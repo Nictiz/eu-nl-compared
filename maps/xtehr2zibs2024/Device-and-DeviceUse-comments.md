@@ -1,4 +1,15 @@
 # Device as of 2025-05-27
+## Overall conclusion
+Xt-EHR defines a device and its use as two distinct models, whereas the zib regards them as one, but this doesn't seem to introduce any conflicts.
+
+Regarding Xt-EHR, the Device model defines some detailed optional metadata about the device, which is not _explicitly_ present in the zib (lot number, manufacture date, manufacturer, model number), although the information will be encoded in the ProductID if an UDI is used. As a matter of fact, the Xt-EHR model seems to make the UDI encoded information explicit.
+
+Regarding the product type, the zib is more constrained in terminology binding than Xt-EHR. The zib value set will be valid in Xt-EHR, but the other way around might be problematic, especially regarding negations in the IPS/EPS.
+
+Some of the (optional) metadata in the DeviceUse model is not present in zib MedicalDevice, but still present in the zib layer due to zib RegistrationData (recorded, source) or by convention (subject). There is some other data present in Xt-EHR which is optional and does not seem to pose fundamental problems. The exception might be status, which Xt-EHR explicitly defines but which is fundamentally absent from the zibs.
+
+On the other hand, the zib defines (optional) metadata which is not present in the Xt-EHR model. This also doesn't seem to be problematic, although it should be investigated if this data is or should be present in one of the other models (e.g. the healthcare provider could be part of the procedure rather than the DeviceUse). 
+
 
 | zib                                        | xtehr                      | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:-------------------------------------------|:---------------------------|:-----------|:----------------|:------------|:--------------|
