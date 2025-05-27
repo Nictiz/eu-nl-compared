@@ -1,4 +1,4 @@
-# Device
+# Device as of 2025-05-27
 
 | zib                                        | xtehr                      | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:-------------------------------------------|:---------------------------|:-----------|:----------------|:------------|:--------------|
@@ -22,7 +22,7 @@
 | MedicalDevice.StartDate                    | EHDSDeviceUse.implantDate  | TS         | dateTime        | 0..1        | 0..1          |
 | MedicalDevice.Comment                      | EHDSDeviceUse.note         | ST         | string          | 0..1        | 0..*          |
 | MedicalDevice.Indication::Diagnosis        | EHDSDeviceUse.reason       |            |                 | 0..*        |               |
-| MedicalDevice.Indication::Problem          | EHDSDeviceUse.reason       |            |                 |             |               |
+| ~~MedicalDevice.Indication::Problem~~      | ~~EHDSDeviceUse.reason~~   |            |                 |             |               |
 |                                            |                            |            | EHDSCondition   |             | 0..*          |
 |                                            | EHDSDeviceUse.recorded     |            | dateTime        |             | 0..1          |
 |                                            | EHDSDeviceUse.source       |            |                 |             |               |
