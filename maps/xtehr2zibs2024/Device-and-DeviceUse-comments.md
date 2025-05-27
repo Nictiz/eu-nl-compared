@@ -59,7 +59,7 @@
 | type_zib |  |
 
 ### Comments
-
+âœ… scope matches
 
 
 ## EHDSDevice.expiryDate
@@ -86,7 +86,7 @@
 | type_zib |  |
 
 ### Comments
-
+Expiry date _can_ be implicitly present in the zib when ProductID is a UDI, but the concept is not discretely defined.
 
 
 ## EHDSDevice.identifier
@@ -114,7 +114,9 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib | ST |
 
 ### Comments
+The identifier oftentimes is required an UDI, in which case the identifier carries more than just identifying information, but also lot number, production date and expiry date. This is recognized both by the zib and by the eHN guidelines. So some of the structured data which is made explicit by Xt-EHR might actually be present in the zib because of the UDI.
 
+However, neither zib nor Xt-EHR _requires_ the identifier to be an UDI. Other identifiers are in scope as well.
 
 
 ## EHDSDevice.lotNumber
@@ -141,8 +143,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib |  |
 
 ### Comments
-
-
+Lot number _can_ be implicitly present in the zib when ProductID is a UDI, but the concept is not discretely defined.
 
 ## EHDSDevice.manufactureDate
 
@@ -168,8 +169,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib |  |
 
 ### Comments
-
-
+Manufacture date _can_ be implicitly present in the zib when ProductID is a UDI, but the concept is not discretely defined.
 
 ## EHDSDevice.manufacturer
 
@@ -195,7 +195,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib |  |
 
 ### Comments
-
+Manufacturer _can_ be implicitly present in the zib when ProductID is a UDI, but the concept is not discretely defined.
 
 
 ## EHDSDevice.modelNumber
@@ -222,7 +222,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib |  |
 
 ### Comments
-
+Model number _can_ be implicitly present in the zib when ProductID is a UDI, but the concept is not discretely defined.
 
 
 ## EHDSDevice.name
@@ -303,7 +303,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib |  |
 
 ### Comments
-
+Serial number _can_ be implicitly present in the zib when ProductID is a UDI, but the concept is not discretely defined.
 
 
 ## EHDSDevice.type
@@ -330,7 +330,12 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib | CD |
 
 ### Comments
+There is partial overlap here, but also a potential conflict:
 
+1. The zib _requires_ the type to be SNOMED (physical objects and objects in the implantaten-refset only (which overlap)) or a local code that specifies "no hearing aid" or "no visual aid".
+2. Xt-EHR has only a preference, of SNOMED or EMDN. So it's much more liberal.
+
+Also note that in the IPS/EPS, negation is added to the value set, which is possible because there is no strong binding on the Xt-EHR level. However, the zib disallows this usage because of the _required_ binding.
 
 
 ## EHDSDevice.version
@@ -384,7 +389,9 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib |  |
 
 ### Comments
+On the zib level, the device and its use are one model, while in Xt-EHR there are two.
 
+Note: in FHIR the distinction between device and its use is also made.
 
 
 ## EHDSDeviceUse.bodySite
@@ -399,7 +406,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Anatomical location of the device. May include laterality. |
-| definition_zib | Patient’s anatomical location of the medical device used. |
+| definition_zib | Patient\92s anatomical location of the medical device used. |
 | definitioncode_zib | 363698007 Finding site |
 | id_xtehr | EHDSDeviceUse.bodySite |
 | id_zib | NL-CM:10.1.15 |
@@ -411,7 +418,9 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib |  |
 
 ### Comments
+On the Xt-EHR level, there is no preference for coding of the body site. For the zib, coding is restricted to SNOMED or ICD-O-3 only.
 
+In addition, the zib recognizes laterality as an (optional) distinct concept (next to pre-coordinated codes), while Xt-EHR doesn't recognize this, or at least doesn't specify this.
 
 
 ## EHDSDeviceUse.device
@@ -438,7 +447,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib |  |
 
 ### Comments
-
+This is inlined in the zib.
 
 
 ## EHDSDeviceUse.endDate
@@ -453,7 +462,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Date when the device was explanted from the patient or the external device was no longer in use; likewise when the device is planned to be explanted. |
-| definition_zib | The end date of the last use or explant of the medical device. A ‘vague’ date, such as only the year, is permitted. |
+| definition_zib | The end date of the last use or explant of the medical device. A \91vague\92 date, such as only the year, is permitted. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSDeviceUse.endDate |
 | id_zib | NL-CM:10.1.14 |
@@ -465,7 +474,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib | TS |
 
 ### Comments
-
+âœ… these concepts match.
 
 
 ## EHDSDeviceUse.identifier
@@ -507,7 +516,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Date when procedure was performed. |
-| definition_zib | The start date of the first use or implant of the medical device. A ‘vague’ date, such as only the year, is permitted. |
+| definition_zib | The start date of the first use or implant of the medical device. A \91vague\92 date, such as only the year, is permitted. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSDeviceUse.implantDate |
 | id_zib | NL-CM:10.1.11 |
@@ -519,7 +528,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib | TS |
 
 ### Comments
-
+âœ… these concepts match.
 
 
 ## EHDSDeviceUse.note
@@ -546,7 +555,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib | ST |
 
 ### Comments
-
+There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also more elaborate as it is of the Narrative data type, compared to simple string for the zib.
 
 
 ## EHDSDeviceUse.reason
@@ -654,7 +663,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib |  |
 
 ### Comments
-
+âœ… This concept matches zib RegistrationData.RegistrationDateTime.
 
 
 ## EHDSDeviceUse.source
@@ -681,34 +690,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib |  |
 
 ### Comments
-
-
-
-## zib: nan
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr |  |
-| zib |  |
-| binding_xtehr |  |
-| card._xtehr | 0..1 |
-| card._zib |  |
-| definition_xtehr | Who reported the device was being used by the patient. |
-| definition_zib |  |
-| definitioncode_zib |  |
-| id_xtehr | EHDSDeviceUse.source[x] |
-| id_zib |  |
-| name_zib |  |
-| path_xtehr | EHDSDeviceUse.source[x] |
-| path_zib |  |
-| short_xtehr | Who reported the device was being used by the patient. |
-| type_xtehr | EHDSPatient |
-| type_zib |  |
-
-### Comments
-
+âœ… This concept matches zib RegistrationData.InformationSource.
 
 
 ## EHDSDeviceUse.status
@@ -762,7 +744,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib |  |
 
 ### Comments
-
+Implicit present in the zib.
 
 
 ## zib: MedicalDevice.HealthProfessional
@@ -791,6 +773,58 @@ A UDI often contains more information than just an ID, but also, for example, an
 ### Comments
 
 
+## zib: MedicalDevice.Indication::Diagnosis
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr |  |
+| zib | MedicalDevice.Indication::Diagnosis |
+| binding_xtehr |  |
+| card._xtehr |  |
+| card._zib | 0..* |
+| definition_xtehr |  |
+| definition_zib | The diagnosis as indication for the medical device. |
+| definitioncode_zib |  |
+| id_xtehr |  |
+| id_zib | NL-CM:10.1.17 |
+| name_zib | Indication::Diagnosis |
+| path_xtehr |  |
+| path_zib | MedicalDevice.Indication::Diagnosis |
+| short_xtehr |  |
+| type_xtehr |  |
+| type_zib |  |
+
+### Comments
+The reason in Xt-EHR can be a Condition, Observation or Procedure. In the zib it is more limited to Diagnosis, which _probably_ aligns with Condition.
+
+
+## zib: MedicalDevice.Indication::Problem
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr |  |
+| zib | MedicalDevice.Indication::Problem |
+| binding_xtehr |  |
+| card._xtehr |  |
+| card._zib |  |
+| definition_xtehr |  |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr |  |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr |  |
+| path_zib |  |
+| short_xtehr |  |
+| type_xtehr |  |
+| type_zib |  |
+
+### Comments
+No longer relevant in the final zib publication.
 
 ## zib: MedicalDevice.Location::HealthcareProvider
 
@@ -843,4 +877,3 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib | ST |
 
 ### Comments
-
