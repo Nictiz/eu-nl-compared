@@ -8,11 +8,11 @@
 |                                            | EHDSDevice.lotNumber       |            | string          |             | 0..1          |
 |                                            | EHDSDevice.manufactureDate |            | dateTime        |             | 0..1          |
 |                                            | EHDSDevice.manufacturer    |            | string          |             | 0..1          |
-| MedicalDevice.Product.ProductType          | EHDSDevice.modelNumber     | CD         | string          | 0..1        | 0..1          |
+|                                            | EHDSDevice.modelNumber     |            | string          |             | 0..1          |
 |                                            | EHDSDevice.name            |            | string          |             | 0..*          |
 |                                            | EHDSDevice.note            |            | Narrative       |             | 0..*          |
 |                                            | EHDSDevice.serialNumber    |            | string          |             | 0..1          |
-|                                            | EHDSDevice.type            |            | CodeableConcept |             | 0..*          |
+| MedicalDevice.Product.ProductType          | EHDSDevice.type            | CD         | CodeableConcept | 0..1        | 0..*          |
 |                                            | EHDSDevice.version         |            | string          |             | 0..1          |
 | MedicalDevice                              | EHDSDeviceUse              |            |                 |             | 0..*          |
 | MedicalDevice.AnatomicalLocation           | EHDSDeviceUse.bodySite     |            | CodeableConcept | 0..1        | 0..1          |
@@ -203,21 +203,21 @@ A UDI often contains more information than just an ID, but also, for example, an
 | attribute | value |
 |---|---|
 | xtehr | EHDSDevice.modelNumber |
-| zib | MedicalDevice.Product.ProductType |
+| zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
-| card._zib | 0..1 |
+| card._zib |  |
 | definition_xtehr | The manufacturer's model number for the device |
-| definition_zib | The code of the type of product. |
+| definition_zib |  |
 | definitioncode_zib |  |
 | id_xtehr | EHDSDevice.modelNumber |
-| id_zib | NL-CM:10.1.3 |
-| name_zib | ProductType |
+| id_zib |  |
+| name_zib |  |
 | path_xtehr | EHDSDevice.modelNumber |
-| path_zib | MedicalDevice.Product.ProductType |
+| path_zib |  |
 | short_xtehr | C.12.8 - Model number |
 | type_xtehr | string |
-| type_zib | CD |
+| type_zib |  |
 
 ### Comments
 
@@ -311,21 +311,21 @@ A UDI often contains more information than just an ID, but also, for example, an
 | attribute | value |
 |---|---|
 | xtehr | EHDSDevice.type |
-| zib |  |
+| zib | MedicalDevice.Product.ProductType |
 | binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT, EMDN'} |
 | card._xtehr | 0..* |
-| card._zib |  |
+| card._zib | 0..1 |
 | definition_xtehr | Device type |
-| definition_zib |  |
+| definition_zib | The code of the type of product. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSDevice.type |
-| id_zib |  |
-| name_zib |  |
+| id_zib | NL-CM:10.1.3 |
+| name_zib | ProductType |
 | path_xtehr | EHDSDevice.type |
-| path_zib |  |
+| path_zib | MedicalDevice.Product.ProductType |
 | short_xtehr | C.12.10 - Type |
 | type_xtehr | CodeableConcept |
-| type_zib |  |
+| type_zib | CD |
 
 ### Comments
 
@@ -397,7 +397,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Anatomical location of the device. May include laterality. |
-| definition_zib | Patientâ€™s anatomical location of the medical device used. |
+| definition_zib | Patient’s anatomical location of the medical device used. |
 | definitioncode_zib | 363698007 Finding site |
 | id_xtehr | EHDSDeviceUse.bodySite |
 | id_zib | NL-CM:10.1.15 |
@@ -451,7 +451,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Date when the device was explanted from the patient or the external device was no longer in use; likewise when the device is planned to be explanted. |
-| definition_zib | The end date of the last use or explant of the medical device. A â€˜vagueâ€™ date, such as only the year, is permitted. |
+| definition_zib | The end date of the last use or explant of the medical device. A ‘vague’ date, such as only the year, is permitted. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSDeviceUse.endDate |
 | id_zib | NL-CM:10.1.14 |
@@ -505,7 +505,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Date when procedure was performed. |
-| definition_zib | The start date of the first use or implant of the medical device. A â€˜vagueâ€™ date, such as only the year, is permitted. |
+| definition_zib | The start date of the first use or implant of the medical device. A ‘vague’ date, such as only the year, is permitted. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSDeviceUse.implantDate |
 | id_zib | NL-CM:10.1.11 |

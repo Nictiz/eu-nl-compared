@@ -6,11 +6,11 @@ A UDI often contains more information than just an ID, but also, for example, an
 EHDSDevice.lotNumber,,,,,,,,,EHDSDevice.lotNumber,EHDSDevice.lotNumber,C.12.5 - Lot number,Lot number of manufacture,string,0..1,
 EHDSDevice.manufactureDate,,,,,,,,,EHDSDevice.manufactureDate,EHDSDevice.manufactureDate,C.12.3 - Manufacture date,The date and time when the device was manufactured,dateTime,0..1,
 EHDSDevice.manufacturer,,,,,,,,,EHDSDevice.manufacturer,EHDSDevice.manufacturer,C.12.2 - Manufacturer,Name of device manufacturer,string,0..1,
-EHDSDevice.modelNumber,MedicalDevice.Product.ProductType,ProductType,MedicalDevice.Product.ProductType,CD,0..1,NL-CM:10.1.3,The code of the type of product.,,EHDSDevice.modelNumber,EHDSDevice.modelNumber,C.12.8 - Model number,The manufacturer's model number for the device,string,0..1,
+EHDSDevice.modelNumber,,,,,,,,,EHDSDevice.modelNumber,EHDSDevice.modelNumber,C.12.8 - Model number,The manufacturer's model number for the device,string,0..1,
 EHDSDevice.name,,,,,,,,,EHDSDevice.name,EHDSDevice.name,C.12.7 - Name,The name and name type of the device as known to the manufacturer and/or patient,string,0..*,
 EHDSDevice.note,,,,,,,,,EHDSDevice.note,EHDSDevice.note,C.12.11 - Note,Device notes and comments,Narrative,0..*,
 EHDSDevice.serialNumber,,,,,,,,,EHDSDevice.serialNumber,EHDSDevice.serialNumber,C.12.6 - Serial number,Serial number assigned by the manufacturer,string,0..1,
-EHDSDevice.type,,,,,,,,,EHDSDevice.type,EHDSDevice.type,C.12.10 - Type,Device type,CodeableConcept,0..*,"{'strength': 'preferred', 'description': 'SNOMED CT, EMDN'}"
+EHDSDevice.type,MedicalDevice.Product.ProductType,ProductType,MedicalDevice.Product.ProductType,CD,0..1,NL-CM:10.1.3,The code of the type of product.,,EHDSDevice.type,EHDSDevice.type,C.12.10 - Type,Device type,CodeableConcept,0..*,"{'strength': 'preferred', 'description': 'SNOMED CT, EMDN'}"
 EHDSDevice.version,,,,,,,,,EHDSDevice.version,EHDSDevice.version,C.12.9 - Version,The actual design of the device or software version running on the device,string,0..1,
 EHDSDeviceUse,MedicalDevice,MedicalDevice,MedicalDevice,,,NL-CM:10.1.1,Root concept of the MedicalDevice information model. This root concept contains all data elements of the MedicalDevice information model.,49062001 Device,EHDSDeviceUse,EHDSDeviceUse,Device use model,C.25 - EHDS refined base model for Device Use,,0..*,
 EHDSDeviceUse.bodySite,MedicalDevice.AnatomicalLocation,AnatomicalLocation,MedicalDevice.AnatomicalLocation,,0..1,NL-CM:10.1.15,Patient’s anatomical location of the medical device used.,363698007 Finding site,EHDSDeviceUse.bodySite,EHDSDeviceUse.bodySite,C.25.7 - Body site,Anatomical location of the device. May include laterality.,CodeableConcept,0..1,
