@@ -136,6 +136,7 @@ Zib Procedure.Proceduretype defines the following value sets, in which the choic
 
 ### Comments
 
+The Zib Diagnosis contains amongst others information element IsComplication. It Indicates whether or not the diagnosis involves a complication. This is however not related to specific complications occured during the procedure. Hence, there is no zib which accurately describes a complication which occurs during a specific intervention/procedure. 
 
 
 ## EHDSProcedure.date[x]
