@@ -99,7 +99,7 @@
 | definition_zib | The name of the procedure |
 | definitioncode_zib |  |
 | id_xtehr | EHDSProcedure.code |
-| id_zib |  |
+| id_zib | NL-CM:14.1.4 |
 | name_zib |  |
 | path_xtehr | EHDSProcedure.code |
 | path_zib |  |
