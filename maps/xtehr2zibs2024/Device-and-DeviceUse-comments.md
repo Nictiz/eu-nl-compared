@@ -35,7 +35,6 @@ On the other hand, the zib defines (optional) metadata which is not present in t
 | MedicalDevice.StartDate                    | EHDSDeviceUse.implantDate  | TS         | dateTime        | 0..1        | 0..1          |
 | MedicalDevice.Comment                      | EHDSDeviceUse.note         | ST         | string          | 0..1        | 0..*          |
 | MedicalDevice.Indication::Diagnosis        | EHDSDeviceUse.reason       |            |                 | 0..*        |               |
-| ~~MedicalDevice.Indication::Problem~~      | ~~EHDSDeviceUse.reason~~   |            |                 |             |               |
 |                                            |                            |            | EHDSCondition   |             | 0..*          |
 |                                            | EHDSDeviceUse.recorded     |            | dateTime        |             | 0..1          |
 |                                            | EHDSDeviceUse.source       |            |                 |             |               |
@@ -56,18 +55,20 @@ On the other hand, the zib defines (optional) metadata which is not present in t
 |---|---|
 | xtehr | EHDSDevice |
 | zib | MedicalDevice.Product |
+| alias_zib | NL: Product |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib | 1 |
 | definition_xtehr | C.12 - EHDS refined base model for Device information |
 | definition_zib | The medical device (internally or externally). |
-| definitioncode_zib | 405815000 Procedure device |
+| definitioncode_zib | SNOMED CT: 405815000 Procedure device |
 | id_xtehr | EHDSDevice |
 | id_zib | NL-CM:10.1.2 |
 | name_zib | Product |
 | path_xtehr | EHDSDevice |
 | path_zib | MedicalDevice.Product |
 | short_xtehr | Device model |
+| stereotype_zib | container |
 | type_xtehr |  |
 | type_zib |  |
 
@@ -83,6 +84,7 @@ On the other hand, the zib defines (optional) metadata which is not present in t
 |---|---|
 | xtehr | EHDSDevice.expiryDate |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib |  |
@@ -95,6 +97,7 @@ On the other hand, the zib defines (optional) metadata which is not present in t
 | path_xtehr | EHDSDevice.expiryDate |
 | path_zib |  |
 | short_xtehr | C.12.4 - Expiry date |
+| stereotype_zib |  |
 | type_xtehr | dateTime |
 | type_zib |  |
 
@@ -110,11 +113,13 @@ Expiry date _can_ be implicitly present in the zib when ProductID is a UDI, but 
 |---|---|
 | xtehr | EHDSDevice.identifier |
 | zib | MedicalDevice.Product.ProductID |
+| alias_zib | NL: ProductID |
 | binding_xtehr |  |
 | card._xtehr | 1..* |
 | card._zib | 0..1 |
 | definition_xtehr | An identifier of the device which is unique within in a defined scope. Multiple identifiers can be used. |
 | definition_zib | Globally unique identification of the product, for example the serial number or a UDI (unique device identifier). For some products, the law requires the use of a UDI. Commonly used coding systems are HIBC and GS1/GTIN.
+
 A UDI often contains more information than just an ID, but also, for example, an expiration date. If a UDI is used, the entire code can be included as text in ProductID, so that no important information is lost. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSDevice.identifier |
@@ -123,6 +128,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | path_xtehr | EHDSDevice.identifier |
 | path_zib | MedicalDevice.Product.ProductID |
 | short_xtehr | C.12.1 - Identifier |
+| stereotype_zib | data |
 | type_xtehr | Identifier |
 | type_zib | ST |
 
@@ -144,6 +150,7 @@ However, neither zib nor Xt-EHR _requires_ the identifier to be an UDI. Other id
 |---|---|
 | xtehr | EHDSDevice.lotNumber |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib |  |
@@ -156,6 +163,7 @@ However, neither zib nor Xt-EHR _requires_ the identifier to be an UDI. Other id
 | path_xtehr | EHDSDevice.lotNumber |
 | path_zib |  |
 | short_xtehr | C.12.5 - Lot number |
+| stereotype_zib |  |
 | type_xtehr | string |
 | type_zib |  |
 
@@ -170,6 +178,7 @@ Lot number _can_ be implicitly present in the zib when ProductID is a UDI, but t
 |---|---|
 | xtehr | EHDSDevice.manufactureDate |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib |  |
@@ -182,6 +191,7 @@ Lot number _can_ be implicitly present in the zib when ProductID is a UDI, but t
 | path_xtehr | EHDSDevice.manufactureDate |
 | path_zib |  |
 | short_xtehr | C.12.3 - Manufacture date |
+| stereotype_zib |  |
 | type_xtehr | dateTime |
 | type_zib |  |
 
@@ -196,6 +206,7 @@ Manufacture date _can_ be implicitly present in the zib when ProductID is a UDI,
 |---|---|
 | xtehr | EHDSDevice.manufacturer |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib |  |
@@ -208,6 +219,7 @@ Manufacture date _can_ be implicitly present in the zib when ProductID is a UDI,
 | path_xtehr | EHDSDevice.manufacturer |
 | path_zib |  |
 | short_xtehr | C.12.2 - Manufacturer |
+| stereotype_zib |  |
 | type_xtehr | string |
 | type_zib |  |
 
@@ -223,6 +235,7 @@ Manufacturer _can_ be implicitly present in the zib when ProductID is a UDI, but
 |---|---|
 | xtehr | EHDSDevice.modelNumber |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib |  |
@@ -235,6 +248,7 @@ Manufacturer _can_ be implicitly present in the zib when ProductID is a UDI, but
 | path_xtehr | EHDSDevice.modelNumber |
 | path_zib |  |
 | short_xtehr | C.12.8 - Model number |
+| stereotype_zib |  |
 | type_xtehr | string |
 | type_zib |  |
 
@@ -250,6 +264,7 @@ Model number _can_ be implicitly present in the zib when ProductID is a UDI, but
 |---|---|
 | xtehr | EHDSDevice.name |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib |  |
@@ -262,6 +277,7 @@ Model number _can_ be implicitly present in the zib when ProductID is a UDI, but
 | path_xtehr | EHDSDevice.name |
 | path_zib |  |
 | short_xtehr | C.12.7 - Name |
+| stereotype_zib |  |
 | type_xtehr | string |
 | type_zib |  |
 
@@ -277,6 +293,7 @@ Model number _can_ be implicitly present in the zib when ProductID is a UDI, but
 |---|---|
 | xtehr | EHDSDevice.note |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib |  |
@@ -289,6 +306,7 @@ Model number _can_ be implicitly present in the zib when ProductID is a UDI, but
 | path_xtehr | EHDSDevice.note |
 | path_zib |  |
 | short_xtehr | C.12.11 - Note |
+| stereotype_zib |  |
 | type_xtehr | Narrative |
 | type_zib |  |
 
@@ -304,6 +322,7 @@ Model number _can_ be implicitly present in the zib when ProductID is a UDI, but
 |---|---|
 | xtehr | EHDSDevice.serialNumber |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib |  |
@@ -316,6 +335,7 @@ Model number _can_ be implicitly present in the zib when ProductID is a UDI, but
 | path_xtehr | EHDSDevice.serialNumber |
 | path_zib |  |
 | short_xtehr | C.12.6 - Serial number |
+| stereotype_zib |  |
 | type_xtehr | string |
 | type_zib |  |
 
@@ -331,6 +351,7 @@ Serial number _can_ be implicitly present in the zib when ProductID is a UDI, bu
 |---|---|
 | xtehr | EHDSDevice.type |
 | zib | MedicalDevice.Product.ProductType |
+| alias_zib | NL: ProductType |
 | binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT, EMDN'} |
 | card._xtehr | 0..* |
 | card._zib | 0..1 |
@@ -343,6 +364,7 @@ Serial number _can_ be implicitly present in the zib when ProductID is a UDI, bu
 | path_xtehr | EHDSDevice.type |
 | path_zib | MedicalDevice.Product.ProductType |
 | short_xtehr | C.12.10 - Type |
+| stereotype_zib | data |
 | type_xtehr | CodeableConcept |
 | type_zib | CD |
 
@@ -363,6 +385,7 @@ Also note that in the IPS/EPS, negation is added to the value set, which is poss
 |---|---|
 | xtehr | EHDSDevice.version |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib |  |
@@ -375,6 +398,7 @@ Also note that in the IPS/EPS, negation is added to the value set, which is poss
 | path_xtehr | EHDSDevice.version |
 | path_zib |  |
 | short_xtehr | C.12.9 - Version |
+| stereotype_zib |  |
 | type_xtehr | string |
 | type_zib |  |
 
@@ -390,18 +414,20 @@ Also note that in the IPS/EPS, negation is added to the value set, which is poss
 |---|---|
 | xtehr | EHDSDeviceUse |
 | zib | MedicalDevice |
+| alias_zib | NL: MedischHulpmiddel |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib |  |
 | definition_xtehr | EHDS refined base model for Device Use |
 | definition_zib | Root concept of the MedicalDevice information model. This root concept contains all data elements of the MedicalDevice information model. |
-| definitioncode_zib | 49062001 Device |
+| definitioncode_zib | SNOMED CT: 49062001 Device |
 | id_xtehr | EHDSDeviceUse |
 | id_zib | NL-CM:10.1.1 |
 | name_zib | MedicalDevice |
 | path_xtehr | EHDSDeviceUse |
 | path_zib | MedicalDevice |
 | short_xtehr | Device use model |
+| stereotype_zib | rootconcept |
 | type_xtehr |  |
 | type_zib |  |
 
@@ -419,18 +445,20 @@ Note: in FHIR the distinction between device and its use is also made.
 |---|---|
 | xtehr | EHDSDeviceUse.bodySite |
 | zib | MedicalDevice.AnatomicalLocation |
+| alias_zib | NL: AnatomischeLocatie |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Anatomical location of the device. May include laterality. |
 | definition_zib | Patient\92s anatomical location of the medical device used. |
-| definitioncode_zib | 363698007 Finding site |
+| definitioncode_zib | SNOMED CT: 363698007 Finding site |
 | id_xtehr | EHDSDeviceUse.bodySite |
 | id_zib | NL-CM:10.1.15 |
 | name_zib | AnatomicalLocation |
 | path_xtehr | EHDSDeviceUse.bodySite |
 | path_zib | MedicalDevice.AnatomicalLocation |
 | short_xtehr | Anatomical location of the device. May include laterality. |
+| stereotype_zib | data,reference |
 | type_xtehr | CodeableConcept |
 | type_zib |  |
 
@@ -448,6 +476,7 @@ In addition, the zib recognizes laterality as an (optional) distinct concept (ne
 |---|---|
 | xtehr | EHDSDeviceUse.device |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 1..1 |
 | card._zib |  |
@@ -460,6 +489,7 @@ In addition, the zib recognizes laterality as an (optional) distinct concept (ne
 | path_xtehr | EHDSDeviceUse.device |
 | path_zib |  |
 | short_xtehr | The details of the device used. |
+| stereotype_zib |  |
 | type_xtehr | EHDSDevice |
 | type_zib |  |
 
@@ -475,6 +505,7 @@ This is inlined in the zib.
 |---|---|
 | xtehr | EHDSDeviceUse.endDate |
 | zib | MedicalDevice.EndDate |
+| alias_zib | NL: EindDatum |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
@@ -487,6 +518,7 @@ This is inlined in the zib.
 | path_xtehr | EHDSDeviceUse.endDate |
 | path_zib | MedicalDevice.EndDate |
 | short_xtehr | Date when the device was explanted from the patient or the external device was no longer in use; likewise when the device is planned to be explanted. |
+| stereotype_zib | data |
 | type_xtehr | dateTime |
 | type_zib | TS |
 
@@ -502,6 +534,7 @@ This is inlined in the zib.
 |---|---|
 | xtehr | EHDSDeviceUse.identifier |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib |  |
@@ -514,6 +547,7 @@ This is inlined in the zib.
 | path_xtehr | EHDSDeviceUse.identifier |
 | path_zib |  |
 | short_xtehr | An identifier for this statement. |
+| stereotype_zib |  |
 | type_xtehr | Identifier |
 | type_zib |  |
 
@@ -529,6 +563,7 @@ This is inlined in the zib.
 |---|---|
 | xtehr | EHDSDeviceUse.implantDate |
 | zib | MedicalDevice.StartDate |
+| alias_zib | NL: BeginDatum |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
@@ -541,6 +576,7 @@ This is inlined in the zib.
 | path_xtehr | EHDSDeviceUse.implantDate |
 | path_zib | MedicalDevice.StartDate |
 | short_xtehr | Date when procedure was performed. |
+| stereotype_zib | data |
 | type_xtehr | dateTime |
 | type_zib | TS |
 
@@ -556,18 +592,20 @@ This is inlined in the zib.
 |---|---|
 | xtehr | EHDSDeviceUse.note |
 | zib | MedicalDevice.Comment |
+| alias_zib | NL: Toelichting |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib | 0..1 |
 | definition_xtehr | Note about the device statement that were not represented at all or sufficiently in one of the attributes provided in a class. These may include for example a comment, an instruction, or a note associated with the statement. |
 | definition_zib | Comment about use or information on the medical device used. |
-| definitioncode_zib | 48767-8 Annotation comment [Interpretation] Narrative |
+| definitioncode_zib | LOINC: 48767-8 Annotation comment [Interpretation] Narrative |
 | id_xtehr | EHDSDeviceUse.note |
 | id_zib | NL-CM:10.1.10 |
 | name_zib | Comment |
 | path_xtehr | EHDSDeviceUse.note |
 | path_zib | MedicalDevice.Comment |
 | short_xtehr | Note about the device statement that were not represented at all or sufficiently in one of the attributes provided in a class. These may include for example a comment, an instruction, or a note associated with the statement. |
+| stereotype_zib | data |
 | type_xtehr | string |
 | type_zib | ST |
 
@@ -583,6 +621,7 @@ There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also
 |---|---|
 | xtehr | EHDSDeviceUse.reason |
 | zib | MedicalDevice.Indication::Diagnosis |
+| alias_zib | NL: Indicatie::Diagnose |
 | binding_xtehr |  |
 | card._xtehr |  |
 | card._zib | 0..* |
@@ -595,38 +634,12 @@ There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also
 | path_xtehr |  |
 | path_zib | MedicalDevice.Indication::Diagnosis |
 | short_xtehr |  |
+| stereotype_zib | context,reference |
 | type_xtehr |  |
 | type_zib |  |
 
 ### Comments
-
-
-
-## EHDSDeviceUse.reason
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSDeviceUse.reason |
-| zib | MedicalDevice.Indication::Problem |
-| binding_xtehr |  |
-| card._xtehr |  |
-| card._zib |  |
-| definition_xtehr |  |
-| definition_zib |  |
-| definitioncode_zib |  |
-| id_xtehr |  |
-| id_zib |  |
-| name_zib |  |
-| path_xtehr |  |
-| path_zib |  |
-| short_xtehr |  |
-| type_xtehr |  |
-| type_zib |  |
-
-### Comments
-
+The reason in Xt-EHR can be a Condition, Observation or Procedure. In the zib it is more limited to Diagnosis, which _probably_ aligns with Condition.
 
 
 ## zib: nan
@@ -637,6 +650,7 @@ There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also
 |---|---|
 | xtehr |  |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib |  |
@@ -649,6 +663,7 @@ There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also
 | path_xtehr | EHDSDeviceUse.reason[x] |
 | path_zib |  |
 | short_xtehr | Reason or justification for the use of the device. |
+| stereotype_zib |  |
 | type_xtehr | EHDSCondition |
 | type_zib |  |
 
@@ -664,6 +679,7 @@ There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also
 |---|---|
 | xtehr | EHDSDeviceUse.recorded |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib |  |
@@ -676,6 +692,7 @@ There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also
 | path_xtehr | EHDSDeviceUse.recorded |
 | path_zib |  |
 | short_xtehr | Date and time at which the statement was made/recorded. |
+| stereotype_zib |  |
 | type_xtehr | dateTime |
 | type_zib |  |
 
@@ -691,6 +708,7 @@ There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also
 |---|---|
 | xtehr | EHDSDeviceUse.source |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr |  |
 | card._zib |  |
@@ -703,11 +721,41 @@ There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also
 | path_xtehr |  |
 | path_zib |  |
 | short_xtehr |  |
+| stereotype_zib |  |
 | type_xtehr |  |
 | type_zib |  |
 
 ### Comments
 ✅ This concept matches zib RegistrationData.InformationSource.
+
+
+## zib: nan
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr |  |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 0..1 |
+| card._zib |  |
+| definition_xtehr | Who reported the device was being used by the patient. |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSDeviceUse.source[x] |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSDeviceUse.source[x] |
+| path_zib |  |
+| short_xtehr | Who reported the device was being used by the patient. |
+| stereotype_zib |  |
+| type_xtehr | EHDSPatient |
+| type_zib |  |
+
+### Comments
+
 
 
 ## EHDSDeviceUse.status
@@ -718,6 +766,7 @@ There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also
 |---|---|
 | xtehr | EHDSDeviceUse.status |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr | {'strength': 'preferred', 'description': 'HL7 device-statement-status'} |
 | card._xtehr | 0..1 |
 | card._zib |  |
@@ -730,6 +779,7 @@ There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also
 | path_xtehr | EHDSDeviceUse.status |
 | path_zib |  |
 | short_xtehr | Current status of the Device Usage. |
+| stereotype_zib |  |
 | type_xtehr | CodeableConcept |
 | type_zib |  |
 
@@ -745,6 +795,7 @@ There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also
 |---|---|
 | xtehr | EHDSDeviceUse.subject |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 1..1 |
 | card._zib |  |
@@ -757,6 +808,7 @@ There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also
 | path_xtehr | EHDSDeviceUse.subject |
 | path_zib |  |
 | short_xtehr | The patient using the device. |
+| stereotype_zib |  |
 | type_xtehr | EHDSPatient |
 | type_zib |  |
 
@@ -772,6 +824,7 @@ Implicit present in the zib.
 |---|---|
 | xtehr |  |
 | zib | MedicalDevice.HealthProfessional |
+| alias_zib | NL: Zorgverlener |
 | binding_xtehr |  |
 | card._xtehr |  |
 | card._zib | 0..1 |
@@ -784,64 +837,13 @@ Implicit present in the zib.
 | path_xtehr |  |
 | path_zib | MedicalDevice.HealthProfessional |
 | short_xtehr |  |
+| stereotype_zib | context,reference |
 | type_xtehr |  |
 | type_zib |  |
 
 ### Comments
 
 
-## zib: MedicalDevice.Indication::Diagnosis
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr |  |
-| zib | MedicalDevice.Indication::Diagnosis |
-| binding_xtehr |  |
-| card._xtehr |  |
-| card._zib | 0..* |
-| definition_xtehr |  |
-| definition_zib | The diagnosis as indication for the medical device. |
-| definitioncode_zib |  |
-| id_xtehr |  |
-| id_zib | NL-CM:10.1.17 |
-| name_zib | Indication::Diagnosis |
-| path_xtehr |  |
-| path_zib | MedicalDevice.Indication::Diagnosis |
-| short_xtehr |  |
-| type_xtehr |  |
-| type_zib |  |
-
-### Comments
-The reason in Xt-EHR can be a Condition, Observation or Procedure. In the zib it is more limited to Diagnosis, which _probably_ aligns with Condition.
-
-
-## zib: MedicalDevice.Indication::Problem
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr |  |
-| zib | MedicalDevice.Indication::Problem |
-| binding_xtehr |  |
-| card._xtehr |  |
-| card._zib |  |
-| definition_xtehr |  |
-| definition_zib |  |
-| definitioncode_zib |  |
-| id_xtehr |  |
-| id_zib |  |
-| name_zib |  |
-| path_xtehr |  |
-| path_zib |  |
-| short_xtehr |  |
-| type_xtehr |  |
-| type_zib |  |
-
-### Comments
-No longer relevant in the final zib publication.
 
 ## zib: MedicalDevice.Location::HealthcareProvider
 
@@ -851,6 +853,7 @@ No longer relevant in the final zib publication.
 |---|---|
 | xtehr |  |
 | zib | MedicalDevice.Location::HealthcareProvider |
+| alias_zib | NL: Locatie::Zorgaanbieder |
 | binding_xtehr |  |
 | card._xtehr |  |
 | card._zib | 0..1 |
@@ -863,6 +866,7 @@ No longer relevant in the final zib publication.
 | path_xtehr |  |
 | path_zib | MedicalDevice.Location::HealthcareProvider |
 | short_xtehr |  |
+| stereotype_zib | context,reference |
 | type_xtehr |  |
 | type_zib |  |
 
@@ -878,6 +882,7 @@ No longer relevant in the final zib publication.
 |---|---|
 | xtehr |  |
 | zib | MedicalDevice.ProductDescription |
+| alias_zib | NL: ProductOmschrijving |
 | binding_xtehr |  |
 | card._xtehr |  |
 | card._zib | 0..1 |
@@ -890,6 +895,7 @@ No longer relevant in the final zib publication.
 | path_xtehr |  |
 | path_zib | MedicalDevice.ProductDescription |
 | short_xtehr |  |
+| stereotype_zib | data |
 | type_xtehr |  |
 | type_zib | ST |
 
