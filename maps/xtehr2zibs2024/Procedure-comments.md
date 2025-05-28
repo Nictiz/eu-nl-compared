@@ -1,4 +1,4 @@
-# Procedure as of 28-05-2025
+# Procedure as of 27-05-2025
 
 | zib                                                       | xtehr                          | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:----------------------------------------------------------|:-------------------------------|:-----------|:----------------|:------------|:--------------|
@@ -261,7 +261,7 @@ In the information model Zib Procedure, a reference is made to zib MedicalDevice
 | card._xtehr | 0..* |
 | card._zib |  |
 | definition_xtehr | Device or devices that is/are implanted, removed, or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure. |
-| definition_zib |  |
+| definition_zib | The medical device (internally or externally). |
 | definitioncode_zib |  |
 | id_xtehr | EHDSProcedure.focalDevice |
 | id_zib |  |
@@ -274,6 +274,12 @@ In the information model Zib Procedure, a reference is made to zib MedicalDevice
 
 ### Comments
 
+There is a distinct difference between the zib and xt ehr definition in its meaning. The MedicalDevice-v5.0 information model from the Dutch "Zorginformatiebouwstenen" (ZIB) defines medical devices more broadly. It encompasses any internally implanted or external devices and aids used by the patient, either currently or in the past, to:
+1. Reduce the effects of functional limitations in organ systems
+2. Facilitate the treatment of a disease
+This includes devices like wheelchairs, hearing aids, or prosthetic limbs, regardless of whether they are the focus of a current medical procedure.
+
+The xt ehr definition of focal device defines medical devices as devices that are the primary focus of a medical procedure. 
 
 
 ## EHDSProcedure.identifier
