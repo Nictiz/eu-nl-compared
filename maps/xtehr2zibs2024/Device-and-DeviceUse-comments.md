@@ -4,6 +4,8 @@ Xt-EHR defines a device and its use as two distinct models, whereas the zib rega
 
 Regarding Xt-EHR, the Device model defines some detailed optional metadata about the device, which is not _explicitly_ present in the zib (lot number, manufacture date, manufacturer, model number), although the information will be encoded in the ProductID if an UDI is used. As a matter of fact, the Xt-EHR model seems to make the UDI encoded information explicit.
 
+The scope of the Xt-EHR model seems to be limited to concrete devices, that are actually used or have been used by patients. The zib also recognizes futures uses of devices, or classes of devices that don't need to be tracked individually (e.g. bandages). For this reason, Xt-EHR regards the identifier of a device as required, while the zib regards it optional. The concept in the zib can be made required in the use cases where it is used.
+
 Regarding the product type, the zib is more constrained in terminology binding than Xt-EHR. The zib value set will be valid in Xt-EHR, but the other way around might be problematic, especially regarding negations in the IPS/EPS.
 
 Some of the (optional) metadata in the DeviceUse model is not present in zib MedicalDevice, but still present in the zib layer due to zib RegistrationData (recorded, source) or by convention (subject). There is some other data present in Xt-EHR which is optional and does not seem to pose fundamental problems. The exception might be status, which Xt-EHR explicitly defines but which is fundamentally absent from the zibs.
@@ -125,6 +127,10 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib | ST |
 
 ### Comments
+The identifier is required in Xt-EHR, while it is optional in the zib. This makes sense from a scoping perspective. In Xt-EHR (at least patient summary and discharge report use cases), the model is about devices that are in use or have been in use by the patient, in which case there is a concrete identifiable device. The zib has a broader scope: devices that are needed or requested, or a general type of device like bandages. For these use cases, an identifier is not present yet or irrelevant. If the zib is used in a context of patient summary or discharge report, the use of identifier could be made mandatory there.
+
+There is also an incompatibility the other way around: the zib recognizes at most 1 identifier, while Xt-EHR recognizes 0..* identifiers.
+
 The identifier oftentimes is required an UDI, in which case the identifier carries more than just identifying information, but also lot number, production date and expiry date. This is recognized both by the zib and by the eHN guidelines. So some of the structured data which is made explicit by Xt-EHR might actually be present in the zib because of the UDI.
 
 However, neither zib nor Xt-EHR _requires_ the identifier to be an UDI. Other identifiers are in scope as well.
