@@ -1,4 +1,12 @@
-# Address
+# Address as of 2025-05-28
+## Overall conclusion
+The zib specifies the house number at a much higher granularity than the Xt-EHR model, making this aspect incompatible; a house number according to the Xt-EHR is a "rendered" version of all the information in the zib.
+
+In addition, the Xt-EHR model includes a rendered version of the full address, potentially duplicating data present in other concepts. This conflicts with the zib design principles.
+
+Both the zib and the Xt-EHR model contain information on how the address is used. However, the Xt-EHR model specifies this information on two axes while the zib combines this in a single axis. From previous FHIR mapping of the zib, it is known that this relation is not straightforward.
+
+Both the zib and the Xt-EHR model define optional concepts that the other doesn't recognize (resp. Municipality and postBox), this doesn't seem to introduce any conflicts.
 
 | zib                                      | xtehr                   | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:-----------------------------------------|:------------------------|:-----------|:----------------|:------------|:--------------|
@@ -76,7 +84,7 @@ For Dutch places of residence, preferably use the name from the GBA, table 33 (O
 | type_zib | ST |
 
 ### Comments
-
+The zib defines two kinds of "city": PlaceOfResidence (Woonplaats) and Municipality (Gemeente). For the address as found on a letter, the PlaceOfResidence is relevant. I _assume_ this is what the city concept is about as well.
 
 
 ## EHDSAddress.country
@@ -105,7 +113,7 @@ For Dutch places of residence, preferably use the name from the GBA, table 33 (O
 | type_zib | CD |
 
 ### Comments
-
+The zib requires the country to be coded using either ISO 3166-1 (alpha-2) or GBA Tabel 34. The Xt-EHR model doesn't have a requirement but prefers ISO 3166-1 (alpha-2). Zib instances are thus valid Xt-EHR instances, but there's no guarantee that the other way around is true as well.
 
 
 ## EHDSAddress.houseNumber
@@ -134,7 +142,9 @@ For Dutch places of residence, preferably use the name from the GBA, table 33 (O
 | type_zib | ST |
 
 ### Comments
+The zib has a total of five concepts that contribute to the house number (HouseNumber, HouseNumberLetter, HouseNumberAddition, HouseNumberIndication and AdditionalInformation), whereas Xt-EHR has one or two, depending on the way of counting (houseNumber and text). The Xt-EHR houseNumber concept doesn't specify exactly what it is, but it is reasonable to assume it simply is "the thing you put next to the street name".
 
+There's a discrepancy here; a zib HouseNumber potentially contains much less information than an Xt-EHR houseNumber (e.g. a house number of "3-bis" would become Xt-EHR houseNumber "3-bis", but zib HouseNumber "3"). Note that this is a different situation then where a zib specifies _additional_ concept compared to Xt-EHR; here the zib defines the _same_ concept but spreads it out over different elements.
 
 
 ## EHDSAddress.postBox
@@ -193,7 +203,7 @@ In Dutch addresses, preferably use the postcode from the Postcode table (OID: 2.
 | type_zib | ST |
 
 ### Comments
-
+✅ these concepts align
 
 
 ## EHDSAddress.street
@@ -222,7 +232,7 @@ In Dutch addresses, preferably use the postcode from the Postcode table (OID: 2.
 | type_zib | ST |
 
 ### Comments
-
+✅ these concepts align
 
 
 ## EHDSAddress.text
@@ -251,7 +261,7 @@ In Dutch addresses, preferably use the postcode from the Postcode table (OID: 2.
 | type_zib |  |
 
 ### Comments
-
+If a text representation is present next to the other elements, there is duplication of data, which goes against the zib design principes.
 
 
 ## EHDSAddress.type
@@ -280,8 +290,18 @@ In Dutch addresses, preferably use the postcode from the Postcode table (OID: 2.
 | type_zib | CD |
 
 ### Comments
+The AddressTyoe contains aspects of both Xt-EHR concepts type and use. The mapping is not straightforward. At the moment, the preferred binding for the Xt-EHR concepts is the same as in the FHIR data type _Address_, for which the mapping has been defined in the following way in the zib FHIR profile:
 
+| zib                               | use   | type      |
+| --------------------------------- | ----- | --------- |
+| Postal Address/Postadres          |       | postal    |
+| Primary Home/Officieel adres      | home  | both      |
+| Visit Address/Woon-/verblijfadres | home  | physical  |
+| Temporary Address/Tijdelijk adres | temp 	|           |
+| Work Place/Werkadres              | work 	|           |
+| Vacation Home/Vakantie adres      | temp 	|           |
 
+This mapping is inexact; the FHIR profile requires the original code to be used in an extension as well.
 
 ## EHDSAddress.use
 
@@ -309,7 +329,7 @@ In Dutch addresses, preferably use the postcode from the Postcode table (OID: 2.
 | type_zib | CD |
 
 ### Comments
-
+See the comment for type
 
 
 ## zib: AddressInformation.AdditionalInformation
@@ -338,7 +358,7 @@ In Dutch addresses, preferably use the postcode from the Postcode table (OID: 2.
 | type_zib | ST |
 
 ### Comments
-
+See the comment for EHDSAddress.houseNumber
 
 
 ## zib: AddressInformation.HouseNumberAddition
@@ -367,7 +387,7 @@ In Dutch addresses, preferably use the postcode from the Postcode table (OID: 2.
 | type_zib | ST |
 
 ### Comments
-
+See the comment for EHDSAddress.houseNumber
 
 
 ## zib: AddressInformation.HouseNumberIndication
@@ -396,7 +416,7 @@ In Dutch addresses, preferably use the postcode from the Postcode table (OID: 2.
 | type_zib | CD |
 
 ### Comments
-
+See the comment for EHDSAddress.houseNumber
 
 
 ## zib: AddressInformation.HouseNumberLetter
@@ -425,7 +445,7 @@ In Dutch addresses, preferably use the postcode from the Postcode table (OID: 2.
 | type_zib | ST |
 
 ### Comments
-
+See the comment for EHDSAddress.houseNumber
 
 
 ## zib: AddressInformation.Municipality
@@ -455,4 +475,4 @@ For Dutch municipalities, preferably use the name from the GBA, table 33 (OID: 2
 | type_zib | ST |
 
 ### Comments
-
+See the comment for EHDSAddress.placeOfResidence
