@@ -163,8 +163,8 @@ The element offers the option to indicate the end of the period of a series of r
 | type_zib | TS |
 
 ### Comments
-
-
+Xt EHR and Zib seem to match. According to FHIR datatypes, date consists of two components: datetime and period. Datetime entails a date, date-time or partial date (e.g. just year or year + month) as used in human communication. The format is YYYY, YYYY-MM, YYYY-MM-DD or YYYY-MM-DDThh:mm:ss+zz:zz, e.g. 2018, 1973-06, 1905-08-23, 2015-02-07T13:28:17-05:00 or 2017-01-01T00:00:00.000Z. Period according to FHIR entails a time range defined by start and end date/time
++ Rule: If present, start SHALL have a lower or equal value than end
 
 ## EHDSProcedure.date[x]
 
@@ -191,8 +191,8 @@ The element offers the option to indicate the start of the period of a series of
 | type_zib | TS |
 
 ### Comments
-
-
+Xt EHR and Zib seem to match. According to FHIR, date consists of two components: datetime and period. Datetime entails a date, date-time or partial date (e.g. just year or year + month) as used in human communication. The format is YYYY, YYYY-MM, YYYY-MM-DD or YYYY-MM-DDThh:mm:ss+zz:zz, e.g. 2018, 1973-06, 1905-08-23, 2015-02-07T13:28:17-05:00 or 2017-01-01T00:00:00.000Z. Period according to FHIR entails a time range defined by start and end date/time
++ Rule: If present, start SHALL have a lower or equal value than end
 
 ## EHDSProcedure.description
 
@@ -246,7 +246,7 @@ The element offers the option to indicate the start of the period of a series of
 
 ### Comments
 
-
+In the information model Zib Procedure, a reference is made to zib MedicalDevice. The product, the placing of which in or on the body is the purpose of the procedure, for example placing an implant. The cardinality of MedicalDevice is 0..*. 
 
 ## EHDSProcedure.focalDevice
 
