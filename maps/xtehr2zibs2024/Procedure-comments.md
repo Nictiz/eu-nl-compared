@@ -108,7 +108,7 @@
 | type_zib |  |
 
 ### Comments
-Zib Procedure.Proceduretype defines the following value sets, in which the choices are as follows: the DHD procedure thesaurus,  the procedures file (CBV), the Care activities file (NZa), the Dutch Mental Health and Addiction Care procedures list (GGZ) and the procedures list of the Dutch College of General Practitioners (NHG). Of all these valuesets the ProcedureMethodCodelist (SNOMED < 129264002), the ProcedureTypeGGZcodelist (SNOMED Ref set ^140741000146104)  and the ProcedureTypeMaternityCareCodelist (SNOMED CT ^146481000146103) is in SNOMED CT. The zib 2024 describes EHDSprocedure.code as a type, which conveys the name of the procedure. 
+Zib Procedure.Proceduretype defines the following value sets, in which the choices are as follows: the DHD procedure thesaurus,  the procedures file (CBV), the Care activities file (NZa), the Dutch Mental Health and Addiction Care procedures list (GGZ) and the procedures list of the Dutch College of General Practitioners (NHG). Of all these valuesets the ProcedureMethodCodelist (SNOMED < 129264002), the ProcedureTypeGGZcodelist (SNOMED Ref set ^140741000146104)  and the ProcedureTypeMaternityCareCodelist (SNOMED CT ^146481000146103) is in SNOMED CT. The zib 2024 describes EHDSprocedure.code as a type, which conveys the name of the procedure. The zib furthermore has a cardinality of 1, which means the element is required to be filled. 
 
 
 ## EHDSProcedure.complication
