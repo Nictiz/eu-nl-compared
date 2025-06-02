@@ -1,4 +1,16 @@
-# AlertFlag
+# AlertFlag as of 2025-05-28
+## Overall conclusion
+
+The Xt-EHR model and the zib differ in some important aspects. The Xt-EHR model has a pretty straightforward model where a code to define the model is required (SNOMED or text). In the zib, the "thing to flag for" is optional, and apart from a coded/test value, it might be a reference to a Diagnosis or HypersensitivityIntelerance instance. It should be noted that within the context of the eHN guideline for the patient summary and in the logcial model for the Hospital Discharge Report, the alert sections mentions to use the AllergyIntolerance model for these kinds of alerts, so possibly allergies/intolerances are out of scope for the AlertFlag model.
+
+On the other hand, the Xt-EHR model has richer semantics with the optional possibility to define a narrative text, a priority, and an encounter to which the flag applies specifically. These concepts are not present in the zib.
+
+In addition, the Xt-EHR model has a status, which conceptually overlaps with the period and thus might duplicate information.
+
+An Xt-EHR AlertFlag can be authored by a health professional, an organization or a device. For the zib, only a health professional is able to author an AlertFlag.
+
+The zib has the possibility to add a Comment and an AlertType (a category), which the Xt-EHR model lacks.
+
 
 | zib                                     | xtehr                    | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:----------------------------------------|:-------------------------|:-----------|:----------------|:------------|:--------------|
@@ -75,7 +87,7 @@
 | type_zib |  |
 
 ### Comments
-
+In the Xt-EHR model, the author can be a health professional, an organization or a device. In the zib, only a health professional can set the flag.
 
 
 ## EHDSAlertFlag.code
@@ -91,7 +103,7 @@
 | card._xtehr | 1..1 |
 | card._zib | (0..1) |
 | definition_xtehr | A coded or textual representation of the flag. |
-| definition_zib | A warning, other than a condition or problem. For example, a patient can be given an ‘Aggressive patient' alert. 
+| definition_zib | A warning, other than a condition or problem. For example, a patient can be given an ï¿½Aggressive patient' alert. 
 The warning can be entered in code (there are codes for frequently used alerts), but seeing the dynamic nature of the warnings cf. SARS and Ebola, these alerts will often be entered as free text. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSAlertFlag.code |
@@ -105,7 +117,11 @@ The warning can be entered in code (there are codes for frequently used alerts),
 | type_zib | CD |
 
 ### Comments
+This concept is required in the Xt-EHR model, but optional in the zib. In addition, in the zib, the thing to monitor can also be a reference to a zib Diagnosis instance or a zib HypersensitivityIntolerance instance. Note that in the logical model for the Hospital Discharge Report, the alerts section contains AllergyIntolarence as a possible alert. This is not the case in the Patient Summary, although the eHN guidelines mentions the AllergyIntolerance in the section regarding alerts.
 
+When it is a coded value, the Xt-EHR model has a preference for SNOMED. The zib has an _extensible_ binding on a limited set of SNOMED terms, and a _required_ binding on G-standaard Contra Indicaties (Thesaurus 40) (how an _extensible_ and _required_ binding can be mixed on a single element is another matter).
+
+Since the zib interpretation of _extensible_ actually means _required_ for SNOMED as a whole, one could say the zib has a _required_ binding on SNOMED and the G-standaard Contra Indicaties. This doesn't fundamentally conflict with the _preferred_ SNOMED binding in Xt-EHR.
 
 
 ## EHDSAlertFlag.encounter
@@ -164,7 +180,7 @@ The warning can be entered in code (there are codes for frequently used alerts),
 
 ### Comments
 
-
+Might align with zib RegistrationData.IdentificationNumber, but it's not clear if the Xt-EHR identifier is about the registration or the data itself. Also, there's a cardinality conflict.
 
 ## EHDSAlertFlag.patient
 
@@ -193,7 +209,7 @@ The warning can be entered in code (there are codes for frequently used alerts),
 
 ### Comments
 
-
+This is implicit in the zib.
 
 ## EHDSAlertFlag.period
 
@@ -223,7 +239,7 @@ This can be an exact date and time, or a rough indication of the date (such as o
 
 ### Comments
 
-
+In the Xt-EHR model, the active period is modelled using the _Period_ data type, while the zib models it as a distinct begin and end date/time, but the concepts seem to match.
 
 ## EHDSAlertFlag.period
 
@@ -253,6 +269,7 @@ This can be an exact date and time, or a rough indication of the date (such as o
 
 ### Comments
 
+In the Xt-EHR model, the active period is modelled using the _Period_ data type, while the zib models it as a distinct begin and end date/time, but the concepts seem to match.
 
 
 ## EHDSAlertFlag.priority
@@ -311,7 +328,9 @@ This can be an exact date and time, or a rough indication of the date (such as o
 
 ### Comments
 
+The status overlaps with the period concept; when there is no end time yet, the status should be active, and when there is an end time, it should be inactive. If status would be modeled this way in the zib, the zib would define duplicate information, which goes against one of the design principles.
 
+Note that there might be a difference between this conceptual idea and practical situations.
 
 ## EHDSAlertFlag.text
 
