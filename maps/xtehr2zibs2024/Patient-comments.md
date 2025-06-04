@@ -183,7 +183,7 @@ CommunicationLanguage is not part of the Patient zib, but there is a separate zi
 | type_zib | TS |
 
 ### Comments
-Element is required in zib, but optional in EHDSPatient.
+Element is required in zib, but optional in EHDSPatient. Furthermore xtehr requires a complete date of birth; in the zib a vague date (such as only the year) is permitted.
 
 
 ## EHDSPatient.maritalStatus
@@ -237,7 +237,7 @@ MaritalStatus is not part of the Patient zib, but there is a separate zib called
 | type_zib |  |
 
 ### Comments
-
+Name information is optional in xtehr, but required in zib and further specified in the subbouwsteen Naamgegevens.
 
 
 ## EHDSPatient.personalIdentifier
@@ -264,7 +264,7 @@ MaritalStatus is not part of the Patient zib, but there is a separate zib called
 | type_zib | II |
 
 ### Comments
-
+In extehr at least one type of identifier is required; in zib it's optional.
 
 
 ## EHDSPatient.telecom
@@ -291,7 +291,7 @@ MaritalStatus is not part of the Patient zib, but there is a separate zib called
 | type_zib |  |
 
 ### Comments
-
+The zib refers to subcomponent (subbouwsteen) ContactInformation which consists of Telecommunication contact information, should be further analyzed.
 
 
 ## zib: Patient.ContactInformation
