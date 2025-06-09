@@ -45,8 +45,8 @@
 | type_zib |  |
 
 ### Comments
-Semantics: The EHDSPatient Logical Model and the Patient zib represent the same entity: an individual receiving healthcare. Despite potential structural or terminological differences, they refer to the same underlying subject.
-Datatype: N/A
+Semantics: The EHDSPatient Logical Model and the Patient zib represent the same entity: an individual receiving healthcare. Despite potential structural or terminological differences, they refer to the same underlying subject.  
+Datatype: N/A  
 Cardinalities: N/A
 
 
@@ -74,9 +74,9 @@ Cardinalities: N/A
 | type_zib |  |
 
 ### Comments
-Semantics: ✅
-Datatype: N/A
-Cardinalities:✅
+Semantics: ✅  
+Datatype: N/A  
+Cardinalities:✅  
 Note: EHDSAddress should be compared to partial information model AddressInformation https://zibs.nl/wiki/AddressInformation-v1.2(2024EN)
 
 
@@ -104,10 +104,10 @@ Note: EHDSAddress should be compared to partial information model AddressInforma
 | type_zib | CD |
 
 ### Comments
-Semantics: Both the zib and EHDS models appear to conflate gender and sex, reflecting a common misconception that the two are equivalent, despite their distinct meanings. The term "Physiological gender" would be more accurately described as "biological sex," which is the standard term used to refer to physical and physiological characteristics such as chromosomes, hormones, and reproductive anatomy. Gender however refers to the characteristics of women, men, girls and boys that are socially constructed (https://www.who.int/health-topics/gender. The lack of a clear definition for "gender" in both the EHDS and zib models results in ambiguity regarding its intended meaning and use.
+Semantics: Both the zib and EHDS models appear to conflate gender and sex, reflecting a common misconception that the two are equivalent, despite their distinct meanings. The term "Physiological gender" would be more accurately described as "biological sex," which is the standard term used to refer to physical and physiological characteristics such as chromosomes, hormones, and reproductive anatomy. Gender however refers to the characteristics of women, men, girls and boys that are socially constructed (https://www.who.int/health-topics/gender. The lack of a clear definition for "gender" in both the EHDS and zib models results in ambiguity regarding its intended meaning and use.  
 Datatype: CodableConcept vs Coded descriptor (CD)
     - Terminology: Zib - https://terminologie.nictiz.nl/art-decor/loinc?conceptId=46098-0; 
-    - valuesets: EHDSPatient.administrativeGender: Preferred {male, female, other, unknown} https://build.fhir.org/valueset-administrative-gender.html; Zib Patient.Gender: Required {male, female, undifferentiated, unknown}
+    - valuesets: EHDSPatient.administrativeGender: Preferred {male, female, other, unknown} https://build.fhir.org/valueset-administrative-gender.html; Zib Patient.Gender: Required {male, female, undifferentiated, unknown}  
 Cardinalities:Element is required in zib, but optional in EHDSPatient.
 
 
@@ -192,10 +192,10 @@ CommunicationLanguage is not part of the Patient zib, but there is a separate zi
 | type_zib | TS |
 
 ### Comments
-Semantics: Xtehr requires a complete date of birth YYYY-MM-DDThh:mm:ss+zz:zz; in the zib a vague date (such as only the year) is permitted.
-Datatype: ✅
-Cardinalities:Element is required in zib, but optional in EHDSPatient.
-Note: Which format is used in zib Patient?
+Semantics: Xtehr requires a complete date of birth YYYY-MM-DDThh:mm:ss+zz:zz; in the zib a vague date (such as only the year) is permitted.  
+Datatype: ✅  
+Cardinalities:Element is required in zib, but optional in EHDSPatient.  
+Note: Which format is used in zib Patient?  
 
 
 ## EHDSPatient.maritalStatus
@@ -250,9 +250,9 @@ MaritalStatus is not part of the Patient zib, but there is a separate zib called
 | type_zib |  |
 
 ### Comments
-Semantics: ?
-Datatype: ?
-Cardinalities: Name information is optional in xtehr, but required in zib and further specified in the partial information model NameInformation.
+Semantics: ?  
+Datatype: ?  
+Cardinalities: Name information is optional in xtehr, but required in zib and further specified in the partial information model NameInformation.  
 Note: Further analysis required of EHDSHumanName and https://zibs.nl/wiki/NameInformation-v1.2(2024EN)
 
 
@@ -280,8 +280,8 @@ Note: Further analysis required of EHDSHumanName and https://zibs.nl/wiki/NameIn
 | type_zib | II |
 
 ### Comments
-Semantics: ✅
-Datatype: ✅
+Semantics: ✅  
+Datatype: ✅  
 Cardinalities: In extehr at least one type of identifier is required; in zib it's optional.
 
 
