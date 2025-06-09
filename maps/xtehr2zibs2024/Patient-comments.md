@@ -45,7 +45,7 @@
 | type_zib |  |
 
 ### Comments
-Semantics: The EHDSPatient Logical Model and the Patient zib represent the same entity: an individual receiving healthcare. Despite potential structural or terminological differences, they refer to the same underlying subject.
+Semantics: The EHDSPatient Logical Model and the Patient zib represent the same entity: an individual receiving healthcare. Despite potential structural or terminological differences, they refer to the same underlying subject.  
 Datatype: N/A
 Cardinalities: N/A
 
