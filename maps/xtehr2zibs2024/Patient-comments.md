@@ -1,4 +1,4 @@
-# Patient
+# Patient as of 29-05-2025
 
 | zib                                 | xtehr                             | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:------------------------------------|:----------------------------------|:-----------|:----------------|:------------|:--------------|
@@ -45,7 +45,9 @@
 | type_zib |  |
 
 ### Comments
-
+Semantics: The EHDSPatient Logical Model and the Patient zib represent the same entity: an individual receiving healthcare. Despite potential structural or terminological differences, they refer to the same underlying subject.
+Datatype: N/A
+Cardinalities: N/A
 
 
 ## EHDSPatient.address
@@ -72,7 +74,10 @@
 | type_zib |  |
 
 ### Comments
-
+Semantics: ✅
+Datatype: N/A
+Cardinalities:✅
+Note: EHDSAddress should be compared to partial information model AddressInformation https://zibs.nl/wiki/AddressInformation-v1.2(2024EN)
 
 
 ## EHDSPatient.administrativeGender
@@ -99,6 +104,11 @@
 | type_zib | CD |
 
 ### Comments
+Semantics: Both the zib and EHDS models appear to conflate gender and sex, reflecting a common misconception that the two are equivalent, despite their distinct meanings. The term "Physiological gender" would be more accurately described as "biological sex," which is the standard term used to refer to physical and physiological characteristics such as chromosomes, hormones, and reproductive anatomy. Gender however refers to the characteristics of women, men, girls and boys that are socially constructed (https://www.who.int/health-topics/gender. The lack of a clear definition for "gender" in both the EHDS and zib models results in ambiguity regarding its intended meaning and use.
+Datatype: CodableConcept vs Coded descriptor (CD)
+    - Terminology: Zib - https://terminologie.nictiz.nl/art-decor/loinc?conceptId=46098-0; 
+    - valuesets: EHDSPatient.administrativeGender: Preferred {male, female, other, unknown} https://build.fhir.org/valueset-administrative-gender.html; Zib Patient.Gender: Required {male, female, undifferentiated, unknown}
+Cardinalities:Element is required in zib, but optional in EHDSPatient.
 
 
 
@@ -126,7 +136,8 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExlusive
+Nationality is not part of the Patient zib, but there is a separate zib called "Nationality" that requires further analysis: https://zibs.nl/wiki/Nationality-v3.0(2024EN)
 
 
 ## EHDSPatient.communicationLanguage
@@ -153,7 +164,8 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExlusive
+CommunicationLanguage is not part of the Patient zib, but there is a separate zib called "LanguageProficiency" that requires further analysis: https://zibs.nl/wiki/LanguageProficiency-v4.0(2024EN)
 
 
 ## EHDSPatient.dateOfBirth
@@ -180,7 +192,10 @@
 | type_zib | TS |
 
 ### Comments
-
+Semantics: Xtehr requires a complete date of birth YYYY-MM-DDThh:mm:ss+zz:zz; in the zib a vague date (such as only the year) is permitted.
+Datatype: ✅
+Cardinalities:Element is required in zib, but optional in EHDSPatient.
+Note: Which format is used in zib Patient?
 
 
 ## EHDSPatient.maritalStatus
@@ -207,7 +222,8 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExlusive
+MaritalStatus is not part of the Patient zib, but there is a separate zib called "MaritalStatus" that requires further analysis: https://zibs.nl/wiki/MaritalStatus-v3.2(2024EN)
 
 
 ## EHDSPatient.name
@@ -234,7 +250,10 @@
 | type_zib |  |
 
 ### Comments
-
+Semantics: ?
+Datatype: ?
+Cardinalities: Name information is optional in xtehr, but required in zib and further specified in the partial information model NameInformation.
+Note: Further analysis required of EHDSHumanName and https://zibs.nl/wiki/NameInformation-v1.2(2024EN)
 
 
 ## EHDSPatient.personalIdentifier
@@ -261,7 +280,9 @@
 | type_zib | II |
 
 ### Comments
-
+Semantics: ✅
+Datatype: ✅
+Cardinalities: In extehr at least one type of identifier is required; in zib it's optional.
 
 
 ## EHDSPatient.telecom
@@ -288,7 +309,7 @@
 | type_zib |  |
 
 ### Comments
-
+The zib refers to the partial information model ContactInformation which consists of Telecommunication contact information, should be further analyzed.
 
 
 ## zib: Patient.ContactInformation
@@ -315,7 +336,7 @@
 | type_zib |  |
 
 ### Comments
-
+The zib refers to the partial information model ContactInformation which consists of Telecommunication contact information, should be further analyzed.
 
 
 ## zib: Patient.DateOfDeath
@@ -342,7 +363,7 @@
 | type_zib | TS |
 
 ### Comments
-
+ZibExclusive
 
 
 ## zib: Patient.DeathIndicator
@@ -369,7 +390,7 @@
 | type_zib | BL |
 
 ### Comments
-
+ZibExclusive
 
 
 ## zib: Patient.GenderIdentity
@@ -396,7 +417,7 @@
 | type_zib | CD |
 
 ### Comments
-
+ZibExclusive
 
 
 ## zib: Patient.MultipleBirthIndicator
@@ -423,7 +444,7 @@
 | type_zib | BL |
 
 ### Comments
-
+ZibExclusive
 
 
 ## zib: Patient.MultipleBirthSequence
@@ -450,4 +471,4 @@
 | type_zib | INT |
 
 ### Comments
-
+ZibExclusive
