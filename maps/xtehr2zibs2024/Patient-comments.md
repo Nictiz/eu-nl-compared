@@ -1,5 +1,26 @@
 # Patient as of 29-05-2025
 
+### Overall conclusion
+What is missing in the ZIB that is mandatory/required in the Xt-EHR?
+- X
+
+What is missing in the Xt-EHR that is mandatory/required in the ZIB?
+- Patient.DeathIndicator
+- Patient.MultipleBirthIndicator
+
+What is missing in the ZIB that is optional in the Xt-EHR?
+- EHDSPatient.citizenship
+- EHDSPatient.communicationLanguage
+- EHDSPatient.maritalStatus
+- EHDSPatient.telecom 
+
+What is missing in the Xt-EHR that is optional in the ZIB?
+- Patient.ContactInformation (comparable to EHDSPatient.telecom)
+- Patient.DateOfDeath
+- Patient.GenderIdentity
+
+
+
 | zib                                 | xtehr                             | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:------------------------------------|:----------------------------------|:-----------|:----------------|:------------|:--------------|
 | Patient                             | EHDSPatient                       |            |                 |             | 0..*          |
