@@ -1,12 +1,22 @@
 # Patient as of 29-05-2025
 
 ### Overall conclusion
+The EHDSPatient Logical Model and the Patient zib represent the same entity: an individual receiving healthcare. Despite structural or terminological differences, they refer to the same underlying subject.
+
 What is missing in the ZIB that is mandatory/required in the Xt-EHR?
 - X
 
 What is missing in the Xt-EHR that is mandatory/required in the ZIB?
 - Patient.DeathIndicator
 - Patient.MultipleBirthIndicator
+
+What is mandatory/required in ZIB that is optional in Xt-EHR?
+- Patient.Gender
+- Patient.DateOfBirth
+- Patient.NameInformation
+
+What is mandatory/required in Xt-EHR that is optional in ZIB?
+- EHDSPatient.personalIdentifier
 
 What is missing in the ZIB that is optional in the Xt-EHR?
 - EHDSPatient.citizenship
@@ -157,7 +167,7 @@ Cardinalities:Element is required in zib, but optional in EHDSPatient.
 | type_zib |  |
 
 ### Comments
-EHDSExlusive
+EHDSExclusive
 Nationality is not part of the Patient zib, but there is a separate zib called "Nationality" that requires further analysis: https://zibs.nl/wiki/Nationality-v3.0(2024EN)
 
 
@@ -185,7 +195,7 @@ Nationality is not part of the Patient zib, but there is a separate zib called "
 | type_zib |  |
 
 ### Comments
-EHDSExlusive
+EHDSExclusive
 CommunicationLanguage is not part of the Patient zib, but there is a separate zib called "LanguageProficiency" that requires further analysis: https://zibs.nl/wiki/LanguageProficiency-v4.0(2024EN)
 
 
@@ -243,7 +253,7 @@ Note: Which format is used in zib Patient?
 | type_zib |  |
 
 ### Comments
-EHDSExlusive
+EHDSExclusive
 MaritalStatus is not part of the Patient zib, but there is a separate zib called "MaritalStatus" that requires further analysis: https://zibs.nl/wiki/MaritalStatus-v3.2(2024EN)
 
 
