@@ -1,12 +1,12 @@
 # Patient as of 29-05-2025
 
 ### Overall conclusion
-The EHDSPatient Logical Model and the Patient zib represent the same entity: an individual receiving healthcare. Despite structural or terminological differences, they refer to the same underlying subject.
+The EHDSPatient Logical Model and the Patient zib represent the same entity: an individual receiving healthcare. Despite structural or terminological differences, they refer to the same underlying subject. Below is an overview of the differences.
 
-What is missing in the ZIB that is mandatory/required in the Xt-EHR?
-- X
+What is missing in the ZIB that is **mandatory/required** in the Xt-EHR?
+It is expected that the zib provides sufficient coverage for the mandatory elements of the EHDSPatient model.
 
-What is missing in the Xt-EHR that is mandatory/required in the ZIB?
+What is missing in the Xt-EHR that is **mandatory/required** in the ZIB?
 - Patient.DeathIndicator
 - Patient.MultipleBirthIndicator
 
@@ -18,13 +18,13 @@ What is mandatory/required in ZIB that is optional in Xt-EHR?
 What is mandatory/required in Xt-EHR that is optional in ZIB?
 - EHDSPatient.personalIdentifier
 
-What is missing in the ZIB that is optional in the Xt-EHR?
-- EHDSPatient.citizenship
-- EHDSPatient.communicationLanguage
-- EHDSPatient.maritalStatus
-- EHDSPatient.telecom 
+What is missing in the ZIB that is **optional** in the Xt-EHR?
+- EHDSPatient.citizenship (comparable to zib Nationality)
+- EHDSPatient.communicationLanguage (comparable to zib LanguageProficiency)
+- EHDSPatient.maritalStatus (comparable to zib MartitalStatus)
+- EHDSPatient.telecom (comparable to partial information model ContactInformation)
 
-What is missing in the Xt-EHR that is optional in the ZIB?
+What is missing in the Xt-EHR that is **optional** in the ZIB?
 - Patient.ContactInformation (comparable to EHDSPatient.telecom)
 - Patient.DateOfDeath
 - Patient.GenderIdentity
