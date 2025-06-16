@@ -3,17 +3,26 @@
 What is missing in the Xtehr and present in zib 2024? 
 
 zib: Procedure.Requester::HealthProfessional. 
+
 zib: Procedure.ProcedureMethod
+
 zib: Procedure.ProcedureType
 
 
 What is missing in the zib 2024 and is present in the Xtehr dataset: 
+
 EHDSProcedure.complication
+
 EHDSProcedure.description
+
 EHDSProcedure.identifier
+
 EHDSProcedure.note
+
 EHDSProcedure.outcome
+
 EHDSProcedure.subject. 
+
 
 There is a  zib for patient, and there is also a reference zib for outcome, but it is not specifically connected to the Procedure zib. 
 This zib exists:  UitkomstVanZorg-v3.3.1(2024NL) which could be used to describe a certain outcome of an intervention. 
