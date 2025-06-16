@@ -307,6 +307,9 @@ The xt ehr definition of focal device defines medical devices as devices that ar
 
 ### Comments
 
+Zib doesn't contain element Procedure.Identifier. Instead, the Zib identifies Procedure.Type. That defines the specific name of the procedure: 	The name of the procedure.
+That is not the same as an identifier. Hence there is a small difference. The Zib Procedure.Type defines it as: The name of the procedure.
+Choices are the DHD procedure thesaurus,  the procedures file (CBV), the Care activities file (NZa), the Dutch Mental Health and Addiction Care procedures list (GGZ) and the procedures list of the Dutch College of General Practitioners (NHG).
 
 
 ## EHDSProcedure.location
@@ -334,7 +337,9 @@ The xt ehr definition of focal device defines medical devices as devices that ar
 
 ### Comments
 
-
+See reference zib HealthCare.Provider. Under this you can see data element OrganizationLocation, which is divided in two other data elements: LocationName and LocationNumber. LocationName refers to the 
+Name of the location, in case a healthcare organization has more than one location.
+Locationnumber refers to the Number of the location Number, if a numerical location identification is used next to or instead of a location name.
 
 ## EHDSProcedure.note
 
@@ -361,7 +366,7 @@ The xt ehr definition of focal device defines medical devices as devices that ar
 
 ### Comments
 
-
+Normally any additional information is being added in the 'toelichting' field, which most zibs have. 
 
 ## EHDSProcedure.outcome
 
@@ -388,6 +393,7 @@ The xt ehr definition of focal device defines medical devices as devices that ar
 
 ### Comments
 
+There is no data element under procedure, which specifically refers to the outcome of the procedure performed. There is a Zib 2024 which specifically focuses on the OutcomeOfCare in general: Zib OutcomeOfCare, hence not related to a specific intervention/procedure. Under Zib OutcomeofCare there are two sub data elements: HealthcareResult and HealthCondition The sub data element HealthcareResul defines the concept as follows: The textual account of the healthcare result. If HealthcareResult cannot be entered as a functional/mental status, it can be described as free text in the healthcare result.
 
 
 ## EHDSProcedure.performer
