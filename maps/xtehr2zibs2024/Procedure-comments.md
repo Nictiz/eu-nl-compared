@@ -421,7 +421,12 @@ There is no data element under procedure, which specifically refers to the outco
 
 ### Comments
 
+Seems like a match. Good to note that zib Procedure.Performer:: Healthprofessional is a reference zib. It refers to the zib Healthprofessional. Which distinguishes between Healthprofessional:Specialty, HealthProfessional:Gender, HealthprofessionalRole, HealthprofessionalIdentificationnumber. 
+Related to sub data element Healthprofessional: Specality, it uses two codelists: https://www.zibs.nl/wiki/HealthProfessional-v4.0.1(2024EN)#SpecialtyAGBCodelist and https://www.zibs.nl/wiki/HealthProfessional-v4.0.1(2024EN)#SpecialtyUZICodelist. Under a HealthcareProfessionals speciality is intended: the Health professional’s medical specialty. This refers to the recognized medical specialties as stated in the BIG Act. For example general practitioner or cardiologist.
 
+Hence two mainly Dutch codelists, not based on SNOMED: 
+COD016-VEKT (Vektis AGB-medische specialismen)
+RoleCodeNL (Zorgverlenertype (personen))
 
 ## EHDSProcedure.reason
 
@@ -448,7 +453,8 @@ There is no data element under procedure, which specifically refers to the outco
 
 ### Comments
 
-
+The definition between xtehr and zib is a bit different. Xtehr refers specifically to the reason why a procedure has been performed. the zib indication is divided in three sub elements: diagnosis, reaction, symptom. 
+The diagnosis could be interpreted as the reason why a procedure should be performed to a patient, or a specific symptom could also be the direct consequence for undergoing treatment. 
 
 ## EHDSProcedure.reason
 
@@ -475,8 +481,8 @@ There is no data element under procedure, which specifically refers to the outco
 
 ### Comments
 
-
-
+Hence the difference with the xtehr is that the zib makes the reason behind the intervention/procedure more specific: wether it is the direct result of a symptom, or a new diagnosis or a specific reaction the patient has.
+xtehr keeps it with its formulation very general: the reason, which is free to be filled in with a textual description. 
 ## EHDSProcedure.reason
 
 ### Table
@@ -502,7 +508,8 @@ There is no data element under procedure, which specifically refers to the outco
 
 ### Comments
 
-
+Hence the difference with the xtehr is that the zib makes the reason behind the intervention/procedure more specific: wether it is the direct result of a symptom, or a new diagnosis or a specific reaction the patient has.
+xtehr keeps it with its formulation very general: the reason, which is free to be filled in with a textual description. 
 
 ## EHDSProcedure.reason
 
@@ -529,7 +536,8 @@ There is no data element under procedure, which specifically refers to the outco
 
 ### Comments
 
-
+Hence the difference with the xtehr is that the zib makes the reason behind the intervention/procedure more specific: wether it is the direct result of a symptom, or a new diagnosis or a specific reaction the patient has.
+xtehr keeps it with its formulation very general: the reason, which is free to be filled in with a textual description. 
 
 ## EHDSProcedure.reason
 
@@ -556,7 +564,7 @@ There is no data element under procedure, which specifically refers to the outco
 
 ### Comments
 
-
+The sub element procedure.Indication: problem has become invalid and has been replaced by the zib indication: symptom, reaction, diagnosis. Please dubbelcheck the statement and whether the zib problem has become definitely invalid. 
 
 ## EHDSProcedure.subject
 
@@ -583,7 +591,7 @@ There is no data element under procedure, which specifically refers to the outco
 
 ### Comments
 
-
+This data sub element of procedure can be filled up with the zib Subject. Hence the direct patient on which the procedure has been performed. Under the zib Procedure, there is no data sub element referring to the patient. For this the zib he
 
 ## zib: nan
 
