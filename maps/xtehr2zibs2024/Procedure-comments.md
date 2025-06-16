@@ -593,14 +593,14 @@ The sub element procedure.Indication: problem has become invalid and has been re
 
 This data sub element of procedure can be filled up with the zib Subject. Hence the direct patient on which the procedure has been performed. Under the zib Procedure, there is no data sub element referring to the patient. For this the zib he
 
-## zib: nan
+## zib: nan 
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr |  |
-| zib |  |
+| zib | Medical device |
 | binding_xtehr |  |
 | card._xtehr |  |
 | card._zib | 0..* |
@@ -618,6 +618,10 @@ This data sub element of procedure can be filled up with the zib Subject. Hence 
 
 ### Comments
 
+See for a comparison of the medical device, the tab: device comments. 
+The EHDS logical model has a similar construct: EHDSProcedure.deviceUsed. Again: for further clarification please go to map Device comments
+
+Unclear why the zib is called nan -is this a configuration mistake? 
 
 
 ## zib: Procedure.ProcedureMethod
@@ -645,7 +649,7 @@ This data sub element of procedure can be filled up with the zib Subject. Hence 
 
 ### Comments
 
-
+From xt ehr there is no such construct as procedure method. 
 
 ## zib: nan
 
@@ -672,6 +676,7 @@ This data sub element of procedure can be filled up with the zib Subject. Hence 
 
 ### Comments
 
+From xt ehr there is no such construct as procedure method. 
 
 
 ## zib: nan
@@ -681,7 +686,7 @@ This data sub element of procedure can be filled up with the zib Subject. Hence 
 | attribute | value |
 |---|---|
 | xtehr |  |
-| zib |  |
+| zib | ProcedureType |
 | binding_xtehr |  |
 | card._xtehr |  |
 | card._zib | 1 |
@@ -726,3 +731,4 @@ This data sub element of procedure can be filled up with the zib Subject. Hence 
 
 ### Comments
 
+There is no such thing as procedure requester in the EHDS logical model: Procedure model. This element could be part of the header information. This should be analyzed in further steps. 
