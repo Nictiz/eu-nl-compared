@@ -82,6 +82,8 @@
 
 ### Comments
 
+Seems to match, although a different cardinality is being used. The zib uses specific SNOMED codelists. See for example: 2.16.840.1.113883.6.96 : https://www.zibs.nl/wiki/AnatomicalLocation-v1.0.4(2024EN)#LateralityCodelist. SNOMED CT based. 
+And https://www.zibs.nl/wiki/AnatomicalLocation-v1.0.4(2024EN)#LocationCodelist. SNOMED CT based. 
 
 
 ## EHDSProcedure.code
