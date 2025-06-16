@@ -1,5 +1,27 @@
 # Procedure as of 27-05-2025
 
+What is missing in the Xtehr and present in zib 2024? 
+
+zib: Procedure.Requester::HealthProfessional. 
+zib: Procedure.ProcedureMethod
+zib: Procedure.ProcedureType
+
+
+What is missing in the zib 2024 and is present in the Xtehr dataset: 
+EHDSProcedure.complication
+EHDSProcedure.description
+EHDSProcedure.identifier
+EHDSProcedure.note
+EHDSProcedure.outcome
+EHDSProcedure.subject. 
+
+There is a  zib for patient, and there is also a reference zib for outcome, but it is not specifically connected to the Procedure zib. 
+This zib exists:  UitkomstVanZorg-v3.3.1(2024NL) which could be used to describe a certain outcome of an intervention. 
+
+
+
+
+
 | zib                                                       | xtehr                          | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:----------------------------------------------------------|:-------------------------------|:-----------|:----------------|:------------|:--------------|
 | Procedure                                                 | EHDSProcedure                  |            |                 |             | 0..*          |
@@ -250,7 +272,7 @@ Xt EHR and Zib seem to match. According to FHIR, date consists of two components
 ### Comments
 
 In the information model Zib Procedure, a reference is made to zib MedicalDevice. The product, the placing of which in or on the body is the purpose of the procedure, for example placing an implant. The cardinality of MedicalDevice is 0..*. 
-
+See tab medicaldevice comments for further explanation and comparison. 
 ## EHDSProcedure.focalDevice
 
 ### Table
@@ -368,7 +390,7 @@ Locationnumber refers to the Number of the location Number, if a numerical locat
 
 ### Comments
 
-Normally any additional information is being added in the 'toelichting' field, which most zibs have. 
+Normally any additional information is being added in the 'toelichting' field, which most zibs have. Unclear whether zib procedure has this possibility
 
 ## EHDSProcedure.outcome
 
