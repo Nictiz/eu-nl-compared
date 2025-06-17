@@ -1,4 +1,4 @@
-# HealthProfessional as of 2025-06-17
+# HealthProfessional
 
 | zib                                                       | xtehr                               | type_zib   | type_xtehr       | card._zib   | card._xtehr   |
 |:----------------------------------------------------------|:------------------------------------|:-----------|:-----------------|:------------|:--------------|
@@ -7,10 +7,11 @@
 | HealthProfessional.HealthProfessionalIdentificationNumber | EHDSHealthProfessional.identifier   | II         | Identifier       | 0..*        | 0..*          |
 | HealthProfessional.NameInformation                        | EHDSHealthProfessional.name         |            | EHDSHumanName    | 0..1        | 0..1          |
 | HealthProfessional.HealthcareProvider                     | EHDSHealthProfessional.organization |            | EHDSOrganization | 0..1        | 0..1          |
-| HealthProfessional.HealthProfessionalRole                 | EHDSHealthProfessional.role         | CD         | CodeableConcept  | 0..1        | 0..*          |
+|                                                           | EHDSHealthProfessional.role         |            | CodeableConcept  |             | 0..*          |
 | HealthProfessional.Specialty                              | EHDSHealthProfessional.specialty    | CD         | CodeableConcept  | 0..1        | 0..*          |
 | HealthProfessional.ContactInformation                     | EHDSHealthProfessional.telecom      |            | EHDSTelecom      | 0..1        | 0..*          |
 | HealthProfessional.Gender                                 |                                     | CD         |                  | 0..1        |               |
+| HealthProfessional.HealthProfessionalRole                 |                                     | CD         |                  | 0..1        |               |
 
 
 
@@ -57,7 +58,7 @@ When referring to this information model the role the health professional fulfil
 | card._xtehr | 0..1 |
 | card._zib | 0..* |
 | definition_xtehr | Mailing and office or home addresses. The addresses are always sequences of address parts (e.g. street address line, country, postcode, city) even if postal address formats may vary depending on the country. An address may or may not include a specific use code; if this attribute is not present it is assumed to be the default address useful for any purpose. |
-| definition_zib | Health professionalï¿½s address information. |
+| definition_zib | Health professional’s address information. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSHealthProfessional.address |
 | id_zib | NL-CM:17.1.7 |
@@ -122,7 +123,7 @@ This information is not readily available for foreign health professionals. |
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Name of the health professional that has been treating or taking responsibility for the patient. |
-| definition_zib | Health professionalï¿½s full name. If a health professional identification number is entered, it will be the name as listed in UZI, AGB or by the healthcare center. |
+| definition_zib | Health professional’s full name. If a health professional identification number is entered, it will be the name as listed in UZI, AGB or by the healthcare center. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSHealthProfessional.name |
 | id_zib | NL-CM:17.1.3 |
@@ -174,23 +175,23 @@ This information is not readily available for foreign health professionals. |
 | attribute | value |
 |---|---|
 | xtehr | EHDSHealthProfessional.role |
-| zib | HealthProfessional.HealthProfessionalRole |
-| alias_zib | NL: ZorgverlenerRol |
+| zib |  |
+| alias_zib |  |
 | binding_xtehr | {'strength': 'preferred', 'description': 'ISCO, SNOMED CT'} |
 | card._xtehr | 0..* |
-| card._zib | 0..1 |
+| card._zib |  |
 | definition_xtehr | Health professional role. Multiple roles could be provided. |
-| definition_zib | The role the health professional fulfils in the healthcare process. For health professionals, this could be for example attender, referrer or performer. |
+| definition_zib |  |
 | definitioncode_zib |  |
 | id_xtehr | EHDSHealthProfessional.role |
-| id_zib | NL-CM:17.1.5 |
-| name_zib | HealthProfessionalRole |
+| id_zib |  |
+| name_zib |  |
 | path_xtehr | EHDSHealthProfessional.role |
-| path_zib | HealthProfessional.HealthProfessionalRole |
+| path_zib |  |
 | short_xtehr | Health professional role. Multiple roles could be provided. |
-| stereotype_zib | data |
+| stereotype_zib |  |
 | type_xtehr | CodeableConcept |
-| type_zib | CD |
+| type_zib |  |
 
 ### Comments
 
@@ -209,7 +210,7 @@ This information is not readily available for foreign health professionals. |
 | card._xtehr | 0..* |
 | card._zib | 0..1 |
 | definition_xtehr | The specialty of a practitioner that describes the functional role they are practicing at a given organization |
-| definition_zib | Health professionalï¿½s medical specialty. This refers to the recognized medical specialties as stated in the BIG Act. For example general practitioner or cardiologist. |
+| definition_zib | Health professional’s medical specialty. This refers to the recognized medical specialties as stated in the BIG Act. For example general practitioner or cardiologist. |
 | definitioncode_zib | SNOMED CT: 394658006 Clinical specialty |
 | id_xtehr | EHDSHealthProfessional.specialty |
 | id_zib | NL-CM:17.1.4 |
@@ -238,7 +239,7 @@ This information is not readily available for foreign health professionals. |
 | card._xtehr | 0..* |
 | card._zib | 0..1 |
 | definition_xtehr | Telecommunication contact information (addresses) associated with a person, such as phone number, email, or messaging service. Multiple telecommunication addresses might be provided. |
-| definition_zib | Health professionalï¿½s telephone number(s) or e-mail address(es). |
+| definition_zib | Health professional’s telephone number(s) or e-mail address(es). |
 | definitioncode_zib |  |
 | id_xtehr | EHDSHealthProfessional.telecom |
 | id_zib | NL-CM:17.1.8 |
@@ -267,13 +268,42 @@ This information is not readily available for foreign health professionals. |
 | card._xtehr |  |
 | card._zib | 0..1 |
 | definition_xtehr |  |
-| definition_zib | Health professionalï¿½s administrative gender. |
+| definition_zib | Health professional’s administrative gender. |
 | definitioncode_zib |  |
 | id_xtehr |  |
 | id_zib | NL-CM:17.1.9 |
 | name_zib | Gender |
 | path_xtehr |  |
 | path_zib | HealthProfessional.Gender |
+| short_xtehr |  |
+| stereotype_zib | data |
+| type_xtehr |  |
+| type_zib | CD |
+
+### Comments
+
+
+
+## zib: HealthProfessional.HealthProfessionalRole
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr |  |
+| zib | HealthProfessional.HealthProfessionalRole |
+| alias_zib | NL: ZorgverlenerRol |
+| binding_xtehr |  |
+| card._xtehr |  |
+| card._zib | 0..1 |
+| definition_xtehr |  |
+| definition_zib | The role the health professional fulfils in the healthcare process. For health professionals, this could be for example attender, referrer or performer. |
+| definitioncode_zib |  |
+| id_xtehr |  |
+| id_zib | NL-CM:17.1.5 |
+| name_zib | HealthProfessionalRole |
+| path_xtehr |  |
+| path_zib | HealthProfessional.HealthProfessionalRole |
 | short_xtehr |  |
 | stereotype_zib | data |
 | type_xtehr |  |
