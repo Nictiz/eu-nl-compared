@@ -1,4 +1,23 @@
 # HealthProfessional
+## Overall conclusion
+The models mostly match up, but there is one fundamental difference: the zib model is tightly coupled to process that it is instantiated for, while the Xt-EHR model is generic description of the health professional and its role in an organization (presumably). This results in:
+
+* A role definition for the zib (like performer, case manager, etc.) which is not present and unwanted in the Xt-EHR model
+* A single specialty, which should be interpreted in the context of the healthcare process
+
+Whereas the Xt-EHR model has:
+
+* Multiple specialties, which should be interpreted in the context of the employment at an organization
+* A role, which _probably_ should be interpreted in the context of the employment at an organization. Note that this role is ill defined.
+
+This difference means that the models themselves are not readily compatible. However, compatibility in an actual exchange depends on the way the models are mapped. In the current FHIR implementation of zib HealhProfessional, the HealthProfessionalRole concept is broken out of the health professional model and mapped to the resources where it is reference from.
+
+Furthermore:
+
+* there are several cardinality differences (address, telecom)
+* the zib specifies the gender of the health professional while the Xt-EHR model does not
+* the analyses of Address, Telecom, HumanName and Location/Organization apply
+
 
 | zib                                                       | xtehr                               | type_zib   | type_xtehr       | card._zib   | card._xtehr   |
 |:----------------------------------------------------------|:------------------------------------|:-----------|:-----------------|:------------|:--------------|
@@ -58,7 +77,7 @@ When referring to this information model the role the health professional fulfil
 | card._xtehr | 0..1 |
 | card._zib | 0..* |
 | definition_xtehr | Mailing and office or home addresses. The addresses are always sequences of address parts (e.g. street address line, country, postcode, city) even if postal address formats may vary depending on the country. An address may or may not include a specific use code; if this attribute is not present it is assumed to be the default address useful for any purpose. |
-| definition_zib | Health professional’s address information. |
+| definition_zib | Health professionalï¿½s address information. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSHealthProfessional.address |
 | id_zib | NL-CM:17.1.7 |
@@ -71,7 +90,7 @@ When referring to this information model the role the health professional fulfil
 | type_zib |  |
 
 ### Comments
-
+See the analysis on Address
 
 
 ## EHDSHealthProfessional.identifier
@@ -107,7 +126,7 @@ This information is not readily available for foreign health professionals. |
 | type_zib | II |
 
 ### Comments
-
+The Xt-EHR specifies this as any health professional identifier, which the zib refines to the situation in the Netherlands: UZI, AGB-Z or BIG. The zib doesn't impose any restrictions, so this element is compatible in both ways.
 
 
 ## EHDSHealthProfessional.name
@@ -123,7 +142,7 @@ This information is not readily available for foreign health professionals. |
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Name of the health professional that has been treating or taking responsibility for the patient. |
-| definition_zib | Health professional’s full name. If a health professional identification number is entered, it will be the name as listed in UZI, AGB or by the healthcare center. |
+| definition_zib | Health professionalï¿½s full name. If a health professional identification number is entered, it will be the name as listed in UZI, AGB or by the healthcare center. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSHealthProfessional.name |
 | id_zib | NL-CM:17.1.3 |
@@ -136,7 +155,7 @@ This information is not readily available for foreign health professionals. |
 | type_zib |  |
 
 ### Comments
-
+See the analysis of Name
 
 
 ## EHDSHealthProfessional.organization
@@ -165,7 +184,9 @@ This information is not readily available for foreign health professionals. |
 | type_zib |  |
 
 ### Comments
+There's is a mismatch in the definition. The zib defines this concept as the organization the health professional _works_ for, whereas the Xt-EHR model defines this as the organization the health professional _fulfills the specified role_ for.
 
+This makes sense if one takes the view that a zib instance is tightly couple to a healthcare process. The instance is then about a specific combination of health professional, organization, specialty and role in the process.
 
 
 ## EHDSHealthProfessional.role
@@ -194,8 +215,9 @@ This information is not readily available for foreign health professionals. |
 | type_zib |  |
 
 ### Comments
+Although the zib also defines a "role", it _probably_ has different semantics than the Xt-EHR role. The zib defines the HealthProfessionalRole as the role the health professional plays in the _healthcare process_ (for which the zib is instantiated), like referrer, performer, or case manager. What the Xt-EHR concept is about, is not really clear. However, the terminology binding hints as [ISCO](https://www.who.int/publications/m/item/classifying-health-workers), which is about (broad level) specialty's of health professionals.
 
-
+This Xt-EHR thus seems to be different than HealthProfessionalRole in the zib, _and_ overlaps with the specialty concept in the Xt-EHR model.
 
 ## EHDSHealthProfessional.specialty
 
@@ -210,7 +232,7 @@ This information is not readily available for foreign health professionals. |
 | card._xtehr | 0..* |
 | card._zib | 0..1 |
 | definition_xtehr | The specialty of a practitioner that describes the functional role they are practicing at a given organization |
-| definition_zib | Health professional’s medical specialty. This refers to the recognized medical specialties as stated in the BIG Act. For example general practitioner or cardiologist. |
+| definition_zib | Health professionalï¿½s medical specialty. This refers to the recognized medical specialties as stated in the BIG Act. For example general practitioner or cardiologist. |
 | definitioncode_zib | SNOMED CT: 394658006 Clinical specialty |
 | id_xtehr | EHDSHealthProfessional.specialty |
 | id_zib | NL-CM:17.1.4 |
@@ -223,8 +245,7 @@ This information is not readily available for foreign health professionals. |
 | type_zib | CD |
 
 ### Comments
-
-
+There's a slight mismatch in definition and a big one in cardinalities (see also the comment on .organization). The zib defines this concept as the specialty of the health professional, while the Xt-EHR model combines this with the organization. Also, the zib recognizes at most one specialty for a health professional, while the Xt-EHR model recognizes multiple specialties (per organization).
 
 ## EHDSHealthProfessional.telecom
 
@@ -239,7 +260,7 @@ This information is not readily available for foreign health professionals. |
 | card._xtehr | 0..* |
 | card._zib | 0..1 |
 | definition_xtehr | Telecommunication contact information (addresses) associated with a person, such as phone number, email, or messaging service. Multiple telecommunication addresses might be provided. |
-| definition_zib | Health professional’s telephone number(s) or e-mail address(es). |
+| definition_zib | Health professionalï¿½s telephone number(s) or e-mail address(es). |
 | definitioncode_zib |  |
 | id_xtehr | EHDSHealthProfessional.telecom |
 | id_zib | NL-CM:17.1.8 |
@@ -252,7 +273,7 @@ This information is not readily available for foreign health professionals. |
 | type_zib |  |
 
 ### Comments
-
+See the analysis of Telecom. There's also a cardinality mismatch, the Xt-EHR model is 0..* whereas the zib restricts this to 0..1
 
 
 ## zib: HealthProfessional.Gender
@@ -268,7 +289,7 @@ This information is not readily available for foreign health professionals. |
 | card._xtehr |  |
 | card._zib | 0..1 |
 | definition_xtehr |  |
-| definition_zib | Health professional’s administrative gender. |
+| definition_zib | Health professionalï¿½s administrative gender. |
 | definitioncode_zib |  |
 | id_xtehr |  |
 | id_zib | NL-CM:17.1.9 |
@@ -281,7 +302,7 @@ This information is not readily available for foreign health professionals. |
 | type_zib | CD |
 
 ### Comments
-
+Not present in the Xt-EHR model
 
 
 ## zib: HealthProfessional.HealthProfessionalRole
@@ -310,4 +331,4 @@ This information is not readily available for foreign health professionals. |
 | type_zib | CD |
 
 ### Comments
-
+See the comment on EHDSHealthProfessional.role
