@@ -150,25 +150,28 @@ Cardinalities:Element is required in zib, but optional in EHDSPatient.
 | attribute | value |
 |---|---|
 | xtehr | EHDSPatient.citizenship |
-| zib |  |
+| zib | NationalityRC/Nationality |
 | binding_xtehr | {'strength': 'preferred', 'description': 'ISO 3166-1-2'} |
 | card._xtehr | 0..* |
 | card._zib |  |
 | definition_xtehr | Citizenship/nationality of the patient. |
-| definition_zib |  |
-| definitioncode_zib |  |
+| definition_zib | Root concept of the Nationality information model. This concept contains all data elements of the Nationality information model. /Indicates the country of citizenship. GBA Tabel 32 (Nationaliteitentabel) |
+| definitioncode_zib | 66476-3 Country of citizenship |
 | id_xtehr | EHDSPatient.citizenship |
-| id_zib |  |
-| name_zib |  |
+| id_zib | NL-CM:7.6.1 / NL-CM:7.6.3 |
+| name_zib | NationalityRC/Nationality |
 | path_xtehr | EHDSPatient.citizenship |
-| path_zib |  |
+| path_zib | NationalityRC/NationalityRC.Nationality |
 | short_xtehr | C.1.8 - Citizenship (nationality) |
 | type_xtehr | CodeableConcept |
-| type_zib |  |
+| type_zib | CD |
 
 ### Comments
 EHDSExclusive
 Nationality is not part of the Patient zib, but there is a separate zib called "Nationality" that requires further analysis: https://zibs.nl/wiki/Nationality-v3.0(2024EN)
+Difference in valueset used:  
+The zib uses the GBA Tabel 32 (Nationaliteitentabel)'; Binding: Extensible  
+EHDSPatient.citizenship uses ISO 3166-1-2; Binding: Preferred
 
 
 ## EHDSPatient.communicationLanguage
