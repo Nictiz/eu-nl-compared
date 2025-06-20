@@ -181,25 +181,29 @@ EHDSPatient.citizenship uses ISO 3166-1-2; Binding: Preferred
 | attribute | value |
 |---|---|
 | xtehr | EHDSPatient.communicationLanguage |
-| zib |  |
+| zib | LanguageProficiency(.CommunicationLanguage) |
 | binding_xtehr | {'strength': 'preferred', 'description': 'BCP 47'} |
 | card._xtehr | 0..* |
 | card._zib |  |
 | definition_xtehr | The language which can be used to communicate with the patient about his or her health. |
-| definition_zib |  |
-| definitioncode_zib |  |
+| definition_zib | Linguistic proficiency is the ability to express oneself in a certain language and understand statements made in that language. This includes both oral and written communication.( / CommunicationLanguage: The language of communication. ) |
+| definitioncode_zib | 284530008 / 161139007 |
 | id_xtehr | EHDSPatient.communicationLanguage |
-| id_zib |  |
-| name_zib |  |
+| id_zib | NL-CM:7.12.1 |
+| name_zib | LanguageProficiency(.CommunicationLanguage) |
 | path_xtehr | EHDSPatient.communicationLanguage |
-| path_zib |  |
+| path_zib | LanguageProficiency(.CommunicationLanguage) |
 | short_xtehr | C.1.9 - Communcation language |
 | type_xtehr | CodeableConcept |
-| type_zib |  |
+| type_zib | CD |
 
 ### Comments
 EHDSExclusive
 CommunicationLanguage is not part of the Patient zib, but there is a separate zib called "LanguageProficiency" that requires further analysis: https://zibs.nl/wiki/LanguageProficiency-v4.0(2024EN)
+LanguageProficiency.CommunicationLanguage is a required element of the zib LanguageProficiency with cardinality 1..1.
+Zib has CommunicationLanguageCodelist which consists of all values of ISO-639-2 alpha codevalues with binding: required.
+Xt-EHR model uses 'BCP 47' to describe CommunicationLanguage binding: preferred.
+
 
 
 ## EHDSPatient.dateOfBirth
