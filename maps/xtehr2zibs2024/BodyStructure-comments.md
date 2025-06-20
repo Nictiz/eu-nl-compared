@@ -1,4 +1,36 @@
 # BodyStructure as of 2025-06-17
+## Overall conclusion
+### Partial zib vs. stand-alone Xt-EHR model
+Zib AnatomicalLocation is the universal way to describe anatomical locations in all zibs. It is a partial zib, meaning that it is meant to become part of the zib model where it is used.
+
+This contrasts with the Xt-EHR model, which describes a model that can be instantiated independently. For this reason, it defines (the possibility to add) an identifier, allowing re-use across different models. It should be noted though that the Xt-EHR model is not the only way to describe anatomical locations in the Xt-EHR model. At least the Xt-EHR Condition model allows for a simple coded value as well.
+
+What the result is of these different approaches, will depend on the concrete implementation in FHIR.
+
+## Interpretation of the Xt-EHR model
+The Xt-EHR model lacks terminology bindings, which makes it hard to compare with the zib; however, it is clear that the Xt-EHR model is directly modelled on the FHIR BodyStructure resource, so we'll use this as a proxy to interpret the meaning of the different components.
+
+It should be noted that the BodyStructure model seems immature at this moment, because of the lack of proper meaning and the overlap of the laterality and locationQualifier elements.
+
+## Differences and compatibility
+The zib models an anatomical location as a location with a laterality, both as coded values. Both concepts are optional; the laterality may be irrelevant or pre-coordinated in the location code, and the location may be irrelevant in the context of the larger dataset (e.g. the location is redundant in a description of a cataract).
+
+Just like the zib, the Xt-EHR model recognizes a location and a laterality (both coded, both optional), but in addition it recognizes a more generic coded locationQualifier, which (at least in the examples) also has laterality in scope. (Note that this deviates from the FHIR resource, which only recognizes locationQualifier, which has laterality in scope).
+
+In contrast to the zib, the Xt-EHR model allows for a free text description instead of, or in addition to, the coded form.
+
+In addition, it allows for defining the _kind_ of body structure. Although no formal constraint exists in the FHIR resource, the description makes it clear that it should be used in combination with the location, so I assume that this is the case for the Xt-EHR model as well.
+
+Because of the lack of terminology in the Xt-EHR model and the use alignment of the two main elements from the zib, a valid instance of the zib is guaranteed to be a valid instance of the Xt-EHR model.
+
+This is not true the other way around
+
+* The Xt-EHR instance might use a code system not recognized by the zib
+* The Xt-EHR instance might use a free text description instead of coded information
+* The Xt-EHR instance might carry important information in free text in addition to the coded information, which cannot be interpreted by the zib.
+* The Xt-EHR instance might define laterality information using the locationQualifier element instead of the location element
+
+
 
 | zib                           | xtehr                               | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:------------------------------|:------------------------------------|:-----------|:----------------|:------------|:--------------|
