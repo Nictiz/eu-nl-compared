@@ -1,4 +1,12 @@
 # Location and Organization as of 2025-06-17
+## Overall conclusion
+The Location and Organization Xt-EHR models cover the same information as zib HealthcareProvider does, but it is hard to match zib and Xt-EHR. This is largely due to the fact that the zib [suffers from the known issue](https://nictiz.atlassian.net/browse/ZIB-2471) that it is an amalgamation of both a location where care is delivered, and the managing organization of this location. In [ZIB-1539](https://nictiz.atlassian.net/browse/ZIB-1359) it is clarified that the zib in the first place represents a location, but from its use in other zibs and the description of the concepts it becomes clear that this is not the entire picture.
+
+This makes comparison hard, as most zib concepts could potentially be equivalent to the Xt-EHR Location counterpart or to the Xt-EHR Organization counterpart, depending on interpretation and context of use.
+
+For this analysis, the view was taken that the zib primarily represents a location, but the conclusions should be considered very weak.
+
+Apart from this issue with the zib, the Xt-EHR model has a concept of hierarchy (a location is part of an organization, and organizations can be hierarchically organized). The zib lacks this kind of hierarchical relationships.
 
 | zib                                                       | xtehr                             | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:----------------------------------------------------------|:----------------------------------|:-----------|:----------------|:------------|:--------------|
@@ -82,7 +90,7 @@
 | type_zib |  |
 
 ### Comments
-
+The zib allows for multiple addresses, but the Xt-EHR models allows for just one address, defined as "the physical address". This make sense as the address here is meant to define "where somebody should be" (as opposed to the Organization, which can have multiple types of addresses). It's possible that the location/organization duality of the zib is the reason for this.
 
 
 ## EHDSLocation.description
@@ -112,7 +120,7 @@
 
 ### Comments
 
-
+The zib OrganizationLocation/LocationName/LocationNumber mechanism to refine information about the exact location, so has a degree of overlap with the Xt-EHR description concept. It is not an exact match however.
 
 ## EHDSLocation.description
 
@@ -141,7 +149,7 @@
 
 ### Comments
 
-
+The zib OrganizationLocation/LocationName/LocationNumber mechanism to refine information about the exact location, so has a degree of overlap with the Xt-EHR description concept. It is not an exact match however.
 
 ## EHDSLocation.identifier
 
@@ -199,7 +207,7 @@
 
 ### Comments
 
-
+_If_ the zib represents a location, this information is part of the zib, kind of.
 
 ## EHDSLocation.name
 
@@ -257,7 +265,7 @@
 
 ### Comments
 
-
+This kind of hierarchical relationships are outside of the scope of the zib.
 
 ## EHDSLocation.position
 
@@ -518,7 +526,7 @@
 
 ### Comments
 
-
+This kind of hierarchical relationship is outside the scope of the zib
 
 ## EHDSOrganization.telecom
 
@@ -576,7 +584,9 @@
 
 ### Comments
 
+There is _probably_ a match between zib OrganizationType and the Xt-EHR type concept, as the type according to the RoleCodeNL code system (part of the UZI register) seems to apply to the _organization_ rather than a _location_.
 
+There is a mismatch on both cardinality and terminology binding, although the terminology binding in the Xt-EHR model is only _preferred_.
 
 ## zib: HealthcareProvider.ContactInformation
 
