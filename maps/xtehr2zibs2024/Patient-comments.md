@@ -9,19 +9,22 @@ It is expected that the zib provides sufficient coverage for the mandatory eleme
 What is missing in the Xt-EHR that is **mandatory/required** in the ZIB?
 - Patient.DeathIndicator
 - Patient.MultipleBirthIndicator
+Action needed?
 
 What is mandatory/required in ZIB that is optional in Xt-EHR?
 - Patient.Gender
 - Patient.DateOfBirth
 - Patient.NameInformation
+Action needed?
 
 What is mandatory/required in Xt-EHR that is optional in ZIB?
 - EHDSPatient.personalIdentifier
+Action needed?
 
 What is missing in the ZIB that is **optional** in the Xt-EHR?
-- EHDSPatient.citizenship (comparable to zib Nationality)
-- EHDSPatient.communicationLanguage (comparable to zib LanguageProficiency)
-- EHDSPatient.maritalStatus (comparable to zib MartitalStatus)
+- EHDSPatient.citizenship (comparable to zib Nationality; zib is more granular)
+- EHDSPatient.communicationLanguage (comparable to zib LanguageProficiency; zib is more granular)
+- EHDSPatient.maritalStatus (comparable to zib MartitalStatus; zib doesn't consist of all values in EHDSPatient/HL7 MaritalStatus valueset)
 - EHDSPatient.telecom (comparable to partial information model ContactInformation)
 
 What is missing in the Xt-EHR that is **optional** in the ZIB?
@@ -170,8 +173,10 @@ Cardinalities:Element is required in zib, but optional in EHDSPatient.
 EHDSExclusive
 Nationality is not part of the Patient zib, but there is a separate zib called "Nationality" that requires further analysis: https://zibs.nl/wiki/Nationality-v3.0(2024EN)
 Difference in valueset used:  
-The zib uses the GBA Tabel 32 (Nationaliteitentabel)'; Binding: Extensible  
-EHDSPatient.citizenship uses ISO 3166-1-2; Binding: Preferred
+The zib uses the GBA Tabel 32 (Nationaliteitentabel)'; Binding: Extensible; consists of nationalities and is more nuanced and tailored for Dutch government use, covering real-world complexities like statelessness.
+EHDSPatient.citizenship uses ISO 3166-1-2; Binding: Preferred; consists of country codes, less expressive.
+
+
 
 
 ## EHDSPatient.communicationLanguage
@@ -198,11 +203,12 @@ EHDSPatient.citizenship uses ISO 3166-1-2; Binding: Preferred
 | type_zib | CD |
 
 ### Comments
-EHDSExclusive
-CommunicationLanguage is not part of the Patient zib, but there is a separate zib called "LanguageProficiency" that requires further analysis: https://zibs.nl/wiki/LanguageProficiency-v4.0(2024EN)
-LanguageProficiency.CommunicationLanguage is a required element of the zib LanguageProficiency with cardinality 1..1.
+EHDSExclusive  
+CommunicationLanguage is not part of the Patient zib, but there is a separate zib called "LanguageProficiency" that requires further analysis: https://zibs.nl/wiki/LanguageProficiency-v4.0(2024EN)  
+LanguageProficiency.CommunicationLanguage is a required element of the zib LanguageProficiency with cardinality 1..1.  
 Zib has CommunicationLanguageCodelist which consists of all values of ISO-639-2 alpha codevalues with binding: required.
-Xt-EHR model uses 'BCP 47' to describe CommunicationLanguage binding: preferred.
+Xt-EHR model uses 'BCP 47' to describe CommunicationLanguage with binding: preferred.
+BCP 47 used by the zib does use ISO 639-2 codes as part of its language subtags, but BCP 47 itself defines a much broader and more flexible structure. Therefore the information in a zib is more granular than in the EHDSPatient model.
 
 
 
@@ -243,26 +249,30 @@ Note: Which format is used in zib Patient?
 | attribute | value |
 |---|---|
 | xtehr | EHDSPatient.maritalStatus |
-| zib |  |
+| zib | MaritalStatus |
 | binding_xtehr | {'strength': 'preferred', 'description': 'HL7 marital-status'} |
 | card._xtehr | 0..1 |
-| card._zib |  |
+| card._zib | x |
 | definition_xtehr | Marital (civil) status of a patient |
-| definition_zib |  |
-| definitioncode_zib |  |
+| definition_zib | A person’s marital status according to the terms and definition in the Dutch civil code. |
+| definitioncode_zib | x |
 | id_xtehr | EHDSPatient.maritalStatus |
-| id_zib |  |
-| name_zib |  |
+| id_zib | NL-CM:7.9.2 |
+| name_zib | MaritalStatus |
 | path_xtehr | EHDSPatient.maritalStatus |
-| path_zib |  |
+| path_zib | MaritalStatusRC.MaritalStatus |
 | short_xtehr | C.1.7 - Marital status |
 | type_xtehr | CodeableConcept |
-| type_zib |  |
+| type_zib | CD |
 
 ### Comments
 EHDSExclusive
 MaritalStatus is not part of the Patient zib, but there is a separate zib called "MaritalStatus" that requires further analysis: https://zibs.nl/wiki/MaritalStatus-v3.2(2024EN)
-
+Semantics: They both represent the marital/civil status, but zib is limited to the Dutch civil code
+Datatype: both coded 
+Terminology: not linked to any terminology standards
+Valuesets: Zib uses a MaritalStatusCodelist with binding: Required (OTH/Nullflavor allowed); consists of many but not all values in the 'HL7 marital-status' valueset, which is used in EHDSPatient.
+Cardinalities: N/A
 
 ## EHDSPatient.name
 
