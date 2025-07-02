@@ -2,7 +2,6 @@
 
 What is missing in the Xtehr and present in zib 2024? 
 
-* zib: Procedure.Requester::HealthProfessional. 
 * zib: Procedure.ProcedureMethod
 * zib: Procedure.ProcedureType
 
@@ -14,7 +13,56 @@ What is missing in the zib 2024 and is present in the Xtehr dataset:
 * EHDSProcedure.identifier
 * EHDSProcedure.note
 * EHDSProcedure.outcome
-* EHDSProcedure.subject. 
+* EHDSProcedure.subject.
+
+Regarding the latter. Some text seem to be missing. The subject is not definied in this dataset.
+
+It can be noted that the zib procedure has a scope of a "therapeutic or diagnostic procedure undergone by the patient or which the patient will undergo", so past en future use (and presumably present use as well). The scope of the Xt-EHR is "An action that is or was performed on or for a patient", so only past and present use. So the zib has future use in scope while Xt-EHR has not.
+In addition, Xt-EHR doesn't have the restriction on therapeutic or diagnostic procedures, so it _might_ have a broader scope - e.g. an action could also be an freedom restricting intervention, which is not a Procedure according to the zib. I'm not sure about this though
+
+Regarding EHDSProcedure.reason: there seems to be quite a mismatch on terminology and interpretation: The definition between xtehr and zib is a bit different. Xtehr refers specifically to the reason why a procedure has been performed. the zib indication is divided in three sub elements: diagnosis, reaction, symptom. The diagnosis could be interpreted as the reason why a procedure should be performed on a patient, or a specific symptom could also be the direct consequence for undergoing treatment. At the moment it is hard to tell since the zib condition is quite complex. The xt ehr seems to be much more simplistic: textually defining the reason behind intervention. 
+
+Regarding EHDSProcedure.performer an additional analysis should be made between EHDSHealthProfessional and zib HealthProfessional. An extra subtask has been created. 
+
+Regarding EHDSProcedure.outcome. ZibOutcomeOfCare is not relevant for the procedure zib, but it is relevant for the NursingIntervention zib, which should also be compared to EHDSProcedure. An additional subtask needs to be added for this specific  mapping. 
+
+Regarding EHDSProcedure.location. An analysis should be made between EHDSLocation and Zib HealthcareProvider. The conceptual match is on HealthcareProvider.  
+
+Regarding EHDSProcedure.identifier. this doesn’t align with Procedure.Type; the identifier is about identifying this specific procedure, while type is about the kind of procedure. There is probably a match with zib RegistrationData.Identifier, but that has a more restricted cardinality.
+
+
+Regarding EHDSProcedure.focalDevice: the zib and the Xt-EHR model do match up nicely here. Both are about the device that was the “focal device” of the procedure: “Device(s) that is/are implanted, removed, or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure” according to Xt-EHR, or “The product, the placing of which in or on the body is the purpose of the procedure, for example placing an implant” according to the zib.It is true that there are mismatches in the MedicalDevice model itself between the zib and Xt-EHR, but for this specific context, they mean the same.
+
+Regarding EHDSProcedure.deviceUsed: this element has no equivalent in the zib (although it has one in zib NursingIntervention); this is about devices used in order to perform the procedure, and not about the device that was implanted or manipulated during the procedure … think bandages and such
+
+Regarding EHDSProcedure.description: this element is gone in the current build.
+
+Regarding date[x]: It’s not quite true that date consists of the components: datetime and period; “date[x]” means it can be either a dateTime or a Period.
+The mapping between zib and Xt-EHR is not straightforward and touches both ProcedureStartDate and ProcedureEndDate.
+The meaning of the Xt-EHR model is that date can be:
+- an “instantaneous” procedure in the past (because of the scope)
+- a procedure that took time, in the past
+- an ongoing procedure that has started but not yet ended
+
+The meaning of the zib is that the procedure can be:
+- an “instantaneous” procedure in the past (only ProcedureStartDate present and in the past)
+-an “instantaneous” procedure in the future (only ProcedureStartDate present and in the future)
+- a procedure that took time, in the past (ProcedureStartDate and ProcedureEndDate present and in the past)
+- an ongoing procedure that has started but not yet ended (ProcedureStartDate in the past, ProcedureEndDate present but “left empty”)
+- a procedure that will take time, in the future (ProcedureStartDate in the future, ProcedureEndDate present but “left empty”)
+- a series of procedures that has completed (ProcedureStartDate and ProcedureEndDate in the past, presumably a ProcedureType that indicates that this is a series)
+- a series of procedures that is ongoing (ProcedureStartDate in the past, ProcedureEndDate present but “left empty”, and presumably a ProcedureType that indicates that this is a series)
+- a series of procedures that is will start in the future (ProcedureStartDate in the future, ProcedureEndDate present but “left empty”, and presumably a ProcedureType that indicates that this is a series)
+
+So the zib relies on different heuristics to alter the meaning of the concepts ProcedureStartDate and ProcedureEndDate and has a mismatch in data types. There is no one-to-one mapping between the Xt-EHR model and the zib, although the meaning of the two models seem to align.
+
+
+Regarding EHDSProcedure.complication: I do think zib Diagnosis matches this element, as zib Diagnosis has a Reason element which can be a reference to zib Procedure. However, the mapping is problematic as zib Diagnosis requires a lot of information that is not present in the simple list of “complications that arose during the procedure” of Xt-EHR. Terminology wise, the Xt-EHR model has only a preferred binding. It hints as Orphacode as allowed code system, which is not present in the zib, (next to SNOMED and ICD-10, which are valid in the zib).
+
+
+Regarding EHDSProcedure.code/Procedure.ProcedureType: the zib is more restrictive than XtEHR as it has required bindings to a range of different ValueSets, some of them SNOMED. The use of other code systems besides SNOMED doesn’t seem to be problematic as the XtEHR binding is only preferred.
+
+As the zib is more restrictive, an instance for the will will alwaiys be valid for this element against the XtEHR model. An XtEHR instance however is not guaranteed to be valid against the zib, as the .code may be absent, use a terminology not valid in the zib, or define an action that is not a therapeutic or diagnostic procedure.
 
 There is a  zib for patient, and there is also a reference zib for outcome, but it is not specifically connected to the Procedure zib. 
 This zib exists:  UitkomstVanZorg-v3.3.1(2024NL) which could be used to describe a certain outcome of an intervention. 
