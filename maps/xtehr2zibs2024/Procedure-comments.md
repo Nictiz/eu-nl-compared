@@ -1,10 +1,21 @@
-# Procedure as of 27-05-2025
+# Procedure as of 8-7-2025
+
+## Version history
+
+v1: 27-05-2025, initial version
+v2: 8-7-2025
+
+- EHDSProcedure now uses "EHDSDataset" with metadata (common to more EHDS models)
+- some texts have changed (numbers deleted and other minor changes)
+- anatomicLocation (CodeableConcept) is replaced with submodel bodySite
+- description is gone, presentedForm is part of EHDSDataSet
+
+## Conclusions
 
 What is missing in the Xtehr and present in zib 2024? 
 
 * zib: Procedure.ProcedureMethod
 * zib: Procedure.ProcedureType
-
 
 What is missing in the zib 2024 and is present in the Xtehr dataset: 
 
@@ -15,7 +26,7 @@ What is missing in the zib 2024 and is present in the Xtehr dataset:
 * EHDSProcedure.outcome
 * EHDSProcedure.subject.
 
-Regarding the latter. Some text seem to be missing. The subject is not definied in this dataset.
+Regarding the latter. Some text seem to be missing. The subject is not defined in this dataset.
 
 It can be noted that the zib procedure has a scope of a "therapeutic or diagnostic procedure undergone by the patient or which the patient will undergo", so past en future use (and presumably present use as well). The scope of the Xt-EHR is "An action that is or was performed on or for a patient", so only past and present use. So the zib has future use in scope while Xt-EHR has not.
 In addition, Xt-EHR doesn't have the restriction on therapeutic or diagnostic procedures, so it _might_ have a broader scope - e.g. an action could also be an freedom restricting intervention, which is not a Procedure according to the zib. I'm not sure about this though
@@ -67,33 +78,40 @@ As the zib is more restrictive, an instance for the will will alwaiys be valid f
 There is a  zib for patient, and there is also a reference zib for outcome, but it is not specifically connected to the Procedure zib. 
 This zib exists:  UitkomstVanZorg-v3.3.1(2024NL) which could be used to describe a certain outcome of an intervention. 
 
-| zib                                                       | xtehr                          | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
-|:----------------------------------------------------------|:-------------------------------|:-----------|:----------------|:------------|:--------------|
-| Procedure                                                 | EHDSProcedure                  |            |                 |             | 0..*          |
-| Procedure.ProcedureAnatomicalLocation::AnatomicalLocation | EHDSProcedure.anatomicLocation |            | CodeableConcept | 0..1        | 0..*          |
-| Procedure.ProcedureType                                   | EHDSProcedure.code             |            | CodeableConcept |             | 0..1          |
-|                                                           | EHDSProcedure.complication     |            | CodeableConcept |             | 0..*          |
-| Procedure.ProcedureEndDate                                | EHDSProcedure.date[x]          | TS         | dateTime        | 0..1        | 0..1          |
-| Procedure.ProcedureStartDate                              | EHDSProcedure.date[x]          | TS         | dateTime        | 0..1        | 0..1          |
-|                                                           | EHDSProcedure.description      |            | string          |             | 0..1          |
-|                                                           | EHDSProcedure.deviceUsed       |            | EHDSDevice      |             | 0..*          |
-| Procedure.MedicalDevice                                   | EHDSProcedure.focalDevice      |            | Reference       |             | 0..*          |
-|                                                           | EHDSProcedure.identifier       |            | Identifier      |             | 0..*          |
-| Procedure.Location::HealthcareProvider                    | EHDSProcedure.location         |            | EHDSLocation    | 0..1        | 0..*          |
-|                                                           | EHDSProcedure.note             |            | string          |             | 0..1          |
-|                                                           | EHDSProcedure.outcome          |            | CodeableConcept |             | 0..1          |
-| Procedure.Performer::HealthProfessional                   | EHDSProcedure.performer        |            | Reference       | 0..*        | 0..*          |
-| Procedure.Indication                                      | EHDSProcedure.reason           |            | Reference       | 0..*        | 0..*          |
-| Procedure.Indication.Diagnosis                            | EHDSProcedure.reason           |            | Reference       | (0..1)      | 0..*          |
-| Procedure.Indication.Reaction                             | EHDSProcedure.reason           |            | Reference       | (0..1)      | 0..*          |
-| Procedure.Indication.Symptom                              | EHDSProcedure.reason           |            | Reference       | (0..1)      | 0..*          |
-| Procedure.Indication::Problem                             | EHDSProcedure.reason           |            | Reference       |             | 0..*          |
-|                                                           | EHDSProcedure.subject          |            | Reference       |             | 1..1          |
-|                                                           |                                |            |                 | 0..*        |               |
-| Procedure.ProcedureMethod                                 |                                |            |                 |             |               |
-|                                                           |                                | CD         |                 | 0..*        |               |
-|                                                           |                                | CD         |                 | 1           |               |
-| Procedure.Requester::HealthProfessional                   |                                |            |                 |             |               |
+
+| zib                                                       | xtehr                                     | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
+|:----------------------------------------------------------|:------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
+| Procedure                                                 | EHDSProcedure                             |            |                        |             | 0..*          |
+| Procedure.ProcedureAnatomicalLocation::AnatomicalLocation | EHDSProcedure.bodySite                    |            | EHDSBodyStructure      | 0..1        | 0..*          |
+| Procedure.ProcedureType                                   | EHDSProcedure.code                        | CD         | CodeableConcept        | 1           | 0..1          |
+|                                                           | EHDSProcedure.complication                |            | CodeableConcept        |             | 0..*          |
+| Procedure.ProcedureEndDate                                | EHDSProcedure.date[x]                     | TS         | dateTime               | 0..1        | 0..1          |
+| Procedure.ProcedureStartDate                              | EHDSProcedure.date[x]                     | TS         | dateTime               | 0..1        | 0..1          |
+|                                                           | EHDSProcedure.deviceUsed                  |            | EHDSDevice             |             | 0..*          |
+| Procedure.MedicalDevice                                   | EHDSProcedure.focalDevice                 |            | EHDSDevice             | 0..*        | 0..*          |
+| Registratiegegevens, zie DataSet mapping                  | EHDSProcedure.header                      |            | Base                   |             | 1..1          |
+|                                                           | EHDSProcedure.header.authorship           |            | Base                   |             | 1..*          |
+|                                                           | EHDSProcedure.header.authorship.author[x] |            | EHDSHealthProfessional |             | 1..1          |
+|                                                           | EHDSProcedure.header.authorship.datetime  |            | dateTime               |             | 1..1          |
+|                                                           | EHDSProcedure.header.identifier           |            | Identifier             |             | 0..*          |
+|                                                           | EHDSProcedure.header.language             |            | CodeableConcept        |             | 0..1          |
+|                                                           | EHDSProcedure.header.lastUpdate           |            | dateTime               |             | 0..1          |
+|                                                           | EHDSProcedure.header.status               |            | CodeableConcept        |             | 1..1          |
+|                                                           | EHDSProcedure.header.statusReason[x]      |            | CodeableConcept        |             | 0..1          |
+|                                                           | EHDSProcedure.header.subject              |            | EHDSPatient            |             | 1..1          |
+|                                                           | EHDSProcedure.header.version              |            | string                 |             | 0..1          |
+| Procedure.Location::HealthcareProvider                    | EHDSProcedure.location                    |            |                        | 0..1        |               |
+|                                                           | EHDSProcedure.note                        |            | string                 |             | 0..1          |
+|                                                           | EHDSProcedure.outcome                     |            | CodeableConcept        |             | 0..1          |
+| Procedure.Performer::HealthProfessional                   | EHDSProcedure.performer                   |            | EHDSHealthProfessional | 0..*        | 0..*          |
+|                                                           | EHDSProcedure.presentedForm               |            | EHDSAttachment         |             | 0..*          |
+| Procedure.Indication                                      | EHDSProcedure.reason[x]                   |            | CodeableConcept        | 0..*        | 0..*          |
+| Procedure.Indication.Diagnosis                            | EHDSProcedure.reason[x]                   |            | CodeableConcept        | (0..1)      | 0..*          |
+| Procedure.Indication.Reaction                             | EHDSProcedure.reason[x]                   |            | CodeableConcept        | (0..1)      | 0..*          |
+| Procedure.Indication.Symptom                              | EHDSProcedure.reason[x]                   |            | CodeableConcept        | (0..1)      | 0..*          |
+| Procedure.Indication::Problem                             | EHDSProcedure.reason[x]                   |            | CodeableConcept        |             | 0..*          |
+| Procedure.ProcedureMethod                                 |                                           | CD         |                        | 0..*        |               |
+| Procedure.Requester::HealthProfessional                   |                                           |            |                        |             |               |
 
 
 
@@ -105,18 +123,20 @@ This zib exists:  UitkomstVanZorg-v3.3.1(2024NL) which could be used to describe
 |---|---|
 | xtehr | EHDSProcedure |
 | zib | Procedure |
+| alias_zib | NL: Verrichting |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib |  |
-| definition_xtehr | C.16 - EHDS refined base model for An action that is or was performed on or for a patient |
+| definition_xtehr | EHDS refined base model for an action that is or was performed on or for a patient |
 | definition_zib | Root concept of the Procedure information model. This root concept contains all data elements of the Procedure information model. |
-| definitioncode_zib | 71388002 Procedure |
+| definitioncode_zib | SNOMED CT: 71388002 Procedure |
 | id_xtehr | EHDSProcedure |
 | id_zib | NL-CM:14.1.1 |
 | name_zib | Procedure |
 | path_xtehr | EHDSProcedure |
 | path_zib | Procedure |
 | short_xtehr | Procedure model |
+| stereotype_zib | rootconcept |
 | type_xtehr |  |
 | type_zib |  |
 
@@ -124,34 +144,37 @@ This zib exists:  UitkomstVanZorg-v3.3.1(2024NL) which could be used to describe
 
 
 
-## EHDSProcedure.anatomicLocation
+## EHDSProcedure.bodySite
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSProcedure.anatomicLocation |
+| xtehr | EHDSProcedure.bodySite |
 | zib | Procedure.ProcedureAnatomicalLocation::AnatomicalLocation |
-| binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT, ICD-O-3'} |
+| alias_zib | NL: VerrichtingAnatomischeLocatie::AnatomischeLocatie |
+| binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib | 0..1 |
-| definition_xtehr | Anatomic location and laterality where the procedure was performed. This is the target site. |
+| definition_xtehr | Procedure target body site. Details of where the procedure was performed. Laterality may be included as qualifier of the body site. |
 | definition_zib | Anatomical location that is the focus of the procedure. |
-| definitioncode_zib | 405813007 Procedure site - Direct |
-| id_xtehr | EHDSProcedure.anatomicLocation |
+| definitioncode_zib | SNOMED CT: 405813007 Procedure site - Direct |
+| id_xtehr | EHDSProcedure.bodySite |
 | id_zib | NL-CM:14.1.13 |
 | name_zib | ProcedureAnatomicalLocation::AnatomicalLocation |
-| path_xtehr | EHDSProcedure.anatomicLocation |
+| path_xtehr | EHDSProcedure.bodySite |
 | path_zib | Procedure.ProcedureAnatomicalLocation::AnatomicalLocation |
-| short_xtehr | C.16.6 - Anatomic location |
-| type_xtehr | CodeableConcept |
+| short_xtehr | Procedure target body site. Details of where the procedure was performed. Laterality may be included as qualifier of the body site. |
+| stereotype_zib | data,reference |
+| type_xtehr | EHDSBodyStructure |
 | type_zib |  |
 
 ### Comments
 
-Seems to match, although a different cardinality is being used. The zib uses specific SNOMED codelists. See for example: 2.16.840.1.113883.6.96 : https://www.zibs.nl/wiki/AnatomicalLocation-v1.0.4(2024EN)#LateralityCodelist. SNOMED CT based. 
+Previous comment re. anatomicLocation: Seems to match, although a different cardinality is being used. The zib uses specific SNOMED codelists. See for example: 2.16.840.1.113883.6.96 : https://www.zibs.nl/wiki/AnatomicalLocation-v1.0.4(2024EN)#LateralityCodelist. SNOMED CT based. 
 And https://www.zibs.nl/wiki/AnatomicalLocation-v1.0.4(2024EN)#LocationCodelist. SNOMED CT based. 
 
+anatomicLocation is now replaced with bodySite, we should compare the submodel.
 
 ## EHDSProcedure.code
 
@@ -161,24 +184,26 @@ And https://www.zibs.nl/wiki/AnatomicalLocation-v1.0.4(2024EN)#LocationCodelist.
 |---|---|
 | xtehr | EHDSProcedure.code |
 | zib | Procedure.ProcedureType |
+| alias_zib | NL: VerrichtingType |
 | binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT'} |
 | card._xtehr | 0..1 |
 | card._zib | 1 |
 | definition_xtehr | Code identifying the procedure |
-| definition_zib | The name of the procedure |
+| definition_zib | The name of the procedure.<br />Choices are the DHD procedure thesaurus,  the procedures file (CBV), the Care activities file (NZa), the Dutch Mental Health and Addiction Care procedures list (GGZ) and the procedures list of the Dutch College of General Practitioners (NHG). |
 | definitioncode_zib |  |
 | id_xtehr | EHDSProcedure.code |
 | id_zib | NL-CM:14.1.4 |
-| name_zib |  |
+| name_zib | ProcedureType |
 | path_xtehr | EHDSProcedure.code |
-| path_zib |  |
-| short_xtehr | C.16.3 - Code |
+| path_zib | Procedure.ProcedureType |
+| short_xtehr | Code identifying the procedure |
+| stereotype_zib | data |
 | type_xtehr | CodeableConcept |
-| type_zib |  |
+| type_zib | CD |
 
 ### Comments
-Zib Procedure.Proceduretype defines the following value sets, in which the choices are as follows: the DHD procedure thesaurus,  the procedures file (CBV), the Care activities file (NZa), the Dutch Mental Health and Addiction Care procedures list (GGZ) and the procedures list of the Dutch College of General Practitioners (NHG). Of all these valuesets the ProcedureMethodCodelist (SNOMED < 129264002), the ProcedureTypeGGZcodelist (SNOMED Ref set ^140741000146104)  and the ProcedureTypeMaternityCareCodelist (SNOMED CT ^146481000146103) is in SNOMED CT. The zib 2024 describes EHDSprocedure.code as a type, which conveys the name of the procedure. The zib furthermore has a cardinality of 1, which means the element is required to be filled. 
 
+Zib Procedure.Proceduretype defines the following value sets, in which the choices are as follows: the DHD procedure thesaurus,  the procedures file (CBV), the Care activities file (NZa), the Dutch Mental Health and Addiction Care procedures list (GGZ) and the procedures list of the Dutch College of General Practitioners (NHG). Of all these valuesets the ProcedureMethodCodelist (SNOMED < 129264002), the ProcedureTypeGGZcodelist (SNOMED Ref set ^140741000146104)  and the ProcedureTypeMaternityCareCodelist (SNOMED CT ^146481000146103) is in SNOMED CT. The zib 2024 describes EHDSprocedure.code as a type, which conveys the name of the procedure. The zib furthermore has a cardinality of 1, which means the element is required to be filled. 
 
 ## EHDSProcedure.complication
 
@@ -188,7 +213,8 @@ Zib Procedure.Proceduretype defines the following value sets, in which the choic
 |---|---|
 | xtehr | EHDSProcedure.complication |
 | zib |  |
-| binding_xtehr | {'strength': 'preferred', 'description': 'ICD-10*, SNOMED CT, Orphacode if rare disease is diagnosed'} |
+| alias_zib |  |
+| binding_xtehr | {'strength': 'preferred', 'description': 'ICD-10, SNOMED CT, Orphacode if rare disease is diagnosed'} |
 | card._xtehr | 0..* |
 | card._zib |  |
 | definition_xtehr | Any complications that occurred during the procedure, or in the immediate post-performance period. These are generally tracked separately from the procedure description, which will typically describe the procedure itself rather than any 'post procedure' issues. |
@@ -199,14 +225,14 @@ Zib Procedure.Proceduretype defines the following value sets, in which the choic
 | name_zib |  |
 | path_xtehr | EHDSProcedure.complication |
 | path_zib |  |
-| short_xtehr | C.16.9 - Complication |
+| short_xtehr | Any complications that occurred during the procedure, or in the immediate post-performance period. These are generally tracked separately from the procedure description, which will typically describe the procedure itself rather than any 'post procedure' issues. |
+| stereotype_zib |  |
 | type_xtehr | CodeableConcept |
 | type_zib |  |
 
 ### Comments
 
 The Zib Diagnosis contains amongst others information element IsComplication. It Indicates whether or not the diagnosis involves a complication. This is however not related to specific complications occured during the procedure. Hence, there is no zib which accurately describes a complication which occurs during a specific intervention/procedure. 
-
 
 ## EHDSProcedure.date[x]
 
@@ -216,11 +242,12 @@ The Zib Diagnosis contains amongst others information element IsComplication. It
 |---|---|
 | xtehr | EHDSProcedure.date[x] |
 | zib | Procedure.ProcedureEndDate |
+| alias_zib | NL: VerrichtingEindDatum |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Date and time of the procedure or interval of its performance |
-| definition_zib | The end date (and if possible end time) of the procedure. A ‘vague’ date, such as only the year, is permitted.
+| definition_zib | The end date (and if possible end time) of the procedure. A ‘vague’ date, such as only the year, is permitted. 
 The element offers the option to indicate the end of the period of a series of related procedures. The end date element is only used for a procedures that takes some time and is then always applied. If the procedure still continues, the value is left empty. For instantaneous or very short lasting procedures the element is omitted. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSProcedure.date[x] |
@@ -228,13 +255,16 @@ The element offers the option to indicate the end of the period of a series of r
 | name_zib | ProcedureEndDate |
 | path_xtehr | EHDSProcedure.date[x] |
 | path_zib | Procedure.ProcedureEndDate |
-| short_xtehr | C.16.4 - Date |
+| short_xtehr | Date and time of the procedure or interval of its performance |
+| stereotype_zib | data |
 | type_xtehr | dateTime |
 | type_zib | TS |
 
 ### Comments
+
 Xt EHR and Zib seem to match. According to FHIR datatypes, date consists of two components: datetime and period. Datetime entails a date, date-time or partial date (e.g. just year or year + month) as used in human communication. The format is YYYY, YYYY-MM, YYYY-MM-DD or YYYY-MM-DDThh:mm:ss+zz:zz, e.g. 2018, 1973-06, 1905-08-23, 2015-02-07T13:28:17-05:00 or 2017-01-01T00:00:00.000Z. Period according to FHIR entails a time range defined by start and end date/time
 + Rule: If present, start SHALL have a lower or equal value than end
+
 
 ## EHDSProcedure.date[x]
 
@@ -244,11 +274,12 @@ Xt EHR and Zib seem to match. According to FHIR datatypes, date consists of two 
 |---|---|
 | xtehr | EHDSProcedure.date[x] |
 | zib | Procedure.ProcedureStartDate |
+| alias_zib | NL: VerrichtingStartDatum |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Date and time of the procedure or interval of its performance |
-| definition_zib | The (desired) start date (and if possible start time) of the procedure. A ‘vague’ date, such as only the year, is permitted.
+| definition_zib | The (desired) start date (and if possible start time) of the procedure. A ‘vague’ date, such as only the year, is permitted. 
 The element offers the option to indicate the start of the period of a series of related procedures. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSProcedure.date[x] |
@@ -256,40 +287,15 @@ The element offers the option to indicate the start of the period of a series of
 | name_zib | ProcedureStartDate |
 | path_xtehr | EHDSProcedure.date[x] |
 | path_zib | Procedure.ProcedureStartDate |
-| short_xtehr | C.16.4 - Date |
+| short_xtehr | Date and time of the procedure or interval of its performance |
+| stereotype_zib | data |
 | type_xtehr | dateTime |
 | type_zib | TS |
 
 ### Comments
+
 Xt EHR and Zib seem to match. According to FHIR, date consists of two components: datetime and period. Datetime entails a date, date-time or partial date (e.g. just year or year + month) as used in human communication. The format is YYYY, YYYY-MM, YYYY-MM-DD or YYYY-MM-DDThh:mm:ss+zz:zz, e.g. 2018, 1973-06, 1905-08-23, 2015-02-07T13:28:17-05:00 or 2017-01-01T00:00:00.000Z. Period according to FHIR entails a time range defined by start and end date/time
 + Rule: If present, start SHALL have a lower or equal value than end
-
-## EHDSProcedure.description
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSProcedure.description |
-| zib |  |
-| binding_xtehr |  |
-| card._xtehr | 0..1 |
-| card._zib |  |
-| definition_xtehr | Procedure specification in string form |
-| definition_zib |  |
-| definitioncode_zib |  |
-| id_xtehr | EHDSProcedure.description |
-| id_zib |  |
-| name_zib |  |
-| path_xtehr | EHDSProcedure.description |
-| path_zib |  |
-| short_xtehr | C.16.2 - Description |
-| type_xtehr | string |
-| type_zib |  |
-
-### Comments
-
-
 
 ## EHDSProcedure.deviceUsed
 
@@ -299,6 +305,7 @@ Xt EHR and Zib seem to match. According to FHIR, date consists of two components
 |---|---|
 | xtehr | EHDSProcedure.deviceUsed |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib |  |
@@ -310,7 +317,8 @@ Xt EHR and Zib seem to match. According to FHIR, date consists of two components
 | name_zib |  |
 | path_xtehr | EHDSProcedure.deviceUsed |
 | path_zib |  |
-| short_xtehr | C.16.10 - Device used |
+| short_xtehr | Device used to perform the procedure |
+| stereotype_zib |  |
 | type_xtehr | EHDSDevice |
 | type_zib |  |
 
@@ -318,6 +326,7 @@ Xt EHR and Zib seem to match. According to FHIR, date consists of two components
 
 In the information model Zib Procedure, a reference is made to zib MedicalDevice. The product, the placing of which in or on the body is the purpose of the procedure, for example placing an implant. The cardinality of MedicalDevice is 0..*. 
 See tab medicaldevice comments for further explanation and comparison. 
+
 ## EHDSProcedure.focalDevice
 
 ### Table
@@ -326,19 +335,21 @@ See tab medicaldevice comments for further explanation and comparison.
 |---|---|
 | xtehr | EHDSProcedure.focalDevice |
 | zib | Procedure.MedicalDevice |
+| alias_zib | NL: MedischHulpmiddel |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
-| card._zib |  |
-| definition_xtehr | Device or devices that is/are implanted, removed, or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure. |
-| definition_zib | The medical device (internally or externally). |
-| definitioncode_zib |  |
+| card._zib | 0..* |
+| definition_xtehr | Device(s) that is/are implanted, removed, or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure. |
+| definition_zib | The product, the placing of which in or on the body is the purpose of the procedure, for example placing an implant. |
+| definitioncode_zib | SNOMED CT: 405815000 Procedure device |
 | id_xtehr | EHDSProcedure.focalDevice |
-| id_zib |  |
-| name_zib |  |
+| id_zib | NL-CM:14.1.7 |
+| name_zib | MedicalDevice |
 | path_xtehr | EHDSProcedure.focalDevice |
-| path_zib |  |
-| short_xtehr | C.16.11 - Focal device |
-| type_xtehr | Reference |
+| path_zib | Procedure.MedicalDevice |
+| short_xtehr | Device(s) that is/are implanted, removed, or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure. |
+| stereotype_zib | data,reference |
+| type_xtehr | EHDSDevice |
 | type_zib |  |
 
 ### Comments
@@ -350,27 +361,144 @@ This includes devices like wheelchairs, hearing aids, or prosthetic limbs, regar
 
 The xt ehr definition of focal device defines medical devices as devices that are the primary focus of a medical procedure. 
 
-
-## EHDSProcedure.identifier
+## EHDSProcedure.header
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSProcedure.identifier |
+| xtehr | EHDSProcedure.header |
+| zib | Registratiegegevens, zie DataSet mapping |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 1..1 |
+| card._zib |  |
+| definition_xtehr | Common header for all patient-related data |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSProcedure.header |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSProcedure.header |
+| path_zib |  |
+| short_xtehr | Common header for all patient-related data |
+| stereotype_zib |  |
+| type_xtehr | Base |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSProcedure.header.authorship
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSProcedure.header.authorship |
 | zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 1..* |
+| card._zib |  |
+| definition_xtehr | Resource authoring details |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSProcedure.header.authorship |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSProcedure.header.authorship |
+| path_zib |  |
+| short_xtehr | Authorship |
+| stereotype_zib |  |
+| type_xtehr | Base |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSProcedure.header.authorship.author[x]
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSProcedure.header.authorship.author[x] |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 1..1 |
+| card._zib |  |
+| definition_xtehr | Author(s) by whom the resource was/were authored. Multiple authors could be provided. |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSProcedure.header.authorship.author[x] |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSProcedure.header.authorship.author[x] |
+| path_zib |  |
+| short_xtehr | Author |
+| stereotype_zib |  |
+| type_xtehr | EHDSHealthProfessional |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSProcedure.header.authorship.datetime
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSProcedure.header.authorship.datetime |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 1..1 |
+| card._zib |  |
+| definition_xtehr | Date and time of the issuing the document/resource by its author. |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSProcedure.header.authorship.datetime |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSProcedure.header.authorship.datetime |
+| path_zib |  |
+| short_xtehr | Date and time of authoring/issuing |
+| stereotype_zib |  |
+| type_xtehr | dateTime |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSProcedure.header.identifier
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSProcedure.header.identifier |
+| zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib |  |
-| definition_xtehr | Procedure identifier |
+| definition_xtehr | Business identifier for the object |
 | definition_zib |  |
 | definitioncode_zib |  |
-| id_xtehr | EHDSProcedure.identifier |
+| id_xtehr | EHDSProcedure.header.identifier |
 | id_zib |  |
 | name_zib |  |
-| path_xtehr | EHDSProcedure.identifier |
+| path_xtehr | EHDSProcedure.header.identifier |
 | path_zib |  |
-| short_xtehr | C.16.1 - Identifier |
+| short_xtehr | Business identifier for the object |
+| stereotype_zib |  |
 | type_xtehr | Identifier |
 | type_zib |  |
 
@@ -379,6 +507,179 @@ The xt ehr definition of focal device defines medical devices as devices that ar
 Zib doesn't contain element Procedure.Identifier. Instead, the Zib identifies Procedure.Type. That defines the specific name of the procedure: 	The name of the procedure.
 That is not the same as an identifier. Hence there is a small difference. The Zib Procedure.Type defines it as: The name of the procedure.
 Choices are the DHD procedure thesaurus,  the procedures file (CBV), the Care activities file (NZa), the Dutch Mental Health and Addiction Care procedures list (GGZ) and the procedures list of the Dutch College of General Practitioners (NHG).
+
+## EHDSProcedure.header.language
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSProcedure.header.language |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr | {'strength': 'preferred', 'description': 'BCP 47'} |
+| card._xtehr | 0..1 |
+| card._zib |  |
+| definition_xtehr | Language in which the resource is written. Language is expressed by the IETF language tag. |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSProcedure.header.language |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSProcedure.header.language |
+| path_zib |  |
+| short_xtehr | Language |
+| stereotype_zib |  |
+| type_xtehr | CodeableConcept |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSProcedure.header.lastUpdate
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSProcedure.header.lastUpdate |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 0..1 |
+| card._zib |  |
+| definition_xtehr | Date and time of the last update to the document/information |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSProcedure.header.lastUpdate |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSProcedure.header.lastUpdate |
+| path_zib |  |
+| short_xtehr | Date and time of the last update to the resource |
+| stereotype_zib |  |
+| type_xtehr | dateTime |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSProcedure.header.status
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSProcedure.header.status |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 1..1 |
+| card._zib |  |
+| definition_xtehr | Status of the resource |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSProcedure.header.status |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSProcedure.header.status |
+| path_zib |  |
+| short_xtehr | Status of the resource |
+| stereotype_zib |  |
+| type_xtehr | CodeableConcept |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSProcedure.header.statusReason[x]
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSProcedure.header.statusReason[x] |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 0..1 |
+| card._zib |  |
+| definition_xtehr | Reason for the current status of the resource. |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSProcedure.header.statusReason[x] |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSProcedure.header.statusReason[x] |
+| path_zib |  |
+| short_xtehr | Reason for the current status of the resource. |
+| stereotype_zib |  |
+| type_xtehr | CodeableConcept |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSProcedure.header.subject
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSProcedure.header.subject |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 1..1 |
+| card._zib |  |
+| definition_xtehr | Patient/subject information |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSProcedure.header.subject |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSProcedure.header.subject |
+| path_zib |  |
+| short_xtehr | Subject |
+| stereotype_zib |  |
+| type_xtehr | EHDSPatient |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSProcedure.header.version
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSProcedure.header.version |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 0..1 |
+| card._zib |  |
+| definition_xtehr | Business version of the resource. |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSProcedure.header.version |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSProcedure.header.version |
+| path_zib |  |
+| short_xtehr | Version |
+| stereotype_zib |  |
+| type_xtehr | string |
+| type_zib |  |
+
+### Comments
+
 
 
 ## EHDSProcedure.location
@@ -389,19 +690,21 @@ Choices are the DHD procedure thesaurus,  the procedures file (CBV), the Care ac
 |---|---|
 | xtehr | EHDSProcedure.location |
 | zib | Procedure.Location::HealthcareProvider |
+| alias_zib | NL: Locatie::Zorgaanbieder |
 | binding_xtehr |  |
-| card._xtehr | 0..* |
+| card._xtehr |  |
 | card._zib | 0..1 |
-| definition_xtehr | Location where the procedure had been performed |
+| definition_xtehr |  |
 | definition_zib | The healthcare provider where the procedure was, is or will be carried out. |
 | definitioncode_zib |  |
-| id_xtehr | EHDSProcedure.location |
+| id_xtehr |  |
 | id_zib | NL-CM:14.1.5 |
 | name_zib | Location::HealthcareProvider |
-| path_xtehr | EHDSProcedure.location |
+| path_xtehr |  |
 | path_zib | Procedure.Location::HealthcareProvider |
-| short_xtehr | C.16.12 - Location |
-| type_xtehr | EHDSLocation |
+| short_xtehr |  |
+| stereotype_zib | context,reference |
+| type_xtehr |  |
 | type_zib |  |
 
 ### Comments
@@ -418,6 +721,7 @@ Locationnumber refers to the Number of the location Number, if a numerical locat
 |---|---|
 | xtehr | EHDSProcedure.note |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib |  |
@@ -429,7 +733,8 @@ Locationnumber refers to the Number of the location Number, if a numerical locat
 | name_zib |  |
 | path_xtehr | EHDSProcedure.note |
 | path_zib |  |
-| short_xtehr | C.16.13 - Note |
+| short_xtehr | Additional information about the procedure |
+| stereotype_zib |  |
 | type_xtehr | string |
 | type_zib |  |
 
@@ -445,6 +750,7 @@ Normally any additional information is being added in the 'toelichting' field, w
 |---|---|
 | xtehr | EHDSProcedure.outcome |
 | zib |  |
+| alias_zib |  |
 | binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT'} |
 | card._xtehr | 0..1 |
 | card._zib |  |
@@ -456,14 +762,14 @@ Normally any additional information is being added in the 'toelichting' field, w
 | name_zib |  |
 | path_xtehr | EHDSProcedure.outcome |
 | path_zib |  |
-| short_xtehr | C.16.8 - Outcome |
+| short_xtehr | The outcome of the procedure - did it resolve the reasons for the procedure being performed? |
+| stereotype_zib |  |
 | type_xtehr | CodeableConcept |
 | type_zib |  |
 
 ### Comments
 
 There is no data element under procedure, which specifically refers to the outcome of the procedure performed. There is a Zib 2024 which specifically focuses on the OutcomeOfCare in general: Zib OutcomeOfCare, hence not related to a specific intervention/procedure. Under Zib OutcomeofCare there are two sub data elements: HealthcareResult and HealthCondition The sub data element HealthcareResul defines the concept as follows: The textual account of the healthcare result. If HealthcareResult cannot be entered as a functional/mental status, it can be described as free text in the healthcare result.
-
 
 ## EHDSProcedure.performer
 
@@ -473,10 +779,11 @@ There is no data element under procedure, which specifically refers to the outco
 |---|---|
 | xtehr | EHDSProcedure.performer |
 | zib | Procedure.Performer::HealthProfessional |
+| alias_zib | NL: Uitvoerder::Zorgverlener |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib | 0..* |
-| definition_xtehr | An actor who or what performed the procedure |
+| definition_xtehr | An actor who performed the procedure |
 | definition_zib | The healthcare professional who carried out or will carry out the procedure. In most cases, only the medical specialty is entered, and not the name of the healthcare professional. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSProcedure.performer |
@@ -484,8 +791,9 @@ There is no data element under procedure, which specifically refers to the outco
 | name_zib | Performer::HealthProfessional |
 | path_xtehr | EHDSProcedure.performer |
 | path_zib | Procedure.Performer::HealthProfessional |
-| short_xtehr | C.16.5 - Performer |
-| type_xtehr | Reference |
+| short_xtehr | An actor who performed the procedure |
+| stereotype_zib | context,reference |
+| type_xtehr | EHDSHealthProfessional |
 | type_zib |  |
 
 ### Comments
@@ -497,27 +805,58 @@ Hence two mainly Dutch codelists, not based on SNOMED:
 COD016-VEKT (Vektis AGB-medische specialismen)
 RoleCodeNL (Zorgverlenertype (personen))
 
-## EHDSProcedure.reason
+## EHDSProcedure.presentedForm
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSProcedure.reason |
-| zib | Procedure.Indication |
+| xtehr | EHDSProcedure.presentedForm |
+| zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
+| card._zib |  |
+| definition_xtehr | A narrative easy-to-read representation of the full data set, e.g. PDF-version of a document |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSProcedure.presentedForm |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSProcedure.presentedForm |
+| path_zib |  |
+| short_xtehr | A narrative easy-to-read representation of the full data set, e.g. PDF-version of a document |
+| stereotype_zib |  |
+| type_xtehr | EHDSAttachment |
+| type_zib |  |
+
+### Comments
+
+This is a narrative for the entire Procedure which is missing in the zib (though may be present in FHIR)
+
+## EHDSProcedure.reason[x]
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSProcedure.reason[x] |
+| zib | Procedure.Indication |
+| alias_zib | NL: Indicatie |
+| binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT, ICD-10, Orphacode if rare disease is diagnosed'} |
+| card._xtehr | 0..* |
 | card._zib | 0..* |
-| definition_xtehr | The reason why the procedure was performed. |
+| definition_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
 | definition_zib | Container of the Indication concept.This container contains all data elements of the Indication concept. |
 | definitioncode_zib |  |
-| id_xtehr | EHDSProcedure.reason |
+| id_xtehr | EHDSProcedure.reason[x] |
 | id_zib | NL-CM:14.1.14 |
 | name_zib | Indication |
-| path_xtehr | EHDSProcedure.reason |
+| path_xtehr | EHDSProcedure.reason[x] |
 | path_zib | Procedure.Indication |
-| short_xtehr | C.16.7 - Reason |
-| type_xtehr | Reference |
+| short_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
+| stereotype_zib | container |
+| type_xtehr | CodeableConcept |
 | type_zib |  |
 
 ### Comments
@@ -525,173 +864,122 @@ RoleCodeNL (Zorgverlenertype (personen))
 The definition between xtehr and zib is a bit different. Xtehr refers specifically to the reason why a procedure has been performed. the zib indication is divided in three sub elements: diagnosis, reaction, symptom. 
 The diagnosis could be interpreted as the reason why a procedure should be performed to a patient, or a specific symptom could also be the direct consequence for undergoing treatment. 
 
-## EHDSProcedure.reason
+## EHDSProcedure.reason[x]
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSProcedure.reason |
+| xtehr | EHDSProcedure.reason[x] |
 | zib | Procedure.Indication.Diagnosis |
-| binding_xtehr |  |
+| alias_zib | NL: Diagnose |
+| binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT, ICD-10, Orphacode if rare disease is diagnosed'} |
 | card._xtehr | 0..* |
 | card._zib | (0..1) |
-| definition_xtehr | The reason why the procedure was performed. |
+| definition_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
 | definition_zib | A diagnosis that serves as an indication for the procedure. |
 | definitioncode_zib |  |
-| id_xtehr | EHDSProcedure.reason |
+| id_xtehr | EHDSProcedure.reason[x] |
 | id_zib | NL-CM:14.1.15 |
 | name_zib | Diagnosis |
-| path_xtehr | EHDSProcedure.reason |
+| path_xtehr | EHDSProcedure.reason[x] |
 | path_zib | Procedure.Indication.Diagnosis |
-| short_xtehr | C.16.7 - Reason |
-| type_xtehr | Reference |
+| short_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
+| stereotype_zib | data,reference |
+| type_xtehr | CodeableConcept |
 | type_zib |  |
 
 ### Comments
 
 Hence the difference with the xtehr is that the zib makes the reason behind the intervention/procedure more specific: wether it is the direct result of a symptom, or a new diagnosis or a specific reaction the patient has.
 xtehr keeps it with its formulation very general: the reason, which is free to be filled in with a textual description. 
-## EHDSProcedure.reason
+
+## EHDSProcedure.reason[x]
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSProcedure.reason |
+| xtehr | EHDSProcedure.reason[x] |
 | zib | Procedure.Indication.Reaction |
-| binding_xtehr |  |
+| alias_zib | NL: Reactie |
+| binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT, ICD-10, Orphacode if rare disease is diagnosed'} |
 | card._xtehr | 0..* |
 | card._zib | (0..1) |
-| definition_xtehr | The reason why the procedure was performed. |
+| definition_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
 | definition_zib | An undesired reaction to a substance or radiation that served as an indication for the procedure. |
 | definitioncode_zib |  |
-| id_xtehr | EHDSProcedure.reason |
+| id_xtehr | EHDSProcedure.reason[x] |
 | id_zib | NL-CM:14.1.16 |
 | name_zib | Reaction |
-| path_xtehr | EHDSProcedure.reason |
+| path_xtehr | EHDSProcedure.reason[x] |
 | path_zib | Procedure.Indication.Reaction |
-| short_xtehr | C.16.7 - Reason |
-| type_xtehr | Reference |
+| short_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
+| stereotype_zib | data,reference |
+| type_xtehr | CodeableConcept |
 | type_zib |  |
 
 ### Comments
 
-Hence the difference with the xtehr is that the zib makes the reason behind the intervention/procedure more specific: wether it is the direct result of a symptom, or a new diagnosis or a specific reaction the patient has.
-xtehr keeps it with its formulation very general: the reason, which is free to be filled in with a textual description. 
+See above
 
-## EHDSProcedure.reason
+## EHDSProcedure.reason[x]
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSProcedure.reason |
+| xtehr | EHDSProcedure.reason[x] |
 | zib | Procedure.Indication.Symptom |
-| binding_xtehr |  |
+| alias_zib | NL: Symptoom |
+| binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT, ICD-10, Orphacode if rare disease is diagnosed'} |
 | card._xtehr | 0..* |
 | card._zib | (0..1) |
-| definition_xtehr | The reason why the procedure was performed. |
+| definition_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
 | definition_zib | A symptom that serves as an indication for the procedure. |
 | definitioncode_zib |  |
-| id_xtehr | EHDSProcedure.reason |
+| id_xtehr | EHDSProcedure.reason[x] |
 | id_zib | NL-CM:14.1.17 |
 | name_zib | Symptom |
-| path_xtehr | EHDSProcedure.reason |
+| path_xtehr | EHDSProcedure.reason[x] |
 | path_zib | Procedure.Indication.Symptom |
-| short_xtehr | C.16.7 - Reason |
-| type_xtehr | Reference |
+| short_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
+| stereotype_zib | data,reference |
+| type_xtehr | CodeableConcept |
 | type_zib |  |
 
 ### Comments
 
-Hence the difference with the xtehr is that the zib makes the reason behind the intervention/procedure more specific: wether it is the direct result of a symptom, or a new diagnosis or a specific reaction the patient has.
-xtehr keeps it with its formulation very general: the reason, which is free to be filled in with a textual description. 
+See above
 
-## EHDSProcedure.reason
+## EHDSProcedure.reason[x]
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSProcedure.reason |
+| xtehr | EHDSProcedure.reason[x] |
 | zib | Procedure.Indication::Problem |
-| binding_xtehr |  |
+| alias_zib |  |
+| binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT, ICD-10, Orphacode if rare disease is diagnosed'} |
 | card._xtehr | 0..* |
 | card._zib |  |
-| definition_xtehr | The reason why the procedure was performed. |
+| definition_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
 | definition_zib |  |
 | definitioncode_zib |  |
-| id_xtehr | EHDSProcedure.reason |
+| id_xtehr | EHDSProcedure.reason[x] |
 | id_zib |  |
 | name_zib |  |
-| path_xtehr | EHDSProcedure.reason |
+| path_xtehr | EHDSProcedure.reason[x] |
 | path_zib |  |
-| short_xtehr | C.16.7 - Reason |
-| type_xtehr | Reference |
+| short_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
+| stereotype_zib |  |
+| type_xtehr | CodeableConcept |
 | type_zib |  |
 
 ### Comments
 
 The sub element procedure.Indication: problem has become invalid and has been replaced by the zib indication: symptom, reaction, diagnosis. Please dubbelcheck the statement and whether the zib problem has become definitely invalid. 
-
-## EHDSProcedure.subject
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSProcedure.subject |
-| zib |  |
-| binding_xtehr |  |
-| card._xtehr | 1..1 |
-| card._zib |  |
-| definition_xtehr | On whom or on what the procedure was performed. This is usually an individual human, but can also be performed on animals, groups of humans or animals, organizations or practitioners (for licensing), locations or devices (for safety inspections or regulatory authorizations). If the actual focus of the procedure is different from the subject, the focus element specifies the actual focus of the procedure. |
-| definition_zib |  |
-| definitioncode_zib |  |
-| id_xtehr | EHDSProcedure.subject |
-| id_zib |  |
-| name_zib |  |
-| path_xtehr | EHDSProcedure.subject |
-| path_zib |  |
-| short_xtehr | C.16.14 - Patient |
-| type_xtehr | Reference |
-| type_zib |  |
-
-### Comments
-
-This data sub element of procedure can be filled up with the zib Subject. Hence the direct patient on which the procedure has been performed. Under the zib Procedure, there is no data sub element referring to the patient. For this the zib he
-
-## zib: nan 
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr |  |
-| zib | Medical device |
-| binding_xtehr |  |
-| card._xtehr |  |
-| card._zib | 0..* |
-| definition_xtehr |  |
-| definition_zib | The product, the placing of which in or on the body is the purpose of the procedure, for example placing an implant. |
-| definitioncode_zib | 405815000 Procedure device |
-| id_xtehr |  |
-| id_zib | NL-CM:14.1.7 |
-| name_zib | MedicalDevice |
-| path_xtehr |  |
-| path_zib | Procedure.MedicalDevice.MedicalDevice |
-| short_xtehr |  |
-| type_xtehr |  |
-| type_zib |  |
-
-### Comments
-
-See for a comparison of the medical device, the tab: device comments. 
-The EHDS logical model has a similar construct: EHDSProcedure.deviceUsed. Again: for further clarification please go to map Device comments
-
-Unclear why the zib is called nan -is this a configuration mistake? 
-
 
 ## zib: Procedure.ProcedureMethod
 
@@ -701,79 +989,26 @@ Unclear why the zib is called nan -is this a configuration mistake?
 |---|---|
 | xtehr |  |
 | zib | Procedure.ProcedureMethod |
-| binding_xtehr |  |
-| card._xtehr |  |
-| card._zib |  |
-| definition_xtehr |  |
-| definition_zib |  |
-| definitioncode_zib |  |
-| id_xtehr |  |
-| id_zib |  |
-| name_zib |  |
-| path_xtehr |  |
-| path_zib |  |
-| short_xtehr |  |
-| type_xtehr |  |
-| type_zib |  |
-
-### Comments
-
-From xt ehr there is no such construct as procedure method. 
-
-## zib: nan
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr |  |
-| zib |  |
+| alias_zib | NL: VerrichtingMethode |
 | binding_xtehr |  |
 | card._xtehr |  |
 | card._zib | 0..* |
 | definition_xtehr |  |
 | definition_zib | The method or technique that is going to be or was used to perform the procedure, e.g. approach, lavage, pressuring, etc. |
-| definitioncode_zib | 260686004 Method |
+| definitioncode_zib | SNOMED CT: 260686004 Method |
 | id_xtehr |  |
 | id_zib | NL-CM:14.1.12 |
 | name_zib | ProcedureMethod |
 | path_xtehr |  |
-| path_zib | Procedure.ProcedureMethod.ProcedureMethod |
+| path_zib | Procedure.ProcedureMethod |
 | short_xtehr |  |
+| stereotype_zib | data |
 | type_xtehr |  |
 | type_zib | CD |
 
 ### Comments
 
-From xt ehr there is no such construct as procedure method. 
-
-
-## zib: nan
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr |  |
-| zib | ProcedureType |
-| binding_xtehr |  |
-| card._xtehr |  |
-| card._zib | 1 |
-| definition_xtehr |  |
-| definition_zib | The name of the procedure.Choices are the DHD procedure thesaurus,  the procedures file (CBV), the Care activities file (NZa), the Dutch Mental Health and Addiction Care procedures list (GGZ) and the procedures list of the Dutch College of General Practitioners (NHG). |
-| definitioncode_zib |  |
-| id_xtehr |  |
-| id_zib | NL-CM:14.1.4 |
-| name_zib | ProcedureType |
-| path_xtehr |  |
-| path_zib | Procedure.ProcedureType.ProcedureType |
-| short_xtehr |  |
-| type_xtehr |  |
-| type_zib | CD |
-
-### Comments
-
-
+From xt ehr there is no such construct as procedure method.
 
 ## zib: Procedure.Requester::HealthProfessional
 
@@ -783,6 +1018,7 @@ From xt ehr there is no such construct as procedure method.
 |---|---|
 | xtehr |  |
 | zib | Procedure.Requester::HealthProfessional |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr |  |
 | card._zib |  |
@@ -795,6 +1031,7 @@ From xt ehr there is no such construct as procedure method.
 | path_xtehr |  |
 | path_zib |  |
 | short_xtehr |  |
+| stereotype_zib |  |
 | type_xtehr |  |
 | type_zib |  |
 
