@@ -31,4 +31,7 @@ The "TelephoneNumbers" container of the zib can largely be modelled using Xt-EHR
 
 The mismatch is mainly in mobile phones; the Xt-EHR "use" concept is about _where_ the device is, while the zib TelecomType is about the _type_ of device. There is no clean mapping to be made without some data loss.
 
-In addition, an Xt-EHR instance might contain codes for the "use" concept not understood by the zib.
+In addition, an Xt-EHR instance might contain codes for the "use" concept not understood by the zib.  
+
+  
+Review note: Moeten we bij Telecom nog iets zeggen over kardinaliteiten of is het vanwege de niet-1-op-1-mapping niet te doen? Het geeft wel een idee van wat je minimaal verwacht bij uitwisseling van gegevens.
