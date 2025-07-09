@@ -1,5 +1,23 @@
 # Comparison between XtEHR and zibs
 
+## Sources
+
+| Comparison Logical model 2020 | Comparison Logical model 2024 | Comparison FHIR profile | XtEHR | zib2020 | zib2024 |
+|---|---|---|---|---|---|
+|Address|[Address](./maps/xtehr2zibs/Address-comments.md) | | [Address](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSAddress.html)| | [AddressInformation-v1.2](https://zibs.nl/wiki/AddressInformation-v1.2(2024EN)) |
+|Alert|Alert | | [AlertFlag](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSAlertFlag.html)| | [Alert-v4.1](https://zibs.nl/wiki/Alert-v4.1(2020EN)) |
+|AllergyIntolerance|AllergyIntolerance | | [Allergy Intolerance](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSAllergyIntolerance.html)| | [AllergyIntolerance-v3.3](https://zibs.nl/wiki/AllergyIntolerance-v3.3(2020EN))|
+|BodyStructure|[BodyStructure](./maps/xtehr2zibs/BodyStructure-comments.md) | | [BodyStructure](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSBodyStructure.html)| | [AnatomicalLocation-v1.0.4](https://zibs.nl/wiki/AnatomicalLocation-v1.0.4(2024EN))|
+|[Condition](./maps/xtehr2zibs/Condition-comments.md)| | | [Condition](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSCondition.html)| [Problem-v4.4](https://zibs.nl/wiki/Problem-v4.4(2020EN))|
+|[Device](./maps/xtehr2zibs/Device_And_DeviceUse-comments.md)| [Device](./maps/xtehr2zibs2024/Device-and-DeviceUse-comments.md) | | [Device](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSDevice.html)<br/>[DeviceUse](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSDeviceUse.html)| [MedicalDevice-v3.3.1](https://zibs.nl/wiki/MedicalDevice-v3.3.1(2020EN))|[MedicalDevice-v5.0](https://zibs.nl/wiki/MedicalDevice-v5.0(2024EN))|
+|HealthProfessional|HealthProfessional | |[HealthProfessional](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSHealthProfessional.html)| | [HealthProfessional-v4.0.1](https://zibs.nl/wiki/HealthProfessional-v4.0.1(2024EN))| 
+|HumanName|[HumanName](./maps/xtehr2zibs/HumanName-comments.md)  | |[HumanName](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSHumanName.html)| | [NameInformation-v1.2](https://zibs.nl/wiki/NameInformation-v1.2(2024EN))| 
+|Location-and-Organization|[Location-and-Organization](./maps/xtehr2zibs/HumanName-comments.md) | |[Location-and-Organization](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSLocation-and-Organization.html)| | | 
+|Medication overview | | |
+|[Patient](./maps/xtehr2zibs/Patient-comments.md)| [Patient](./maps/xtehr2zibs2024/Patient-comments.md) | | [Patient](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSPatient.html)| [Patient-v3.2](https://zibs.nl/wiki/Patient-v3.2(2020EN)) | [Patient-v4.3](https://zibs.nl/wiki/Patient-v4.3(2024EN))
+|[Procedure](./maps/xtehr2zibs/Procedure-comments.md)| [Procedure](./maps/xtehr2zibs2024/Procedure-comments.md) | | [Procedure](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSProcedure.html)| [Procedure-v5.2](https://zibs.nl/wiki/Procedure-v5.2(2020EN)) | [Procedure-v6.0](https://zibs.nl/wiki/Procedure-v6.0(2024EN)) |
+|Telecom| [Telecom](./maps/xtehr2zibs2024/Telecom-comments.md) | | [Telecom](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSTelecom.html)|  | [ContactInformation-v1.3.1)](https://zibs.nl/wiki/ContactInformation-v1.3.1(2024EN)) |
+
 ## Deliverable
 
 De analyses per bouwsteen zijn te vinden in de Markdown-bestanden `maps/xtehr2zibs/*-comment.md` en `maps/xtehr2zibs/*-comment.md`. Deze bestanden bevatten tabellen waarin per gegevensconcept in zowel de zib als Xt-EHR-model staat aangegeven:
@@ -62,15 +80,3 @@ Deze bestanden staan in resp. de mappen:
 
 * voor zib2020: `maps/xtehr2zibs`
 * voor zib2024: `maps/xtehr2zibs2024`
-
-## Sources
-
-| Comparison Logical model 2020 | Comparison Logical model 2024 | Comparison FHIR profile | XtEHR | zib2020 | zib2024 (prereleease) |
-|---|---|---|---|---|---|
-|Alert|Alert | [AlertFlag](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSAlertFlag.html)| | [Alert-v4.1](https://zibs.nl/wiki/Alert-v4.1(2020EN)) | |
-|AllergyIntolerance|AllergyIntolerance |[Allergy Intolerance](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSAllergyIntolerance.html)| | [AllergyIntolerance-v3.3](https://zibs.nl/wiki/AllergyIntolerance-v3.3(2020EN))| |
-|[Condition](./maps/xtehr2zibs/Condition-comments.md)| |[Condition](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSCondition.html)| | [Problem-v4.4](https://zibs.nl/wiki/Problem-v4.4(2020EN))| |
-|[Device](./maps/xtehr2zibs/Device_And_DeviceUse-comments.md)| [Device](./maps/xtehr2zibs2024/Device-and-DeviceUse-comments.md) |[Device](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSDevice.html)<br/>[DeviceUse](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSDeviceUse.html)| |[MedicalDevice-v3.3.1](https://zibs.nl/wiki/MedicalDevice-v3.3.1(2020EN))|[MedicalDevice-v5.0](https://zibs.nl/wiki/MedicalDevice-v5.0(2024EN))
-|Medication overview | | |
-|[Patient](./maps/xtehr2zibs/Patient-comments.md)| [Patient](./maps/xtehr2zibs2024/Patient-comments.md) | [Patient](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSPatient.html)| |[Patient-v3.2](https://zibs.nl/wiki/Patient-v3.2(2020EN)) | [Patient-v4.3](https://zibs.nl/wiki/Patient-v4.3(2024EN))
-|[Procedure](./maps/xtehr2zibs/Procedure-comments.md)| [Procedure](./maps/xtehr2zibs2024/Procedure-comments.md) |[Procedure](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSProcedure.html)| | [Procedure-v5.2](https://zibs.nl/wiki/Procedure-v5.2(2020EN)) | [Procedure-v6.0](https://zibs.nl/wiki/Procedure-v6.0(2024EN)) |
