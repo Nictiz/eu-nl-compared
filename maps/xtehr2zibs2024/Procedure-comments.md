@@ -3,6 +3,7 @@
 ## Version history
 
 v1: 27-05-2025, initial version
+
 v2: 8-7-2025
 
 - EHDSProcedure now uses "EHDSDataset" with metadata (common to more EHDS models)
