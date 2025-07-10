@@ -133,13 +133,17 @@ A UDI often contains more information than just an ID, but also, for example, an
 | type_zib | ST |
 
 ### Comments
-The identifier is required in Xt-EHR, while it is optional in the zib. This makes sense from a scoping perspective. In Xt-EHR (at least patient summary and discharge report use cases), the model is about devices that are in use or have been in use by the patient, in which case there is a concrete identifiable device. The zib has a broader scope: devices that are needed or requested, or a general type of device like bandages. For these use cases, an identifier is not present yet or irrelevant. If the zib is used in a context of patient summary or discharge report, the use of identifier could be made mandatory there.
+The identifier is required in Xt-EHR, while it is optional in the zib. This makes sense from a scoping perspective. In Xt-EHR (at least patient summary and discharge report use cases), the model is about devices that are in use or have been in use by the patient, in which case there is a concrete identifiable device. The zib has a broader scope: devices that are needed or requested, or a general type of device like bandages. For these use cases, an identifier is not present yet or irrelevant. If the zib is used in a context of patient summary or discharge report, the use of identifier could be made mandatory there.  
+
 
 There is also an incompatibility the other way around: the zib recognizes at most 1 identifier, while Xt-EHR recognizes 0..* identifiers.
 
 The identifier oftentimes is required an UDI, in which case the identifier carries more than just identifying information, but also lot number, production date and expiry date. This is recognized both by the zib and by the eHN guidelines. So some of the structured data which is made explicit by Xt-EHR might actually be present in the zib because of the UDI.
 
-However, neither zib nor Xt-EHR _requires_ the identifier to be an UDI. Other identifiers are in scope as well.
+However, neither zib nor Xt-EHR _requires_ the identifier to be an UDI. Other identifiers are in scope as well.  
+
+Review note:  
+>We zouden ook kunnen overwegen om een verzoek in te dienen voor het versoepelen van de kardinaliteit in het EHDS model. Wellicht zal dit in toekomstige europese usecases ook nuttig zijn
 
 
 ## EHDSDevice.lotNumber
@@ -310,8 +314,9 @@ Model number _can_ be implicitly present in the zib when ProductID is a UDI, but
 | type_xtehr | Narrative |
 | type_zib |  |
 
-### Comments
-
+### Comments  
+Review note:  
+> Zib element `MedicalDevice.Comment 0..1` is defined as *"Comment about use or information on the medical device used."* and seems to match.
 
 
 ## EHDSDevice.serialNumber
@@ -402,8 +407,9 @@ Also note that in the IPS/EPS, negation is added to the value set, which is poss
 | type_xtehr | string |
 | type_zib |  |
 
-### Comments
-
+### Comments  
+Review note:  
+> EHDSExclusive
 
 
 ## EHDSDeviceUse
@@ -610,7 +616,10 @@ This is inlined in the zib.
 | type_zib | ST |
 
 ### Comments
-There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also more elaborate as it is of the Narrative data type, compared to simple string for the zib.
+There's a conceptual match, but a cardinality mismatch. The Xt-EHR model is also more elaborate as it is of the Narrative data type, compared to simple string for the zib.  
+
+Review note:  
+> Hoe verhoudt dit zich tot `EHDSDevice.note`?
 
 
 ## EHDSDeviceUse.reason
