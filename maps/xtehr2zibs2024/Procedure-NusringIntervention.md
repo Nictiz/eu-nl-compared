@@ -1,4 +1,14 @@
-# Procedure
+# Procedure as of 2025-07-08
+## Overall conclusion
+
+The scopes of the Xt-EHR model and zib NursingIntervention don't align completely. First, the Xt-EHR model seems to be aimed at procedures that are performed by a health professional. The zib recognizes nursing interventions which can also be performed by patients themselves or related persons.
+
+This broader scope results in a mismatch on the performer and the zib concept Instruction. Only part of what is modeled in the Xt-EHR falls within the scope of the zib.
+
+Second, the Xt-EHR scope is "An action that is or was performed on or for a patient", so only past and present use. The zib is a bit of a strange beast that models past, present and future interventions, but also past, running or future _series_ of interventions. It dedicates several elements to this series (Frequency, Interval) which are mainly aimed at continuation of care, which is outside of scope of the Xt-EHR model (and also not relevant for some of the zib use cases).
+
+On the other hand, the zib is more narrow in the sense that it only focusses on the subset of procedures that are nursing interventions.
+
 
 | zib                                                    | xtehr                                     | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
 |:-------------------------------------------------------|:------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
@@ -123,7 +133,7 @@
 
 ### Comments
 
-
+The zib restricts the allowed terminology to two SNOMED refsets, whereas the Xt-EHR model prefers SNOMED. The terminology seems to align pretty well. (In the 2020 zib NIC is still present as a code system, but this has been deprecated as of 2024).
 
 ## EHDSProcedure.complication
 
@@ -180,7 +190,9 @@
 | type_zib | TS |
 
 ### Comments
+The date fields (ProcedureStartDateTime and ProcedureEndDateTime) in the zib carry multiple meanings, they could be the boundaries of a single event or series of events in the past, present or future, so a 1-to-1 mapping is hard to make. The Xt-EHR model defines the date as either Period or dateTime data.
 
+The information present in the zib about start and/or end date/time loosely translates to Period.start and Period.end if the zib is not about an explicit series. The concept of a single dateTime doesn't seem to be covered by the zib.
 
 
 ## EHDSProcedure.date[x]
@@ -210,7 +222,7 @@
 
 ### Comments
 
-
+See the comment on NursingIntervention.ProcedureEndDateTime.
 
 ## EHDSProcedure.deviceUsed
 
@@ -238,6 +250,8 @@
 | type_zib |  |
 
 ### Comments
+
+The zib refers the MedicalDevice zib for "materials used", whereas the Xt-EHR model refers just the Device model, not the DeviceUse model. Seemingly, the zib model envisions much more detailed information here. However, the zib is probably to broad (see [ZIB-2691](https://nictiz.atlassian.net/browse/ZIB-2691)) as it is hard to imagine that for things like bandages etc. detailed information about the use is needed.
 
 
 
@@ -674,7 +688,7 @@
 
 ### Comments
 
-
+Mismatch. The Xt-EHR model only allows health professionals to be performers, while the zib also envisions patients and related persons to be performers.
 
 ## EHDSProcedure.presentedForm
 
@@ -731,36 +745,7 @@
 | type_zib |  |
 
 ### Comments
-
-
-
-## EHDSProcedure.reason[x]
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSProcedure.reason[x] |
-| zib | NursingIntervention.Indication::Problem |
-| alias_zib |  |
-| binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT, ICD-10, Orphacode if rare disease is diagnosed'} |
-| card._xtehr | 0..* |
-| card._zib |  |
-| definition_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
-| definition_zib |  |
-| definitioncode_zib |  |
-| id_xtehr | EHDSProcedure.reason[x] |
-| id_zib |  |
-| name_zib |  |
-| path_xtehr | EHDSProcedure.reason[x] |
-| path_zib |  |
-| short_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
-| stereotype_zib |  |
-| type_xtehr | CodeableConcept |
-| type_zib |  |
-
-### Comments
-
+Mismatch. In the Xt-EHR model this is coded data, while in the zib this is a distinct "Problem" like model.
 
 
 ## zib: NursingIntervention.Frequency
@@ -790,7 +775,7 @@
 
 ### Comments
 
-
+This info is needed when the zib defines a series of nursing interventions that need to be carried out with a certain frequency. This is not relevant for the Xt-EHR use case.
 
 ## zib: NursingIntervention.Instruction
 
@@ -819,6 +804,7 @@
 
 ### Comments
 
+This info is needed when the zib defines a nursing intervention that needs to be carried out by the patient or a related person. This is not relevant for the Xt-EHR use case.
 
 
 ## zib: NursingIntervention.Interval
@@ -849,7 +835,7 @@ When entering an interval, the focus is on the time between the consecutive proc
 
 ### Comments
 
-
+This info is needed when the zib defines a series of nursing interventions that need to be carried out with a certain frequency. This is not relevant for the Xt-EHR use case.
 
 ## zib: NursingIntervention.Performer.Caregiver::ContactPerson
 
@@ -878,7 +864,7 @@ When entering an interval, the focus is on the time between the consecutive proc
 
 ### Comments
 
-
+See the comment on EHDSProcedure.performer.
 
 ## zib: NursingIntervention.Performer.HealthProfessional
 
@@ -907,6 +893,7 @@ When entering an interval, the focus is on the time between the consecutive proc
 
 ### Comments
 
+See the comment on EHDSProcedure.performer.
 
 
 ## zib: NursingIntervention.Performer.Patient
@@ -936,6 +923,7 @@ When entering an interval, the focus is on the time between the consecutive proc
 
 ### Comments
 
+See the comment on EHDSProcedure.performer.
 
 
 ## zib: NursingIntervention.Requester::HealthProfessional
@@ -951,7 +939,7 @@ When entering an interval, the focus is on the time between the consecutive proc
 | card._xtehr |  |
 | card._zib | 0..* |
 | definition_xtehr |  |
-| definition_zib | The health professional who requested the nursing intervention. If desired, only the requester’s specialty can be entered. |
+| definition_zib | The health professional who requested the nursing intervention. If desired, only the requesterï¿½s specialty can be entered. |
 | definitioncode_zib |  |
 | id_xtehr |  |
 | id_zib | NL-CM:14.2.8 |
