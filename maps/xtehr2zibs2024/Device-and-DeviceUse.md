@@ -4,7 +4,7 @@
 |:-------------------------------------------|:------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
 | MedicalDevice.Product                      | EHDSDevice                                |            |                        | 1           | 0..*          |
 |                                            | EHDSDevice.expiryDate                     |            | dateTime               |             | 0..1          |
-| MedicalDevice.Product.ProductID            | EHDSDevice.identifier                     | ST         | Identifier             | 0..1        | 1..*          |
+|                                            |                                           |            | Identifier             |             | 1..*          |
 |                                            | EHDSDevice.lotNumber                      |            | string                 |             | 0..1          |
 |                                            | EHDSDevice.manufactureDate                |            | dateTime               |             | 0..1          |
 |                                            | EHDSDevice.manufacturer                   |            | string                 |             | 0..1          |
@@ -22,7 +22,7 @@
 |                                            | EHDSDeviceUse.header.authorship           |            | Base                   |             | 1..*          |
 |                                            | EHDSDeviceUse.header.authorship.author[x] |            | EHDSHealthProfessional |             | 1..1          |
 |                                            | EHDSDeviceUse.header.authorship.datetime  |            | dateTime               |             | 1..1          |
-|                                            | EHDSDeviceUse.header.identifier           |            | Identifier             |             | 0..*          |
+| MedicalDevice.Product.ProductID            | EHDSDeviceUse.header.identifier           | ST         | Identifier             | 0..1        | 0..*          |
 |                                            | EHDSDeviceUse.header.language             |            | CodeableConcept        |             | 0..1          |
 |                                            | EHDSDeviceUse.header.lastUpdate           |            | dateTime               |             | 0..1          |
 |                                            | EHDSDeviceUse.header.status               |            | CodeableConcept        |             | 1..1          |
@@ -100,32 +100,30 @@
 
 
 
-## EHDSDevice.identifier
+## zib: nan
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSDevice.identifier |
-| zib | MedicalDevice.Product.ProductID |
-| alias_zib | NL: ProductID |
+| xtehr |  |
+| zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 1..* |
-| card._zib | 0..1 |
+| card._zib |  |
 | definition_xtehr | Normalised identifier of the device instance, such as UDI according to REGULATION (EU) 2017/745. Multiple identifiers can be used. |
-| definition_zib | Globally unique identification of the product, for example the serial number or a UDI (unique device identifier). For some products, the law requires the use of a UDI. Commonly used coding systems are HIBC and GS1/GTIN.
-
-A UDI often contains more information than just an ID, but also, for example, an expiration date. If a UDI is used, the entire code can be included as text in ProductID, so that no important information is lost. |
+| definition_zib |  |
 | definitioncode_zib |  |
 | id_xtehr | EHDSDevice.identifier |
-| id_zib | NL-CM:10.1.16 |
-| name_zib | ProductID |
+| id_zib |  |
+| name_zib |  |
 | path_xtehr | EHDSDevice.identifier |
-| path_zib | MedicalDevice.Product.ProductID |
+| path_zib |  |
 | short_xtehr | Normalised identifier of the device instance, such as UDI according to REGULATION (EU) 2017/745. Multiple identifiers can be used. |
-| stereotype_zib | data |
+| stereotype_zib |  |
 | type_xtehr | Identifier |
-| type_zib | ST |
+| type_zib |  |
 
 ### Comments
 
@@ -631,23 +629,25 @@ A UDI often contains more information than just an ID, but also, for example, an
 | attribute | value |
 |---|---|
 | xtehr | EHDSDeviceUse.header.identifier |
-| zib |  |
-| alias_zib |  |
+| zib | MedicalDevice.Product.ProductID |
+| alias_zib | NL: ProductID |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
-| card._zib |  |
+| card._zib | 0..1 |
 | definition_xtehr | Business identifier for the object |
-| definition_zib |  |
+| definition_zib | Globally unique identification of the product, for example the serial number or a UDI (unique device identifier). For some products, the law requires the use of a UDI. Commonly used coding systems are HIBC and GS1/GTIN.
+
+A UDI often contains more information than just an ID, but also, for example, an expiration date. If a UDI is used, the entire code can be included as text in ProductID, so that no important information is lost. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSDeviceUse.header.identifier |
-| id_zib |  |
-| name_zib |  |
+| id_zib | NL-CM:10.1.16 |
+| name_zib | ProductID |
 | path_xtehr | EHDSDeviceUse.header.identifier |
-| path_zib |  |
+| path_zib | MedicalDevice.Product.ProductID |
 | short_xtehr | Business identifier for the object |
-| stereotype_zib |  |
+| stereotype_zib | data |
 | type_xtehr | Identifier |
-| type_zib |  |
+| type_zib | ST |
 
 ### Comments
 
