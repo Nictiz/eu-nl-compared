@@ -1,36 +1,44 @@
 # Device
 
-| zib                                        | xtehr                      | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
-|:-------------------------------------------|:---------------------------|:-----------|:----------------|:------------|:--------------|
-| MedicalDevice.Product                      | EHDSDevice                 |            |                 | 1           | 0..*          |
-|                                            | EHDSDevice.expiryDate      |            | dateTime        |             | 0..1          |
-| MedicalDevice.Product.ProductID            | EHDSDevice.identifier      | ST         | Identifier      | 0..1        | 1..*          |
-|                                            | EHDSDevice.lotNumber       |            | string          |             | 0..1          |
-|                                            | EHDSDevice.manufactureDate |            | dateTime        |             | 0..1          |
-|                                            | EHDSDevice.manufacturer    |            | string          |             | 0..1          |
-|                                            | EHDSDevice.modelNumber     |            | string          |             | 0..1          |
-|                                            | EHDSDevice.name            |            | string          |             | 0..*          |
-|                                            | EHDSDevice.note            |            | Narrative       |             | 0..*          |
-|                                            | EHDSDevice.serialNumber    |            | string          |             | 0..1          |
-| MedicalDevice.Product.ProductType          | EHDSDevice.type            | CD         | CodeableConcept | 0..1        | 0..*          |
-|                                            | EHDSDevice.version         |            | string          |             | 0..1          |
-| MedicalDevice                              | EHDSDeviceUse              |            |                 |             | 0..*          |
-| MedicalDevice.AnatomicalLocation           | EHDSDeviceUse.bodySite     |            | CodeableConcept | 0..1        | 0..1          |
-|                                            | EHDSDeviceUse.device       |            | EHDSDevice      |             | 1..1          |
-| MedicalDevice.EndDate                      | EHDSDeviceUse.endDate      | TS         | dateTime        | 0..1        | 0..1          |
-|                                            | EHDSDeviceUse.identifier   |            | Identifier      |             | 0..*          |
-| MedicalDevice.StartDate                    | EHDSDeviceUse.implantDate  | TS         | dateTime        | 0..1        | 0..1          |
-| MedicalDevice.Comment                      | EHDSDeviceUse.note         | ST         | string          | 0..1        | 0..*          |
-| MedicalDevice.Indication::Diagnosis        | EHDSDeviceUse.reason       |            |                 | 0..*        |               |
-|                                            |                            |            | EHDSCondition   |             | 0..*          |
-|                                            | EHDSDeviceUse.recorded     |            | dateTime        |             | 0..1          |
-|                                            | EHDSDeviceUse.source       |            |                 |             |               |
-|                                            |                            |            | EHDSPatient     |             | 0..1          |
-|                                            | EHDSDeviceUse.status       |            | CodeableConcept |             | 0..1          |
-|                                            | EHDSDeviceUse.subject      |            | EHDSPatient     |             | 1..1          |
-| MedicalDevice.HealthProfessional           |                            |            |                 | 0..1        |               |
-| MedicalDevice.Location::HealthcareProvider |                            |            |                 | 0..1        |               |
-| MedicalDevice.ProductDescription           |                            | ST         |                 | 0..1        |               |
+| zib                                        | xtehr                                     | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
+|:-------------------------------------------|:------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
+| MedicalDevice.Product                      | EHDSDevice                                |            |                        | 1           | 0..*          |
+|                                            | EHDSDevice.expiryDate                     |            | dateTime               |             | 0..1          |
+| MedicalDevice.Product.ProductID            | EHDSDevice.identifier                     | ST         | Identifier             | 0..1        | 1..*          |
+|                                            | EHDSDevice.lotNumber                      |            | string                 |             | 0..1          |
+|                                            | EHDSDevice.manufactureDate                |            | dateTime               |             | 0..1          |
+|                                            | EHDSDevice.manufacturer                   |            | string                 |             | 0..1          |
+|                                            | EHDSDevice.modelNumber                    |            | string                 |             | 0..1          |
+|                                            | EHDSDevice.name                           |            | string                 |             | 0..*          |
+|                                            | EHDSDevice.note                           |            | string                 |             | 0..*          |
+|                                            | EHDSDevice.serialNumber                   |            | string                 |             | 0..1          |
+| MedicalDevice.Product.ProductType          | EHDSDevice.type                           | CD         | CodeableConcept        | 0..1        | 0..*          |
+|                                            | EHDSDevice.version                        |            | string                 |             | 0..1          |
+| MedicalDevice                              | EHDSDeviceUse                             |            |                        |             | 0..*          |
+| MedicalDevice.AnatomicalLocation           | EHDSDeviceUse.bodySite                    |            | EHDSBodyStructure      | 0..1        | 0..1          |
+|                                            | EHDSDeviceUse.device[x]                   |            | CodeableConcept        |             | 1..1          |
+| MedicalDevice.EndDate                      | EHDSDeviceUse.endDate                     | TS         | dateTime               | 0..1        | 0..1          |
+|                                            | EHDSDeviceUse.header                      |            | Base                   |             | 1..1          |
+|                                            | EHDSDeviceUse.header.authorship           |            | Base                   |             | 1..*          |
+|                                            | EHDSDeviceUse.header.authorship.author[x] |            | EHDSHealthProfessional |             | 1..1          |
+|                                            | EHDSDeviceUse.header.authorship.datetime  |            | dateTime               |             | 1..1          |
+|                                            | EHDSDeviceUse.header.identifier           |            | Identifier             |             | 0..*          |
+|                                            | EHDSDeviceUse.header.language             |            | CodeableConcept        |             | 0..1          |
+|                                            | EHDSDeviceUse.header.lastUpdate           |            | dateTime               |             | 0..1          |
+|                                            | EHDSDeviceUse.header.status               |            | CodeableConcept        |             | 1..1          |
+|                                            | EHDSDeviceUse.header.statusReason[x]      |            | CodeableConcept        |             | 0..1          |
+|                                            | EHDSDeviceUse.header.subject              |            | EHDSPatient            |             | 1..1          |
+|                                            | EHDSDeviceUse.header.version              |            | string                 |             | 0..1          |
+| MedicalDevice.Comment                      | EHDSDeviceUse.note                        | ST         | string                 | 0..1        | 0..*          |
+|                                            | EHDSDeviceUse.presentedForm               |            | EHDSAttachment         |             | 0..*          |
+| MedicalDevice.Indication::Diagnosis        | EHDSDeviceUse.reason[x]                   |            | CodeableConcept        | 0..*        | 0..*          |
+|                                            | EHDSDeviceUse.recorded                    |            |                        |             |               |
+|                                            | EHDSDeviceUse.source[x]                   |            | EHDSPatient            |             | 0..1          |
+| MedicalDevice.StartDate                    | EHDSDeviceUse.startDate                   | TS         | dateTime               | 0..1        | 0..1          |
+|                                            | EHDSDeviceUse.status                      |            |                        |             |               |
+| MedicalDevice.HealthProfessional           |                                           |            |                        | 0..1        |               |
+| MedicalDevice.Location::HealthcareProvider |                                           |            |                        | 0..1        |               |
+| MedicalDevice.ProductDescription           |                                           | ST         |                        | 0..1        |               |
 
 
 
@@ -46,7 +54,7 @@
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib | 1 |
-| definition_xtehr | C.12 - EHDS refined base model for Device information |
+| definition_xtehr | EHDS refined base model for Device information |
 | definition_zib | The medical device (internally or externally). |
 | definitioncode_zib | SNOMED CT: 405815000 Procedure device |
 | id_xtehr | EHDSDevice |
@@ -83,7 +91,7 @@
 | name_zib |  |
 | path_xtehr | EHDSDevice.expiryDate |
 | path_zib |  |
-| short_xtehr | C.12.4 - Expiry date |
+| short_xtehr | The date and time beyond which this device is no longer valid or should not be used (if applicable). |
 | stereotype_zib |  |
 | type_xtehr | dateTime |
 | type_zib |  |
@@ -104,7 +112,7 @@
 | binding_xtehr |  |
 | card._xtehr | 1..* |
 | card._zib | 0..1 |
-| definition_xtehr | An identifier of the device which is unique within in a defined scope. Multiple identifiers can be used. |
+| definition_xtehr | Normalised identifier of the device instance, such as UDI according to REGULATION (EU) 2017/745. Multiple identifiers can be used. |
 | definition_zib | Globally unique identification of the product, for example the serial number or a UDI (unique device identifier). For some products, the law requires the use of a UDI. Commonly used coding systems are HIBC and GS1/GTIN.
 
 A UDI often contains more information than just an ID, but also, for example, an expiration date. If a UDI is used, the entire code can be included as text in ProductID, so that no important information is lost. |
@@ -114,7 +122,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | name_zib | ProductID |
 | path_xtehr | EHDSDevice.identifier |
 | path_zib | MedicalDevice.Product.ProductID |
-| short_xtehr | C.12.1 - Identifier |
+| short_xtehr | Normalised identifier of the device instance, such as UDI according to REGULATION (EU) 2017/745. Multiple identifiers can be used. |
 | stereotype_zib | data |
 | type_xtehr | Identifier |
 | type_zib | ST |
@@ -143,7 +151,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | name_zib |  |
 | path_xtehr | EHDSDevice.lotNumber |
 | path_zib |  |
-| short_xtehr | C.12.5 - Lot number |
+| short_xtehr | Lot number of manufacture |
 | stereotype_zib |  |
 | type_xtehr | string |
 | type_zib |  |
@@ -172,7 +180,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | name_zib |  |
 | path_xtehr | EHDSDevice.manufactureDate |
 | path_zib |  |
-| short_xtehr | C.12.3 - Manufacture date |
+| short_xtehr | The date and time when the device was manufactured |
 | stereotype_zib |  |
 | type_xtehr | dateTime |
 | type_zib |  |
@@ -201,7 +209,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | name_zib |  |
 | path_xtehr | EHDSDevice.manufacturer |
 | path_zib |  |
-| short_xtehr | C.12.2 - Manufacturer |
+| short_xtehr | Name of device manufacturer |
 | stereotype_zib |  |
 | type_xtehr | string |
 | type_zib |  |
@@ -230,7 +238,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | name_zib |  |
 | path_xtehr | EHDSDevice.modelNumber |
 | path_zib |  |
-| short_xtehr | C.12.8 - Model number |
+| short_xtehr | The manufacturer's model number for the device |
 | stereotype_zib |  |
 | type_xtehr | string |
 | type_zib |  |
@@ -259,7 +267,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | name_zib |  |
 | path_xtehr | EHDSDevice.name |
 | path_zib |  |
-| short_xtehr | C.12.7 - Name |
+| short_xtehr | The name and name type of the device as known to the manufacturer and/or patient |
 | stereotype_zib |  |
 | type_xtehr | string |
 | type_zib |  |
@@ -288,9 +296,9 @@ A UDI often contains more information than just an ID, but also, for example, an
 | name_zib |  |
 | path_xtehr | EHDSDevice.note |
 | path_zib |  |
-| short_xtehr | C.12.11 - Note |
+| short_xtehr | Device notes and comments |
 | stereotype_zib |  |
-| type_xtehr | Narrative |
+| type_xtehr | string |
 | type_zib |  |
 
 ### Comments
@@ -317,7 +325,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | name_zib |  |
 | path_xtehr | EHDSDevice.serialNumber |
 | path_zib |  |
-| short_xtehr | C.12.6 - Serial number |
+| short_xtehr | Serial number assigned by the manufacturer |
 | stereotype_zib |  |
 | type_xtehr | string |
 | type_zib |  |
@@ -346,7 +354,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | name_zib | ProductType |
 | path_xtehr | EHDSDevice.type |
 | path_zib | MedicalDevice.Product.ProductType |
-| short_xtehr | C.12.10 - Type |
+| short_xtehr | Device type |
 | stereotype_zib | data |
 | type_xtehr | CodeableConcept |
 | type_zib | CD |
@@ -375,7 +383,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | name_zib |  |
 | path_xtehr | EHDSDevice.version |
 | path_zib |  |
-| short_xtehr | C.12.9 - Version |
+| short_xtehr | The actual design of the device or software version running on the device |
 | stereotype_zib |  |
 | type_xtehr | string |
 | type_zib |  |
@@ -396,7 +404,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib |  |
-| definition_xtehr | EHDS refined base model for Device Use |
+| definition_xtehr | EHDS refined base model for device use information |
 | definition_zib | Root concept of the MedicalDevice information model. This root concept contains all data elements of the MedicalDevice information model. |
 | definitioncode_zib | SNOMED CT: 49062001 Device |
 | id_xtehr | EHDSDeviceUse |
@@ -426,7 +434,7 @@ A UDI often contains more information than just an ID, but also, for example, an
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Anatomical location of the device. May include laterality. |
-| definition_zib | Patient’s anatomical location of the medical device used. |
+| definition_zib | Patientâ€™s anatomical location of the medical device used. |
 | definitioncode_zib | SNOMED CT: 363698007 Finding site |
 | id_xtehr | EHDSDeviceUse.bodySite |
 | id_zib | NL-CM:10.1.15 |
@@ -435,20 +443,20 @@ A UDI often contains more information than just an ID, but also, for example, an
 | path_zib | MedicalDevice.AnatomicalLocation |
 | short_xtehr | Anatomical location of the device. May include laterality. |
 | stereotype_zib | data,reference |
-| type_xtehr | CodeableConcept |
+| type_xtehr | EHDSBodyStructure |
 | type_zib |  |
 
 ### Comments
 
 
 
-## EHDSDeviceUse.device
+## EHDSDeviceUse.device[x]
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSDeviceUse.device |
+| xtehr | EHDSDeviceUse.device[x] |
 | zib |  |
 | alias_zib |  |
 | binding_xtehr |  |
@@ -457,14 +465,14 @@ A UDI often contains more information than just an ID, but also, for example, an
 | definition_xtehr | The details of the device used. |
 | definition_zib |  |
 | definitioncode_zib |  |
-| id_xtehr | EHDSDeviceUse.device |
+| id_xtehr | EHDSDeviceUse.device[x] |
 | id_zib |  |
 | name_zib |  |
-| path_xtehr | EHDSDeviceUse.device |
+| path_xtehr | EHDSDeviceUse.device[x] |
 | path_zib |  |
 | short_xtehr | The details of the device used. |
 | stereotype_zib |  |
-| type_xtehr | EHDSDevice |
+| type_xtehr | CodeableConcept |
 | type_zib |  |
 
 ### Comments
@@ -483,15 +491,15 @@ A UDI often contains more information than just an ID, but also, for example, an
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
-| definition_xtehr | Date when the device was explanted from the patient or the external device was no longer in use; likewise when the device is planned to be explanted. |
-| definition_zib | The end date of the last use or explant of the medical device. A ‘vague’ date, such as only the year, is permitted. |
+| definition_xtehr | Date when the device was explanted from the patient or the external device was no longer in use. |
+| definition_zib | The end date of the last use or explant of the medical device. A â€˜vagueâ€™ date, such as only the year, is permitted. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSDeviceUse.endDate |
 | id_zib | NL-CM:10.1.14 |
 | name_zib | EndDate |
 | path_xtehr | EHDSDeviceUse.endDate |
 | path_zib | MedicalDevice.EndDate |
-| short_xtehr | Date when the device was explanted from the patient or the external device was no longer in use; likewise when the device is planned to be explanted. |
+| short_xtehr | Date when the device was explanted from the patient or the external device was no longer in use. |
 | stereotype_zib | data |
 | type_xtehr | dateTime |
 | type_zib | TS |
@@ -500,27 +508,143 @@ A UDI often contains more information than just an ID, but also, for example, an
 
 
 
-## EHDSDeviceUse.identifier
+## EHDSDeviceUse.header
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSDeviceUse.identifier |
+| xtehr | EHDSDeviceUse.header |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 1..1 |
+| card._zib |  |
+| definition_xtehr | Common header for all patient-related data |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSDeviceUse.header |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSDeviceUse.header |
+| path_zib |  |
+| short_xtehr | Common header for all patient-related data |
+| stereotype_zib |  |
+| type_xtehr | Base |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSDeviceUse.header.authorship
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSDeviceUse.header.authorship |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 1..* |
+| card._zib |  |
+| definition_xtehr | Resource authoring details |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSDeviceUse.header.authorship |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSDeviceUse.header.authorship |
+| path_zib |  |
+| short_xtehr | Authorship |
+| stereotype_zib |  |
+| type_xtehr | Base |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSDeviceUse.header.authorship.author[x]
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSDeviceUse.header.authorship.author[x] |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 1..1 |
+| card._zib |  |
+| definition_xtehr | Author(s) by whom the resource was/were authored. Multiple authors could be provided. |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSDeviceUse.header.authorship.author[x] |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSDeviceUse.header.authorship.author[x] |
+| path_zib |  |
+| short_xtehr | Author |
+| stereotype_zib |  |
+| type_xtehr | EHDSHealthProfessional |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSDeviceUse.header.authorship.datetime
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSDeviceUse.header.authorship.datetime |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 1..1 |
+| card._zib |  |
+| definition_xtehr | Date and time of the issuing the document/resource by its author. |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSDeviceUse.header.authorship.datetime |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSDeviceUse.header.authorship.datetime |
+| path_zib |  |
+| short_xtehr | Date and time of authoring/issuing |
+| stereotype_zib |  |
+| type_xtehr | dateTime |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSDeviceUse.header.identifier
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSDeviceUse.header.identifier |
 | zib |  |
 | alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
 | card._zib |  |
-| definition_xtehr | An identifier for this statement. |
+| definition_xtehr | Business identifier for the object |
 | definition_zib |  |
 | definitioncode_zib |  |
-| id_xtehr | EHDSDeviceUse.identifier |
+| id_xtehr | EHDSDeviceUse.header.identifier |
 | id_zib |  |
 | name_zib |  |
-| path_xtehr | EHDSDeviceUse.identifier |
+| path_xtehr | EHDSDeviceUse.header.identifier |
 | path_zib |  |
-| short_xtehr | An identifier for this statement. |
+| short_xtehr | Business identifier for the object |
 | stereotype_zib |  |
 | type_xtehr | Identifier |
 | type_zib |  |
@@ -529,30 +653,175 @@ A UDI often contains more information than just an ID, but also, for example, an
 
 
 
-## EHDSDeviceUse.implantDate
+## EHDSDeviceUse.header.language
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSDeviceUse.implantDate |
-| zib | MedicalDevice.StartDate |
-| alias_zib | NL: BeginDatum |
+| xtehr | EHDSDeviceUse.header.language |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr | {'strength': 'preferred', 'description': 'BCP 47'} |
+| card._xtehr | 0..1 |
+| card._zib |  |
+| definition_xtehr | Language in which the resource is written. Language is expressed by the IETF language tag. |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSDeviceUse.header.language |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSDeviceUse.header.language |
+| path_zib |  |
+| short_xtehr | Language |
+| stereotype_zib |  |
+| type_xtehr | CodeableConcept |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSDeviceUse.header.lastUpdate
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSDeviceUse.header.lastUpdate |
+| zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 0..1 |
-| card._zib | 0..1 |
-| definition_xtehr | Date when procedure was performed. |
-| definition_zib | The start date of the first use or implant of the medical device. A ‘vague’ date, such as only the year, is permitted. |
+| card._zib |  |
+| definition_xtehr | Date and time of the last update to the document/information |
+| definition_zib |  |
 | definitioncode_zib |  |
-| id_xtehr | EHDSDeviceUse.implantDate |
-| id_zib | NL-CM:10.1.11 |
-| name_zib | StartDate |
-| path_xtehr | EHDSDeviceUse.implantDate |
-| path_zib | MedicalDevice.StartDate |
-| short_xtehr | Date when procedure was performed. |
-| stereotype_zib | data |
+| id_xtehr | EHDSDeviceUse.header.lastUpdate |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSDeviceUse.header.lastUpdate |
+| path_zib |  |
+| short_xtehr | Date and time of the last update to the resource |
+| stereotype_zib |  |
 | type_xtehr | dateTime |
-| type_zib | TS |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSDeviceUse.header.status
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSDeviceUse.header.status |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr | {'strength': 'preferred', 'description': 'HL7 device-statement-status'} |
+| card._xtehr | 1..1 |
+| card._zib |  |
+| definition_xtehr | Status of the resource |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSDeviceUse.header.status |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSDeviceUse.header.status |
+| path_zib |  |
+| short_xtehr | Current status of the device usage. |
+| stereotype_zib |  |
+| type_xtehr | CodeableConcept |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSDeviceUse.header.statusReason[x]
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSDeviceUse.header.statusReason[x] |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 0..1 |
+| card._zib |  |
+| definition_xtehr | Reason for the current status of the resource. |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSDeviceUse.header.statusReason[x] |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSDeviceUse.header.statusReason[x] |
+| path_zib |  |
+| short_xtehr | Reason for the current status of the resource. |
+| stereotype_zib |  |
+| type_xtehr | CodeableConcept |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSDeviceUse.header.subject
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSDeviceUse.header.subject |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 1..1 |
+| card._zib |  |
+| definition_xtehr | Patient/subject information |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSDeviceUse.header.subject |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSDeviceUse.header.subject |
+| path_zib |  |
+| short_xtehr | Subject |
+| stereotype_zib |  |
+| type_xtehr | EHDSPatient |
+| type_zib |  |
+
+### Comments
+
+
+
+## EHDSDeviceUse.header.version
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSDeviceUse.header.version |
+| zib |  |
+| alias_zib |  |
+| binding_xtehr |  |
+| card._xtehr | 0..1 |
+| card._zib |  |
+| definition_xtehr | Business version of the resource. |
+| definition_zib |  |
+| definitioncode_zib |  |
+| id_xtehr | EHDSDeviceUse.header.version |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSDeviceUse.header.version |
+| path_zib |  |
+| short_xtehr | Version |
+| stereotype_zib |  |
+| type_xtehr | string |
+| type_zib |  |
 
 ### Comments
 
@@ -587,58 +856,58 @@ A UDI often contains more information than just an ID, but also, for example, an
 
 
 
-## EHDSDeviceUse.reason
+## EHDSDeviceUse.presentedForm
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSDeviceUse.reason |
-| zib | MedicalDevice.Indication::Diagnosis |
-| alias_zib | NL: Indicatie::Diagnose |
+| xtehr | EHDSDeviceUse.presentedForm |
+| zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
-| card._xtehr |  |
-| card._zib | 0..* |
-| definition_xtehr |  |
-| definition_zib | The diagnosis as indication for the medical device. |
+| card._xtehr | 0..* |
+| card._zib |  |
+| definition_xtehr | A narrative easy-to-read representation of the full data set, e.g. PDF-version of a document |
+| definition_zib |  |
 | definitioncode_zib |  |
-| id_xtehr |  |
-| id_zib | NL-CM:10.1.17 |
-| name_zib | Indication::Diagnosis |
-| path_xtehr |  |
-| path_zib | MedicalDevice.Indication::Diagnosis |
-| short_xtehr |  |
-| stereotype_zib | context,reference |
-| type_xtehr |  |
+| id_xtehr | EHDSDeviceUse.presentedForm |
+| id_zib |  |
+| name_zib |  |
+| path_xtehr | EHDSDeviceUse.presentedForm |
+| path_zib |  |
+| short_xtehr | A narrative easy-to-read representation of the full data set, e.g. PDF-version of a document |
+| stereotype_zib |  |
+| type_xtehr | EHDSAttachment |
 | type_zib |  |
 
 ### Comments
 
 
 
-## zib: nan
+## EHDSDeviceUse.reason[x]
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr |  |
-| zib |  |
-| alias_zib |  |
+| xtehr | EHDSDeviceUse.reason[x] |
+| zib | MedicalDevice.Indication::Diagnosis |
+| alias_zib | NL: Indicatie::Diagnose |
 | binding_xtehr |  |
 | card._xtehr | 0..* |
-| card._zib |  |
+| card._zib | 0..* |
 | definition_xtehr | Reason or justification for the use of the device. |
-| definition_zib |  |
+| definition_zib | The diagnosis as indication for the medical device. |
 | definitioncode_zib |  |
 | id_xtehr | EHDSDeviceUse.reason[x] |
-| id_zib |  |
-| name_zib |  |
+| id_zib | NL-CM:10.1.17 |
+| name_zib | Indication::Diagnosis |
 | path_xtehr | EHDSDeviceUse.reason[x] |
-| path_zib |  |
+| path_zib | MedicalDevice.Indication::Diagnosis |
 | short_xtehr | Reason or justification for the use of the device. |
-| stereotype_zib |  |
-| type_xtehr | EHDSCondition |
+| stereotype_zib | context,reference |
+| type_xtehr | CodeableConcept |
 | type_zib |  |
 
 ### Comments
@@ -655,35 +924,6 @@ A UDI often contains more information than just an ID, but also, for example, an
 | zib |  |
 | alias_zib |  |
 | binding_xtehr |  |
-| card._xtehr | 0..1 |
-| card._zib |  |
-| definition_xtehr | Date and time at which the statement was made/recorded. |
-| definition_zib |  |
-| definitioncode_zib |  |
-| id_xtehr | EHDSDeviceUse.recorded |
-| id_zib |  |
-| name_zib |  |
-| path_xtehr | EHDSDeviceUse.recorded |
-| path_zib |  |
-| short_xtehr | Date and time at which the statement was made/recorded. |
-| stereotype_zib |  |
-| type_xtehr | dateTime |
-| type_zib |  |
-
-### Comments
-
-
-
-## EHDSDeviceUse.source
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSDeviceUse.source |
-| zib |  |
-| alias_zib |  |
-| binding_xtehr |  |
 | card._xtehr |  |
 | card._zib |  |
 | definition_xtehr |  |
@@ -703,13 +943,13 @@ A UDI often contains more information than just an ID, but also, for example, an
 
 
 
-## zib: nan
+## EHDSDeviceUse.source[x]
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr |  |
+| xtehr | EHDSDeviceUse.source[x] |
 | zib |  |
 | alias_zib |  |
 | binding_xtehr |  |
@@ -732,6 +972,35 @@ A UDI often contains more information than just an ID, but also, for example, an
 
 
 
+## EHDSDeviceUse.startDate
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSDeviceUse.startDate |
+| zib | MedicalDevice.StartDate |
+| alias_zib | NL: BeginDatum |
+| binding_xtehr |  |
+| card._xtehr | 0..1 |
+| card._zib | 0..1 |
+| definition_xtehr | Date when the device was implantable to the patient or the external device was first in use. |
+| definition_zib | The start date of the first use or implant of the medical device. A â€˜vagueâ€™ date, such as only the year, is permitted. |
+| definitioncode_zib |  |
+| id_xtehr | EHDSDeviceUse.startDate |
+| id_zib | NL-CM:10.1.11 |
+| name_zib | StartDate |
+| path_xtehr | EHDSDeviceUse.startDate |
+| path_zib | MedicalDevice.StartDate |
+| short_xtehr | Date when the device was implantable to the patient or the external device was first in use. |
+| stereotype_zib | data |
+| type_xtehr | dateTime |
+| type_zib | TS |
+
+### Comments
+
+
+
 ## EHDSDeviceUse.status
 
 ### Table
@@ -741,49 +1010,20 @@ A UDI often contains more information than just an ID, but also, for example, an
 | xtehr | EHDSDeviceUse.status |
 | zib |  |
 | alias_zib |  |
-| binding_xtehr | {'strength': 'preferred', 'description': 'HL7 device-statement-status'} |
-| card._xtehr | 0..1 |
-| card._zib |  |
-| definition_xtehr | Current status of the Device Usage. |
-| definition_zib |  |
-| definitioncode_zib |  |
-| id_xtehr | EHDSDeviceUse.status |
-| id_zib |  |
-| name_zib |  |
-| path_xtehr | EHDSDeviceUse.status |
-| path_zib |  |
-| short_xtehr | Current status of the Device Usage. |
-| stereotype_zib |  |
-| type_xtehr | CodeableConcept |
-| type_zib |  |
-
-### Comments
-
-
-
-## EHDSDeviceUse.subject
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSDeviceUse.subject |
-| zib |  |
-| alias_zib |  |
 | binding_xtehr |  |
-| card._xtehr | 1..1 |
+| card._xtehr |  |
 | card._zib |  |
-| definition_xtehr | The patient using the device. |
+| definition_xtehr |  |
 | definition_zib |  |
 | definitioncode_zib |  |
-| id_xtehr | EHDSDeviceUse.subject |
+| id_xtehr |  |
 | id_zib |  |
 | name_zib |  |
-| path_xtehr | EHDSDeviceUse.subject |
+| path_xtehr |  |
 | path_zib |  |
-| short_xtehr | The patient using the device. |
+| short_xtehr |  |
 | stereotype_zib |  |
-| type_xtehr | EHDSPatient |
+| type_xtehr |  |
 | type_zib |  |
 
 ### Comments
