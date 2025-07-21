@@ -12,7 +12,7 @@
 |                                                       | EHDSDataSet.header.lastUpdate           |            | dateTime               |             | 0..1          |
 |                                                       | EHDSDataSet.header.status               |            | CodeableConcept        |             | 1..1          |
 |                                                       | EHDSDataSet.header.statusReason[x]      |            | CodeableConcept        |             | 0..1          |
-| RegistrationData.InformationSource.Patient            | EHDSDataSet.header.subject              |            | EHDSPatient            | (0..1)      | 1..1          |
+|                                                       | EHDSDataSet.header.subject              |            | EHDSPatient            |             | 1..1          |
 |                                                       | EHDSDataSet.header.version              |            | string                 |             | 0..1          |
 |                                                       | EHDSDataSet.presentedForm               |            | EHDSAttachment         |             | 0..*          |
 | RegistrationData.AcquisitionDateTime                  |                                         | TS         |                        | 0..1        |               |
@@ -22,6 +22,7 @@
 | RegistrationData.InformationSource                    |                                         |            |                        | 0..1        |               |
 | RegistrationData.InformationSource.ContactPerson      |                                         |            |                        | (0..1)      |               |
 | RegistrationData.InformationSource.HealthProfessional |                                         |            |                        | (0..1)      |               |
+| RegistrationData.InformationSource.Patient            |                                         |            |                        | (0..1)      |               |
 | RegistrationData.ReasonDataAbsent                     |                                         | CD         |                        | 0..1        |               |
 | RegistrationData.ReasonForClosing                     |                                         | ST         |                        | 0..1        |               |
 | RegistrationData.RegistrationReason                   |                                         | ST         |                        | 0..1        |               |
@@ -326,21 +327,21 @@ It concerns not only own observations, but also information received from third 
 | attribute | value |
 |---|---|
 | xtehr | EHDSDataSet.header.subject |
-| zib | RegistrationData.InformationSource.Patient |
-| alias_zib | NL: Patient |
+| zib |  |
+| alias_zib |  |
 | binding_xtehr |  |
 | card._xtehr | 1..1 |
-| card._zib | (0..1) |
+| card._zib |  |
 | definition_xtehr | Patient/subject information |
-| definition_zib | The patient as information source |
+| definition_zib |  |
 | definitioncode_zib |  |
 | id_xtehr | EHDSDataSet.header.subject |
-| id_zib | NL-CM:22.1.16 |
-| name_zib | Patient |
+| id_zib |  |
+| name_zib |  |
 | path_xtehr | EHDSDataSet.header.subject |
-| path_zib | RegistrationData.InformationSource.Patient |
+| path_zib |  |
 | short_xtehr | Subject |
-| stereotype_zib | data,reference |
+| stereotype_zib |  |
 | type_xtehr | EHDSPatient |
 | type_zib |  |
 
@@ -601,6 +602,35 @@ If the recorded information has not been assessed by the attending physician, th
 | name_zib | HealthProfessional |
 | path_xtehr |  |
 | path_zib | RegistrationData.InformationSource.HealthProfessional |
+| short_xtehr |  |
+| stereotype_zib | data,reference |
+| type_xtehr |  |
+| type_zib |  |
+
+### Comments
+
+
+
+## zib: RegistrationData.InformationSource.Patient
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr |  |
+| zib | RegistrationData.InformationSource.Patient |
+| alias_zib | NL: Patient |
+| binding_xtehr |  |
+| card._xtehr |  |
+| card._zib | (0..1) |
+| definition_xtehr |  |
+| definition_zib | The patient as information source |
+| definitioncode_zib |  |
+| id_xtehr |  |
+| id_zib | NL-CM:22.1.16 |
+| name_zib | Patient |
+| path_xtehr |  |
+| path_zib | RegistrationData.InformationSource.Patient |
 | short_xtehr |  |
 | stereotype_zib | data,reference |
 | type_xtehr |  |
