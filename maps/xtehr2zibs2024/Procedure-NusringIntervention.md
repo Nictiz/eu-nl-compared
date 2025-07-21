@@ -1,6 +1,7 @@
 # Procedure as of 2025-07-08
 ## Reason for comparing NursingIntervention (in addition to zib Procedure)
-Certain elements of EHDSProcedure are not included in or relevant to zib Procedure, but are covered in zib NursingIntervention, which is used within the eOverdracht use case "Overdracht Sturen". This use case partially overlaps with the EHDS use case "Discharge Report".  
+Certain elements of EHDSProcedure are not included in or relevant to zib Procedure, but are covered in zib NursingIntervention, which is used within the eOverdracht use case "Overdracht Sturen". This use case partially overlaps with the EHDS use case "Discharge Report".
+
 Specifically EHDSProcedure.outcome (Zib OutcomeOfCare) and EHDSProcedure.deviceUsed.
 
 ## Overall conclusion
@@ -13,7 +14,8 @@ Second, the Xt-EHR scope is "An action that is or was performed on or for a pati
 
 On the other hand, the zib is more narrow in the sense that it only focusses on the subset of procedures that are nursing interventions, but this seems to be intentional.  
 
-**Missing in EHDSProcedure**  
+**Missing in EHDSProcedure**
+
 - NursingIntervention.Frequency
 - NursingIntervention.Instruction
 - NursingIntervention.Interval  
@@ -23,7 +25,8 @@ On the other hand, the zib is more narrow in the sense that it only focusses on 
 - NursingIntervention.Requester::HealthProfessional
 - NursingIntervention.TreatmentObjective
 
-**Missing in zib NursingIntervention**  
+**Missing in zib NursingIntervention**
+
 - EHDSProcedure.bodySite  
 - EHDSProcedure.complication
 - EHDSProcedure.focalDevice
@@ -32,6 +35,7 @@ On the other hand, the zib is more narrow in the sense that it only focusses on 
 - EHDSProcedure.presentedForm
 
 **Cardinality differences**
+
 - NursingIntervention.Intervention vs EHDSProcedure.code
 - NursingIntervention.Performer vs EHDSProcedure.performer
 
