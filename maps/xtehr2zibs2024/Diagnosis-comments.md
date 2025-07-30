@@ -1,5 +1,69 @@
 # Condition
 
+## Version history
+
+v1: XtEHR model van 21-7-2025.
+
+## Actions
+
+Besproken 23-7-2025
+
+XtEHR Condition wordt gemapt op zib Diagnosis en zib Condition. Voor Diagnosis is de verwachting dat er altijd een Condition bij bestaat. (Het is wel gebruikelijk om symptomen als diagnose vast te leggen, maar het logical model is gebaseerde op de diagnose-aanpak.)
+
+De voorgestelde mapping klopt, er zijn wel opmerkingen.
+
+### problemStatus
+
+EHDSCondition.problemStatus	mapt op Condition.Course maar de waardelijsten verschillen.
+
+Acties:
+
+- zibcentrum kijkt naar de correcte mapping
+- 'improved' ontbreekt in problemStatus, dit inbrengen bij XtEHR
+
+### reason
+
+De zib kent diagnosis.reason (wat kan zijn: Diagnosis, Incident, Procedure), in de XtEHR ontbreekt dit.
+
+Acties:
+
+- diagnosis.reason zoals in de zib voorstellen aan XtEHR
+
+### differential diagnosis
+
+Diagnose: differentiaal diagnoses vragen aan xtehr wat de bedoeling is, ook gerelateerd diagnosisAssertionStatus 
+- Assertion about the certainty associated with a diagnosis. Diagnostic and/or clinical evidence of condition. 
+- Binding Description: (preferred): HL7 Condition Verification Status: deze bevat 'differential'.
+
+Acties:
+
+- toelichting vragen aan XtEHR wat de bedoeling is rondom differentiaaldiagnosen: wel of niet opnemen, hoe relateren ze aan elkaar. Noot daarbij: in een Patient Summary is het opnemen van differentiaaldiagnoses niet gebruikelijk.
+
+### Overige
+
+FurtherSpecificationDiagnosisName mapt waarschijnlijk op CodeableConcept.text
+
+XtEHR kent IsComplication, dat is in de zibs andersom gemapt. Hier doen we niets mee.
+
+xtEHR kent 'stage'.
+
+Acties:
+
+- voor zibcentrum: overwegen of 'stage' opgenomen moet worden in de zib
+
+Nagekomen commentaar:
+
+Van Condition.StatusDate werd gedacht dat dat op header.lastUpdate zou passen: dat is niet zo, want de lastUpdate is de datum wijziging registratie en niet de datum van wijziging status (die kan eerder liggen.)
+
+Acties:
+
+- Aangeven bij XtEHR dat er geen datum wijziging status is, alleen een datum wijziging record.
+
+## Mapping
+
+
+
+
 | zib                                                           | xtehr                                     | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
 |:--------------------------------------------------------------|:------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
 | Condition                                                     | EHDSCondition                             |            |                        |             | 0..*          |
