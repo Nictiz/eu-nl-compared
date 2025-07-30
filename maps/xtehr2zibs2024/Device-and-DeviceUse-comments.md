@@ -12,7 +12,57 @@ v2: 16-7-2025
 - identifier, subject, recordedDate are removed (since similar items are in EHDSDataset)
 - implantDate is now startDate
 
-## Overall conclusion
+## Actions
+
+Device/DeviceUse is besproken 17-7-2025, waaronder 'Voorlopige conclusies' hieronder.
+
+### Apart model voor Use/Gebruik versus Hulpmiddel zelf
+
+Het belangrijkste verschil met de zib is dat de EHDS een onderscheid maakt tussen het device zelf en het gebruik ervan, terwijl dat in de zib samen zit. Zibcentrum geeft aan dat zij vanuit een analyse bij de zibs ook al op dat spoor zijn gekomen, voornamelijk rond zaken als infusen en lijnen, waar informatie over het gebruik gedeeltelijk in andere zibs zelf is ondergebracht. Conclusie: zib MedischHulpmiddel zowel informatie over het device zelf als over het gebruik ervan bevat. Daarnaast constateren we dat zowel de zib als de EHDS niet heel expliciet zijn over wat precies binnen en buiten scope is. Vallen brillen, gehoorapparaten, krukken, chirurgische gereedschappen er wel of niet onder?
+
+Acties:
+
+- We vragen het zibcentrum te onderzoeken of het device en het gebruik ervan uit elkaar getrokken kunnen worden.
+- We vragen het zibcentrum om specifieker te zijn over de scope.
+- We vragen de Xt-EHR om specifieker te zijn over de scope.
+
+### Extra velden
+
+De volgende bevinding is dat de Xt-EHR een aantal datavelden over het device expliciet modelleert: fabrikant, modelnummer, batchnummer, etc. In de zib is dit niet expliciet gemodelleerd, maar wel onderdeel van de GTIN. Deze is ook aanwezig in het EHDSDevice-model. Een ontwerpprincipe van de zib is dat informatie slechts éénmaal gemodelleerd wordt; als al deze expliciete data aanwezig is, dan zou de GTIN niet gebruikt moeten worden. Er worden vraagtekens gesteld of dit ontwerpprincipe in de praktijk altijd houdbaar is, vanuit terminologie en FHIR zijn er voorbeelden bekend waarin enige overlap onvermijdelijk is. Wanneer aansluiting gezocht moet worden bij de EHDS is het ook onwenselijk dat gebruikers verschillende modellen zouden moeten gebruiken omdat de zibs aan dit ontwerpprincipe willen vasthouden.
+
+Acties:
+
+- We vragen het zibcentrum om te overwegen de expliciete velden over het device uit het Xt-EHR-model over te nemen.
+- We vragen de Xt-EHR om duiding over de relatie en verwachtingen rond deze velden in combinatie met het GTIN.
+
+### Verleden/toekomst
+
+Er is een bevinding dat het Xt-EHR-model alleen over gebruik in het verleden en het heden gaat, terwijl de zib ook over gebruik in de toekomst gaat. Hier ontstaat discussie over, de zib zelf zegt dat het niet over toekomstig gebruik gaat, maar de context die andere zibs zoals Behandeldoel of VerpleegkundigeInterventie scheppen wijzen wel op toekomstig gebruik. We zien het als extra ondersteuning om naar de splitsing op Device en DeviceUse te kijken. Er zijn geen aanvullende besluiten.
+
+Geen acties
+
+### Geen hulpmiddelen
+
+De volgende bevinding is dat er mogelijk een conflict zit op de terminologie-binding van zib ProductType en Xt-EHR Device.type. De zib is hier restrictiever dan het Xt-EHR-model -- dat zou geen probleem moeten zijn -- maar daarnaast is er vanuit de IPS/EPS voorzien in de usecase dat het model wordt gebruikt om aan te geven dat er _geen_ hulpmiddelen zijn. Binnen SNOMED internationaal veel discussies zijn over dit soort negatie-codes, en het lijkt er nu naartoe te bewegen dat ze binnen SNOMED gedeactiveerd zullen worden. Er worden ook vraagtekens gezet of dit een goede aanpak is binnen de IPS/EPS. Op dit moment moeten we wel volgen wat daar gebeurt omdat dat nu eenmaal wetgeving wordt.
+
+Acties:
+
+- We stellen de aanpak bij de IPS en de EPS nogmaals ter discussie, omdat vanuit SNOMED consensus lijkt te ontstaan dat dit niet de juiste aanpak is.
+- Wanneer de IPS/EPS niet meegaan in deze wijziging, wordt het zibcentrum gevraagd te onderzoeken hoe er bij de IPS/EPS kan worden aangesloten.
+
+### Overige punten
+
+Moeten de Xt-EHR-concepten zelf gecodeerd moeten worden, net zoals dat nu gedeeltelijk voor de zibs gebeurt? Voor de FHIR-uitwerking zijn soms dit soort codes nodig, en het zou goed zijn als deze uit het model zelf komen. Onlangs is besloten om hier bij de zibs juist wat terughoudender mee te zijn. In de praktijk bleek de eis niet altijd goed te werken.
+
+De volgende bevinding is dat de zib concepten heeft over aanvrager en locatie, die niet in het EHDSDeviceUse-model staan. Het is de vraag of deze concepten anders zouden worden bij een splitsing tussen Device en DeviceUse, maar voor nu besluiten we er niks mee te doen. De zib heeft ook een concept ProductDecscription, dat overlapt mogelijk met Xt-EHR-concept presentedForm. Die laatste is echter breder. We besluiten om hier ook niks mee te doen.
+
+Verder kan er in de zib alleen een Probleem (2020) of Diagnose (2024) worden opgevoerd als reden voor het hulpmiddelgebruik. In de Xt-EHR zijn ook een code, een Observation en een Procedure mogelijk. We kunnen niet achterhalen waar deze eis vandaan komt, en geen situatie bedenken waarin deze opties nodig zijn.
+
+Acties:
+
+- We vragen de Xt-EHR waarom Observation, Procedure of een code nodig zijn als reden voor het hulpmiddelengebruik.
+
+## Voorlopige conclusies (vóór 17-7-2025, toen besproken)
 
 Xt-EHR defines a device and its use as two distinct models, whereas the zib regards them as one, but this doesn't seem to introduce any conflicts.
 
