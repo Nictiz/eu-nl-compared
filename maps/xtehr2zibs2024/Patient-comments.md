@@ -1,5 +1,54 @@
 # Patient as of 29-05-2025
 
+## Actions
+
+### EHDSpatient.personalidentifier
+
+personalidentifier is verplicht in Xt EHR, maar optioneel in ZIB
+
+Het is niet handig voor secundair gebruik om personal identifier te verplichten. In Nederland mag via het PGO BSN nummer niet meegestuurd worden/over de lijn gestuurd worden.
+
+- Issue XtEHR: Voorstellen EHDSpatient.personalidentifier 0..1 maken voor o.a. secundair gebruik.
+
+### Nationaliteit vs. Staatsburgerschap (EHDSpatient.citizenship )
+
+EHDSpatient.citizenship ≠ Zib nationaliteit. In Nederland hebben we zib nationaliteit. Er zit verschil tussen nationaliteit en xt ehr 'citizenship' = staatsburgerschap. Dit is een lastige kwestie. Zib heeft enkel nationaliteit: Zib gebruikt GBA tabel 32, Xt EHR gebruikt ISO 3166.
+
+- Zib-centrum: ticket aanmaken → voorstel: ‘nationaliteit’ hernoemen naar ‘staatsburgerschap’.
+- Issue XtEHR: Inbrengen dat we ook stateloosheid moeten kunnen vastleggen. Dit is op dit moment nog niet mogelijk om vast te leggen in Europese valueset Citizenship.
+- Issue XtEHR: Landenlijst ISO moet worden afgestemd — er is geen EU-consensus welke landen erkend worden. In Nederland wordt de ISO 3166 bijvoorbeeld niet gebruikt en dit kan voor meerdere Europese landen zo zijn. Dit moet besproken worden met EU werkgroep.
+
+### Communicatietaal (EHDSpatient.communication.language.)
+
+EHDSpatient.communication.language bestaat niet in zib, wel: zib.languageProficiency.
+
+- Actie (Zib-centrum): Onderzoeken of taalvoorkeur van patiënt wordt vastgelegd in languageProficiency.
+
+### Burgelijke Staat (EHDSpatient. MaritalStatus. )
+
+De Xt EHR kent meer waardes dan zib.
+
+- Actie (Zib-centrum): Mapping uitbreiden: Xt EHR-waardes onderbrengen in zib. (Alleen doen indien registratie-inhoud niet significant verandert.)
+
+### Overlijdensdatum (Patient.DateOfDeath)
+
+Zit niet in XtEHR, wordt wel gebruikt in zib.
+
+- Actie (XtEHR): Inbrengen of dit moet worden opgenomen in XtEHR model. 
+
+### Patient.MultipleBirthSequence
+
+De zib heeft meerlingindicator, de XtEHR niet.
+
+Issue XtEHR: Besloten is dat het gewenst is deze in te brengen bij Europa. 
+
+### Genderidentiteit (EHDS.AdministrativeGender)
+
+Xt EHR kent alleen administrativeGender. Zib kent administratief geslacht én gender identiteit. Xt EHR: biologisch geslacht van patient zal waarschijnlijk vastgelegd worden onder observatie.
+
+- actie Zib-centrum: XtEHR valueset voor administrative gender moet vergeleken worden met valueset voor zib Gender Identity.
+- actie XtEHR: Inbrengen: wenselijkheid van opnemen van Gender Identity. Voor Xt EHR kennen ze enkel administrativeGender.
+
 ### Overall Discussion
 The EHDSPatient Logical Model and the Patient zib represent the same entity: an individual receiving healthcare. Despite structural or terminological differences, they refer to the same underlying subject. Below is an overview of the differences.
 
