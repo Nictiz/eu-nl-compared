@@ -1,5 +1,5 @@
 # AlertFlag as of 2025-05-28
-## Overall conclusion
+## Overall Discussion
 
 The Xt-EHR model and the zib differ in some important aspects. The Xt-EHR model has a pretty straightforward model where a code to define the model is required (SNOMED or text). In the zib, the "thing to flag for" is optional, and apart from a coded/test value, it might be a reference to a Diagnosis or HypersensitivityIntelerance instance. It should be noted that within the context of the eHN guideline for the patient summary and in the logcial model for the Hospital Discharge Report, the alert sections mentions to use the AllergyIntolerance model for these kinds of alerts, so possibly allergies/intolerances are out of scope for the AlertFlag model.
 

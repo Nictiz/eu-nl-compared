@@ -14,11 +14,11 @@ v2: 16-7-2025
 
 ## Actions
 
-Device/DeviceUse is besproken 17-7-2025, waaronder 'Voorlopige conclusies' hieronder.
+Device/DeviceUse is besproken 17-7-2025, waaronder 'Discussions' hieronder.
 
 ### Apart model voor Use/Gebruik versus Hulpmiddel zelf
 
-Het belangrijkste verschil met de zib is dat de EHDS een onderscheid maakt tussen het device zelf en het gebruik ervan, terwijl dat in de zib samen zit. Zibcentrum geeft aan dat zij vanuit een analyse bij de zibs ook al op dat spoor zijn gekomen, voornamelijk rond zaken als infusen en lijnen, waar informatie over het gebruik gedeeltelijk in andere zibs zelf is ondergebracht. Conclusie: zib MedischHulpmiddel zowel informatie over het device zelf als over het gebruik ervan bevat. Daarnaast constateren we dat zowel de zib als de EHDS niet heel expliciet zijn over wat precies binnen en buiten scope is. Vallen brillen, gehoorapparaten, krukken, chirurgische gereedschappen er wel of niet onder?
+Het belangrijkste verschil met de zib is dat de EHDS een onderscheid maakt tussen het device zelf en het gebruik ervan, terwijl dat in de zib samen zit. Zibcentrum geeft aan dat zij vanuit een analyse bij de zibs ook al op dat spoor zijn gekomen, voornamelijk rond zaken als infusen en lijnen, waar informatie over het gebruik gedeeltelijk in andere zibs zelf is ondergebracht. Discussion: zib MedischHulpmiddel zowel informatie over het device zelf als over het gebruik ervan bevat. Daarnaast constateren we dat zowel de zib als de EHDS niet heel expliciet zijn over wat precies binnen en buiten scope is. Vallen brillen, gehoorapparaten, krukken, chirurgische gereedschappen er wel of niet onder?
 
 Acties:
 
@@ -62,7 +62,7 @@ Acties:
 
 - We vragen de Xt-EHR waarom Observation, Procedure of een code nodig zijn als reden voor het hulpmiddelengebruik.
 
-## Voorlopige conclusies (vóór 17-7-2025, toen besproken)
+## Discussions (vóór 17-7-2025, toen besproken)
 
 Xt-EHR defines a device and its use as two distinct models, whereas the zib regards them as one, but this doesn't seem to introduce any conflicts.
 

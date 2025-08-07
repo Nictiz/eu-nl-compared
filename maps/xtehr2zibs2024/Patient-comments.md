@@ -1,6 +1,6 @@
 # Patient as of 29-05-2025
 
-### Overall conclusion
+### Overall Discussion
 The EHDSPatient Logical Model and the Patient zib represent the same entity: an individual receiving healthcare. Despite structural or terminological differences, they refer to the same underlying subject. Below is an overview of the differences.
 
 What is missing in the ZIB that is **mandatory/required** in the Xt-EHR?

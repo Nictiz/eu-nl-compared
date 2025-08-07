@@ -11,7 +11,7 @@ v2: 8-7-2025
 - anatomicLocation (CodeableConcept) is replaced with submodel bodySite
 - description is gone, presentedForm is part of EHDSDataSet
 
-## Conclusions
+## Discussion
 
 What is missing in the Xtehr and present in zib 2024? 
 
