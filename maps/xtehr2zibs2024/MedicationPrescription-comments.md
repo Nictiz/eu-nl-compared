@@ -1,4 +1,53 @@
-# MedicationPrescription
+# Medication Presscription as of 2025-08-19
+
+## Version history
+
+v1: 19-08-2025, initial version
+
+## Actions
+
+## Compared
+### Scope
+The xtEHR model is a generic not adressed prescription where as the zib can be adressed to a certain pharmacy or location.
+The xtEHR models a prescription with multiple medications lines on it where as the zib only describes a single medication line per dispense request.
+
+### Summary of partly matching elements
+- EHDSMedicationPrescription.prescriptionItem.comment cardinality mismatch 
+- EHDSMedicationPrescription.prescriptionItem.preparationInstructions Cardinality mismatch, Datatype mismatch
+- EHDSMedicationPrescription.prescriptionItem.quantityPrescribed additional codelist bindings not covered in zib (NHG table 25) and xtEHR (EDQM).
+- EHDSMedicationPrescription.prescriptionItem.treatmentPeriod datatype period partially matches sub-zib TimeInterval (Time Interval has extra elements like duration). 
+
+### Zib elements not present in xtEHR model:
+
+- DispenseRequest.DispenseLocation
+- DispenseRequest.DispenseRequestDate
+- DispenseRequest.IntendedSupplier::HealthcareProvider
+
+### EHDS elements not present in the zib model:
+
+- EHDSMedicationPrescription.comment
+- EHDSMedicationPrescription.prescriptionItem
+- EHDSMedicationPrescription.prescriptionItem.category
+- EHDSMedicationPrescription.prescriptionItem.identifier- EHDSMedicationPrescription.prescriptionItem.dosageInstructions
+- EHDSMedicationPrescription.prescriptionItem.minimumDispenseInterval
+- EHDSMedicationPrescription.prescriptionItem.offLabel
+- EHDSMedicationPrescription.prescriptionItem.offLabel.isOffLabelUse
+- EHDSMedicationPrescription.prescriptionItem.offLabel.reason[x]
+- EHDSMedicationPrescription.prescriptionItem.prescriptionIntent
+- EHDSMedicationPrescription.prescriptionItem.statusReason[x]
+- EHDSMedicationPrescription.prescriptionItem.substitution
+- EHDSMedicationPrescription.prescriptionItem.substitution.allowed[x]
+- EHDSMedicationPrescription.prescriptionItem.substitution.reason[x]
+
+### Other
+Elements possibly mappable to zib **MedicationAgreement** (but reference is not available in the zib)
+- EHDSMedicationPrescription.prescriptionItem.indicationText not clear how to map this in MedicationAgreement no room for free text. EHDS model indicates "This might not be allowed by some implementations".
+- EHDSMedicationPrescription.prescriptionItem.indication[x] this maps to PrescriptionReason
+- EHDSMedicationPrescription.prescriptionItem.dosageInstructions: could map on InstructionForUse (seperate mapping)
+
+The .header elements and .presentForm are skipped in this comparison (as they should map on more generic zib(s) like registration data).
+
+## Discussions (datum:)# MedicationPrescription
 
 | zib                                                          | xtehr                                                               | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
 |:-------------------------------------------------------------|:--------------------------------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
@@ -47,7 +96,6 @@
 |                                                              |                                                                     |            |                        | 0..1        |               |
 
 
-
 ## EHDSMedicationPrescription
 
 ### Table
@@ -89,7 +137,7 @@
 | type_xtehr | string |
 
 ### Comments
-
+Zib Comment field is not mapped here but under the prescriptionItem.comment as the zib only concerns a single line of medication on the prescritpion.
 
 
 ## EHDSMedicationPrescription.header
@@ -441,7 +489,8 @@
 | type_zib | ST |
 
 ### Comments
-
+Scope an datatype are matched
+Cardinality mismatch zib is 0..1 xtehr 0..*. 
 
 
 ## EHDSMedicationPrescription.prescriptionItem.dosageInstructions
@@ -460,7 +509,7 @@
 | type_xtehr | EHDSDosaging |
 
 ### Comments
-
+Dosaging is not available in the zib DispenseRequest but could possibly be mapped to the InstructionforUse zib, however there is no link from DispenseRequest to MedicationAgreement which references the InstructionforUse zib.
 
 
 ## EHDSMedicationPrescription.prescriptionItem.identifier
@@ -498,7 +547,7 @@
 | type_xtehr | string |
 
 ### Comments
-
+Might match MedicationAgreement zib both only coded text is avilable. EHDS model already indicates possible problems.
 
 
 ## EHDSMedicationPrescription.prescriptionItem.indication[x]
@@ -517,7 +566,7 @@
 | type_xtehr | CodeableConcept |
 
 ### Comments
-
+Indication[x] is not available in the zib DispenseRequest but could possibly be mapped to the MedicationAgreement zib, however there is no reference from DispenseRequest to MedicationAgreement.
 
 
 ## EHDSMedicationPrescription.prescriptionItem.medication
@@ -543,7 +592,7 @@
 | type_xtehr | EHDSMedication |
 
 ### Comments
-
+Scope and cardinality match. The referenced zib PharmaceuticalProduct and ehds model Medication are compared in seperate map.
 
 
 ## EHDSMedicationPrescription.prescriptionItem.minimumDispenseInterval
@@ -646,7 +695,9 @@
 | type_zib | CD |
 
 ### Comments
-
+Scope match
+Cardinality mismatch. 0..1 for xtEHR and 0..* for zib.
+Datatype mismatch. String for xtEHR and CD for zib.
 
 
 ## EHDSMedicationPrescription.prescriptionItem.prescriptionIntent
@@ -693,7 +744,7 @@
 | type_zib | PQ |
 
 ### Comments
-
+match scope, cardinality and datatype. Partial match on binding for UCUM. Additional binding possible in zib for NHG table 25. Additional preffered binding for xtEHR on EDQM.
 
 
 ## EHDSMedicationPrescription.prescriptionItem.repeatsAllowed
@@ -720,7 +771,7 @@
 | type_zib | INT |
 
 ### Comments
-
+Complete match.
 
 
 ## EHDSMedicationPrescription.prescriptionItem.status
@@ -747,7 +798,7 @@
 | type_zib | CD |
 
 ### Comments
-
+Complete match
 
 
 ## EHDSMedicationPrescription.prescriptionItem.statusReason[x]
@@ -849,7 +900,7 @@
 | type_xtehr | Period |
 
 ### Comments
-
+Complete match on scope, cardinality. Datatype Period partially matches sub-zib Time Interval. As time-interval can also be a duration with a start or end date. And even has the possibility of a relative start- and/or end time.
 
 
 ## EHDSMedicationPrescription.presentedForm
@@ -928,6 +979,26 @@
 | name_zib | IntendedSupplier::HealthcareProvider |
 | path_zib | DispenseRequest.IntendedSupplier::HealthcareProvider |
 | stereotype_zib | context,reference |
+
+### Comments
+
+
+
+## zib: nan
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr |  |
+| zib |  |
+| alias_zib | NL: TeVerstrekkenGeneesmiddel::FarmaceutischProduct |
+| card._zib | 1 |
+| definition_zib | The medicine to be dispensed. |
+| id_zib | NL-CM:9.10.22249 |
+| name_zib | MedicineToBeDispensed::PharmaceuticalProduct |
+| path_zib | DispenseRequest.MedicineToBeDispensed::PharmaceuticalProduct |
+| stereotype_zib | data,reference |
 
 ### Comments
 
