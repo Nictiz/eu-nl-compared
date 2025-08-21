@@ -52,31 +52,31 @@ Xt EHR kent alleen administrativeGender. Zib kent administratief geslacht én ge
 ### Overall Discussion
 The EHDSPatient Logical Model and the Patient zib represent the same entity: an individual receiving healthcare. Despite structural or terminological differences, they refer to the same underlying subject. Below is an overview of the differences.
 
-What is missing in the ZIB that is **mandatory/required** in the Xt-EHR?
+What is missing in the ZIB that is conceptually **mandatory/required** in the Xt-EHR?  
 It is expected that the zib provides sufficient coverage for the mandatory elements of the EHDSPatient model.
 
-What is missing in the Xt-EHR that is **mandatory/required** in the ZIB?
+What is missing in the Xt-EHR that is conceptually **mandatory/required** in the ZIB?  
 - Patient.DeathIndicator
-- Patient.MultipleBirthIndicator
+- Patient.MultipleBirthIndicator  
 Action needed?
 
-What is mandatory/required in ZIB that is optional in Xt-EHR?
-- Patient.Gender
-- Patient.DateOfBirth
-- Patient.NameInformation
-Action needed?
+What is conceptually **mandatory/required** in ZIB that is optional in Xt-EHR?  
+- Patient.Gender  
+- Patient.DateOfBirth  
+- Patient.NameInformation  
+Action needed?  
 
-What is mandatory/required in Xt-EHR that is optional in ZIB?
-- EHDSPatient.personalIdentifier
-Action needed?
+What is conceptually **mandatory/required** in Xt-EHR that is optional in ZIB?  
+- EHDSPatient.personalIdentifier  
+Action needed?  
 
-What is missing in the ZIB that is **optional** in the Xt-EHR?
-- EHDSPatient.citizenship (comparable to zib Nationality; zib is more granular)
-- EHDSPatient.communicationLanguage (comparable to zib LanguageProficiency; zib is more granular)
-- EHDSPatient.maritalStatus (comparable to zib MartitalStatus; zib doesn't consist of all values in EHDSPatient/HL7 MaritalStatus valueset)
-- EHDSPatient.telecom (comparable to partial information model ContactInformation)
+What is missing in the ZIB that is conceptually **optional** in the Xt-EHR?  
+- EHDSPatient.citizenship (comparable to zib Nationality; zib is more granular)  
+- EHDSPatient.communicationLanguage (comparable to zib LanguageProficiency; zib is more granular)  
+- EHDSPatient.maritalStatus (comparable to zib MartitalStatus; zib doesn't consist of all values in EHDSPatient/HL7 MaritalStatus valueset)  
+- EHDSPatient.telecom (comparable to partial information model ContactInformation)  
 
-What is missing in the Xt-EHR that is **optional** in the ZIB?
+What is missing in the Xt-EHR that is conceptually **optional** in the ZIB?
 - Patient.ContactInformation (comparable to EHDSPatient.telecom)
 - Patient.DateOfDeath
 - Patient.GenderIdentity
@@ -187,11 +187,11 @@ Note: EHDSAddress should be compared to partial information model AddressInforma
 | type_zib | CD |
 
 ### Comments
-Semantics: Both the zib and EHDS models appear to conflate gender and sex, reflecting a common misconception that the two are equivalent, despite their distinct meanings. The term "Physiological gender" would be more accurately described as "biological sex," which is the standard term used to refer to physical and physiological characteristics such as chromosomes, hormones, and reproductive anatomy. Gender however refers to the characteristics of women, men, girls and boys that are socially constructed (https://www.who.int/health-topics/gender. The lack of a clear definition for "gender" in both the EHDS and zib models results in ambiguity regarding its intended meaning and use.  
+Semantics: Both the zib and EHDS model define this as the administrative gender of the patient.  
 Datatype: CodableConcept vs Coded descriptor (CD)
     - Terminology: Zib - https://terminologie.nictiz.nl/art-decor/loinc?conceptId=46098-0; 
-    - valuesets: EHDSPatient.administrativeGender: Preferred {male, female, other, unknown} https://build.fhir.org/valueset-administrative-gender.html; Zib Patient.Gender: Required {male, female, undifferentiated, unknown}  
-Cardinalities:Element is required in zib, but optional in EHDSPatient.
+    - Difference in valuesets: EHDSPatient.administrativeGender: Preferred {male, female, other, unknown} https://build.fhir.org/valueset-administrative-gender.html; Zib Patient.Gender: Required {male, female, undifferentiated, unknown}  
+Cardinalities:Element is conceptually required in zib, but optional in EHDSPatient.
 
 
 
@@ -285,9 +285,9 @@ BCP 47 used by the zib does use ISO 639-2 codes as part of its language subtags,
 | type_zib | TS |
 
 ### Comments
-Semantics: Xtehr requires a complete date of birth YYYY-MM-DDThh:mm:ss+zz:zz; in the zib a vague date (such as only the year) is permitted.  
+Semantics: Xtehr highly recommends a complete date of birth YYYY-MM-DDThh:mm:ss+zz:zz; in the zib a vague date (such as only the year) is permitted by exception.  
 Datatype: ✅  
-Cardinalities:Element is required in zib, but optional in EHDSPatient.  
+Cardinalities:Element is conceptually required in zib, but optional in EHDSPatient.  
 Note: Which format is used in zib Patient?  
 
 
@@ -379,7 +379,7 @@ Note: Further analysis required of EHDSHumanName and https://zibs.nl/wiki/NameIn
 ### Comments
 Semantics: ✅  
 Datatype: ✅  
-Cardinalities: In extehr at least one type of identifier is required; in zib it's optional.
+Cardinalities: In Xt-ehr at least one type of identifier is conceptually required; in zib it's optional.
 
 
 ## EHDSPatient.telecom
