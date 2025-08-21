@@ -1,0 +1,1004 @@
+# Medication Presscription as of 2025-08-19
+
+## Version history
+
+v1: 19-08-2025, initial version
+
+## Actions
+
+## Compared
+### Scope
+The xtEHR model is a generic not adressed prescription where as the zib can be adressed to a certain pharmacy or location.
+The xtEHR models a prescription with multiple medications lines on it where as the zib only describes a single medication line per dispense request.
+
+### Summary of partly matching elements
+- EHDSMedicationPrescription.prescriptionItem.comment cardinality mismatch 
+- EHDSMedicationPrescription.prescriptionItem.preparationInstructions Cardinality mismatch, Datatype mismatch
+- EHDSMedicationPrescription.prescriptionItem.quantityPrescribed additional codelist bindings not covered in zib (NHG table 25) and xtEHR (EDQM).
+- EHDSMedicationPrescription.prescriptionItem.treatmentPeriod datatype period partially matches sub-zib TimeInterval (Time Interval has extra elements like duration). 
+
+### Zib elements not present in xtEHR model:
+
+- DispenseRequest.DispenseLocation
+- DispenseRequest.DispenseRequestDate
+- DispenseRequest.IntendedSupplier::HealthcareProvider
+
+### EHDS elements not present in the zib model:
+
+- EHDSMedicationPrescription.comment
+- EHDSMedicationPrescription.prescriptionItem
+- EHDSMedicationPrescription.prescriptionItem.category
+- EHDSMedicationPrescription.prescriptionItem.identifier- EHDSMedicationPrescription.prescriptionItem.dosageInstructions
+- EHDSMedicationPrescription.prescriptionItem.minimumDispenseInterval
+- EHDSMedicationPrescription.prescriptionItem.offLabel
+- EHDSMedicationPrescription.prescriptionItem.offLabel.isOffLabelUse
+- EHDSMedicationPrescription.prescriptionItem.offLabel.reason[x]
+- EHDSMedicationPrescription.prescriptionItem.prescriptionIntent
+- EHDSMedicationPrescription.prescriptionItem.statusReason[x]
+- EHDSMedicationPrescription.prescriptionItem.substitution
+- EHDSMedicationPrescription.prescriptionItem.substitution.allowed[x]
+- EHDSMedicationPrescription.prescriptionItem.substitution.reason[x]
+
+### Other
+Elements possibly mappable to zib **MedicationAgreement** (but reference is not available in the zib)
+- EHDSMedicationPrescription.prescriptionItem.indicationText not clear how to map this in MedicationAgreement no room for free text. EHDS model indicates "This might not be allowed by some implementations".
+- EHDSMedicationPrescription.prescriptionItem.indication[x] this maps to PrescriptionReason
+- EHDSMedicationPrescription.prescriptionItem.dosageInstructions: could map on InstructionForUse (seperate mapping)
+
+The .header elements and .presentForm are skipped in this comparison (as they should map on more generic zib(s) like registration data).
+
+## Discussions (datum:)# MedicationPrescription
+
+| zib                                                          | xtehr                                                               | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
+|:-------------------------------------------------------------|:--------------------------------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
+| DispenseRequest                                              | EHDSMedicationPrescription                                          |            |                        |             | 0..*          |
+|                                                              | EHDSMedicationPrescription.comment                                  |            | string                 |             | 0..*          |
+|                                                              | EHDSMedicationPrescription.header                                   |            | Base                   |             | 1..1          |
+|                                                              | EHDSMedicationPrescription.header.authorship                        |            | Base                   |             | 1..*          |
+|                                                              | EHDSMedicationPrescription.header.authorship.author[x]              |            | EHDSHealthProfessional |             | 1..1          |
+|                                                              | EHDSMedicationPrescription.header.authorship.datetime               |            | dateTime               |             | 1..1          |
+|                                                              | EHDSMedicationPrescription.header.identifier                        |            | Identifier             |             | 0..*          |
+|                                                              | EHDSMedicationPrescription.header.language                          |            | CodeableConcept        |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.header.lastUpdate                        |            | dateTime               |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.header.recorder                          |            | EHDSHealthProfessional |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.header.recordingDate                     |            | dateTime               |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.header.status                            |            | CodeableConcept        |             | 1..1          |
+|                                                              | EHDSMedicationPrescription.header.statusReason[x]                   |            | CodeableConcept        |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.header.subject                           |            | EHDSPatient            |             | 1..1          |
+|                                                              | EHDSMedicationPrescription.header.validFrom                         |            | dateTime               |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.header.validUntil                        |            | dateTime               |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.header.version                           |            | string                 |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem                         |            | Base                   |             | 1..*          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.category                |            | CodeableConcept        |             | 0..*          |
+| DispenseRequest.Comment                                      | EHDSMedicationPrescription.prescriptionItem.comment                 | ST         | string                 | 0..1        | 0..*          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.dosageInstructions      |            | EHDSDosaging           |             | 0..*          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.identifier              |            | Identifier             |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.indicationText          |            | string                 |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.indication[x]           |            | CodeableConcept        |             | 0..*          |
+| DispenseRequest.MedicineToBeDispensed::PharmaceuticalProduct | EHDSMedicationPrescription.prescriptionItem.medication              |            | EHDSMedication         | 1           | 1..1          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.minimumDispenseInterval |            | Quantity               |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.offLabel                |            | Base                   |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.offLabel.isOffLabelUse  |            | boolean                |             | 1..1          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.offLabel.reason[x]      |            | CodeableConcept        |             | 0..*          |
+| DispenseRequest.AdditionalWishes                             | EHDSMedicationPrescription.prescriptionItem.preparationInstructions | CD         | string                 | 0..*        | 0..1          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.prescriptionIntent      |            | CodeableConcept        |             | 0..1          |
+| DispenseRequest.Amount                                       | EHDSMedicationPrescription.prescriptionItem.quantityPrescribed      | PQ         | Quantity               | 0..1        | 0..1          |
+| DispenseRequest.NumberOfRefills                              | EHDSMedicationPrescription.prescriptionItem.repeatsAllowed          | INT        | integer                | 0..1        | 0..1          |
+| DispenseRequest.DispenseRequestStatus                        | EHDSMedicationPrescription.prescriptionItem.status                  | CD         | CodeableConcept        | 1           | 1..1          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.statusReason[x]         |            | CodeableConcept        |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.substitution            |            | Base                   |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.substitution.allowed[x] |            | boolean                |             | 0..1          |
+|                                                              | EHDSMedicationPrescription.prescriptionItem.substitution.reason[x]  |            | CodeableConcept        |             | 0..1          |
+| DispenseRequest.SupplyPeriod::TimeInterval                   | EHDSMedicationPrescription.prescriptionItem.treatmentPeriod         |            | Period                 | 0..1        | 0..1          |
+|                                                              | EHDSMedicationPrescription.presentedForm                            |            | EHDSAttachment         |             | 0..*          |
+|                                                              |                                                                     | ST         |                        | 0..1        |               |
+|                                                              |                                                                     | TS         |                        | 0..1        |               |
+|                                                              |                                                                     |            |                        | 0..1        |               |
+
+
+## EHDSMedicationPrescription
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription |
+| zib | DispenseRequest |
+| alias_zib | NL: Verstrekkingsverzoek |
+| card._xtehr | 0..* |
+| definition_xtehr | Logical model for medication prescription. A prescription contains one or more prescription items. |
+| definition_zib | Root concept of the DispenseRequest information model.This root concept contains all data elements of the DispenseRequest information model. |
+| definitioncode_zib | SNOMED CT: 52711000146108 Request to dispense medication to patient |
+| id_xtehr | EHDSMedicationPrescription |
+| id_zib | NL-CM:9.10.19963 |
+| name_zib | DispenseRequest |
+| path_xtehr | EHDSMedicationPrescription |
+| path_zib | DispenseRequest |
+| short_xtehr | Medication prescription model |
+| stereotype_zib | rootconcept |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.comment
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.comment |
+| zib |  |
+| card._xtehr | 0..* |
+| definition_xtehr | Additional information or comments |
+| id_xtehr | EHDSMedicationPrescription.comment |
+| path_xtehr | EHDSMedicationPrescription.comment |
+| short_xtehr | Additional information or comments |
+| type_xtehr | string |
+
+### Comments
+Zib Comment field is not mapped here but under the prescriptionItem.comment as the zib only concerns a single line of medication on the prescritpion.
+
+
+## EHDSMedicationPrescription.header
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header |
+| zib |  |
+| card._xtehr | 1..1 |
+| definition_xtehr | Prescription header data elements |
+| id_xtehr | EHDSMedicationPrescription.header |
+| path_xtehr | EHDSMedicationPrescription.header |
+| short_xtehr | Prescription header |
+| type_xtehr | Base |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.authorship
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.authorship |
+| zib |  |
+| card._xtehr | 1..* |
+| definition_xtehr | Resource authoring details |
+| id_xtehr | EHDSMedicationPrescription.header.authorship |
+| path_xtehr | EHDSMedicationPrescription.header.authorship |
+| short_xtehr | Authorship |
+| type_xtehr | Base |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.authorship.author[x]
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.authorship.author[x] |
+| zib |  |
+| card._xtehr | 1..1 |
+| definition_xtehr | Author(s) by whom the resource was/were authored. Multiple authors could be provided. |
+| id_xtehr | EHDSMedicationPrescription.header.authorship.author[x] |
+| path_xtehr | EHDSMedicationPrescription.header.authorship.author[x] |
+| short_xtehr | The prescriber, the person who made the prescription, and who takes the responsibility of the treatment. [Used for searching] |
+| type_xtehr | EHDSHealthProfessional |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.authorship.datetime
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.authorship.datetime |
+| zib |  |
+| card._xtehr | 1..1 |
+| definition_xtehr | Date and time of the issuing the document/resource by its author. |
+| id_xtehr | EHDSMedicationPrescription.header.authorship.datetime |
+| path_xtehr | EHDSMedicationPrescription.header.authorship.datetime |
+| short_xtehr | Time of issuing (signing) the prescription by health care professional. [Used for searching] |
+| type_xtehr | dateTime |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.identifier
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.identifier |
+| zib |  |
+| card._xtehr | 0..* |
+| definition_xtehr | Business identifier for the object |
+| id_xtehr | EHDSMedicationPrescription.header.identifier |
+| path_xtehr | EHDSMedicationPrescription.header.identifier |
+| short_xtehr | Business identifier(s) for the prescription. [Used for searching] |
+| type_xtehr | Identifier |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.language
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.language |
+| zib |  |
+| binding_xtehr | {'strength': 'preferred', 'description': 'BCP 47'} |
+| card._xtehr | 0..1 |
+| definition_xtehr | Language in which the resource is written. Language is expressed by the IETF language tag. |
+| id_xtehr | EHDSMedicationPrescription.header.language |
+| path_xtehr | EHDSMedicationPrescription.header.language |
+| short_xtehr | Language |
+| type_xtehr | CodeableConcept |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.lastUpdate
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.lastUpdate |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | Date and time of the last update to the document/information |
+| id_xtehr | EHDSMedicationPrescription.header.lastUpdate |
+| path_xtehr | EHDSMedicationPrescription.header.lastUpdate |
+| short_xtehr | Date and time of the last update to the resource |
+| type_xtehr | dateTime |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.recorder
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.recorder |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | The recorder of the prescription/draft in the information system |
+| id_xtehr | EHDSMedicationPrescription.header.recorder |
+| path_xtehr | EHDSMedicationPrescription.header.recorder |
+| short_xtehr | The recorder of the prescription/draft in the information system |
+| type_xtehr | EHDSHealthProfessional |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.recordingDate
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.recordingDate |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | Time of authoring the prescription/draft in the information system |
+| id_xtehr | EHDSMedicationPrescription.header.recordingDate |
+| path_xtehr | EHDSMedicationPrescription.header.recordingDate |
+| short_xtehr | Time of authoring the prescription/draft in the information system |
+| type_xtehr | dateTime |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.status
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.status |
+| zib |  |
+| card._xtehr | 1..1 |
+| definition_xtehr | Status of the resource |
+| id_xtehr | EHDSMedicationPrescription.header.status |
+| path_xtehr | EHDSMedicationPrescription.header.status |
+| short_xtehr | Status of the prescription, this should not be status of treatment. For multi-item prescription, the status of prescription is often related to statuses of single lines. In case of single-item prescriptions, the status for line is usually the status of prescription. [Used for searching] |
+| type_xtehr | CodeableConcept |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.statusReason[x]
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.statusReason[x] |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | Reason for the current status of the resource. |
+| id_xtehr | EHDSMedicationPrescription.header.statusReason[x] |
+| path_xtehr | EHDSMedicationPrescription.header.statusReason[x] |
+| short_xtehr | Reason for the current status of prescription, for example the reason why the prescription was made invalid or why the prescription was changed from previous |
+| type_xtehr | CodeableConcept |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.subject
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.subject |
+| zib |  |
+| card._xtehr | 1..1 |
+| definition_xtehr | Patient/subject information |
+| id_xtehr | EHDSMedicationPrescription.header.subject |
+| path_xtehr | EHDSMedicationPrescription.header.subject |
+| short_xtehr | The person for whom the medication is prescribed/ordered. [Used for searching] |
+| type_xtehr | EHDSPatient |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.validFrom
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.validFrom |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | Effective date of the prescription. The prescription is not dispensable before this date. In most cases this information repeats issueDate. [Used for searching] |
+| id_xtehr | EHDSMedicationPrescription.header.validFrom |
+| path_xtehr | EHDSMedicationPrescription.header.validFrom |
+| short_xtehr | Effective date of the prescription. The prescription is not dispensable before this date. In most cases this information repeats issueDate. [Used for searching] |
+| type_xtehr | dateTime |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.validUntil
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.validUntil |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | The validity period end date. The prescription is not dispensable after this date. [Used for searching] |
+| id_xtehr | EHDSMedicationPrescription.header.validUntil |
+| path_xtehr | EHDSMedicationPrescription.header.validUntil |
+| short_xtehr | The validity period end date. The prescription is not dispensable after this date. [Used for searching] |
+| type_xtehr | dateTime |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.header.version
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.header.version |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | Business version of the resource. |
+| id_xtehr | EHDSMedicationPrescription.header.version |
+| path_xtehr | EHDSMedicationPrescription.header.version |
+| short_xtehr | Version |
+| type_xtehr | string |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.prescriptionItem
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem |
+| zib |  |
+| card._xtehr | 1..* |
+| definition_xtehr | Prescription line for one medication. In many countries, only one item is allowed. In case multiple medications are allowed, all lines need to be authored together. |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem |
+| short_xtehr | Prescription line for one medication. In many countries, only one item is allowed. In case multiple medications are allowed, all lines need to be authored together. |
+| type_xtehr | Base |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.prescriptionItem.category
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.category |
+| zib |  |
+| card._xtehr | 0..* |
+| definition_xtehr | Category or categories of prescription. For example type of reimbursement, or type of prescription (e.g. hospital, private, etc). |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.category |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.category |
+| short_xtehr | Category or categories of prescription. For example type of reimbursement, or type of prescription (e.g. hospital, private, etc). |
+| type_xtehr | CodeableConcept |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.prescriptionItem.comment
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.comment |
+| zib | DispenseRequest.Comment |
+| alias_zib | NL: Toelichting |
+| card._xtehr | 0..* |
+| card._zib | 0..1 |
+| definition_xtehr | Additional information or comments |
+| definition_zib | Explanation for the dispense request. <br> <br>This explanation can contain e.g. information on why a prescriber submits a dispense request that deviates from the norm, e.g. an extra dispense request needed because the patient has lost the medication. |
+| definitioncode_zib | LOINC: 48767-8 Annotation comment [Interpretation] Narrative |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.comment |
+| id_zib | NL-CM:9.10.22274 |
+| name_zib | Comment |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.comment |
+| path_zib | DispenseRequest.Comment |
+| short_xtehr | Additional information or comments |
+| stereotype_zib | data |
+| type_xtehr | string |
+| type_zib | ST |
+
+### Comments
+Scope an datatype are matched
+Cardinality mismatch zib is 0..1 xtehr 0..*. 
+
+
+## EHDSMedicationPrescription.prescriptionItem.dosageInstructions
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.dosageInstructions |
+| zib |  |
+| card._xtehr | 0..* |
+| definition_xtehr | Dosaging and administration instructions |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.dosageInstructions |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.dosageInstructions |
+| short_xtehr | Dosaging and administration instructions |
+| type_xtehr | EHDSDosaging |
+
+### Comments
+Dosaging is not available in the zib DispenseRequest but could possibly be mapped to the InstructionforUse zib, however there is no link from DispenseRequest to MedicationAgreement which references the InstructionforUse zib.
+
+
+## EHDSMedicationPrescription.prescriptionItem.identifier
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.identifier |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | Identifier for a single item on prescription, if exists. In case of single-item prescription, this identifier is typically the same as prescription identifier. |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.identifier |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.identifier |
+| short_xtehr | Identifier for a single item on prescription, if exists. In case of single-item prescription, this identifier is typically the same as prescription identifier. |
+| type_xtehr | Identifier |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.prescriptionItem.indicationText
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.indicationText |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | Reason for the prescription in textual form. This might not be allowed by some implementations. |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.indicationText |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.indicationText |
+| short_xtehr | Reason for the prescription in textual form. This might not be allowed by some implementations. |
+| type_xtehr | string |
+
+### Comments
+Might match MedicationAgreement zib both only coded text is avilable. EHDS model already indicates possible problems.
+
+
+## EHDSMedicationPrescription.prescriptionItem.indication[x]
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.indication[x] |
+| zib |  |
+| card._xtehr | 0..* |
+| definition_xtehr | Reason for the prescription (typically diagnosis, or a procedure) |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.indication[x] |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.indication[x] |
+| short_xtehr | Reason for the prescription (typically diagnosis, or a procedure) |
+| type_xtehr | CodeableConcept |
+
+### Comments
+Indication[x] is not available in the zib DispenseRequest but could possibly be mapped to the MedicationAgreement zib, however there is no reference from DispenseRequest to MedicationAgreement.
+
+
+## EHDSMedicationPrescription.prescriptionItem.medication
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.medication |
+| zib | DispenseRequest.MedicineToBeDispensed::PharmaceuticalProduct |
+| alias_zib | NL: TeVerstrekkenGeneesmiddel::FarmaceutischProduct |
+| card._xtehr | 1..1 |
+| card._zib | 1 |
+| definition_xtehr | Prescribed product, branded, generic, virtual, extemporal, etc |
+| definition_zib | The medicine to be dispensed. |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.medication |
+| id_zib | NL-CM:9.10.22249 |
+| name_zib | MedicineToBeDispensed::PharmaceuticalProduct |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.medication |
+| path_zib | DispenseRequest.MedicineToBeDispensed::PharmaceuticalProduct |
+| short_xtehr | Prescribed product, branded, generic, virtual, extemporal, etc |
+| stereotype_zib | data,reference |
+| type_xtehr | EHDSMedication |
+
+### Comments
+Scope and cardinality match. The referenced zib PharmaceuticalProduct and ehds model Medication are compared in seperate map.
+
+
+## EHDSMedicationPrescription.prescriptionItem.minimumDispenseInterval
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.minimumDispenseInterval |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | If a prescription allows for repeated dispensations, the interval between dispensations shall be stated here. |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.minimumDispenseInterval |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.minimumDispenseInterval |
+| short_xtehr | Minimum Dispense Interval |
+| type_xtehr | Quantity |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.prescriptionItem.offLabel
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.offLabel |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | Indicates that the prescriber has knowingly prescribed the medication for an indication, age group, dosage, or route of administration that is not approved by the regulatory agencies and is not mentioned in the prescribing information for the drug |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.offLabel |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.offLabel |
+| short_xtehr | Indicates that the prescriber has knowingly prescribed the medication for an indication, age group, dosage, or route of administration that is not approved by the regulatory agencies and is not mentioned in the prescribing information for the drug |
+| type_xtehr | Base |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.prescriptionItem.offLabel.isOffLabelUse
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.offLabel.isOffLabelUse |
+| zib |  |
+| card._xtehr | 1..1 |
+| definition_xtehr | Indicates off-label use. Must be 'true' when .reason is provided. |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.offLabel.isOffLabelUse |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.offLabel.isOffLabelUse |
+| short_xtehr | Indicates off-label use. Must be 'true' when .reason is provided. |
+| type_xtehr | boolean |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.prescriptionItem.offLabel.reason[x]
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.offLabel.reason[x] |
+| zib |  |
+| card._xtehr | 0..* |
+| definition_xtehr | Reason or related clarification for off-label use |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.offLabel.reason[x] |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.offLabel.reason[x] |
+| short_xtehr | Reason or related clarification for off-label use |
+| type_xtehr | CodeableConcept |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.prescriptionItem.preparationInstructions
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.preparationInstructions |
+| zib | DispenseRequest.AdditionalWishes |
+| alias_zib | NL: AanvullendeWensen |
+| card._xtehr | 0..1 |
+| card._zib | 0..* |
+| definition_xtehr | Additional instructions about preparation or dispense |
+| definition_zib | Logistics and other instructions such as: do not enter in GDS, urgent, purposeful deviation, etc. |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.preparationInstructions |
+| id_zib | NL-CM:9.10.22759 |
+| name_zib | AdditionalWishes |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.preparationInstructions |
+| path_zib | DispenseRequest.AdditionalWishes |
+| short_xtehr | Additional instructions about preparation or dispense |
+| stereotype_zib | data |
+| type_xtehr | string |
+| type_zib | CD |
+
+### Comments
+Scope match
+Cardinality mismatch. 0..1 for xtEHR and 0..* for zib.
+Datatype mismatch. String for xtEHR and CD for zib.
+
+
+## EHDSMedicationPrescription.prescriptionItem.prescriptionIntent
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.prescriptionIntent |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | Intent of the prescription - prophylaxis, treatment, anesthesia, etc |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.prescriptionIntent |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.prescriptionIntent |
+| short_xtehr | Intent of the prescription - prophylaxis, treatment, anesthesia, etc |
+| type_xtehr | CodeableConcept |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.prescriptionItem.quantityPrescribed
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.quantityPrescribed |
+| zib | DispenseRequest.Amount |
+| alias_zib | NL: TeVerstrekkenHoeveelheid |
+| binding_xtehr | {'strength': 'preferred', 'description': 'UCUM, EDQM Standard Terms'} |
+| card._xtehr | 0..1 |
+| card._zib | 0..1 |
+| definition_xtehr | Overall quantity of prescribed product (e.g number of packages or number of tablets). |
+| definition_zib | This is the number of units of the ordered product per dispense. The number of refills indicates how often this amount is allowed to be dispensed. Optionally a translation to NHG table Gebruiksvoorschriften (Table 25) is also allowed. |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.quantityPrescribed |
+| id_zib | NL-CM:9.10.19964 |
+| name_zib | Amount |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.quantityPrescribed |
+| path_zib | DispenseRequest.Amount |
+| short_xtehr | Overall quantity of prescribed product (e.g number of packages or number of tablets). |
+| stereotype_zib | data |
+| type_xtehr | Quantity |
+| type_zib | PQ |
+
+### Comments
+match scope, cardinality and datatype. Partial match on binding for UCUM. Additional binding possible in zib for NHG table 25. Additional preffered binding for xtEHR on EDQM.
+
+
+## EHDSMedicationPrescription.prescriptionItem.repeatsAllowed
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.repeatsAllowed |
+| zib | DispenseRequest.NumberOfRefills |
+| alias_zib | NL: AantalHerhalingen |
+| card._xtehr | 0..1 |
+| card._zib | 0..1 |
+| definition_xtehr | How many times the prescription item can be dispensed in addition to the original dispense. |
+| definition_zib | The number of additional times the medication may be dispensed after the first time. <br>In the case of Amount: The total amount that may be dispensed is: (Number of refills + 1) x amount to be dispensed.<br>In the case of Period of Use:The total period of use is: (Number of refills + 1) x period of use |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.repeatsAllowed |
+| id_zib | NL-CM:9.10.22120 |
+| name_zib | NumberOfRefills |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.repeatsAllowed |
+| path_zib | DispenseRequest.NumberOfRefills |
+| short_xtehr | Number of refills authorized |
+| stereotype_zib | data |
+| type_xtehr | integer |
+| type_zib | INT |
+
+### Comments
+Complete match.
+
+
+## EHDSMedicationPrescription.prescriptionItem.status
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.status |
+| zib | DispenseRequest.DispenseRequestStatus |
+| alias_zib | NL: VerstrekkingsverzoekStatus |
+| card._xtehr | 1..1 |
+| card._zib | 1 |
+| definition_xtehr | Status of a single item of a multi-item prescription. In case of single-item prescriptions, the status of prescription has the same meaning as the status of the item. |
+| definition_zib | Status of the order in the ordering process, such as e.g. 'cancelled', 'ordered' |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.status |
+| id_zib | NL-CM:9.10.22760 |
+| name_zib | DispenseRequestStatus |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.status |
+| path_zib | DispenseRequest.DispenseRequestStatus |
+| short_xtehr | Status of a single item of a multi-item prescription. In case of single-item prescriptions, the status of prescription has the same meaning as the status of the item. |
+| stereotype_zib | data |
+| type_xtehr | CodeableConcept |
+| type_zib | CD |
+
+### Comments
+Complete match
+
+
+## EHDSMedicationPrescription.prescriptionItem.statusReason[x]
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.statusReason[x] |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | Reason for the current status of prescription, for example the reason why the prescription was made invalid or why the prescription was changed from previous |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.statusReason[x] |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.statusReason[x] |
+| short_xtehr | Reason for the current status of prescription, for example the reason why the prescription was made invalid or why the prescription was changed from previous |
+| type_xtehr | CodeableConcept |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.prescriptionItem.substitution
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.substitution |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | Whether and which type of substitution is allowed for this medication treatment item |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.substitution |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.substitution |
+| short_xtehr | Whether and which type of substitution is allowed for this medication treatment item |
+| type_xtehr | Base |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.prescriptionItem.substitution.allowed[x]
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.substitution.allowed[x] |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | Whether and to what extent substitution is allowed. |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.substitution.allowed[x] |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.substitution.allowed[x] |
+| short_xtehr | Whether and to what extent substitution is allowed. |
+| type_xtehr | boolean |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.prescriptionItem.substitution.reason[x]
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.substitution.reason[x] |
+| zib |  |
+| card._xtehr | 0..1 |
+| definition_xtehr | Reason for the substitution requirement (e.g. Biological product, Patient allergic to an excipient in alternative products, etc) |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.substitution.reason[x] |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.substitution.reason[x] |
+| short_xtehr | Reason for the substitution requirement (e.g. Biological product, Patient allergic to an excipient in alternative products, etc) |
+| type_xtehr | CodeableConcept |
+
+### Comments
+
+
+
+## EHDSMedicationPrescription.prescriptionItem.treatmentPeriod
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.prescriptionItem.treatmentPeriod |
+| zib | DispenseRequest.SupplyPeriod::TimeInterval |
+| alias_zib | NL: Verbruiksperiode::TijdsInterval |
+| card._xtehr | 0..1 |
+| card._zib | 0..1 |
+| definition_xtehr | Period over which the medication is to be taken (in case of multiple dosaging schemes, this would be the overall period of all dosages.) |
+| definition_zib | During the approved period of use, the pharmacist has permission to dispense medicine so that the patient has a sufficient amount of medication.<br><br>In many cases, the approved supply period can be described by only an end date: the approved end date of use. <br><br>Toegestane eenheden voor de duur zijn:  uur, dag, week, jaar. |
+| id_xtehr | EHDSMedicationPrescription.prescriptionItem.treatmentPeriod |
+| id_zib | NL-CM:9.10.20062 |
+| name_zib | SupplyPeriod::TimeInterval |
+| path_xtehr | EHDSMedicationPrescription.prescriptionItem.treatmentPeriod |
+| path_zib | DispenseRequest.SupplyPeriod::TimeInterval |
+| short_xtehr | Period over which the medication is to be taken (in case of multiple dosaging schemes, this would be the overall period of all dosages.) |
+| stereotype_zib | data,reference |
+| type_xtehr | Period |
+
+### Comments
+Complete match on scope, cardinality. Datatype Period partially matches sub-zib Time Interval. As time-interval can also be a duration with a start or end date. And even has the possibility of a relative start- and/or end time.
+
+
+## EHDSMedicationPrescription.presentedForm
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSMedicationPrescription.presentedForm |
+| zib |  |
+| card._xtehr | 0..* |
+| definition_xtehr | A narrative easy-to-read representation of the full data set, e.g. PDF-version of a document |
+| id_xtehr | EHDSMedicationPrescription.presentedForm |
+| path_xtehr | EHDSMedicationPrescription.presentedForm |
+| short_xtehr | Entire prescription as issued. Various formats could be provided, PDF format is recommended. |
+| type_xtehr | EHDSAttachment |
+
+### Comments
+
+
+
+## zib: nan
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr |  |
+| zib |  |
+| alias_zib | NL: Afleverlocatie |
+| card._zib | 0..1 |
+| definition_zib | Dispense location. |
+| id_zib | NL-CM:9.10.20068 |
+| name_zib | DispenseLocation |
+| path_zib | DispenseRequest.DispenseLocation |
+| stereotype_zib | data |
+| type_zib | ST |
+
+### Comments
+
+
+
+## zib: nan
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr |  |
+| zib |  |
+| alias_zib | NL: VerstrekkingsverzoekDatum |
+| card._zib | 0..1 |
+| definition_zib | Time at which the dispense request is entered. |
+| id_zib | NL-CM:9.10.20060 |
+| name_zib | DispenseRequestDate |
+| path_zib | DispenseRequest.DispenseRequestDate |
+| stereotype_zib | data |
+| type_zib | TS |
+
+### Comments
+
+
+
+## zib: nan
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr |  |
+| zib |  |
+| alias_zib | NL: BeoogdVerstrekker::Zorgaanbieder |
+| card._zib | 0..1 |
+| definition_zib | The intended supplier is a pharmacist. |
+| id_zib | NL-CM:9.10.19966 |
+| name_zib | IntendedSupplier::HealthcareProvider |
+| path_zib | DispenseRequest.IntendedSupplier::HealthcareProvider |
+| stereotype_zib | context,reference |
+
+### Comments
+
+
+
+## zib: nan
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr |  |
+| zib |  |
+| alias_zib | NL: TeVerstrekkenGeneesmiddel::FarmaceutischProduct |
+| card._zib | 1 |
+| definition_zib | The medicine to be dispensed. |
+| id_zib | NL-CM:9.10.22249 |
+| name_zib | MedicineToBeDispensed::PharmaceuticalProduct |
+| path_zib | DispenseRequest.MedicineToBeDispensed::PharmaceuticalProduct |
+| stereotype_zib | data,reference |
+
+### Comments
+
