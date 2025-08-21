@@ -1,10 +1,10 @@
 # Location and Organization as of 2025-06-17
-## Overall conclusion
+## Overall Discussion
 The Location and Organization Xt-EHR models cover the same information as zib HealthcareProvider does, but it is hard to match zib and Xt-EHR. This is largely due to the fact that the zib [suffers from the known issue](https://nictiz.atlassian.net/browse/ZIB-2471) that it is an amalgamation of both a location where care is delivered, and the managing organization of this location. In [ZIB-1539](https://nictiz.atlassian.net/browse/ZIB-1359) it is clarified that the zib in the first place represents a location, but from its use in other zibs and the description of the concepts it becomes clear that this is not the entire picture.
 
 This makes comparison hard, as most zib concepts could potentially be equivalent to the Xt-EHR Location counterpart or to the Xt-EHR Organization counterpart, depending on interpretation and context of use.
 
-For this analysis, the view was taken that the zib primarily represents a location, but the conclusions should be considered very weak.
+For this analysis, the view was taken that the zib primarily represents a location, but the Discussion should be considered very weak.
 
 Apart from this issue with the zib, the Xt-EHR model has a concept of hierarchy (a location is part of an organization, and organizations can be hierarchically organized). The zib lacks this kind of hierarchical relationships.
 

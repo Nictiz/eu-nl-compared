@@ -1,5 +1,5 @@
 # HealthProfessional
-## Overall conclusion
+## Overall Discussion
 The models mostly match up, but there is one fundamental difference: the zib model is tightly coupled to process that it is instantiated for, while the Xt-EHR model is generic description of the health professional and its role in an organization (presumably). This results in:
 
 * A role definition for the zib (like performer, case manager, etc.) which is not present and unwanted in the Xt-EHR model

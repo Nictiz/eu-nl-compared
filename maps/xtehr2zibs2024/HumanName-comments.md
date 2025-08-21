@@ -1,5 +1,30 @@
 # HumanName as of 2025-05-28
-## Overall conclusion
+
+## Actions
+
+### Structuur achternaam
+
+De XtEHR heeft family (niet opgedeeld), de zib alleen opgedeeld. De zib erkent eigenlijk alleen NL namen volgens GBA.
+
+- zib issue: de zib moet buitenlandse achternamen ondersteunen (voor cross border, vluchteling, toerist)
+
+### Voornamen
+
+Hier heeft de zib 1 string met voornamen, XtEHR heeft given 0..*. De zib onderscheidt given, initials, roepnaam
+
+- zib issue: moet buitenlandse voornamen ondersteunen (voor cross border, vluchteling, toerist). Dit gaat met name om niet-officiele voornamen.
+
+### Titels
+
+De XtEHR heeft 0..* pre- en suffix, de zib heeft alleen titulatuur.
+
+- issue zib: wat te doen als je niet weet of het voor of achter de naam moet (b.v. buitenlandse titels)
+
+### Volledige 
+
+De XtEHR heeft volledige naam (1 string voor de hele naam als delen niet bekend zijn). Dit laten we even liggen, is bekend zib issue.
+
+## Overall Discussion
 The Xt-EHR model and the zib have significant granularity differences, leading to incompatibilities on all parts comprising the name:
 
 * Family name: one or more strings in Xt-EHR, without restrictions on how to accommodate the parts of a family name, while the zib exactly defines the four parts a family name can consist of plus an indicator on how to combine them.

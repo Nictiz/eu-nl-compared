@@ -1,6 +1,15 @@
 # BodyStructure as of 2025-06-17
-## Overall conclusion
+
+## Actions
+
+Er is al een analyse gedaan op anatomische locatie bij het zibcemtrum
+
+- zib issue: XtEHR BodyStructure model meenemen bij verdere ontwikkeling zib. Overwegen .locationQualifier en .morpholoy over te nemen.
+
+## Overall Discussion
+
 ### Partial zib vs. stand-alone Xt-EHR model
+
 Zib AnatomicalLocation is the universal way to describe anatomical locations in all zibs. It is a partial zib, meaning that it is meant to become part of the zib model where it is used.
 
 This contrasts with the Xt-EHR model, which describes a model that can be instantiated independently. For this reason, it defines (the possibility to add) an identifier, allowing re-use across different models. It should be noted though that the Xt-EHR model is not the only way to describe anatomical locations in the Xt-EHR model. At least the Xt-EHR Condition model allows for a simple coded value as well.

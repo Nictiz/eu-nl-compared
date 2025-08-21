@@ -1,5 +1,21 @@
 # Telecom as of 2025-05-28
 
+## Actions
+
+### Model
+
+XtEHR heeft telecom type (email, phone etc) en use (home, work etc.) met value (de waarde).
+De zib heeft alleen tel en email (geen fax etc.).
+
+- issue voor xtehr: binding op type en use wijzigen van preferred naar extensible
+- zib issue: telecomtype en numbertype harmoniseren met type en use in XtEHR
+
+## Toelichting
+
+Telefoon in de zib heeft toelichting: laten zoals het is, geen issue.
+
+## Discussion
+
 This isn't a generated file, as the zib and the Xt-EHR model operate at a different level of granularity and one-to-one concept mapping is hard to make. However, a useful mapping can still be made. On a high level, zib instances can largely be accommodated by the Xt-EHR model, although some subtleties are missing. However, Xt-EHR model might contain codes not understood by the zib (web address and other information and old addresses).
 
 The Xt-EHR model is based on the FHIR [_ContactPoint_](https://www.hl7.org/fhir/R4/datatypes.html#ContactPoint) data type. At this moment, there is a _preferred_ binding to the FHIR value sets used in this data type. The mapping with the zib hinges on these value sets, which are required in the FHIR implementation. So for the moment let's assume these value set bindings to be _required_.

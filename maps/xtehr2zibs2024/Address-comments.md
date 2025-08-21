@@ -1,5 +1,28 @@
 # Address as of 2025-05-28
-## Overall conclusion
+
+## Acties
+
+### Adres zonder bekende structuur
+
+De zib veronderstelt dat de structuur altijd bekend is, en heeft dus geen tekstuele weergave of meerdere adresregels als string. Dat betekent dat o.a. buitenlandse adressen niet in de zib passen.
+
+- Zibcentrum onderzoekt adres zonder bekende Nederlandse structuur
+
+### Use en type
+
+De XtEHR heeft use (b.v.: werk-, thuisadres) en type (b.v. postadres). De zib kent alleen AddressType waar beide gemengd worden. Noot: ook HL7, waaruit use/type voortkomt, is niet glashelder over het onderscheid.
+
+- Zibcentrum onderzoekt splitsen van AddressType
+
+## Country
+
+XtEHR heeft ISO, zib heeft GBA. Geen issue.
+
+## Postbus
+
+De XtEHR heeft postbox, in NL is dat straat=postbus en geen apart veld. Geen issue.
+
+## Overall Discussion
 The zib specifies the house number at a much higher granularity than the Xt-EHR model, making this aspect incompatible; a house number according to the Xt-EHR is a "rendered" version of all the information in the zib.
 
 In addition, the Xt-EHR model includes a rendered version of the full address, potentially duplicating data present in other concepts. This conflicts with the zib design principles.
