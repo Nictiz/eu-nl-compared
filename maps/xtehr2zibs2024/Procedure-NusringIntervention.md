@@ -1,8 +1,8 @@
 # Procedure as of 2025-07-08
 ## Reason for comparing NursingIntervention (in addition to zib Procedure)
-Certain elements of EHDSProcedure are not included in or relevant to zib Procedure, but are covered in zib NursingIntervention, which is used within the eOverdracht use case "Overdracht Sturen". This use case partially overlaps with the EHDS use case "Discharge Report".
 
-Specifically EHDSProcedure.outcome (Zib OutcomeOfCare) and EHDSProcedure.deviceUsed.
+Certain elements of EHDSProcedure are not included in or relevant to zib Procedure, but are covered in zib NursingIntervention, which is used within the eOverdracht use case "Overdracht Sturen". This use case partially overlaps with the EHDS use case "Discharge Report".  
+Specifically EHDSProcedure.outcome (Zib OutcomeOfCare, which evaluates the NursingIntervention) and EHDSProcedure.deviceUsed.
 
 ## Overall conclusion
 
@@ -106,7 +106,7 @@ On the other hand, the zib is more narrow in the sense that it only focusses on 
 ### Comments
 Description of zib: A nursing intervention is the care and/or treatment that a nurse performs on the basis of expert judgment and clinical knowledge. It is part of the nursing process; interventions are determined on the basis of nursing diagnoses (indicated care problems) and on the basis of treatment goals. In the home care situation, after instruction, some actions *can also be performed by the patient themselves or by a caregiver*. In the right context, the concept *can describe historical, future and advised* nursing interventions. 
 Description of EHDSProcedure: EHDS refined base model for *an action that is or was performed* on or for a patient.  
-Conclusion: EHDSProcedure is limited to past procedures while zib NursingIntervention describes both past, future and advised interventions.
+Conclusion: EHDSProcedure is limited to past procedures while zib NursingIntervention describes both past, future and advised interventions. And an EHDSProcedure only takes into account procedures performed by EHDSHealthProfessional, whereas a NursingIntervention can be done by either a HealthProfessional, Related Person (care giver) or Patient. 
 
 
 ## EHDSProcedure.bodySite
@@ -666,33 +666,34 @@ EHDSExclusive
 Seems to match
 
 
-## EHDSProcedure.outcome
+## EHDSProcedure.outcome (vs ZIBOutcomeOfCare)
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr | EHDSProcedure.outcome |
-| zib |  |
+| zib | ZIBOutcomeOfCare |
 | alias_zib |  |
 | binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT'} |
 | card._xtehr | 0..1 |
-| card._zib |  |
+| card._zib | n/a |
 | definition_xtehr | The outcome of the procedure - did it resolve the reasons for the procedure being performed? |
-| definition_zib |  |
-| definitioncode_zib |  |
+| definition_zib | Root concept of the OutcomeOfCare information model. This root concept contains all data elements of the OutcomeOfCare information model. This consists of the HealthcareResult (The textual account of the healthcare result. If HealthcareResult cannot be entered as a functional/mental status, it can be described as free text in the healthcare result) or ZIBFunctionalOrMentalStatus (Description of the patient’s health condition in the form of a functional and/or mental status) |
+| definitioncode_zib | 423100009 SNOMED Results section |
 | id_xtehr | EHDSProcedure.outcome |
-| id_zib |  |
-| name_zib |  |
+| id_zib | NL-CM:13.4.1 |
+| name_zib | OutcomeOfCare |
 | path_xtehr | EHDSProcedure.outcome |
 | path_zib |  |
 | short_xtehr | The outcome of the procedure - did it resolve the reasons for the procedure being performed? |
 | stereotype_zib |  |
 | type_xtehr | CodeableConcept |
-| type_zib |  |
+| type_zib | ST and CD |
 
 ### Comments
-EHDSExclusive, seperate zib OutcomeOfCare evaluates the NursingIntervention and describes the determined status of the patient in terms of a certain problem. Comparing the healthcare result with the treatment objective provides insight into the effectivity of the nursing interventions/activities carried out for this problem. It is a part of the nursing process, together with nursing diagnoses/problems, the treatment objective and nursing interventions. 
+EHDSExclusive, seperate zib OutcomeOfCare evaluates the NursingIntervention and describes the determined status of the patient in terms of a certain problem. Comparing the healthcare result with the treatment objective provides insight into the effectivity of the nursing interventions/activities carried out for this problem. It is a part of the nursing process, together with nursing diagnoses/problems, the treatment objective and nursing interventions. In the zib the outcome is given in either textual format or structured in ZIBFunctionalOrMentalStatus.  
+Conclusion: ZIBOutcomeOfCare provides more detailed information about the outcome of a certain NursingIntervention compared to the EHDSProcedure.outcome, which only answers the question "did it resolve the reasons for the procedure being performed?"
 
 
 ## EHDSProcedure.performer
