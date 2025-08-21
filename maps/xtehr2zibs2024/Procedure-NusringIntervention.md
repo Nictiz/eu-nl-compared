@@ -1,4 +1,44 @@
-# Procedure
+# Procedure as of 2025-07-08
+## Reason for comparing NursingIntervention (in addition to zib Procedure)
+
+Certain elements of EHDSProcedure are not included in or relevant to zib Procedure, but are covered in zib NursingIntervention, which is used within the eOverdracht use case "Overdracht Sturen". This use case partially overlaps with the EHDS use case "Discharge Report".  
+Specifically EHDSProcedure.outcome (Zib OutcomeOfCare, which evaluates the NursingIntervention) and EHDSProcedure.deviceUsed.
+
+## Overall conclusion
+
+The scopes of the Xt-EHR model and zib NursingIntervention don't align completely. First, the Xt-EHR model seems to be aimed at procedures that are performed by a health professional. The zib recognizes nursing interventions which can also be performed by patients themselves or related persons.
+
+This broader scope results in a mismatch on the performer and the zib concept Instruction. Only part of what is modeled in the Xt-EHR falls within the scope of the zib.
+
+Second, the Xt-EHR scope is "An action that is or was performed on or for a patient", so only past and present use. The zib is a bit of a strange beast that models past, present and future interventions, but also past, running or future _series_ of interventions. It dedicates several elements to this series (Frequency, Interval) which are mainly aimed at continuation of care, which is outside of scope of the Xt-EHR model (and also not relevant for some of the zib use cases).
+
+On the other hand, the zib is more narrow in the sense that it only focusses on the subset of procedures that are nursing interventions, but this seems to be intentional.  
+
+**Missing in EHDSProcedure**
+
+- NursingIntervention.Frequency
+- NursingIntervention.Instruction
+- NursingIntervention.Interval  
+- NursingIntervention.Performer.Caregiver::ContactPerson
+- NursingIntervention.Performer.HealthProfessional
+- NursingIntervention.Performer.Patient
+- NursingIntervention.Requester::HealthProfessional
+- NursingIntervention.TreatmentObjective
+
+**Missing in zib NursingIntervention**
+
+- EHDSProcedure.bodySite  
+- EHDSProcedure.complication
+- EHDSProcedure.focalDevice
+- EHDSProcedure.header (and all underlying elements)
+- EHDSProcedure.outcome
+- EHDSProcedure.presentedForm
+
+**Cardinality differences**
+
+- NursingIntervention.Intervention vs EHDSProcedure.code
+- NursingIntervention.Performer vs EHDSProcedure.performer
+
 
 | zib                                                    | xtehr                                     | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
 |:-------------------------------------------------------|:------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
@@ -64,7 +104,9 @@
 | type_zib |  |
 
 ### Comments
-
+Description of zib: A nursing intervention is the care and/or treatment that a nurse performs on the basis of expert judgment and clinical knowledge. It is part of the nursing process; interventions are determined on the basis of nursing diagnoses (indicated care problems) and on the basis of treatment goals. In the home care situation, after instruction, some actions *can also be performed by the patient themselves or by a caregiver*. In the right context, the concept *can describe historical, future and advised* nursing interventions. 
+Description of EHDSProcedure: EHDS refined base model for *an action that is or was performed* on or for a patient.  
+Conclusion: EHDSProcedure is limited to past procedures while zib NursingIntervention describes both past, future and advised interventions. And an EHDSProcedure only takes into account procedures performed by EHDSHealthProfessional, whereas a NursingIntervention can be done by either a HealthProfessional, Related Person (care giver) or Patient. 
 
 
 ## EHDSProcedure.bodySite
@@ -93,7 +135,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.code
@@ -123,6 +165,9 @@
 
 ### Comments
 
+The zib restricts the allowed terminology to two SNOMED refsets consisting of procedures as well as regime/therapy and situation (e.g. beoordeling van kennis over aandoening bij familie (situatie), debriefing van patiënt na fysieke inperking (regime/therapie)), whereas the Xt-EHR model prefers SNOMED.  
+(The terminology seems to align pretty well. (In the 2020 zib NIC is still present as a code system, but this has been deprecated as of 2024).)  
+It's expected that the SNOMED codes in the EHDSmodel will be restricted to just procedures. Therefore interventions about the situation and regime/therapy might be out of scope of the EHDSmodel.
 
 
 ## EHDSProcedure.complication
@@ -151,7 +196,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.date[x]
@@ -180,7 +225,9 @@
 | type_zib | TS |
 
 ### Comments
+The date fields (ProcedureStartDateTime and ProcedureEndDateTime) in the zib carry multiple meanings, they could be the boundaries of a single event or series of events in the past, present or future, so a 1-to-1 mapping is hard to make. The Xt-EHR model defines the date as either Period or dateTime data.
 
+The information present in the zib about start and/or end date/time loosely translates to Period.start and Period.end if the zib is not about an explicit series. The concept of a single dateTime doesn't seem to be covered by the zib.
 
 
 ## EHDSProcedure.date[x]
@@ -210,7 +257,7 @@
 
 ### Comments
 
-
+See the comment on NursingIntervention.ProcedureEndDateTime.
 
 ## EHDSProcedure.deviceUsed
 
@@ -239,6 +286,7 @@
 
 ### Comments
 
+The zib refers the MedicalDevice zib for "materials used", whereas the Xt-EHR model refers just the Device model, not the DeviceUse model. Seemingly, the zib model envisions much more detailed information here. However, the zib is probably to broad (see [ZIB-2691](https://nictiz.atlassian.net/browse/ZIB-2691)) as it is hard to imagine that for things like bandages etc. detailed information about the use is needed.
 
 
 ## EHDSProcedure.focalDevice
@@ -267,7 +315,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive, unlikely to be used in NursingIntervention as NursingIntervention.MedicalDevice is restricted to "the materials used for the nursing procedure, such as bandages".
 
 
 ## EHDSProcedure.header
@@ -296,7 +344,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.header.authorship
@@ -325,7 +373,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.header.authorship.author[x]
@@ -354,7 +402,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.header.authorship.datetime
@@ -383,7 +431,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.header.identifier
@@ -412,7 +460,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.header.language
@@ -441,7 +489,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.header.lastUpdate
@@ -470,7 +518,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.header.status
@@ -499,7 +547,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.header.statusReason[x]
@@ -528,7 +576,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.header.subject
@@ -557,7 +605,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.header.version
@@ -586,7 +634,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.note
@@ -615,36 +663,37 @@
 | type_zib | ST |
 
 ### Comments
+Seems to match
 
 
-
-## EHDSProcedure.outcome
+## EHDSProcedure.outcome (vs ZIBOutcomeOfCare)
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr | EHDSProcedure.outcome |
-| zib |  |
+| zib | ZIBOutcomeOfCare |
 | alias_zib |  |
 | binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT'} |
 | card._xtehr | 0..1 |
-| card._zib |  |
+| card._zib | n/a |
 | definition_xtehr | The outcome of the procedure - did it resolve the reasons for the procedure being performed? |
-| definition_zib |  |
-| definitioncode_zib |  |
+| definition_zib | Root concept of the OutcomeOfCare information model. This root concept contains all data elements of the OutcomeOfCare information model. This consists of the HealthcareResult (The textual account of the healthcare result. If HealthcareResult cannot be entered as a functional/mental status, it can be described as free text in the healthcare result) or ZIBFunctionalOrMentalStatus (Description of the patient’s health condition in the form of a functional and/or mental status) |
+| definitioncode_zib | 423100009 SNOMED Results section |
 | id_xtehr | EHDSProcedure.outcome |
-| id_zib |  |
-| name_zib |  |
+| id_zib | NL-CM:13.4.1 |
+| name_zib | OutcomeOfCare |
 | path_xtehr | EHDSProcedure.outcome |
 | path_zib |  |
 | short_xtehr | The outcome of the procedure - did it resolve the reasons for the procedure being performed? |
 | stereotype_zib |  |
 | type_xtehr | CodeableConcept |
-| type_zib |  |
+| type_zib | ST and CD |
 
 ### Comments
-
+EHDSExclusive, seperate zib OutcomeOfCare evaluates the NursingIntervention and describes the determined status of the patient in terms of a certain problem. Comparing the healthcare result with the treatment objective provides insight into the effectivity of the nursing interventions/activities carried out for this problem. It is a part of the nursing process, together with nursing diagnoses/problems, the treatment objective and nursing interventions. In the zib the outcome is given in either textual format or structured in ZIBFunctionalOrMentalStatus.  
+Conclusion: ZIBOutcomeOfCare provides more detailed information about the outcome of a certain NursingIntervention compared to the EHDSProcedure.outcome, which only answers the question "did it resolve the reasons for the procedure being performed?"
 
 
 ## EHDSProcedure.performer
@@ -674,7 +723,7 @@
 
 ### Comments
 
-
+Mismatch. The Xt-EHR model only allows health professionals to be performers, while the zib also envisions patients and care givers (related persons) to be performers. Also cardinality difference.
 
 ## EHDSProcedure.presentedForm
 
@@ -702,7 +751,7 @@
 | type_zib |  |
 
 ### Comments
-
+EHDSExclusive
 
 
 ## EHDSProcedure.reason[x]
@@ -731,36 +780,7 @@
 | type_zib |  |
 
 ### Comments
-
-
-
-## EHDSProcedure.reason[x]
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSProcedure.reason[x] |
-| zib | NursingIntervention.Indication::Problem |
-| alias_zib |  |
-| binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT, ICD-10, Orphacode if rare disease is diagnosed'} |
-| card._xtehr | 0..* |
-| card._zib |  |
-| definition_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
-| definition_zib |  |
-| definitioncode_zib |  |
-| id_xtehr | EHDSProcedure.reason[x] |
-| id_zib |  |
-| name_zib |  |
-| path_xtehr | EHDSProcedure.reason[x] |
-| path_zib |  |
-| short_xtehr | The reason why the procedure was performed. This may be a concept from a terminology or a reference to a specific instance that describes the reason. |
-| stereotype_zib |  |
-| type_xtehr | CodeableConcept |
-| type_zib |  |
-
-### Comments
-
+Mismatch. In the Xt-EHR model this is coded data, while in the zib this is a distinct "Problem" like model zib NursingDiagnosis.
 
 
 ## zib: NursingIntervention.Frequency
@@ -790,7 +810,7 @@
 
 ### Comments
 
-
+ZIBExclusive: This info is needed when the zib defines a series of nursing interventions that need to be carried out with a certain frequency. This is not relevant for the Xt-EHR use case.
 
 ## zib: NursingIntervention.Instruction
 
@@ -819,6 +839,7 @@
 
 ### Comments
 
+ZIBExclusive: This info is needed when the zib defines a nursing intervention that needs to be carried out by the patient or a related person. This is not relevant for the Xt-EHR use case.
 
 
 ## zib: NursingIntervention.Interval
@@ -849,7 +870,7 @@ When entering an interval, the focus is on the time between the consecutive proc
 
 ### Comments
 
-
+ZIBExclusive: This info is needed when the zib defines a series of nursing interventions that need to be carried out with a certain frequency. This is not relevant for the Xt-EHR use case.
 
 ## zib: NursingIntervention.Performer.Caregiver::ContactPerson
 
@@ -878,7 +899,7 @@ When entering an interval, the focus is on the time between the consecutive proc
 
 ### Comments
 
-
+See the comment on EHDSProcedure.performer.
 
 ## zib: NursingIntervention.Performer.HealthProfessional
 
@@ -907,6 +928,7 @@ When entering an interval, the focus is on the time between the consecutive proc
 
 ### Comments
 
+See the comment on EHDSProcedure.performer.
 
 
 ## zib: NursingIntervention.Performer.Patient
@@ -936,6 +958,7 @@ When entering an interval, the focus is on the time between the consecutive proc
 
 ### Comments
 
+See the comment on EHDSProcedure.performer.
 
 
 ## zib: NursingIntervention.Requester::HealthProfessional
@@ -951,7 +974,7 @@ When entering an interval, the focus is on the time between the consecutive proc
 | card._xtehr |  |
 | card._zib | 0..* |
 | definition_xtehr |  |
-| definition_zib | The health professional who requested the nursing intervention. If desired, only the requester�s specialty can be entered. |
+| definition_zib | The health professional who requested the nursing intervention. If desired, only the requester�s specialty can be entered. |
 | definitioncode_zib |  |
 | id_xtehr |  |
 | id_zib | NL-CM:14.2.8 |
@@ -964,7 +987,7 @@ When entering an interval, the focus is on the time between the consecutive proc
 | type_zib |  |
 
 ### Comments
-
+ZIBExclusive
 
 
 ## zib: NursingIntervention.TreatmentObjective
@@ -993,4 +1016,4 @@ When entering an interval, the focus is on the time between the consecutive proc
 | type_zib |  |
 
 ### Comments
-
+ZIBExclusive
