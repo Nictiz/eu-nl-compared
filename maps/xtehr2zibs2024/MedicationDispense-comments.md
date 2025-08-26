@@ -1,4 +1,46 @@
-# MedicationDispense
+# Medication Dispense as of 2025-08-21
+
+## Version history
+
+v1: 21-08-2025, initial version
+
+## Actions
+
+## Compared
+### Scope
+Scope largely corresponds namely dispensing a medication with accompanying instructions. There is no medication agreement or administration agreement in xtEHR which means that when mapping Instructions for use one or the other (depending) on what is more actual information should be mapped.
+
+Substitute drugs are modelled in the xtEHR model within the group elements Substitution.  This models the decision to give a substitute drug by the pharmacist with reasons. Within the zibs, there is an administration arrangement separate from the medication arrangement in which the pharmaceutical product may differ from medication arrangement which allows it to be inferred that a substitute drug was given, but does not clarify why this was done.
+
+### Summary of partly matching elements
+- EHDSMedicationDispense.dispenseLocation string in the zib, location model in EHDS
+- EHDSMedicationDispense.dispensedQuantity additional bindings that are not mentioned in xtEHR and zib
+- EHDSMedicationDispense.relatedRequest cardinality mismatch
+
+
+### Zib elements not present in xtEHR model:
+
+- MedicationDispense.DistributionForm
+- MedicationDispense.DurationOfUse
+- MedicationDispense.MedicationDispenseAdditionalInformation can possibly be matched one way to EHDSMedicationDispense.substitution.reason
+- MedicationDispense.RequestDate
+- MedicationDispense.Supplier::HealthcareProvider
+
+### EHDS elements not present in the zib model:
+
+- EHDSMedicationDispense.dosageInstructions can likely be modelled based on InstructionForUse via MedicationAgreement or AdministrationAgreement, but there are no reference(s) in the zib.
+- EHDSMedicationDispense.receiver[x]
+- EHDSMedicationDispense.substitution
+- EHDSMedicationDispense.substitution.reason
+- EHDSMedicationDispense.substitution.substitutionOccurred
+- EHDSMedicationDispense.substitution.type
+
+
+### Other
+
+The .header elements and .presentForm are skipped in this comparison (as they should map on more generic zib(s) like registration data).
+
+## Discussions (datum:)# 
 
 | zib                                                         | xtehr                                                    | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
 |:------------------------------------------------------------|:---------------------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
@@ -57,7 +99,7 @@
 | stereotype_zib | rootconcept |
 
 ### Comments
-
+Why is cardinality of xtEHR rootconcept 0..*
 
 
 ## EHDSMedicationDispense.comment
@@ -84,7 +126,7 @@
 | type_zib | ST |
 
 ### Comments
-
+Complete match
 
 
 ## EHDSMedicationDispense.dispenseLocation
@@ -111,7 +153,7 @@
 | type_zib | ST |
 
 ### Comments
-
+Scope match, cardinality match, datatype mismatch string in zib complete location model in xtEHR.
 
 
 ## EHDSMedicationDispense.dispensedQuantity
@@ -139,7 +181,7 @@
 | type_zib | PQ |
 
 ### Comments
-
+match scope, cardinality and datatype. Partial match on binding for UCUM. Additional binding possible in zib for NHG table 25. Additional preferred binding for xtEHR on EDQM.
 
 
 ## EHDSMedicationDispense.dosageInstructions
@@ -158,7 +200,7 @@
 | type_xtehr | EHDSDosaging |
 
 ### Comments
-
+Can be mapped via the zib Instruction for Use. (refrence is missing in the zib to DispenseAgreement -> InstructionForUse)
 
 
 ## EHDSMedicationDispense.header
@@ -458,7 +500,7 @@
 | type_xtehr | Identifier |
 
 ### Comments
-
+Scope match, cardinality mismatch zib 0..1 exthr 0..*, datatype almost match, xther is an identifier zib a reference. But it is allowed to use identifiers to create a context reference. 
 
 
 ## EHDSMedicationDispense.substitution
@@ -561,7 +603,7 @@
 | type_zib | TS |
 
 ### Comments
-
+Complete match
 
 
 ## zib: MedicationDispense.DistributionForm
@@ -624,7 +666,7 @@
 | type_zib | CD |
 
 ### Comments
-
+Might match partially with EHDSMedicationDispense.substitution.reason (one way mapping possible xtEHR to zib)
 
 
 ## zib: MedicationDispense.RequestDate
