@@ -1,5 +1,17 @@
 # Dosaging
 
+## Overall discussion
+The Xt-EHR model contains far more concepts to represent dosaging parameters for more complex dosaging schemes than the zib. The zib has RepeatesPeriodCyclicalSchedule to represent the repeated period in a cyclical schedule which the XT-EHR model has not, but it lacks the possibilities to represent the entire scheme for such a period.
+Note that the compared version of the XT-EHR model has no bindings.
+
+Concerns/issues with the EHDS model:
++ name and defnition of the .doseAndRate.rate[x] concept do not match
++ the way of specifying .repeat.frequency (in separate concepts .numberOfTimes and .period seems unusual)
+
+
+
+## 
+
 | zib                                                                                   | xtehr                                                 | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:--------------------------------------------------------------------------------------|:------------------------------------------------------|:-----------|:----------------|:------------|:--------------|
 | InstructionsForUse                                                                    | EHDSDosaging                                          |            |                 |             | 0..*          |
@@ -15,10 +27,10 @@
 |                                                                                       | EHDSDosaging.maxDose.maxDosePerAdministration         |            | Quantity        |             | 0..1          |
 |                                                                                       | EHDSDosaging.maxDose.maxDosePerLifetime               |            | Quantity        |             | 0..1          |
 |                                                                                       | EHDSDosaging.maxDose.maxDosePerPeriod                 |            | Ratio           |             | 0..*          |
-| InstructionsForUse.RouteOfAdministration                                              | EHDSDosaging.methodOfAdministration                   | CD         | CodeableConcept | 0..1        | 0..1          |
+|                                                                                       | EHDSDosaging.methodOfAdministration                   |            | CodeableConcept |             | 0..1          |
 |                                                                                       | EHDSDosaging.patientInstruction                       |            | string          |             | 0..1          |
 |                                                                                       | EHDSDosaging.renderedDescription                      |            | string          |             | 0..1          |
-|                                                                                       | EHDSDosaging.routeOfAdministration                    |            | CodeableConcept |             | 0..1          |
+| InstructionsForUse.RouteOfAdministration                                              | EHDSDosaging.routeOfAdministration                    | CD         | CodeableConcept | 0..1        | 0..1          |
 | InstructionsForUse.DosingInstructions.SequenceNumber                                  | EHDSDosaging.sequence                                 | INT        | integer         | 0..1        | 0..1          |
 | InstructionsForUse.Description                                                        | EHDSDosaging.text                                     | ST         | string          | 0..1        | 0..1          |
 | InstructionsForUse.DosingInstructions.Dosage.AdministeringSchedule                    | EHDSDosaging.timing                                   |            | Base            | 0..1        | 0..1          |
@@ -77,6 +89,7 @@
 | stereotype_zib | rootconcept |
 
 ### Comments
+The zib and the Xt-EHR model match 1 to 1.
 
 
 
@@ -92,7 +105,7 @@
 | card._xtehr | 0..* |
 | card._zib | 0..* |
 | definition_xtehr | Coded instructions, e.g warnings to the patient, like 'may cause drowsiness' etc |
-| definition_zib | The additional instructions contain extra information on the use of the current prescription.<br>This includes all instructions for use. The text can come from the original “paper" medication prescription, but can also be generated from the coded information. <br>This concept may contain more information than what is structurally coded in the information below, but may not conflict with it. <br>The instructions may not conflict with other components of the request for administration. <br>The instructions can also refer to an existing protocol. <br>The texts in the G-standard that can support this attribute are included in table 362 and are a copy of the texts from the general practitioner' standard 'NHG-tabel Gebruiksvoorschrift' which are included in the CIM. These texts can be used to structure this concept. |
+| definition_zib | The additional instructions contain extra information on the use of the current prescription.<br>This includes all instructions for use. The text can come from the original ï¿½paper" medication prescription, but can also be generated from the coded information. <br>This concept may contain more information than what is structurally coded in the information below, but may not conflict with it. <br>The instructions may not conflict with other components of the request for administration. <br>The instructions can also refer to an existing protocol. <br>The texts in the G-standard that can support this attribute are included in table 362 and are a copy of the texts from the general practitioner' standard 'NHG-tabel Gebruiksvoorschrift' which are included in the CIM. These texts can be used to structure this concept. |
 | id_xtehr | EHDSDosaging.additionalInstruction |
 | id_zib | NL-CM:9.12.19944 |
 | name_zib | AdditionalInstructions |
@@ -104,6 +117,7 @@
 | type_zib | CD |
 
 ### Comments
+These concepts match. Note that in the zib, the concept is bound to NHG table 25. The NHG code is in fact a composition of a number of other concepts in the zib: frequency, duration, dosage per administration, additional information.
 
 
 
@@ -123,7 +137,7 @@
 | type_xtehr | boolean |
 
 ### Comments
-
+This boolean is not present in the zib. This means that when using the zib, one can not prescribe "as needed" without specifying one ore more conditions and/or a maximum dose.  
 
 
 ## EHDSDosaging.asNeededFor
@@ -150,7 +164,7 @@
 | type_zib | CD |
 
 ### Comments
-
+Exact match.
 
 
 ## EHDSDosaging.bodySite
@@ -169,7 +183,7 @@
 | type_xtehr | CodeableConcept |
 
 ### Comments
-
+There is no equivalent in the zib. 
 
 
 ## EHDSDosaging.doseAndRate
@@ -188,6 +202,7 @@
 | type_xtehr | Base |
 
 ### Comments
+This container is not present in the zib.
 
 
 
@@ -214,7 +229,7 @@
 | type_xtehr | Quantity |
 
 ### Comments
-
+These concepts match. Note that the zib datatype Range includes FHIR datatypes Quantity and Range used in the XT-EHR model. 
 
 
 ## EHDSDosaging.doseAndRate.rate[x]
@@ -240,8 +255,10 @@
 | type_xtehr | Ratio |
 
 ### Comments
-
-
+The zib and Xt-EHR concepts are equivalent, on the assumption that EHDSDosaging.doseAndRate rate is really a rate (an amount per unit of time) and the definition (Time period which one defined dose is administered) is wrong. This definition conflicts with the name of the concept.  
+There are differences however: 
++ EHDSDosaging.rate has datatypes Ratio, Quantity and Range. The latter could be used to represent e.g. "5 ml in 8 minutes". This is not possible in the zib.  
++ The zib restricts the use of .AdministeringSpeed to the use case of slow administration of liquid. The Xt-EHR model does not.
 
 ## EHDSDosaging.doseAndRate.type
 
@@ -259,6 +276,7 @@
 | type_xtehr | CodeableConcept |
 
 ### Comments
+There is no equivalent concept in the zib.
 
 
 
@@ -278,6 +296,7 @@
 | type_xtehr | Base |
 
 ### Comments
+There's no equivalent concept in the zib. The zib has .AsNeeded.MaximumDose, which is the maximum dose in an "as needed" prescription. It not clear why this concept should be relevant in other prescriptions than "as needed". 
 
 
 
@@ -297,6 +316,7 @@
 | type_xtehr | Quantity |
 
 ### Comments
+There's no equivalent concept in the zib. 
 
 
 
@@ -316,7 +336,7 @@
 | type_xtehr | Quantity |
 
 ### Comments
-
+There's no equivalent concept in the zib. 
 
 
 ## EHDSDosaging.maxDose.maxDosePerPeriod
@@ -335,7 +355,7 @@
 | type_xtehr | Ratio |
 
 ### Comments
-
+The zib has .AsNeeded.MaximumDose.MaximumDose, which is the maximum usage per unit of time in an "as needed" prescription. The Xt-EHR concept can be used for all prescriptions. It is not clear why it should be relevant in other prescriptions than "as needed" prescriptions. 
 
 
 ## EHDSDosaging.methodOfAdministration
@@ -345,23 +365,16 @@
 | attribute | value |
 |---|---|
 | xtehr | EHDSDosaging.methodOfAdministration |
-| zib | InstructionsForUse.RouteOfAdministration |
-| alias_zib | NL: Toedieningsweg |
+| zib |  |
 | card._xtehr | 0..1 |
-| card._zib | 0..1 |
 | definition_xtehr | Method of administration |
-| definition_zib | The route through which the medication is administered (oral, nasal, intravenous, etc.). |
 | id_xtehr | EHDSDosaging.methodOfAdministration |
-| id_zib | NL-CM:9.12.19941 |
-| name_zib | RouteOfAdministration |
 | path_xtehr | EHDSDosaging.methodOfAdministration |
-| path_zib | InstructionsForUse.RouteOfAdministration |
 | short_xtehr | Method of administration |
-| stereotype_zib | data |
 | type_xtehr | CodeableConcept |
-| type_zib | CD |
 
 ### Comments
+Exact match.
 
 
 
@@ -381,7 +394,7 @@
 | type_xtehr | string |
 
 ### Comments
-
+There is no equivalent concept in the zib. The zib has only coded instructions in .AdditionalInstructions.
 
 
 ## EHDSDosaging.renderedDescription
@@ -400,6 +413,7 @@
 | type_xtehr | string |
 
 ### Comments
+This concept is not present in the Workpackage 6.2 branch of the logical models. There is no equivalent in the zib, as per design principle.
 
 
 
@@ -410,15 +424,24 @@
 | attribute | value |
 |---|---|
 | xtehr | EHDSDosaging.routeOfAdministration |
-| zib |  |
+| zib | InstructionsForUse.RouteOfAdministration |
+| alias_zib | NL: Toedieningsweg |
 | card._xtehr | 0..1 |
+| card._zib | 0..1 |
 | definition_xtehr | Route of administration |
+| definition_zib | The route through which the medication is administered (oral, nasal, intravenous, etc.). |
 | id_xtehr | EHDSDosaging.routeOfAdministration |
+| id_zib | NL-CM:9.12.19941 |
+| name_zib | RouteOfAdministration |
 | path_xtehr | EHDSDosaging.routeOfAdministration |
+| path_zib | InstructionsForUse.RouteOfAdministration |
 | short_xtehr | Route of administration |
+| stereotype_zib | data |
 | type_xtehr | CodeableConcept |
+| type_zib | CD |
 
 ### Comments
+Exact match.
 
 
 
@@ -446,6 +469,7 @@
 | type_zib | INT |
 
 ### Comments
+There is no equivalent in the zib. This concept may be present in the MP building blocks?
 
 
 
@@ -473,6 +497,7 @@
 | type_zib | ST |
 
 ### Comments
+The zib and Xt-EHR concepts are equivalent, but the Xt-EHR definition restricts the use to "when structured dosage information is not fully provided".
 
 
 
@@ -488,7 +513,7 @@
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | When medication should be administered (period, time of day, frequency, etc) |
-| definition_zib | Specifications of the times at which the medication is to be administered. This is indicated as follows: <br>-  Time(s) (16:00) or indications (“before meals”) at which the medication is to be taken each day.<br>-  A specific number of times the medication is to be taken each day ("3x a day"), indicated with the frequency.<br>-  A time interval between consecutive doses (“Every 2 hours”, “every 3 days”), indicated with the word Interval.<br>-  Combined periods with an interval and duration (“1 daily for three out of four weeks: the pill schedule”)<br><br>If a certain medication is not to be taken daily, the aforementioned can be combined with daily indications: <br>-  One or more week days on which the medication is to be administered (e.g. “Monday, Wednesday, Friday”)<br>-  ”3x a week”, “2x a month”.<br><br>The specified administration “infinite” is automatically to be repeated until:  <br>-  The end date and time has been reached<br>-  The total administration duration has been reached (14 days)<br>-  A specific amount of administrations has been reached (“20 doses”), to be entered in the Frequency concept. |
+| definition_zib | Specifications of the times at which the medication is to be administered. This is indicated as follows: <br>-  Time(s) (16:00) or indications (ï¿½before mealsï¿½) at which the medication is to be taken each day.<br>-  A specific number of times the medication is to be taken each day ("3x a day"), indicated with the frequency.<br>-  A time interval between consecutive doses (ï¿½Every 2 hoursï¿½, ï¿½every 3 daysï¿½), indicated with the word Interval.<br>-  Combined periods with an interval and duration (ï¿½1 daily for three out of four weeks: the pill scheduleï¿½)<br><br>If a certain medication is not to be taken daily, the aforementioned can be combined with daily indications: <br>-  One or more week days on which the medication is to be administered (e.g. ï¿½Monday, Wednesday, Fridayï¿½)<br>-  ï¿½3x a weekï¿½, ï¿½2x a monthï¿½.<br><br>The specified administration ï¿½infiniteï¿½ is automatically to be repeated until:  <br>-  The end date and time has been reached<br>-  The total administration duration has been reached (14 days)<br>-  A specific amount of administrations has been reached (ï¿½20 dosesï¿½), to be entered in the Frequency concept. |
 | id_xtehr | EHDSDosaging.timing |
 | id_zib | NL-CM:9.12.19948 |
 | name_zib | AdministeringSchedule |
@@ -499,7 +524,7 @@
 | type_xtehr | Base |
 
 ### Comments
-
+These container concepts are equivalent.
 
 
 ## EHDSDosaging.timing.code
@@ -518,10 +543,12 @@
 | type_xtehr | CodeableConcept |
 
 ### Comments
+The .code concept seems to be a combination of frequency and part of day. The zib has both, but not a combination.
 
 
 
 ## EHDSDosaging.timing.event
+
 
 ### Table
 
@@ -537,7 +564,7 @@
 | type_xtehr | dateTime |
 
 ### Comments
-
+The zib has .AdministeringSchedule.AdministrationTime which maps to .timing.repeat.timeOfDay in the EHDS model. One could argue that this concept is not necessary as it can be expressed as a schedule whith only one administration.
 
 
 ## EHDSDosaging.timing.repeat
@@ -556,6 +583,7 @@
 | type_xtehr | Base |
 
 ### Comments
+This container is not present in the zib.
 
 
 
@@ -575,7 +603,7 @@
 | type_xtehr | Base |
 
 ### Comments
-
+This container is not present in the zib.
 
 
 ## EHDSDosaging.timing.repeat.bounds.duration
@@ -602,7 +630,7 @@
 | type_zib | PQ |
 
 ### Comments
-
+Exact match.
 
 
 ## EHDSDosaging.timing.repeat.bounds.period
@@ -621,7 +649,7 @@
 | type_xtehr | Period |
 
 ### Comments
-
+This concept has no equivalent in the zib. Only a duration can be specified in .DoseDuration.
 
 
 ## EHDSDosaging.timing.repeat.bounds.range
@@ -640,6 +668,7 @@
 | type_xtehr | Range |
 
 ### Comments
+This concept has no equivalent in the zib. Only an exact duration can be specified in .DoseDuration.
 
 
 
@@ -659,7 +688,7 @@
 | type_xtehr | Base |
 
 ### Comments
-
+This container has no equivalent in the zib.
 
 
 ## EHDSDosaging.timing.repeat.count.count
@@ -678,7 +707,7 @@
 | type_xtehr | integer |
 
 ### Comments
-
+This concept has no equivalent in the zib. 
 
 
 ## EHDSDosaging.timing.repeat.count.countMax
@@ -697,7 +726,7 @@
 | type_xtehr | integer |
 
 ### Comments
-
+This concept has no equivalent in the zib. 
 
 
 ## EHDSDosaging.timing.repeat.dayOfWeek
@@ -724,6 +753,7 @@
 | type_zib | CD |
 
 ### Comments
+Exact match.
 
 
 
@@ -743,6 +773,7 @@
 | type_xtehr | Base |
 
 ### Comments
+This container has no equivalent in the zib.
 
 
 
@@ -769,7 +800,7 @@
 | type_xtehr | Quantity |
 
 ### Comments
-
+Exact match.
 
 
 ## EHDSDosaging.timing.repeat.duration.durationMax
@@ -788,6 +819,7 @@
 | type_xtehr | Quantity |
 
 ### Comments
+This concept has no equivalnt in the zib.
 
 
 
@@ -807,7 +839,7 @@
 | type_xtehr | Base |
 
 ### Comments
-
+This container has no equivalnt in the zib.
 
 
 ## EHDSDosaging.timing.repeat.eventTime.offset
@@ -826,7 +858,7 @@
 | type_xtehr | integer |
 
 ### Comments
-
+This concept has no equivalent in the zib. 
 
 
 ## EHDSDosaging.timing.repeat.eventTime.when
@@ -845,7 +877,7 @@
 | type_xtehr | CodeableConcept |
 
 ### Comments
-
+This concept has no equivalent in the zib, although it was intended to be there, seen the definition of the AdministeringSchedule container. The instructions may be pre-coordionated in the AdditionalInstructionsCodelist of the zib.
 
 
 ## EHDSDosaging.timing.repeat.frequency
@@ -864,7 +896,7 @@
 | type_xtehr | Base |
 
 ### Comments
-
+This container has no equivalent in the zib.
 
 
 ## EHDSDosaging.timing.repeat.frequency.maxNumberOfTimes
@@ -883,6 +915,7 @@
 | type_xtehr | integer |
 
 ### Comments
+The concept has no direct equivalent in the zib, but the maximum frequency can be specified in the range of AdmnisteringSchedule.Frequency::Range in the zib.
 
 
 
@@ -909,6 +942,7 @@
 | type_xtehr | integer |
 
 ### Comments
+AdministeringSchedule.Frequency is a range of physical quantities (for example 5 to 10 times/day.) In the Xt-EHR model, one has to specify a .numberOfTimes and a .period, anh the frequency would be the quotinet betwee the two. For example: 5 times in 3 days. This seems a very unusual way to specify a frequency.
 
 
 
@@ -928,6 +962,7 @@
 | type_xtehr | Quantity |
 
 ### Comments
+The .period has no equivalent in the zib, but is needed to express the frequency, which is present in the zib.
 
 
 
@@ -947,7 +982,7 @@
 | type_xtehr | Quantity |
 
 ### Comments
-
+This concept has no equivalnt in the zib.
 
 
 ## EHDSDosaging.timing.repeat.timeOfDay
@@ -962,7 +997,7 @@
 | card._xtehr | 0..* |
 | card._zib | 0..* |
 | definition_xtehr | Time of day of administration (e.g '10:00') |
-| definition_zib | The time of administration is a specific time of day (on the clock). This time usually isn’t (intended to be) exact. There can be multiple administering times in one day. <br> <br>The ideal time of administration can also be entered as a time of day (morning, afternoon, evening, night-time). The administration time is then to be left empty, and the time of day can be entered in the TimeOfDay concept. |
+| definition_zib | The time of administration is a specific time of day (on the clock). This time usually isnï¿½t (intended to be) exact. There can be multiple administering times in one day. <br> <br>The ideal time of administration can also be entered as a time of day (morning, afternoon, evening, night-time). The administration time is then to be left empty, and the time of day can be entered in the TimeOfDay concept. |
 | id_xtehr | EHDSDosaging.timing.repeat.timeOfDay |
 | id_zib | NL-CM:9.12.19951 |
 | name_zib | AdministeringSchedule.AdministrationTime |
@@ -974,7 +1009,7 @@
 | type_zib | TS |
 
 ### Comments
-
+Exact match.
 
 
 ## zib: InstructionsForUse.DosingInstructions
@@ -994,7 +1029,7 @@
 | stereotype_zib | container |
 
 ### Comments
-
+This container has no equivalent in the Xt-EHR model.
 
 
 ## zib: InstructionsForUse.DosingInstructions.Dosage
@@ -1014,7 +1049,7 @@
 | stereotype_zib | container |
 
 ### Comments
-
+This container has no equivalent in the Xt-EHR model.
 
 
 ## zib: InstructionsForUse.DosingInstructions.Dosage.AdministeringSchedule
@@ -1027,14 +1062,14 @@
 | zib | InstructionsForUse.DosingInstructions.Dosage.AdministeringSchedule |
 | alias_zib | NL: Toedieningsschema |
 | card._zib | 0..1 |
-| definition_zib | Specifications of the times at which the medication is to be administered. This is indicated as follows: <br>-  Time(s) (16:00) or indications (“before meals”) at which the medication is to be taken each day.<br>-  A specific number of times the medication is to be taken each day ("3x a day"), indicated with the frequency.<br>-  A time interval between consecutive doses (“Every 2 hours”, “every 3 days”), indicated with the word Interval.<br>-  Combined periods with an interval and duration (“1 daily for three out of four weeks: the pill schedule”)<br><br>If a certain medication is not to be taken daily, the aforementioned can be combined with daily indications: <br>-  One or more week days on which the medication is to be administered (e.g. “Monday, Wednesday, Friday”)<br>-  ”3x a week”, “2x a month”.<br><br>The specified administration “infinite” is automatically to be repeated until:  <br>-  The end date and time has been reached<br>-  The total administration duration has been reached (14 days)<br>-  A specific amount of administrations has been reached (“20 doses”), to be entered in the Frequency concept. |
+| definition_zib | Specifications of the times at which the medication is to be administered. This is indicated as follows: <br>-  Time(s) (16:00) or indications (ï¿½before mealsï¿½) at which the medication is to be taken each day.<br>-  A specific number of times the medication is to be taken each day ("3x a day"), indicated with the frequency.<br>-  A time interval between consecutive doses (ï¿½Every 2 hoursï¿½, ï¿½every 3 daysï¿½), indicated with the word Interval.<br>-  Combined periods with an interval and duration (ï¿½1 daily for three out of four weeks: the pill scheduleï¿½)<br><br>If a certain medication is not to be taken daily, the aforementioned can be combined with daily indications: <br>-  One or more week days on which the medication is to be administered (e.g. ï¿½Monday, Wednesday, Fridayï¿½)<br>-  ï¿½3x a weekï¿½, ï¿½2x a monthï¿½.<br><br>The specified administration ï¿½infiniteï¿½ is automatically to be repeated until:  <br>-  The end date and time has been reached<br>-  The total administration duration has been reached (14 days)<br>-  A specific amount of administrations has been reached (ï¿½20 dosesï¿½), to be entered in the Frequency concept. |
 | id_zib | NL-CM:9.12.19948 |
 | name_zib | AdministeringSchedule |
 | path_zib | InstructionsForUse.DosingInstructions.Dosage.AdministeringSchedule |
 | stereotype_zib | container |
 
 ### Comments
-
+This container has no equivalent in the Xt-EHR model.
 
 
 ## zib: InstructionsForUse.DosingInstructions.Dosage.AdministeringSchedule.Interval
@@ -1055,7 +1090,7 @@
 | type_zib | PQ |
 
 ### Comments
-
+This concept has no equivalent in the Xt-EHR model, in which only the frequency is included.
 
 
 ## zib: InstructionsForUse.DosingInstructions.Dosage.AdministeringSchedule.PartOfDay
@@ -1076,7 +1111,7 @@
 | type_zib | CD |
 
 ### Comments
-
+This concept has no equivalent in the Xt-EHR model, in which only a timeOdDay can be specified, or a relative time with respect to an event.
 
 
 ## zib: InstructionsForUse.DosingInstructions.Dosage.AsNeeded
@@ -1096,6 +1131,7 @@
 | stereotype_zib | container |
 
 ### Comments
+This container has no equivalent in the zib.
 
 
 
@@ -1117,6 +1153,7 @@
 | type_zib | PQ |
 
 ### Comments
+This concept had no equivalent in teh Xt-EHR model. There is a maxDose container, but its use is not restricted to the AsNeeded precriptions. It can be used for this purpose in the AsNeeded prescriptions. 
 
 
 
@@ -1138,4 +1175,4 @@
 | type_zib | PQ |
 
 ### Comments
-
+This concept has no equivalent in the Xt-EHR model.

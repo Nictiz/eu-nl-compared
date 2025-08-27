@@ -15,10 +15,10 @@
 |                                                                                       | EHDSDosaging.maxDose.maxDosePerAdministration         |            | Quantity        |             | 0..1          |
 |                                                                                       | EHDSDosaging.maxDose.maxDosePerLifetime               |            | Quantity        |             | 0..1          |
 |                                                                                       | EHDSDosaging.maxDose.maxDosePerPeriod                 |            | Ratio           |             | 0..*          |
-| InstructionsForUse.RouteOfAdministration                                              | EHDSDosaging.methodOfAdministration                   | CD         | CodeableConcept | 0..1        | 0..1          |
+|                                                                                       | EHDSDosaging.methodOfAdministration                   |            | CodeableConcept |             | 0..1          |
 |                                                                                       | EHDSDosaging.patientInstruction                       |            | string          |             | 0..1          |
 |                                                                                       | EHDSDosaging.renderedDescription                      |            | string          |             | 0..1          |
-|                                                                                       | EHDSDosaging.routeOfAdministration                    |            | CodeableConcept |             | 0..1          |
+| InstructionsForUse.RouteOfAdministration                                              | EHDSDosaging.routeOfAdministration                    | CD         | CodeableConcept | 0..1        | 0..1          |
 | InstructionsForUse.DosingInstructions.SequenceNumber                                  | EHDSDosaging.sequence                                 | INT        | integer         | 0..1        | 0..1          |
 | InstructionsForUse.Description                                                        | EHDSDosaging.text                                     | ST         | string          | 0..1        | 0..1          |
 | InstructionsForUse.DosingInstructions.Dosage.AdministeringSchedule                    | EHDSDosaging.timing                                   |            | Base            | 0..1        | 0..1          |
@@ -345,21 +345,13 @@
 | attribute | value |
 |---|---|
 | xtehr | EHDSDosaging.methodOfAdministration |
-| zib | InstructionsForUse.RouteOfAdministration |
-| alias_zib | NL: Toedieningsweg |
+| zib |  |
 | card._xtehr | 0..1 |
-| card._zib | 0..1 |
 | definition_xtehr | Method of administration |
-| definition_zib | The route through which the medication is administered (oral, nasal, intravenous, etc.). |
 | id_xtehr | EHDSDosaging.methodOfAdministration |
-| id_zib | NL-CM:9.12.19941 |
-| name_zib | RouteOfAdministration |
 | path_xtehr | EHDSDosaging.methodOfAdministration |
-| path_zib | InstructionsForUse.RouteOfAdministration |
 | short_xtehr | Method of administration |
-| stereotype_zib | data |
 | type_xtehr | CodeableConcept |
-| type_zib | CD |
 
 ### Comments
 
@@ -410,13 +402,21 @@
 | attribute | value |
 |---|---|
 | xtehr | EHDSDosaging.routeOfAdministration |
-| zib |  |
+| zib | InstructionsForUse.RouteOfAdministration |
+| alias_zib | NL: Toedieningsweg |
 | card._xtehr | 0..1 |
+| card._zib | 0..1 |
 | definition_xtehr | Route of administration |
+| definition_zib | The route through which the medication is administered (oral, nasal, intravenous, etc.). |
 | id_xtehr | EHDSDosaging.routeOfAdministration |
+| id_zib | NL-CM:9.12.19941 |
+| name_zib | RouteOfAdministration |
 | path_xtehr | EHDSDosaging.routeOfAdministration |
+| path_zib | InstructionsForUse.RouteOfAdministration |
 | short_xtehr | Route of administration |
+| stereotype_zib | data |
 | type_xtehr | CodeableConcept |
+| type_zib | CD |
 
 ### Comments
 
