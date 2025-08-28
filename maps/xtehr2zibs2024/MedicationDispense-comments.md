@@ -8,7 +8,7 @@ v1: 21-08-2025, initial version
 
 ## Compared
 ### Scope
-Scope largely corresponds namely dispensing a medication with accompanying instructions. There is no medication agreement or administration agreement in xtEHR which means that when mapping Instructions for use one or the other (depending) on what is more actual information should be mapped.
+Scope largely corresponds namely dispensing a medication with accompanying instructions. There is no medication agreement or administration agreement in xtEHR which means that when mapping InstructionsForUse one or the other (depending on what is more actual information) should be mapped.
 
 Substitute drugs are modelled in the xtEHR model within the group elements Substitution.  This models the decision to give a substitute drug by the pharmacist with reasons. Within the zibs, there is an administration arrangement separate from the medication arrangement in which the pharmaceutical product may differ from medication arrangement which allows it to be inferred that a substitute drug was given, but does not clarify why this was done.
 
@@ -40,7 +40,7 @@ Substitute drugs are modelled in the xtEHR model within the group elements Subst
 
 The .header elements and .presentForm are skipped in this comparison (as they should map on more generic zib(s) like registration data).
 
-## Discussions (datum:)# 
+## Discussions (datum:)
 
 | zib                                                         | xtehr                                                    | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
 |:------------------------------------------------------------|:---------------------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
@@ -200,7 +200,7 @@ match scope, cardinality and datatype. Partial match on binding for UCUM. Additi
 | type_xtehr | EHDSDosaging |
 
 ### Comments
-Can be mapped via the zib Instruction for Use. (refrence is missing in the zib to DispenseAgreement -> InstructionForUse)
+Can be mapped via the zib InstructionsForUse. (reference is missing in the zib to DispenseAgreement -> InstructionsForUse)
 
 
 ## EHDSMedicationDispense.header
@@ -500,7 +500,7 @@ Can be mapped via the zib Instruction for Use. (refrence is missing in the zib t
 | type_xtehr | Identifier |
 
 ### Comments
-Scope match, cardinality mismatch zib 0..1 exthr 0..*, datatype almost match, xther is an identifier zib a reference. But it is allowed to use identifiers to create a context reference. 
+Scope match, cardinality mismatch zib 0..1 xtehr 0..*, datatype almost match, xtehr is an identifier zib a reference. But it is allowed to use identifiers to create a context reference. 
 
 
 ## EHDSMedicationDispense.substitution
