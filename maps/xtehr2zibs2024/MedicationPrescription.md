@@ -42,9 +42,9 @@
 |                                                              | EHDSMedicationPrescription.prescriptionItem.substitution.reason[x]  |            | CodeableConcept        |             | 0..1          |
 | DispenseRequest.SupplyPeriod::TimeInterval                   | EHDSMedicationPrescription.prescriptionItem.treatmentPeriod         |            | Period                 | 0..1        | 0..1          |
 |                                                              | EHDSMedicationPrescription.presentedForm                            |            | EHDSAttachment         |             | 0..*          |
-|                                                              |                                                                     | ST         |                        | 0..1        |               |
-|                                                              |                                                                     | TS         |                        | 0..1        |               |
-|                                                              |                                                                     |            |                        | 0..1        |               |
+| DispenseRequest.DispenseLocation                             |                                                                     | ST         |                        | 0..1        |               |
+| DispenseRequest.DispenseRequestDate                          |                                                                     | TS         |                        | 0..1        |               |
+| DispenseRequest.IntendedSupplier::HealthcareProvider         |                                                                     |            |                        | 0..1        |               |
 
 
 
@@ -871,14 +871,14 @@
 
 
 
-## zib: nan
+## zib: DispenseRequest.DispenseLocation
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr |  |
-| zib |  |
+| zib | DispenseRequest.DispenseLocation |
 | alias_zib | NL: Afleverlocatie |
 | card._zib | 0..1 |
 | definition_zib | Dispense location. |
@@ -892,14 +892,14 @@
 
 
 
-## zib: nan
+## zib: DispenseRequest.DispenseRequestDate
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr |  |
-| zib |  |
+| zib | DispenseRequest.DispenseRequestDate |
 | alias_zib | NL: VerstrekkingsverzoekDatum |
 | card._zib | 0..1 |
 | definition_zib | Time at which the dispense request is entered. |
@@ -913,14 +913,14 @@
 
 
 
-## zib: nan
+## zib: DispenseRequest.IntendedSupplier::HealthcareProvider
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr |  |
-| zib |  |
+| zib | DispenseRequest.IntendedSupplier::HealthcareProvider |
 | alias_zib | NL: BeoogdVerstrekker::Zorgaanbieder |
 | card._zib | 0..1 |
 | definition_zib | The intended supplier is a pharmacist. |

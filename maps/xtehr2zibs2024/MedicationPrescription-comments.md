@@ -91,9 +91,9 @@ The .header elements and .presentForm are skipped in this comparison (as they sh
 |                                                              | EHDSMedicationPrescription.prescriptionItem.substitution.reason[x]  |            | CodeableConcept        |             | 0..1          |
 | DispenseRequest.SupplyPeriod::TimeInterval                   | EHDSMedicationPrescription.prescriptionItem.treatmentPeriod         |            | Period                 | 0..1        | 0..1          |
 |                                                              | EHDSMedicationPrescription.presentedForm                            |            | EHDSAttachment         |             | 0..*          |
-|                                                              |                                                                     | ST         |                        | 0..1        |               |
-|                                                              |                                                                     | TS         |                        | 0..1        |               |
-|                                                              |                                                                     |            |                        | 0..1        |               |
+| DispenseRequest.DispenseLocation                             |                                                                     | ST         |                        | 0..1        |               |
+| DispenseRequest.DispenseRequestDate                          |                                                                     | TS         |                        | 0..1        |               |
+| DispenseRequest.IntendedSupplier::HealthcareProvider         |                                                                     |            |                        | 0..1        |               |
 
 
 ## EHDSMedicationPrescription
@@ -920,16 +920,14 @@ Complete match on scope, cardinality. Datatype Period partially matches sub-zib 
 
 ### Comments
 
-
-
-## zib: nan
+## zib: DispenseRequest.DispenseLocation
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr |  |
-| zib |  |
+| zib | DispenseRequest.DispenseLocation |
 | alias_zib | NL: Afleverlocatie |
 | card._zib | 0..1 |
 | definition_zib | Dispense location. |
@@ -943,14 +941,14 @@ Complete match on scope, cardinality. Datatype Period partially matches sub-zib 
 
 
 
-## zib: nan
+## zib: DispenseRequest.DispenseRequestDate
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr |  |
-| zib |  |
+| zib | DispenseRequest.DispenseRequestDate |
 | alias_zib | NL: VerstrekkingsverzoekDatum |
 | card._zib | 0..1 |
 | definition_zib | Time at which the dispense request is entered. |
@@ -962,16 +960,14 @@ Complete match on scope, cardinality. Datatype Period partially matches sub-zib 
 
 ### Comments
 
-
-
-## zib: nan
+## zib: DispenseRequest.IntendedSupplier::HealthcareProvider
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr |  |
-| zib |  |
+| zib | DispenseRequest.IntendedSupplier::HealthcareProvider |
 | alias_zib | NL: BeoogdVerstrekker::Zorgaanbieder |
 | card._zib | 0..1 |
 | definition_zib | The intended supplier is a pharmacist. |
@@ -979,26 +975,6 @@ Complete match on scope, cardinality. Datatype Period partially matches sub-zib 
 | name_zib | IntendedSupplier::HealthcareProvider |
 | path_zib | DispenseRequest.IntendedSupplier::HealthcareProvider |
 | stereotype_zib | context,reference |
-
-### Comments
-
-
-
-## zib: nan
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr |  |
-| zib |  |
-| alias_zib | NL: TeVerstrekkenGeneesmiddel::FarmaceutischProduct |
-| card._zib | 1 |
-| definition_zib | The medicine to be dispensed. |
-| id_zib | NL-CM:9.10.22249 |
-| name_zib | MedicineToBeDispensed::PharmaceuticalProduct |
-| path_zib | DispenseRequest.MedicineToBeDispensed::PharmaceuticalProduct |
-| stereotype_zib | data,reference |
 
 ### Comments
 
