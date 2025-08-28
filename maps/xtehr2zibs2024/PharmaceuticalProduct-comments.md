@@ -2,9 +2,7 @@
 ## Overall discussion
 The most striking difference between the zib model and the Xt-EHR model is the Xt-EHR concept EHDSMedication.item, unknown in the zib. This is to represent an item in a combination pack, which the zib cannot represent. The identifying codes in the Xt-EHR model are on package level. The zib can thus only represent a package containing one single item.  
 The Xt-EHR model has EHDSMedication.device of which the zib has no equivalent. It is an administration device included in the product.  
-The Xt-EHR model has EHDSMedication.Characteristic of which the zib has no equivalent but a free text description. It is a key-value pair and can represent any type of characteristic of the product.    
-
-
+The Xt-EHR model has EHDSMedication.Characteristic of which the zib has no equivalent but a free text description. It is a key-value pair and can represent any type of characteristic of the product.  
 
 | zib                                                                                   | xtehr                                                                | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:--------------------------------------------------------------------------------------|:---------------------------------------------------------------------|:-----------|:----------------|:------------|:--------------|
@@ -23,7 +21,7 @@ The Xt-EHR model has EHDSMedication.Characteristic of which the zib has no equiv
 | PharmaceuticalProduct.MedicationCode                                                  | EHDSMedication.identifyingCode[x]                                    | CD         | CodeableConcept | 0..1        | 0..*          |
 |                                                                                       | EHDSMedication.item                                                  |            | Base            |             | 0..*          |
 |                                                                                       | EHDSMedication.item.amount                                           |            | Quantity        |             | 0..1          |
-| PharmaceuticalProduct.ProductSpecifications.Ingredient.Concentration.ProductAmount    | EHDSMedication.item.containedQuantity                                | PQ         | Ratio           | 0..1        | 0..1          |
+|                                                                                       | EHDSMedication.item.containedQuantity                                |            | Ratio           |             | 0..1          |
 | PharmaceuticalProduct.ProductSpecifications.PharmaceuticalForm                        | EHDSMedication.item.doseForm                                         | CD         | CodeableConcept | 0..1        | 0..1          |
 | PharmaceuticalProduct.ProductSpecifications.Ingredient                                | EHDSMedication.item.ingredient                                       |            | Base            | 0..*        | 1..*          |
 |                                                                                       | EHDSMedication.item.ingredient.isActive                              |            | boolean         |             | 0..1          |
@@ -34,14 +32,21 @@ The Xt-EHR model has EHDSMedication.Characteristic of which the zib has no equiv
 |                                                                                       | EHDSMedication.item.packageType                                      |            | CodeableConcept |             | 0..1          |
 |                                                                                       | EHDSMedication.item.unitOfPresentation                               |            | CodeableConcept |             | 0..1          |
 |                                                                                       | EHDSMedication.marketingAuthorisationHolder                          |            | Base            |             | 0..1          |
-|                                                                                       | EHDSMedication.marketingAuthorisationHolder.organisationIdentifier   |            | Identifier      |             | 0..*          |
-|                                                                                       | EHDSMedication.marketingAuthorisationHolder.organisationName         |            | string          |             | 0..1          |
+|                                                                                       | EHDSMedication.marketingAuthorisationHolder.organisationIdentifier   |            |                 |             |               |
+|                                                                                       | EHDSMedication.marketingAuthorisationHolder.organisationName         |            |                 |             |               |
+|                                                                                       |                                                                      |            | Identifier      |             | 0..*          |
+|                                                                                       |                                                                      |            | string          |             | 0..1          |
 |                                                                                       | EHDSMedication.packSize                                              |            | Quantity        |             | 0..*          |
 | PharmaceuticalProduct.ProductSpecifications.Medication                                | EHDSMedication.productName                                           | ST         | string          | 0..1        | 0..1          |
 | PharmaceuticalProduct.ProductSpecifications                                           |                                                                      |            |                 | 0..1        |               |
 | PharmaceuticalProduct.ProductSpecifications.Description                               |                                                                      | ST         |                 | 0..1        |               |
 | PharmaceuticalProduct.ProductSpecifications.Ingredient.Concentration.IngredientAmount |                                                                      | PQ         |                 | 0..1        |               |
+| PharmaceuticalProduct.ProductSpecifications.Ingredient.Concentration.ProductAmount    |                                                                      | PQ         |                 | 0..1        |               |
 | PharmaceuticalProduct.ProductSpecifications.SerieNumber                               |                                                                      | ST         |                 | 0..1        |               |
+
+
+
+
 
 
 
@@ -373,24 +378,17 @@ The zib cannot represent a product consisting of more than one item.
 | attribute | value |
 |---|---|
 | xtehr | EHDSMedication.item.containedQuantity |
-| zib | PharmaceuticalProduct.ProductSpecifications.Ingredient.Concentration.ProductAmount |
-| alias_zib | NL: ProductHoeveelheid |
+| zib |  |
 | card._xtehr | 0..1 |
-| card._zib | 0..1 |
 | definition_xtehr | Manufactured item quantity for liquids (3ml / 1 vial) |
-| definition_zib | Amount of the product. This is the denominator for the calculation of the concentration. Optionally a translation to NHG table Gebruiksvoorschriften (Table 25) is also allowed. |
 | id_xtehr | EHDSMedication.item.containedQuantity |
-| id_zib | NL-CM:9.7.22278 |
-| name_zib | ProductAmount |
 | path_xtehr | EHDSMedication.item.containedQuantity |
-| path_zib | PharmaceuticalProduct.ProductSpecifications.Ingredient.Concentration.ProductAmount |
 | short_xtehr | Manufactured item quantity for liquids (3ml / 1 vial) |
-| stereotype_zib | data |
 | type_xtehr | Ratio |
-| type_zib | PQ |
+
 
 ### Comments
-In the case the product contains one item, EHDSMediation.item.containedQuantity matches the zib .ProductAmount concept. It's datatype is a ratio, but the examples are in ml/vial, which is the total amount in the item.   
+EHDSMediation.item.containedQuantity does not match the zib .ProductAmount concept. It's datatype is a ratio, so this can be 10ml / 2 vials. Moreover, the zib doesn't model items within a package.   
 
 
 
@@ -681,7 +679,7 @@ This concept is absent in the zib.
 | type_xtehr | Quantity |
 
 ### Comments
-This concept is absent in the zib. 
+This concept is absent in the zib. The zib has .Concentration.ProductAmount, but this seems dedicated to computation of the concentration of liquid ingredients, and not to represent the number of, for example, tablets.
 
 
 ## EHDSMedication.productName
@@ -773,6 +771,25 @@ This concept is absent in the Xt-EHR model. However, relevant properties of the 
 
 ### Comments
 This concept is absent in the Xt-EHR model. In the Xt-EHR model, .strength is present, which is the ratio of the ingredient amount and the product amount.
+
+## zib: PharmaceuticalProduct.ProductSpecifications.Ingredient.Concentration.ProductAmount
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr |  |
+| zib | PharmaceuticalProduct.ProductSpecifications.Ingredient.Concentration.ProductAmount |
+| alias_zib | NL: ProductHoeveelheid |
+| card._zib | 0..1 |
+| definition_zib | Amount of the product. This is the denominator for the calculation of the concentration. Optionally a translation to NHG table Gebruiksvoorschriften (Table 25) is also allowed. |
+| id_zib | NL-CM:9.7.22278 |
+| name_zib | ProductAmount |
+| path_zib | PharmaceuticalProduct.ProductSpecifications.Ingredient.Concentration.ProductAmount |
+| stereotype_zib | data |
+| type_zib | PQ |
+
+### Comments
 
 
 ## zib: PharmaceuticalProduct.ProductSpecifications.SerieNumber
