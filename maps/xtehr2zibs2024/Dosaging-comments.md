@@ -469,7 +469,7 @@ Exact match.
 | type_zib | INT |
 
 ### Comments
-There is no equivalent in the zib. This concept may be present in the MP building blocks?
+Match, but zib definition is "sequence within medication agreement" and Xt-EHR definition is "order within one treatment". 
 
 
 
@@ -800,7 +800,7 @@ This container has no equivalent in the zib.
 | type_xtehr | Quantity |
 
 ### Comments
-Exact match.
+Match, but different data type. The zib has TimeInterval, which includes .Duration but also .StartEvent and .EndEvent. Theoretically, only .StartEvent can be used: in that case, the zib information can not be mapped.
 
 
 ## EHDSDosaging.timing.repeat.duration.durationMax
