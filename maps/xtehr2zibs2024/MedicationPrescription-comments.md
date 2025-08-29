@@ -1,4 +1,4 @@
-# Medication Presscription as of 2025-08-19
+# Medication Prescription as of 2025-08-19
 
 ## Version history
 
@@ -42,8 +42,8 @@ The xtEHR models a prescription with multiple medications lines on it where as t
 ### Other
 Elements possibly mappable to zib **MedicationAgreement** (but reference is not available in the zib)
 - EHDSMedicationPrescription.prescriptionItem.indicationText not clear how to map this in MedicationAgreement no room for free text. EHDS model indicates "This might not be allowed by some implementations".
-- EHDSMedicationPrescription.prescriptionItem.indication[x] this maps to PrescriptionReason
-- EHDSMedicationPrescription.prescriptionItem.dosageInstructions: could map on InstructionForUse (seperate mapping)
+- EHDSMedicationPrescription.prescriptionItem.indication[x] this maps to .PrescriptionReason
+- EHDSMedicationPrescription.prescriptionItem.dosageInstructions: could map on zib InstructionForUse (separate mapping)
 
 The .header elements and .presentForm are skipped in this comparison (as they should map on more generic zib(s) like registration data).
 
@@ -137,7 +137,7 @@ The .header elements and .presentForm are skipped in this comparison (as they sh
 | type_xtehr | string |
 
 ### Comments
-Zib Comment field is not mapped here but under the prescriptionItem.comment as the zib only concerns a single line of medication on the prescritpion.
+Zib Comment field is not mapped here but under the prescriptionItem.comment as the zib only concerns a single line of medication on the prescription.
 
 
 ## EHDSMedicationPrescription.header
