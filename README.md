@@ -11,7 +11,7 @@
 |[Condition](./maps/xtehr2zibs/Condition-comments.md)|[Diagnosis, Condition](./maps/xtehr2zibs2024/Diagnosis-comments.md) | | [Condition](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSCondition.html)| [Problem-v4.4](https://zibs.nl/wiki/Problem-v4.4(2020EN))|
 | | [DataSet](./maps/xtehr2zibs2024/DataSet-comments.md) | | [DataSet](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSDataSet.html)| |[RegistrationData-v1.1.2](https://zibs.nl/wiki/RegistrationData-v1.1.2(2024EN))|
 |[Device](./maps/xtehr2zibs/Device_And_DeviceUse-comments.md)| [Device](./maps/xtehr2zibs2024/Device-and-DeviceUse-comments.md) | | [Device](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSDevice.html)<br/>[DeviceUse](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSDeviceUse.html)| [MedicalDevice-v3.3.1](https://zibs.nl/wiki/MedicalDevice-v3.3.1(2020EN))|[MedicalDevice-v5.0](https://zibs.nl/wiki/MedicalDevice-v5.0(2024EN))|
-|| [Dosaging](./maps/xtehr2zibs2024/Dosaging.md) | | [Dosaging](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSDosaging.html)| |[InstructionsForUse-v3.1](https://zibs.nl/wiki/InstructionsForUse-v3.1(2024EN))|
+|| [Dosaging](./maps/xtehr2zibs2024/Dosaging-comments.md) | | [Dosaging](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSDosaging.html)| |[InstructionsForUse-v3.1](https://zibs.nl/wiki/InstructionsForUse-v3.1(2024EN))|
 |HealthProfessional|HealthProfessional | |[HealthProfessional](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSHealthProfessional.html)| | [HealthProfessional-v4.0.1](https://zibs.nl/wiki/HealthProfessional-v4.0.1(2024EN))| 
 |HumanName|[HumanName](./maps/xtehr2zibs2024/HumanName-comments.md)  | |[HumanName](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSHumanName.html)| | [NameInformation-v1.2](https://zibs.nl/wiki/NameInformation-v1.2(2024EN))| 
 |Location-and-Organization|[Location-and-Organization](./maps/xtehr2zibs2024/Location-and-Organization-comments.md) | |[Location-and-Organization](https://build.fhir.org/ig/Xt-EHR/xt-ehr-common/StructureDefinition-EHDSLocation-and-Organization.html)| | | 
@@ -84,4 +84,5 @@ Deze inputs wordt vervolgens gebruikt voor het genereren van een aantal bestande
 Deze bestanden staan in resp. de mappen:
 
 * voor zib2020: `maps/xtehr2zibs`
+
 * voor zib2024: `maps/xtehr2zibs2024`
