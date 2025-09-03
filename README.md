@@ -40,7 +40,7 @@ Dit tools in dit repo maken het mogelijk om voor een deels automatisch een verge
 Als basis dienen de Excels van de zibs. Deze worden gedownload naar:
 
 * voor zib2020: `zibs2020/downloads`: dit zijn de Excels van zibs.nl gedownload
-* voor zib2020: `zibs2024/downloads`: deze zijn met Excel (Data->from web) gedownload omdat de Excels nog niet op zibs.nl stonden
+* voor zib2024: `zibs2024/downloads`: dito (de oudere zijn met Excel (Data->from web) gedownload omdat de Excels toen nog niet op zibs.nl stonden)
 
 Voor elk van deze Excels wordt een "mappable" Excel gemaakt (via zib2020-2-map.py en zib2024-2-map.py), waarmee later de relatie met de Xt-EHR-modellen aangegeven kan worden. De 'mappable' komen respectievelijk in de folders `zibs2020/mappable` en `zibs2024/mappable`. Deze Excels zijn gestandaardiseerd naar een gemeenschappelijk format met voor de zibs kolommen:
 
@@ -86,3 +86,4 @@ Deze bestanden staan in resp. de mappen:
 * voor zib2020: `maps/xtehr2zibs`
 
 * voor zib2024: `maps/xtehr2zibs2024`
+
