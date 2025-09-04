@@ -1,6 +1,7 @@
-# PregnancyHistory
+# PregnancyHistory  
 
 ## Overall discussion
+There are no matching concepts in the zib versus the Xt-EHR logical model.
 
 
 
@@ -8,20 +9,20 @@
 | zib                                                            | xtehr                                 | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:---------------------------------------------------------------|:--------------------------------------|:-----------|:----------------|:------------|:--------------|
 | Pregnancy                                                      | EHDSPregnancyHistory                  |            |                 |             | 0..*          |
-|                                                                | EHDSPregnancyHistory.narrative        |            | string          |             | 0..1          |
-|                                                                | EHDSPregnancyHistory.numberOfChildren |            | integer         |             | 0..1          |
-|                                                                | EHDSPregnancyHistory.outcome          |            | CodeableConcept |             | 0..1          |
-|                                                                | EHDSPregnancyHistory.outcomeDate      |            | dateTime        |             | 0..1          |
 |                                                                | EHDSPregnancyHistory.presentedForm    |            | EHDSAttachment  |             | 0..*          |
+|                                                                | EHDSPregnancyHistory.narrative        |            | string          |             | 0..1          |
+|                                                                | EHDSPregnancyHistory.outcomeDate      |            | dateTime        |             | 0..1          |
+|                                                                | EHDSPregnancyHistory.outcome          |            | CodeableConcept |             | 0..1          |
+|                                                                | EHDSPregnancyHistory.numberOfChildren |            | integer         |             | 0..1          |
+| Pregnancy.PregnancyDuration                                    |                                       | PQ         |                 | 0..1        |               |
+| Pregnancy.Parity                                               |                                       | INT        |                 | 0..1        |               |
+| Pregnancy.Gravidity                                            |                                       | INT        |                 | 0..1        |               |
 | Pregnancy.Comment                                              |                                       | ST         |                 | 0..1        |               |
 | Pregnancy.EstimatedDateOfDeliveryItems                         |                                       |            |                 | 0..1        |               |
-| Pregnancy.EstimatedDateOfDeliveryItems.DateLastMenstruation    |                                       | TS         |                 | 0..1        |               |
-| Pregnancy.EstimatedDateOfDeliveryItems.DateOfEstimation        |                                       | TS         |                 | 0..1        |               |
 | Pregnancy.EstimatedDateOfDeliveryItems.EstimatedDateOfDelivery |                                       | TS         |                 | 0..1        |               |
 | Pregnancy.EstimatedDateOfDeliveryItems.EstimatingMethod        |                                       | CD         |                 | 0..1        |               |
-| Pregnancy.Gravidity                                            |                                       | INT        |                 | 0..1        |               |
-| Pregnancy.Parity                                               |                                       | INT        |                 | 0..1        |               |
-| Pregnancy.PregnancyDuration                                    |                                       | PQ         |                 | 0..1        |               |
+| Pregnancy.EstimatedDateOfDeliveryItems.DateOfEstimation        |                                       | TS         |                 | 0..1        |               |
+| Pregnancy.EstimatedDateOfDeliveryItems.DateLastMenstruation    |                                       | TS         |                 | 0..1        |               |
 
 
 
@@ -50,6 +51,25 @@
 
 
 
+## EHDSPregnancyHistory.presentedForm
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr | EHDSPregnancyHistory.presentedForm |
+| zib |  |
+| card._xtehr | 0..* |
+| definition_xtehr | A narrative easy-to-read representation of the full data set, e.g. PDF-version of a document |
+| id_xtehr | EHDSPregnancyHistory.presentedForm |
+| path_xtehr | EHDSPregnancyHistory.presentedForm |
+| short_xtehr | A narrative easy-to-read representation of the full data set, e.g. PDF-version of a document |
+| type_xtehr | EHDSAttachment |
+
+### Comments
+
+
+
 ## EHDSPregnancyHistory.narrative
 
 ### Table
@@ -69,20 +89,20 @@
 
 
 
-## EHDSPregnancyHistory.numberOfChildren
+## EHDSPregnancyHistory.outcomeDate
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSPregnancyHistory.numberOfChildren |
+| xtehr | EHDSPregnancyHistory.outcomeDate |
 | zib |  |
 | card._xtehr | 0..1 |
-| definition_xtehr | Number of children/fetuses in this specific pregnancy |
-| id_xtehr | EHDSPregnancyHistory.numberOfChildren |
-| path_xtehr | EHDSPregnancyHistory.numberOfChildren |
-| short_xtehr | Number of children/fetuses in this specific pregnancy |
-| type_xtehr | integer |
+| definition_xtehr | Date referred to the previous pregnancies outcome. |
+| id_xtehr | EHDSPregnancyHistory.outcomeDate |
+| path_xtehr | EHDSPregnancyHistory.outcomeDate |
+| short_xtehr | Outcome date |
+| type_xtehr | dateTime |
 
 ### Comments
 
@@ -108,39 +128,86 @@
 
 
 
-## EHDSPregnancyHistory.outcomeDate
+## EHDSPregnancyHistory.numberOfChildren
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSPregnancyHistory.outcomeDate |
+| xtehr | EHDSPregnancyHistory.numberOfChildren |
 | zib |  |
 | card._xtehr | 0..1 |
-| definition_xtehr | Date referred to the previous pregnancies outcome. |
-| id_xtehr | EHDSPregnancyHistory.outcomeDate |
-| path_xtehr | EHDSPregnancyHistory.outcomeDate |
-| short_xtehr | Outcome date |
-| type_xtehr | dateTime |
+| definition_xtehr | Number of children/fetuses in this specific pregnancy |
+| id_xtehr | EHDSPregnancyHistory.numberOfChildren |
+| path_xtehr | EHDSPregnancyHistory.numberOfChildren |
+| short_xtehr | Number of children/fetuses in this specific pregnancy |
+| type_xtehr | integer |
 
 ### Comments
 
 
 
-## EHDSPregnancyHistory.presentedForm
+## zib: Pregnancy.PregnancyDuration
 
 ### Table
 
 | attribute | value |
 |---|---|
-| xtehr | EHDSPregnancyHistory.presentedForm |
-| zib |  |
-| card._xtehr | 0..* |
-| definition_xtehr | A narrative easy-to-read representation of the full data set, e.g. PDF-version of a document |
-| id_xtehr | EHDSPregnancyHistory.presentedForm |
-| path_xtehr | EHDSPregnancyHistory.presentedForm |
-| short_xtehr | A narrative easy-to-read representation of the full data set, e.g. PDF-version of a document |
-| type_xtehr | EHDSAttachment |
+| xtehr |  |
+| zib | Pregnancy.PregnancyDuration |
+| alias_zib | NL: Zwangerschapsduur |
+| card._zib | 0..1 |
+| definition_zib | Duration of the pregnancy on the day on which the patient was asked. The duration can be given in days (d) or weeks (wk). |
+| definitioncode_zib | SNOMED CT: 57036006 Fetal gestational age |
+| id_zib | NL-CM:7.14.4 |
+| name_zib | PregnancyDuration |
+| path_zib | Pregnancy.PregnancyDuration |
+| stereotype_zib | data |
+| type_zib | PQ |
+
+### Comments
+
+
+
+## zib: Pregnancy.Parity
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr |  |
+| zib | Pregnancy.Parity |
+| alias_zib | NL: Pariteit |
+| card._zib | 0..1 |
+| definition_zib | Number of previous pregnancies ending in partum (>= 16w 0d / 112 days). |
+| definitioncode_zib | SNOMED CT: 364325004 Parity |
+| id_zib | NL-CM:7.14.6 |
+| name_zib | Parity |
+| path_zib | Pregnancy.Parity |
+| stereotype_zib | data |
+| type_zib | INT |
+
+### Comments
+
+
+
+## zib: Pregnancy.Gravidity
+
+### Table
+
+| attribute | value |
+|---|---|
+| xtehr |  |
+| zib | Pregnancy.Gravidity |
+| alias_zib | NL: Graviditeit |
+| card._zib | 0..1 |
+| definition_zib | The number of times the woman has gotten pregnant (including this one). |
+| definitioncode_zib | SNOMED CT: 161732006 Gravida |
+| id_zib | NL-CM:7.14.5 |
+| name_zib | Gravidity |
+| path_zib | Pregnancy.Gravidity |
+| stereotype_zib | data |
+| type_zib | INT |
 
 ### Comments
 
@@ -183,49 +250,6 @@
 | name_zib | EstimatedDateOfDeliveryItems |
 | path_zib | Pregnancy.EstimatedDateOfDeliveryItems |
 | stereotype_zib | container |
-
-### Comments
-
-
-
-## zib: Pregnancy.EstimatedDateOfDeliveryItems.DateLastMenstruation
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr |  |
-| zib | Pregnancy.EstimatedDateOfDeliveryItems.DateLastMenstruation |
-| alias_zib | NL: DatumLaatsteMenstruatie |
-| card._zib | 0..1 |
-| definition_zib | The date on which the last menstruation started. |
-| definitioncode_zib | SNOMED CT: 21840007 Date of last menstrual period |
-| id_zib | NL-CM:7.14.8 |
-| name_zib | DateLastMenstruation |
-| path_zib | Pregnancy.EstimatedDateOfDeliveryItems.DateLastMenstruation |
-| stereotype_zib | data |
-| type_zib | TS |
-
-### Comments
-
-
-
-## zib: Pregnancy.EstimatedDateOfDeliveryItems.DateOfEstimation
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr |  |
-| zib | Pregnancy.EstimatedDateOfDeliveryItems.DateOfEstimation |
-| alias_zib | NL: DatumBepaling |
-| card._zib | 0..1 |
-| definition_zib | Date on which the delivery date is estimated. |
-| id_zib | NL-CM:7.14.11 |
-| name_zib | DateOfEstimation |
-| path_zib | Pregnancy.EstimatedDateOfDeliveryItems.DateOfEstimation |
-| stereotype_zib | data |
-| type_zib | TS |
 
 ### Comments
 
@@ -274,67 +298,44 @@
 
 
 
-## zib: Pregnancy.Gravidity
+## zib: Pregnancy.EstimatedDateOfDeliveryItems.DateOfEstimation
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr |  |
-| zib | Pregnancy.Gravidity |
-| alias_zib | NL: Graviditeit |
+| zib | Pregnancy.EstimatedDateOfDeliveryItems.DateOfEstimation |
+| alias_zib | NL: DatumBepaling |
 | card._zib | 0..1 |
-| definition_zib | The number of times the woman has gotten pregnant (including this one). |
-| definitioncode_zib | SNOMED CT: 161732006 Gravida |
-| id_zib | NL-CM:7.14.5 |
-| name_zib | Gravidity |
-| path_zib | Pregnancy.Gravidity |
+| definition_zib | Date on which the delivery date is estimated. |
+| id_zib | NL-CM:7.14.11 |
+| name_zib | DateOfEstimation |
+| path_zib | Pregnancy.EstimatedDateOfDeliveryItems.DateOfEstimation |
 | stereotype_zib | data |
-| type_zib | INT |
+| type_zib | TS |
 
 ### Comments
 
 
 
-## zib: Pregnancy.Parity
+## zib: Pregnancy.EstimatedDateOfDeliveryItems.DateLastMenstruation
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr |  |
-| zib | Pregnancy.Parity |
-| alias_zib | NL: Pariteit |
+| zib | Pregnancy.EstimatedDateOfDeliveryItems.DateLastMenstruation |
+| alias_zib | NL: DatumLaatsteMenstruatie |
 | card._zib | 0..1 |
-| definition_zib | Number of previous pregnancies ending in partum (>= 16w 0d / 112 days). |
-| definitioncode_zib | SNOMED CT: 364325004 Parity |
-| id_zib | NL-CM:7.14.6 |
-| name_zib | Parity |
-| path_zib | Pregnancy.Parity |
+| definition_zib | The date on which the last menstruation started. |
+| definitioncode_zib | SNOMED CT: 21840007 Date of last menstrual period |
+| id_zib | NL-CM:7.14.8 |
+| name_zib | DateLastMenstruation |
+| path_zib | Pregnancy.EstimatedDateOfDeliveryItems.DateLastMenstruation |
 | stereotype_zib | data |
-| type_zib | INT |
-
-### Comments
-
-
-
-## zib: Pregnancy.PregnancyDuration
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr |  |
-| zib | Pregnancy.PregnancyDuration |
-| alias_zib | NL: Zwangerschapsduur |
-| card._zib | 0..1 |
-| definition_zib | Duration of the pregnancy on the day on which the patient was asked. The duration can be given in days (d) or weeks (wk). |
-| definitioncode_zib | SNOMED CT: 57036006 Fetal gestational age |
-| id_zib | NL-CM:7.14.4 |
-| name_zib | PregnancyDuration |
-| path_zib | Pregnancy.PregnancyDuration |
-| stereotype_zib | data |
-| type_zib | PQ |
+| type_zib | TS |
 
 ### Comments
 
