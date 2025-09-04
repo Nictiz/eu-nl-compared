@@ -1,4 +1,32 @@
 # Medication
+
+##Discussion 2 september 2025
+ePrescription consultatie - bespreken feedback 
+    di 2 sep, 13:00 - 14:00
+         
+    Deelnemers (12) 
+        Bart Harthoorn (organisator van vergadering)
+        Hernany Silva Costa Melo (Geaccepteerde vergadering)
+        Tim Schüller (Geaccepteerde vergadering)
+        Evelyn Lai (Geaccepteerde vergadering)
+        Elze de Groot (Geaccepteerde vergadering)
+        Jacob Engel
+        Sander Boelsma (Geaccepteerde vergadering)
+        Gerda Meijboom (Geaccepteerde vergadering)
+        Wouter Zanen
+        Sabrina Abou Kamar
+
+Notities
+Medication: we kunnen niet concluderen of we aparte model voor item nodig hebben. ==>Actie Hernany.
+Devices hebben in NL aparte PRK codes (inhalator), maar kunnen in PharmProduct
+==> zib issue: device ook in zib opnemen?
+==> Actie Hernany: hoe gaan we om met de G-standaard met toedienhulpmiddelen icm medicatie
+
+G standaard heeft karakteristieken.
+G-standaard (geprecoordineerd) moet uit elkaar getrokken worden. Mapping wordt ingewikkeld
+Issue Europa: wat doet strengthInfo? Wij denken dat het zonder kan ==>issue EHDS
+
+
 ## Overall discussion
 The most striking difference between the zib model and the Xt-EHR model is the Xt-EHR concept EHDSMedication.item, unknown in the zib. This is to represent an item in a combination pack, which the zib cannot represent. The identifying codes in the Xt-EHR model are on package level. The zib can thus only represent a package containing one single item.  
 The Xt-EHR model has EHDSMedication.device of which the zib has no equivalent. It is an administration device included in the product.  
