@@ -15,7 +15,84 @@ The zib does not explicitly describe any other subject than the patient for spec
 ### Other
 Specimen is also used in imaging and servicerequest. The zib can currently only be used in context of a LaboratoryTestResult. 
 
-## Discussions (datum4-9-2025:) Specimen
+## Discussions (4-9-2025:) Specimen
+# Notulen  
+**Aantekeningen Duiding verschillen Lab - XtEHR consultatie**
+
+---
+
+## Specimen
+
+- In **EHDS Lab result** kan een specimen meerdere specimens en containers bevatten.  
+  In **ZIB** is dit één-op-één.  
+  **Actie:** Lab checkt hoe dit in Nederland werkt en komt hierop terug.  
+
+- In de **Zib** moet specimen los zijn van *LaboratoryTestResult*.  
+  **Actie:** ZIB issue maken Wouter.  
+
+- **EHDS BodyStructure Laterality** en **BodyStucture Qualified** lijken dubbel.  
+  **Actie:** Wouter bespreekt dit met Astrid. (Gedaan). Consultatie inbrengen om FHIR Bodystructure/openEHR ananatomical locations/relative anatomical locations te volgen, omdat complexe bodystructures niet kunnen worden beschreven. 
+  **Actie** aangeven in de valueset dat Lateraliteit niet zou moeten voorkomen in qualifier (want dubbel)
+  **Actie** een binding naar twee takken in SNOMED voor Qualifier zou beter zijn (Navragen welke takken bij Astrid)
+
+
+- **CollectionProcedure**  
+  **Actie:** ZIB issue maken Wouter let op dit geeft twee mogelijk modelleringen via een reference naar procedure en via Proceduremethod om een procedure te beschrijven is er verschil?.  
+
+- **CollectionProcedureMethod** lijkt dubbel met *CollectionProcedure*.  
+  Voor nu zo laten.  
+
+- **EHDS Specimen.container**  
+  **Actie:** Michal zoekt uit hoe in FHIR wordt omgegaan met specimen conatainer multiplicity.  
+
+  **EHDS Specimen.container.device**   
+  Verschil tussen EHDS (`706041008 | Device for body fluid and tissue collection/transfer/processing |`)  
+  en ZIB (`<260787004|Fysiek voorwerp|`).  
+  **Actie:** Wouter checkt dit met Terminologie.  
+
+- **EHDS Specimen.container.specimenQuantity**  
+  **Acties:**  
+  - Consultatie: Wouter vraagt verduidelijking bij EHDS.  
+  - Zib issue: Wouter onderzoekt hoe hiermee om te gaan in de ZIB.  
+
+- **EHDS SpecimenIdentifier**  
+  In ZIB: één ID.  
+  In EHDS: meerdere ID’s, en verplicht.  
+  **Acties:**  
+  -Consultatie: Lab vraagt aan EHDS: Hoe kan een specimen meerdere ID’s hebben?  
+  - Consultatie: Lab vraagt aan EHDS: Waarom is het ID verplicht?  
+  - Lab zoekt een voorbeeld waar een specimen geen ID heeft.  
+
+- **EHDS SpecimenMaterial**  
+  **Actie:** Wouter bespreekt dit met Terminologie.  
+
+- **EHDS SpecimenSourceDevice**  
+  **Actie:** Consultatie: In overleg met terminologie kijken of hier geen waardelijst of expressie voorgesteld kan worden.  
+
+- **EHDS Subject** zijn te gedetailleerd in de context van LAB.  
+  **Acties:**  
+  - Wouter bespreekt dit met Terminologie.
+  - Eventueel issue voor de consultatie  
+
+- **EHDS SpecimenNumberExtension**  
+  Hier hoeven wij niets mee.  
+  **Actie:** Lab geeft gap met Nederland aan in gerichte consultatie.  
+
+- **EHDS MicroOrganism**  
+  **Acties:**  
+  - Consultatie issue: Lab brengt dit in bij EHDS.  
+  - Terminologie check nodig of dit onder *TypeOfSpecies* valt.  
+
+- **EHDS Morphology** is te mappen.  
+  **Actie:** ZIB issue: overweeg of dit binnen *AnatomicalLocation* moet komen.  
+
+- **EHDS Comment**  
+  **Actie:** Lab onderzoekt of een comment in specimen nodig is.  
+
+
+## Actiepuntenlijst
+
+  
 
 
 
