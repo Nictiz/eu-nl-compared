@@ -1,29 +1,30 @@
 # Dosaging
+
 ## Discussion 3 september 16:00 ##
 Evelyn, Wouter Z, Elze, Hernany, Jacob
 
-methodOfAdministration absent in zib, meaning and scope unclear ==>EHDS issue
-ratio vs range => zib issue
-doseAndRate.type ==>EHDS issue, examples needed 
-maxDose: only needed in asNeeded prescriptions ==>EHDS issue
-maxDosePerLifeteime ==> why ? examples? ==>EHDS issue
-maxDosePerPeriod, maxDosePerAdmin ==>  ==>EHDS issue, only applicable in asNeeded prescriptions
+methodOfAdministration absent in zib, meaning and scope unclear ==>EHDS issue  
+ratio vs range => zib issue. 
 
-.sequence
+doseAndRate.type ==>EHDS issue, examples needed   
+maxDose: only needed in asNeeded prescriptions ==>EHDS issue  
+maxDosePerLifeteime ==> why ? examples? ==>EHDS issue   
+maxDosePerPeriod, maxDosePerAdmin ==>EHDS issue, only applicable in asNeeded  prescriptions
+
+.sequence  
 prescription kan bestaan uit meerdere doseerschema's
 dispense kan bestaan uit meerdere doseerschema's
 ===> EHDS issue: "treatment" moet vervangen worden door presciption item of dispense 
 
-Breng verschil definitie .description naar ==>zib issue 
+Breng verschil definitie .description naar zib ==>zib issue 
 
-Rendered moeten we mappen op omschrijving
+Rendered moeten we mappen op omschrijving  
 .text komt op OTH van aanvullende instructie wordt gerendered in omschrijving
 
-.timing.code: er is geen binding. We vermoeden https://build.fhir.org/valueset-timing-abbreviation.html
-===> EHDS issue: required binding with a limited value set (such as timing-abbreviation) must be provided
-===> zib issue om dit concept toe te voegen 
+.timing.code: er is geen binding. We vermoeden https://build.fhir.org/valueset-timing-abbreviation.html ==> EHDS issue: required binding with a limited value set (such as timing-abbreviation) must be provided  
+==> zib issue om dit concept toe te voegen 
 
-zib .AdministeringSchedule.interval missing in Xt-EHR model ===>EHDS issue
+zib .AdministeringSchedule.interval missing in Xt-EHR model ==>EHDS issue
 
 
 
