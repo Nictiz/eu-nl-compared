@@ -1,4 +1,32 @@
 # Dosaging
+## Discussion 3 september 16:00 ##
+Evelyn, Wouter Z, Elze, Hernany, Jacob
+
+methodOfAdministration absent in zib, meaning and scope unclear ==>EHDS issue
+ratio vs range => zib issue
+doseAndRate.type ==>EHDS issue, examples needed 
+maxDose: only needed in asNeeded prescriptions ==>EHDS issue
+maxDosePerLifeteime ==> why ? examples? ==>EHDS issue
+maxDosePerPeriod, maxDosePerAdmin ==>  ==>EHDS issue, only applicable in asNeeded prescriptions
+
+.sequence
+prescription kan bestaan uit meerdere doseerschema's
+dispense kan bestaan uit meerdere doseerschema's
+===> EHDS issue: "treatment" moet vervangen worden door presciption item of dispense 
+
+Breng verschil definitie .description naar ==>zib issue 
+
+Rendered moeten we mappen op omschrijving
+.text komt op OTH van aanvullende instructie wordt gerendered in omschrijving
+
+.timing.code: er is geen binding. We vermoeden https://build.fhir.org/valueset-timing-abbreviation.html
+===> EHDS issue: required binding with a limited value set (such as timing-abbreviation) must be provided
+===> zib issue om dit concept toe te voegen 
+
+zib .AdministeringSchedule.interval missing in Xt-EHR model ===>EHDS issue
+
+
+
 
 ## Overall discussion
 The Xt-EHR model contains far more concepts to represent dosaging parameters for more complex dosaging schemes than the zib. The zib has RepeatesPeriodCyclicalSchedule to represent the repeated period in a cyclical schedule which the XT-EHR model has not, but it lacks the possibilities to represent the entire scheme for such a period.
@@ -374,7 +402,8 @@ The zib has .AsNeeded.MaximumDose.MaximumDose, which is the maximum usage per un
 | type_xtehr | CodeableConcept |
 
 ### Comments
-Exact match.
+Absent in the zib.
+
 
 
 
