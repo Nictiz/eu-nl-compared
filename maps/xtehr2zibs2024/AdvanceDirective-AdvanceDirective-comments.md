@@ -1,6 +1,6 @@
 # AdvanceDirective  
 ## Overall discussion  
-Thre zib has matching concepts for EHDSAdvanceDirective.category and .advancedDirectiveDocument. The zib lacks matching concepts for .authorisingEntity, .relatedConditions, and .narrative. The data types of .effectivePeriod and the zib concept .LivingWillDate do not match.
+The zib has matching concepts for EHDSAdvanceDirective.category and .advancedDirectiveDocument. The zib lacks matching concepts for .authorisingEntity, .relatedConditions, and .narrative. The data types of .effectivePeriod and the zib concept .LivingWillDate do not match.
 
 | zib                                            | xtehr                                            | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
 |:-----------------------------------------------|:-------------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
