@@ -1,5 +1,36 @@
 # FunctionalStatus 
 
+## Discussion 
+
+Verschilanalyse functionele status, social history 
+    wo 3 sep, 15:00 - 15:55
+         
+    Deelnemers (4) 
+        Marc de Graauw (organisator van vergadering)
+        Micha Drielinger (Geaccepteerde vergadering)
+        Jacob Engel (Geaccepteerde vergadering)
+        Astrid van Ginneken (Geaccepteerde vergadering)
+
+Notities
+
+EHDS func.st. heeft relatie met diagnose, zib heeft die niet
+zib heeft ref. naar device
+ 
+xtehr heeft 2 manieren om naar condition te verwijzen
+==> zib issue: kijken of we ook condition opnemen in funct.st.
+ 
+discussie over device in zib functst: als status zonder device is (per definitie), dan hoort device hier niet huis. Het is juist nuttig om de functional status MET device te meten ==> zib issue
+==> xtehr issue: verwijzing naar device voorstellen (als device die patient gebruikte tijdens vaststellen functional status).
+
+
+status is ICF en Snomed: voorkeur voor SCT? Maar niet alles kan met ICF
+(geen verschil zib en xtehr)
+ 
+ 
+vermogen-tot-zibs: in HDR is dit alleen funcst.
+ 
+
+
 ## Overall comments
 The main differences are:
 + EHDSFunctionalStatus.relatedConditions is present in the Xt-EHR model, not in the zib. Note that this concept is present in the main branch of the Xt-EHR logical models, but not in the 6.2 stakeholder consultation branch. Why isn't a reference to EHDSCondition used?
