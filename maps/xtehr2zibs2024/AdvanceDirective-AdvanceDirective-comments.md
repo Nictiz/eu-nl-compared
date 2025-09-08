@@ -1,4 +1,19 @@
 # AdvanceDirective  
+## Bespreking 8 september 2025
+    Deelnemers (7) 
+        Marc de Graauw (organisator van vergadering)
+        Pieter Edelman (Geaccepteerde vergadering)
+        Bas de Jong (Geaccepteerde vergadering)
+        Jacob Engel (Geaccepteerde vergadering)
+        Micha Drielinger (Geaccepteerde vergadering)
+        Eduard de Rijcke (Geaccepteerde vergadering)
+
+zib issue: Wilsverklaring.Vertegenwoordiger.contactpersoon heeft geen rol bij opstellen wilsverklaring dus hoort niet in de zib
+ 
+ehds issue: authorising entity kan geen health professional of organization zijn. Dat kan wel in de Treatment directive. Voorstel om de Treatment directive toe te voegen als logical model.
+Bas en Eduard schrijven voorstel uit. 
+
+
 ## Overall discussion  
 The zib has matching concepts for EHDSAdvanceDirective.category and .advancedDirectiveDocument. The zib lacks matching concepts for .authorisingEntity, .relatedConditions, and .narrative. The data types of .effectivePeriod and the zib concept .LivingWillDate do not match.
 
