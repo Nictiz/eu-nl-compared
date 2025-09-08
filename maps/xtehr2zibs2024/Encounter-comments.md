@@ -1,5 +1,27 @@
 # Encounter
 
+## Version history
+
+v1: 3-9-2025, initial version
+
+## Actions
+
+
+## Discussion
+
+- EHDS header, als bij andere
+- EHDSEncounter.type, EHDS heeft preferred [HL7v3 ActEncounterCode](https://terminology.hl7.org/5.3.0/ValueSet-v3-ActEncounterCode.html), zib heeft deze DEPRECATED en andere SNOMED codes
+- EHDSEncounter.note, zib heeft geen toelichting naast CommentEncounterReason (en dat is comment bij aanleiding, niet bij Encounter zelf) - moet dat toegevoegd?
+- EHDSEncounter.episodeOfCare, ontbreekt in zib, optionele relatie toevoegen?
+- EHDSEncounter.basedOn[x] is relatie met CarePlan of ServiceRequest, optionele relatie toevoegen?
+- EHDSEncounter.partOf, heeft zib niet, is relatie met andere Encounter waar deze deel van is (zoals bv. bloed prikken bij ziekenhuis klinische consult etc.), deze optionele relatie toevoegen?
+- zib heeft Encounter.HealthProfessional, EHDSEncounter.admission.admitter lijkt niet hetzelfde, moet dit als comment naar XtEHR?
+- EHDSEncounter.admission.reason[x] is relatie naar Codeableconcept, Conditoin, Procedure, Observation, zib Encounter.EncounterReason heeft 1..1 Encounter.EncounterReason.Reason met SNOMED codelijst, en wat andere lijst met relaties - moet dat geharmoniseerd?
+- EHDSEncounter.admission.legalStatus heeft zib niet (is b.v. dwang etc.)
+- EHDSEncounter.discharge zit niet in zib (is b.v. volgende locatie zoals verpleeghuis etc.), toevoegen?
+- EHDSEncounter.location en EHDSEncounter.serviceProvider, hoe relateren die tot Location::HealthcareProvider?
+- zib Encounter.EncounterSetting is bv. fysiek, video etc. -> naar XtEHR?
+
 | zib                                                           | xtehr                                          | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
 |:--------------------------------------------------------------|:-----------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
 | Encounter                                                     | EHDSEncounter                                  |            |                        |             | 0..*          |
