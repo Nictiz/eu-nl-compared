@@ -1,19 +1,15 @@
 # Encounter
 
+## Overall discussion
+The Xt-EHR Encounter model apparently has a broader scope, including the scope of both Admission and Contact zibs. 
+The Xt-EHR model and the zib can both be used for both past admissions and planned admissions. However, only the Xt-EHR models actual and planned start and end dates separately.
+The Xt-EHR model id layered: an encounter can be part of an encounter. 
+
+
+
 | zib                                                               | xtehr                                          | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
 |:------------------------------------------------------------------|:-----------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
 | Admission                                                         | EHDSEncounter                                  |            |                        |             | 0..*          |
-|                                                                   | EHDSEncounter.header                           |            | Base                   |             | 1..1          |
-|                                                                   | EHDSEncounter.header.subject                   |            | EHDSPatient            |             | 1..1          |
-|                                                                   | EHDSEncounter.header.identifier                |            | Identifier             |             | 0..*          |
-|                                                                   | EHDSEncounter.header.authorship                |            | Base                   |             | 1..*          |
-|                                                                   | EHDSEncounter.header.authorship.author[x]      |            | EHDSHealthProfessional |             | 1..1          |
-|                                                                   | EHDSEncounter.header.authorship.datetime       |            | dateTime               |             | 1..1          |
-|                                                                   | EHDSEncounter.header.lastUpdate                |            | dateTime               |             | 0..1          |
-|                                                                   | EHDSEncounter.header.status                    |            | CodeableConcept        |             | 1..1          |
-|                                                                   | EHDSEncounter.header.statusReason[x]           |            | CodeableConcept        |             | 0..1          |
-|                                                                   | EHDSEncounter.header.language                  |            | CodeableConcept        |             | 0..1          |
-|                                                                   | EHDSEncounter.header.version                   |            | string                 |             | 0..1          |
 |                                                                   | EHDSEncounter.presentedForm                    |            | EHDSAttachment         |             | 0..*          |
 |                                                                   | EHDSEncounter.priority                         |            | CodeableConcept        |             | 0..1          |
 |                                                                   | EHDSEncounter.type                             |            | CodeableConcept        |             | 1..1          |
@@ -39,9 +35,9 @@
 |                                                                   | EHDSEncounter.discharge                        |            | Base                   |             | 0..1          |
 | Admission.Destination                                             | EHDSEncounter.discharge.destinationType        | CD         | CodeableConcept        | 0..1        | 0..1          |
 |                                                                   | EHDSEncounter.discharge.destinationLocation[x] |            | EHDSOrganisation       |             | 0..1          |
-|                                                                   | EHDSEncounter.location                         |            | Base                   |             | 0..*          |
+| Admission.CareFacility::HealthcareProvider                        | EHDSEncounter.location                         |            | Base                   | 1           | 0..*          |
 |                                                                   | EHDSEncounter.location.period                  |            | Period                 |             | 0..1          |
-| Admission.CareFacility::HealthcareProvider                        | EHDSEncounter.location.organisationPart[x]     |            | EHDSOrganisation       | 1           | 1..1          |
+|                                                                   | EHDSEncounter.location.organisationPart[x]     |            | EHDSOrganisation       |             | 1..1          |
 | Admission.CareType                                                |                                                | CD         |                        | 1           |               |
 | Admission.Origin                                                  |                                                | CD         |                        | 1           |               |
 | Admission.AdmissionScope                                          |                                                | CD         |                        | 1           |               |
@@ -74,216 +70,6 @@
 
 
 
-## EHDSEncounter.header
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSEncounter.header |
-| zib |  |
-| card._xtehr | 1..1 |
-| definition_xtehr | Common header for all patient-related data |
-| id_xtehr | EHDSEncounter.header |
-| path_xtehr | EHDSEncounter.header |
-| short_xtehr | Common header for all patient-related data |
-| type_xtehr | Base |
-
-### Comments
-
-
-
-## EHDSEncounter.header.subject
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSEncounter.header.subject |
-| zib |  |
-| card._xtehr | 1..1 |
-| definition_xtehr | Patient/subject information |
-| id_xtehr | EHDSEncounter.header.subject |
-| path_xtehr | EHDSEncounter.header.subject |
-| short_xtehr | Subject |
-| type_xtehr | EHDSPatient |
-
-### Comments
-
-
-
-## EHDSEncounter.header.identifier
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSEncounter.header.identifier |
-| zib |  |
-| card._xtehr | 0..* |
-| definition_xtehr | Business identifier for the object |
-| id_xtehr | EHDSEncounter.header.identifier |
-| path_xtehr | EHDSEncounter.header.identifier |
-| short_xtehr | Business identifier for the object |
-| type_xtehr | Identifier |
-
-### Comments
-
-
-
-## EHDSEncounter.header.authorship
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSEncounter.header.authorship |
-| zib |  |
-| card._xtehr | 1..* |
-| definition_xtehr | Resource authoring details |
-| id_xtehr | EHDSEncounter.header.authorship |
-| path_xtehr | EHDSEncounter.header.authorship |
-| short_xtehr | Authorship |
-| type_xtehr | Base |
-
-### Comments
-
-
-
-## EHDSEncounter.header.authorship.author[x]
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSEncounter.header.authorship.author[x] |
-| zib |  |
-| card._xtehr | 1..1 |
-| definition_xtehr | Author(s) by whom the resource was/were authored. Multiple authors could be provided. |
-| id_xtehr | EHDSEncounter.header.authorship.author[x] |
-| path_xtehr | EHDSEncounter.header.authorship.author[x] |
-| short_xtehr | Author |
-| type_xtehr | EHDSHealthProfessional |
-
-### Comments
-
-
-
-## EHDSEncounter.header.authorship.datetime
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSEncounter.header.authorship.datetime |
-| zib |  |
-| card._xtehr | 1..1 |
-| definition_xtehr | Date and time of the issuing the document/resource by its author. |
-| id_xtehr | EHDSEncounter.header.authorship.datetime |
-| path_xtehr | EHDSEncounter.header.authorship.datetime |
-| short_xtehr | Date and time of authoring/issuing |
-| type_xtehr | dateTime |
-
-### Comments
-
-
-
-## EHDSEncounter.header.lastUpdate
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSEncounter.header.lastUpdate |
-| zib |  |
-| card._xtehr | 0..1 |
-| definition_xtehr | Date and time of the last update to the document/information |
-| id_xtehr | EHDSEncounter.header.lastUpdate |
-| path_xtehr | EHDSEncounter.header.lastUpdate |
-| short_xtehr | Date and time of the last update to the resource |
-| type_xtehr | dateTime |
-
-### Comments
-
-
-
-## EHDSEncounter.header.status
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSEncounter.header.status |
-| zib |  |
-| card._xtehr | 1..1 |
-| definition_xtehr | Status of the resource |
-| id_xtehr | EHDSEncounter.header.status |
-| path_xtehr | EHDSEncounter.header.status |
-| short_xtehr | Status of the resource |
-| type_xtehr | CodeableConcept |
-
-### Comments
-
-
-
-## EHDSEncounter.header.statusReason[x]
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSEncounter.header.statusReason[x] |
-| zib |  |
-| card._xtehr | 0..1 |
-| definition_xtehr | Reason for the current status of the resource. |
-| id_xtehr | EHDSEncounter.header.statusReason[x] |
-| path_xtehr | EHDSEncounter.header.statusReason[x] |
-| short_xtehr | Reason for the current status of the resource. |
-| type_xtehr | CodeableConcept |
-
-### Comments
-
-
-
-## EHDSEncounter.header.language
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSEncounter.header.language |
-| zib |  |
-| binding_xtehr | {'strength': 'preferred', 'description': 'BCP 47'} |
-| card._xtehr | 0..1 |
-| definition_xtehr | Language in which the resource is written. Language is expressed by the IETF language tag. |
-| id_xtehr | EHDSEncounter.header.language |
-| path_xtehr | EHDSEncounter.header.language |
-| short_xtehr | Language |
-| type_xtehr | CodeableConcept |
-
-### Comments
-
-
-
-## EHDSEncounter.header.version
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr | EHDSEncounter.header.version |
-| zib |  |
-| card._xtehr | 0..1 |
-| definition_xtehr | Business version of the resource. |
-| id_xtehr | EHDSEncounter.header.version |
-| path_xtehr | EHDSEncounter.header.version |
-| short_xtehr | Version |
-| type_xtehr | string |
-
-### Comments
-
-
-
 ## EHDSEncounter.presentedForm
 
 ### Table
@@ -300,6 +86,7 @@
 | type_xtehr | EHDSAttachment |
 
 ### Comments
+Not present in the zib as per design principles.
 
 
 
@@ -340,6 +127,7 @@
 | type_xtehr | CodeableConcept |
 
 ### Comments
+This concept is absent in the zib as the scope of the zib is only Admission.
 
 
 
@@ -435,6 +223,7 @@
 | type_xtehr | EHDSOrganisation |
 
 ### Comments
+The zib has only HealthcareProvider in the role of *location*. 
 
 
 
@@ -462,6 +251,8 @@
 | type_zib | TS |
 
 ### Comments
+Data type mismatch. The zib has StartDateTime and EndDateTime. The zib does not include actual and planned dates separately. 
+
 
 
 
@@ -489,7 +280,7 @@
 | type_zib | TS |
 
 ### Comments
-
+The zib does not include actual and planned dates separately. 
 
 
 ## EHDSEncounter.plannedEndDate
@@ -516,7 +307,7 @@
 | type_zib | TS |
 
 ### Comments
-
+The zib does not include actual and planned dates separately. 
 
 
 ## EHDSEncounter.admission
@@ -773,6 +564,7 @@
 | type_xtehr | CodeableConcept |
 
 ### Comments
+The legal status is modelled in a separate zib, but the Admission zib does not have a reference to it.  
 
 
 
@@ -820,7 +612,7 @@
 | type_zib | CD |
 
 ### Comments
-
+The concepts match exactly. The Xt-EHR concept is bound to HL7-discharge-disposition code system, whereas the zib concept is bound to a set of SNOMED values. Note that the values that do not fit to the Destination concept are deprecated in the zib, but still present in the HL7 code system. 
 
 
 ## EHDSEncounter.discharge.destinationLocation[x]
@@ -849,15 +641,23 @@
 | attribute | value |
 |---|---|
 | xtehr | EHDSEncounter.location |
-| zib |  |
+| zib | Admission.CareFacility::HealthcareProvider |
+| alias_zib | NL: ZorgInstelling::Zorgaanbieder |
 | card._xtehr | 0..* |
+| card._zib | 1 |
 | definition_xtehr | List of locations where the patient has been. |
+| definition_zib | The physical location of the healthcare provider where the (partial) admission has taken place or will take place. |
 | id_xtehr | EHDSEncounter.location |
+| id_zib | NL-CM:15.4.13 |
+| name_zib | CareFacility::HealthcareProvider |
 | path_xtehr | EHDSEncounter.location |
+| path_zib | Admission.CareFacility::HealthcareProvider |
 | short_xtehr | List of locations where the patient has been. |
+| stereotype_zib | context,reference |
 | type_xtehr | Base |
 
 ### Comments
+Cardinality mismatch. 
 
 
 
@@ -887,19 +687,12 @@
 | attribute | value |
 |---|---|
 | xtehr | EHDSEncounter.location.organisationPart[x] |
-| zib | Admission.CareFacility::HealthcareProvider |
-| alias_zib | NL: ZorgInstelling::Zorgaanbieder |
+| zib |  |
 | card._xtehr | 1..1 |
-| card._zib | 1 |
 | definition_xtehr | Organisation or organisation part (department) where the patient was present. |
-| definition_zib | The physical location of the healthcare provider where the (partial) admission has taken place or will take place. |
 | id_xtehr | EHDSEncounter.location.organisationPart[x] |
-| id_zib | NL-CM:15.4.13 |
-| name_zib | CareFacility::HealthcareProvider |
 | path_xtehr | EHDSEncounter.location.organisationPart[x] |
-| path_zib | Admission.CareFacility::HealthcareProvider |
 | short_xtehr | Organisation or organisation part (department) where the patient was present. |
-| stereotype_zib | context,reference |
 | type_xtehr | EHDSOrganisation |
 
 ### Comments
