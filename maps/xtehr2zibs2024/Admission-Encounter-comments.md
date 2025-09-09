@@ -3,8 +3,7 @@
 ## Overall discussion
 The Xt-EHR Encounter model apparently has a broader scope, including the scope of both Admission and Contact zibs. 
 The Xt-EHR model and the zib can both be used for both past admissions and planned admissions. However, only the Xt-EHR models actual and planned start and end dates separately.
-The Xt-EHR model id layered: an encounter can be part of an encounter. 
-
+The Xt-EHR model is layered: an encounter can be part of an encounter. 
 
 
 | zib                                                               | xtehr                                          | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
@@ -35,14 +34,17 @@ The Xt-EHR model id layered: an encounter can be part of an encounter.
 |                                                                   | EHDSEncounter.discharge                        |            | Base                   |             | 0..1          |
 | Admission.Destination                                             | EHDSEncounter.discharge.destinationType        | CD         | CodeableConcept        | 0..1        | 0..1          |
 |                                                                   | EHDSEncounter.discharge.destinationLocation[x] |            | EHDSOrganisation       |             | 0..1          |
-| Admission.CareFacility::HealthcareProvider                        | EHDSEncounter.location                         |            | Base                   | 1           | 0..*          |
+|                                                                   | EHDSEncounter.location                         |            | Base                   |             | 0..*          |
 |                                                                   | EHDSEncounter.location.period                  |            | Period                 |             | 0..1          |
-|                                                                   | EHDSEncounter.location.organisationPart[x]     |            | EHDSOrganisation       |             | 1..1          |
+| Admission.CareFacility::HealthcareProvider                        | EHDSEncounter.location.organisationPart[x]     |            | EHDSOrganisation       | 1           | 1..1          |
 | Admission.CareType                                                |                                                | CD         |                        | 1           |               |
 | Admission.Origin                                                  |                                                | CD         |                        | 1           |               |
 | Admission.AdmissionScope                                          |                                                | CD         |                        | 1           |               |
 | Admission.ReasonAdmission                                         |                                                |            |                        | 1           |               |
 | Admission.ResponsibleHealthProfessional::HealthProfessional       |                                                |            |                        | 1           |               |
+
+
+
 
 
 
@@ -612,7 +614,7 @@ The legal status is modelled in a separate zib, but the Admission zib does not h
 | type_zib | CD |
 
 ### Comments
-The concepts match exactly. The Xt-EHR concept is bound to HL7-discharge-disposition code system, whereas the zib concept is bound to a set of SNOMED values. Note that the values that do not fit to the Destination concept are deprecated in the zib, but still present in the HL7 code system. 
+The concepts match exactly. The Xt-EHR concept is bound to HL7-discharge-disposition code system, whereas the zib concept is bound to a set of SNOMED values. Note that the values in this set that do not fit in the Destination concept are deprecated in the zib, but are still present in the HL7 code system. 
 
 
 ## EHDSEncounter.discharge.destinationLocation[x]
@@ -632,8 +634,6 @@ The concepts match exactly. The Xt-EHR concept is bound to HL7-discharge-disposi
 
 ### Comments
 
-
-
 ## EHDSEncounter.location
 
 ### Table
@@ -641,23 +641,17 @@ The concepts match exactly. The Xt-EHR concept is bound to HL7-discharge-disposi
 | attribute | value |
 |---|---|
 | xtehr | EHDSEncounter.location |
-| zib | Admission.CareFacility::HealthcareProvider |
-| alias_zib | NL: ZorgInstelling::Zorgaanbieder |
+| zib |  |
 | card._xtehr | 0..* |
-| card._zib | 1 |
 | definition_xtehr | List of locations where the patient has been. |
-| definition_zib | The physical location of the healthcare provider where the (partial) admission has taken place or will take place. |
 | id_xtehr | EHDSEncounter.location |
-| id_zib | NL-CM:15.4.13 |
-| name_zib | CareFacility::HealthcareProvider |
 | path_xtehr | EHDSEncounter.location |
-| path_zib | Admission.CareFacility::HealthcareProvider |
 | short_xtehr | List of locations where the patient has been. |
-| stereotype_zib | context,reference |
 | type_xtehr | Base |
 
 ### Comments
-Cardinality mismatch. 
+
+
 
 
 
@@ -678,24 +672,30 @@ Cardinality mismatch.
 
 ### Comments
 
-
-
-## EHDSEncounter.location.organisationPart[x]
-
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr | EHDSEncounter.location.organisationPart[x] |
-| zib |  |
+| zib | Admission.CareFacility::HealthcareProvider |
+| alias_zib | NL: ZorgInstelling::Zorgaanbieder |
 | card._xtehr | 1..1 |
+| card._zib | 1 |
 | definition_xtehr | Organisation or organisation part (department) where the patient was present. |
+| definition_zib | The physical location of the healthcare provider where the (partial) admission has taken place or will take place. |
 | id_xtehr | EHDSEncounter.location.organisationPart[x] |
+| id_zib | NL-CM:15.4.13 |
+| name_zib | CareFacility::HealthcareProvider |
 | path_xtehr | EHDSEncounter.location.organisationPart[x] |
+| path_zib | Admission.CareFacility::HealthcareProvider |
 | short_xtehr | Organisation or organisation part (department) where the patient was present. |
+| stereotype_zib | context,reference |
 | type_xtehr | EHDSOrganisation |
 
 ### Comments
+Partial data type mismatch. In the zib, the location is a reference to zib Healthcare provicer (hence, an organization). In the Xt-EHR model, the location is either a EHDSOrganisation or a EHDSLocation.  
+Cardinality mismatch. In the Xt-EHR model, container .location has cardinality 0..*. In the zib, .CareFacility has cardinality 1..1.
+
 
 
 
