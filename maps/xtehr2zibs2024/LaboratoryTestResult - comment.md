@@ -1,4 +1,20 @@
-# LaboratoryTestResult
+# LaboratoryTestResult as of 05-9-2025
+
+## Version history
+
+v1: 05-09-2025, initial version
+
+## Actions
+
+## Compared
+### Scope
+
+### Other
+
+## Discussions (datum:) LabResult
+# Notulen  
+
+## Actiepuntenlijst
 
 | zib                                                      | xtehr                                                                      | type_zib   | type_xtehr                   | card._zib   | card._xtehr   |
 |:---------------------------------------------------------|:---------------------------------------------------------------------------|:-----------|:-----------------------------|:------------|:--------------|
