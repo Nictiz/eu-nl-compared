@@ -65,6 +65,7 @@ The zib has all (logical) concepts of the Xt-EHR model except for .currentPregna
 
 ### Comments
 Absent in the zib. In general, absence of conditions are not modelled in the zibs itself.
+Note: the presence of this concept indicates that the model is to be interpreted as an *observation*.
 
 
 ## EHDSCurrentPregnancy.dateOfStatus
@@ -84,6 +85,7 @@ Absent in the zib. In general, absence of conditions are not modelled in the zib
 
 ### Comments
 Absent in the zib. See .currentPregnancyStatus.
+Note: the presence of this concept indicates that the model is to be interpreted as an *observation*.
 
 
 ## EHDSCurrentPregnancy.expectedDateOfDelivery
