@@ -2,6 +2,7 @@
 
 ## Overall discussion
 The zib has all (logical) concepts of the Xt-EHR model except for .currentPregnancyStatus, with which it is possible to express, for example, that the subject is not pregnant. The zib has Gravidity, Parity, and several concepts to express the data on which the EstimatedDateOfDelivery is based which the Xt-EHR model has not. 
+Note that the Xt-EHR model models an *observation* regarding pregnance at .dateOfStatus. In its current form, it is not clear whether the zib models an observation or a condition.
 
 
 | zib                                                            | xtehr                                            | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
