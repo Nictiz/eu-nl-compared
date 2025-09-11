@@ -5,8 +5,8 @@
 v1: 3-9-2025, initial version
 
 ## Actions
-Bespreking op 8 september 2025
-+ Deelnemers (7)
+Bespreking op 8 september 2025  
+Deelnemers (7)  
 * Marc de Graauw (organisator van vergadering)
 * Pieter Edelman (Geaccepteerde vergadering)
 * Bas de Jong (Geaccepteerde vergadering) gedeeltelijk
