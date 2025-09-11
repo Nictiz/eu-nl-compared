@@ -5,6 +5,31 @@
 v1: 3-9-2025, initial version
 
 ## Actions
+Bespreking op 8 september 2025
+Aanwezig: 
+	Deelnemers (7) 
+		Marc de Graauw (organisator van vergadering)
+		Pieter Edelman (Geaccepteerde vergadering)
+		Bas de Jong (Geaccepteerde vergadering) gedeeltelijk
+		Jacob Engel (Geaccepteerde vergadering)
+		Micha Drielinger (Geaccepteerde vergadering)
+		Eduard de Rijcke (Geaccepteerde vergadering)
+		Astrid van Ginneken
+
+Astrid: opname past in EHDS model, maar niet in de zib Contact: daar is zib Opname voor
+list of locations: wat bedoelen ze daarmee (geen zib issue of EHDS issue)  
++ EHDS issue: admission doet denken aan opname, maar kan ook (polyklinisch) contact zijn. Maak dat duidelijk.
++ zib issue: RedenContact harmoniseren met EHDSContact.reason, bijvoorbeeld evt. verrichting toegevoegen
+Astrid: symptomen, reacties etc mappen op op condition
++ zib issue: .equivalent van EHDSEncounter.note toevoegen
++ zib issue: relatie met episode of care toevoegen
+basedOn: niet voldoende uitgewerkt (geen EHDS issue)
++ EHDS issue: geen Zorgverlener waar het contact mee is
++ zib issue: kijken of dwang (.legalStatus) in de zib moet
++ zib issue: zib opname met ehds encounter vergelijken
++ zibs issue: organisatie en locatie uit elkaar trekken
++ zibs issue: setting en type lopen door elkaar  
+Contact zib2024 is voor type overgegaan op SNOMED codes waarschijnlijk niet mapbaar.
 
 
 ## Discussion
