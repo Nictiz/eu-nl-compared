@@ -6,14 +6,14 @@ v1: 3-9-2025, initial version
 
 ## Actions
 Bespreking op 8 september 2025
-	+ Deelnemers (7) 
-		++ Marc de Graauw (organisator van vergadering)
-		++ Pieter Edelman (Geaccepteerde vergadering)
-		++ Bas de Jong (Geaccepteerde vergadering) gedeeltelijk
-		++ Jacob Engel (Geaccepteerde vergadering)
-		++ Micha Drielinger (Geaccepteerde vergadering)
-		++ Eduard de Rijcke (Geaccepteerde vergadering)
-		++ Astrid van Ginneken
++ Deelnemers (7) 
+++ Marc de Graauw (organisator van vergadering)
+++ Pieter Edelman (Geaccepteerde vergadering)
+++ Bas de Jong (Geaccepteerde vergadering) gedeeltelijk
+++ Jacob Engel (Geaccepteerde vergadering)
+++ Micha Drielinger (Geaccepteerde vergadering)
+++ Eduard de Rijcke (Geaccepteerde vergadering)
+++ Astrid van Ginneken
 
 + Astrid: opname past in EHDS model, maar niet in de zib Contact: daar is zib Opname voor
 + list of locations: wat bedoelen ze daarmee (geen zib issue of EHDS issue)  
