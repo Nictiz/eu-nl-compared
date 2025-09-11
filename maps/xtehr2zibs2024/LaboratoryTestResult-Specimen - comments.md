@@ -48,7 +48,7 @@ Specimen is also used in imaging and servicerequest. The zib can currently only 
   **EHDS Specimen.container.device**   
   Verschil tussen EHDS (`706041008 | Device for body fluid and tissue collection/transfer/processing |`)  
   en ZIB (`<260787004|Fysiek voorwerp|`).  
-  **Actie:** Wouter checkt dit met Terminologie.  
+  **Actie:** Terminologie geeft in de consultatie aan dat ehDS binding verkeerd is.  
 
 - **EHDS Specimen.container.specimenQuantity**  
   **Acties:**  
@@ -64,15 +64,14 @@ Specimen is also used in imaging and servicerequest. The zib can currently only 
   - Lab zoekt een voorbeeld waar een specimen geen ID heeft.  
 
 - **EHDS SpecimenMaterial**  
-  **Actie:** Wouter bespreekt dit met Terminologie.  
+  **Actie:** Wouter bespreekt dit met Terminologie. Besproken substance gaat over 5 jaar ook uit de zib weg issue maken (EHDS implementatie meenemen).
 
 - **EHDS SpecimenSourceDevice**  
-  **Actie:** Consultatie: In overleg met terminologie kijken of hier geen waardelijst of expressie voorgesteld kan worden.  
+  **Actie:** Consultatie: In overleg met terminologie kijken of hier geen waardelijst of expressie voorgesteld kan worden.  Overlegd geen verdere actie nodig. Snomed CT (is voldoende) en EMDN (niet ideaal maar toestaan). ZIB issue om te kijken of EMDN wel of niet toegevoegd moet worden?
 
 - **EHDS Subject** zijn te gedetailleerd in de context van LAB.  
   **Acties:**  
-  - Wouter bespreekt dit met Terminologie.
-  - Eventueel issue voor de consultatie  
+  - Wouter bespreekt dit met Terminologie. Dit is eigenlijk wel wenselijk. 
 
 - **EHDS SpecimenNumberExtension**  
   Hier hoeven wij niets mee.  
@@ -80,11 +79,11 @@ Specimen is also used in imaging and servicerequest. The zib can currently only 
 
 - **EHDS MicroOrganism**  
   **Acties:**  
-  - Consultatie issue: Lab brengt dit in bij EHDS.  
-  - Terminologie check nodig of dit onder *TypeOfSpecies* valt.  
+  - Consultatie issue: Lab brengt dit in bij EHDS (Terminologie reviewt).  
+  - ZIB issue: Terminologie check nodig of dit onder *TypeOfSpecies* valt.  Nee maar wel wenselijk om op te nemen in ZIB als we niet menselijke onderzoeken toestaan (subject).
 
 - **EHDS Morphology** is te mappen.  
-  **Actie:** ZIB issue: overweeg of dit binnen *AnatomicalLocation* moet komen.  
+  **Actie:** ZIB issue: overweeg of dit binnen *AnatomicalLocation* moet komen. Scope niet pathology???
 
 - **EHDS Comment**  
   **Actie:** Lab onderzoekt of een comment in specimen nodig is.  
