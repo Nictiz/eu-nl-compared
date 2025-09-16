@@ -1,4 +1,30 @@
-# Immunisation
+# Immunisation as of 2025-09-12
+
+## Version history
+
+v1: 12-09-2025, initial version
+
+## Actions
+
+## Compared
+### Scope
+Scope matches they are both about vaccination (the process of getting immunized). Name of the EHDS concept is bit misleading.
+
+The EHDS misses information about dosaging, a link to dossaging model is not present. The zib does present elements of dossaging. 
+
+EHDS presents the nextVaccinationDate which is a part of planning which is not present in the zib.
+
+### Summary of partly matching elements
+
+### Other
+
+- The .header elements and .presentForm are skipped in this comparison (as they should map on more generic zib(s) like registration data).
+- EHDS can have multiple target Agent or diseases (where the zib only has the primary pathogen).
+- Binding Terminology in the zib only on SNOMED CT (5 concepts extensible, xtEHR also allows ICD-10).
+- EHDS vaccine is missing in the zib, this could be represented in the Pharmaceutical product code. Multiple codes are allowed. 
+
+## Discussions (datum:)# MedicationPrescription
+
 
 | zib                                           | xtehr                                        | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
 |:----------------------------------------------|:---------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
@@ -52,7 +78,7 @@
 | stereotype_zib | rootconcept |
 
 ### Comments
-
+Matches
 
 
 ## EHDSImmunisation.header
@@ -309,7 +335,7 @@
 | type_zib | CD |
 
 ### Comments
-
+Scope matches, however EHDS can have multiple target Agent or diseases (where the zib only has the primary pathogen).  Binding Terminology in the zib only on SNOMED CT (5 concepts extensible, xtEHR also allows ICD-10). 
 
 
 ## EHDSImmunisation.vaccine
@@ -329,7 +355,7 @@
 | type_xtehr | CodeableConcept |
 
 ### Comments
-
+This could be represented in the Parmaceutical product code. Multiple codes are allowed. 
 
 
 ## EHDSImmunisation.administeredProduct
@@ -355,7 +381,7 @@
 | type_xtehr | EHDSMedication |
 
 ### Comments
-
+Matches scope, datatype. Mismatch cardinality for EHDS 0..1 while zib 1..1, however zib misses vaccine which means the Pharmaceutical product is always needed.  
 
 
 ## EHDSImmunisation.doseNumber
@@ -401,7 +427,7 @@
 | type_zib | TS |
 
 ### Comments
-
+Matches
 
 
 ## EHDSImmunisation.administeringCentre
@@ -427,7 +453,7 @@
 | type_xtehr | EHDSOrganisation |
 
 ### Comments
-
+Matches scope almost (same intend zib could be clearer). Cardinality mismatch 0..* vs 1..1 in the zib. It seems odd that a single vaccination can take place at multiple administering centres and by multiple administrators. 
 
 
 ## EHDSImmunisation.vaccineAdministrator
