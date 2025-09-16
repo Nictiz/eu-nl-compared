@@ -7,14 +7,30 @@ v1: 05-09-2025, initial version
 ## Actions
 
 ## Compared
+Labreport gaat veel verder dan de labuitslag in de zib. Zo wordt er ook allerlei supporting information. De vraag is of dit wel het juiste mappingsniveau is.
+
+Consultatie inbrengen dat onduidelijk is hoe met panels en batteries om te gaan. Op welk niveau starten die Labreport of EHDSlabobservation? 
+
+Consultatie: Inbrengen hoe je panel definieert, oplossing SNOMED met HasMember resultaten. 
+Consultatie: Relatie tussen specimen en observatie(s) moet duidelijk zijn.
+
 ### Scope
 
 ### Other
+Resulttype uit de zib is al een issue over omdat het niet duidelijk of eenduidig is in NL. Nu niet gewenst in EU en ook niet meer opgenomen. 
+
+Actie: Performer in de zib Organisatie, in EHDS de zorgverlener genoemd (privacy) 
 
 ## Discussions (datum:) LabResult
 # Notulen  
 
 ## Actiepuntenlijst
+Triggered by, Derived from, hasMember relatie opnieuw onderzoeken of deze nuttig zijn in de zib (zie ook eerder zib-1584). 
+
+Actie: Zorgaanbieder kan ook performer zijn?? Is dit een algemeen patroon in de zibs?
+Consultatie: Privacy use case opschrijven en vragen of ze dit kunnen beschrijven.
+
+Actie: Consultatie: hoort IntendedRecipient geen onderdeel te zijn van de order (servicerequest) als de aanvrager dit kan aangeven.
 
 | zib                                                      | xtehr                                                                      | type_zib   | type_xtehr                   | card._zib   | card._xtehr   |
 |:---------------------------------------------------------|:---------------------------------------------------------------------------|:-----------|:-----------------------------|:------------|:--------------|
