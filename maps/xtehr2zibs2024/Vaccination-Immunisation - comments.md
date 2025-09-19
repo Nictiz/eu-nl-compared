@@ -12,7 +12,7 @@ Scope matches they are both about vaccination (the process of getting immunized)
 
 The EHDS misses information about dosaging, a link to dossaging model is not present. The zib does present elements of dossaging. 
 
-EHDS presents the nextVaccinationDate which is a part of planning which is not present in the zib.
+EHDS presents the nextVaccinationDate which is not present in the zib.
 
 ### Summary of partly matching elements
 
@@ -23,7 +23,10 @@ EHDS presents the nextVaccinationDate which is a part of planning which is not p
 - Binding Terminology in the zib only on SNOMED CT (5 concepts extensible, xtEHR also allows ICD-10).
 - EHDS vaccine is missing in the zib, this could be represented in the Pharmaceutical product code. Multiple codes are allowed. 
 
-## Discussions (datum:)# MedicationPrescription
+## Discussions (16-09-2025:)# Vaccination
+Consultatie: Sharper definition needed is this about vaccination or immunisation (Does it include passive and active immunisation)
+
+
 
 
 | zib                                           | xtehr                                        | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
