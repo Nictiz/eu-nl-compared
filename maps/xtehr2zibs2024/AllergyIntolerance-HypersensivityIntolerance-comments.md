@@ -2,16 +2,19 @@
 
 ## Overall discussion
 
-EHDSAllergyIntolerance maps to three zibs:
+EHDSAllergyIntolerance maps to the following zibs, that are connected by references:
 + HypersensitivityIntolerance
 + Reaction
-+ Condition  
++ Condition 
++ Symptom 
 
-In this comparison, the mapping to HypersensitivityIntolerance is used as a basis, bur references to the zib models Reaction and Condition are made in the discussion of the concepts in the Xt-EHR model that map to concepts in these zibs.
+In this comparison, the mapping to HypersensitivityIntolerance is used as a basis, but references to the zib models Reaction, Symptom and Condition are made in the discussion of the concepts in the Xt-EHR model that map to concepts in these zibs.
 
 Since the Xt-EHR model does not make the distinction, it lacks the functionality of the zibs to relate the AllergyIntolerance and is reactions as diagnoses to conditions and their symptoms.
 
 Hypersensitity to radiation cannot be expressed using the Xt-EHR model. 
+
+We need a clearer definition of EHDSAllergyIntolerance.onsetDate for a correct mapping to one of the zibs. Is the diagnosis date or the onset of the condition?
 
 
 
@@ -107,7 +110,8 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 | type_zib | CD |
 
 ### Comments
-
+Binding valuesets mismatch. The binding in the zib is required.
+Cardinality mismatch because in the zib, either Radiation or Substance must be chosen.
 
 ## EHDSAllergyIntolerance.typeOfPropensity
 
@@ -126,6 +130,7 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 | type_xtehr | CodeableConcept |
 
 ### Comments
+No match in the zib. The type intolerance may be pre-coordinated in the .DiagnosisName.
 
 
 
@@ -154,7 +159,7 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 | type_zib | ST |
 
 ### Comments
-
+Not an exact match. The zib has a more restricted use of the concept by definition.
 
 
 ## EHDSAllergyIntolerance.criticality
@@ -183,6 +188,7 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 | type_zib | CD |
 
 ### Comments
+Match. The valueset in the Xt-EHRT model has "unable to assess" which the zib has not as per design principles. 
 
 
 
@@ -211,6 +217,10 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 | type_zib | CD |
 
 ### Comments
+Cardinality mismatch, as the zib has conceptual cardinality.
+https://hl7.org/fhir/valueset-allergyintolerance-verification.html has a distinction between "unconfirmed" and its child "presumed" which the zib has not. It has a value "refuted" which is not in the zib value set because there is a separate zib "Exclusion". It has a value "entered in error" which is not in the zib value set as per design principles.  
+
+
 
 
 
@@ -231,6 +241,7 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 | type_xtehr | CodeableConcept |
 
 ### Comments
+This concept has a poor match to .Course in the zib Condition, to which the zib HypersensitivityIntolerance has a reference. In https://hl7.org/fhir/valueset-allergyintolerance-clinical.html we have "active", "inactive" and its child "resolved". Only "resolved" has an equivalent "No longer present" in the zib. The same incompatibility issues apply as for the EHDSCondition.problemStatus element. 
 
 
 
@@ -250,7 +261,9 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 | type_xtehr | dateTime |
 
 ### Comments
-
+There's a definition / name mismatch in the Xt-EHR model here.
+If the onset date is meant, this concept matches Condition.PeriodPresent.TimeInterval.StartEvent.
+If the date of the diagnosis is meant, this concept matches HypersensitityIntolerance.DianoisDate (typo in zib!).
 
 
 ## EHDSAllergyIntolerance.endDate
@@ -269,6 +282,7 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 | type_xtehr | dateTime |
 
 ### Comments
+This concept matches Condition.PeriodPresent.TimeInterval.EndEvent. 
 
 
 
@@ -288,6 +302,7 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 | type_xtehr | Base |
 
 ### Comments
+This concept matches the root concept of the zib Reaction.
 
 
 
@@ -308,6 +323,7 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 | type_xtehr | CodeableConcept |
 
 ### Comments
+This concept matches to Symptom.SymptomName. Thr binding in the zib to SNOMED findings is required.
 
 
 
@@ -327,6 +343,7 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 | type_xtehr | dateTime |
 
 ### Comments
+This concept matches Symptom.SymptomPeriod::TimeInterval.StartEvent.
 
 
 
@@ -347,6 +364,7 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 | type_xtehr | CodeableConcept |
 
 ### Comments
+This concept matches Condition.Serverity (not Symptom.SymptomSeverity, as that would be te severity of the _manifestation_ of the reaction). The preferred binding is a 3 point HL7 scale. The zib has a 3 point SNOMED scale with a required binding. The scales match exactly.    
 
 
 
@@ -366,6 +384,7 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 | type_xtehr | dateTime |
 
 ### Comments
+This concept matches Condition.PeriodPresent::TimeInterval.StartEvent.StartDateTime.
 
 
 
