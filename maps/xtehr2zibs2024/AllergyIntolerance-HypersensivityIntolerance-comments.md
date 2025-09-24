@@ -241,7 +241,7 @@ https://hl7.org/fhir/valueset-allergyintolerance-verification.html has a distinc
 | type_xtehr | CodeableConcept |
 
 ### Comments
-This concept has a poor match to .Course in the zib Condition, to which the zib HypersensitivityIntolerance has a reference. In https://hl7.org/fhir/valueset-allergyintolerance-clinical.html we have "active", "inactive" and its child "resolved". Only "resolved" has an equivalent "No longer present" in the zib. The same incompatibility issues apply as for the EHDSCondition.problemStatus element. 
+This concept has a poor match to .Course in the zib Condition, to which the zib HypersensitivityIntolerance has a reference. In https://hl7.org/fhir/valueset-allergyintolerance-clinical.html we have "active", "inactive" and its child "resolved". Only "resolved" has an equivalent "No longer present" in the zib. The same incompatibility issues apply to the EHDSCondition.problemStatus element. 
 
 
 
