@@ -12,9 +12,12 @@ In this comparison, the mapping to HypersensitivityIntolerance is used as a basi
 
 Since the Xt-EHR model does not make the distinction, it lacks the functionality of the zibs to relate the AllergyIntolerance and is reactions as diagnoses to conditions and their symptoms.
 
-Hypersensitity to radiation cannot be expressed using the Xt-EHR model. 
+Hypersensitity to radiation cannot be expressed using the Xt-EHR model.   
 
-We need a clearer definition of EHDSAllergyIntolerance.onsetDate for a correct mapping to one of the zibs. Is the diagnosis date or the onset of the condition?
+Issues on the Xt-EHR model:  
++ We need a clearer definition of EHDSAllergyIntolerance.onsetDate for a correct mapping to one of the zibs. Is the diagnosis date or the onset of the condition?
++ The name of the reaction seems to be missing.
++ The date and severity have a cardinality that differs from cardinality of the manifestation, but seem to apply to the manifestation by definition   
 
 
 
@@ -323,8 +326,8 @@ This concept matches the root concept of the zib Reaction.
 | type_xtehr | CodeableConcept |
 
 ### Comments
-This concept matches to Symptom.SymptomName. Thr binding in the zib to SNOMED findings is required.
-
+As the cardinality of this concept is 0..*, this concept can only be mapped to Symptom.SymptomName. The binding in the zib to SNOMED findings is required.
+However,the examples given in the definition are more applicable to the name of the reaction itself, which would map to Reaction.DiagnosisNameData.DiagnosisName. It appears that the name of the reaction itself (cardinality 0..1) is missing. 
 
 
 ## EHDSAllergyIntolerance.reaction.date
