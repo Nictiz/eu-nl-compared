@@ -364,7 +364,7 @@ This concept matches Symptom.SymptomPeriod::TimeInterval.StartEvent.
 | type_xtehr | CodeableConcept |
 
 ### Comments
-This concept matches Condition.Serverity (not Symptom.SymptomSeverity, as that would be te severity of the _manifestation_ of the reaction). The preferred binding is a 3 point HL7 scale. The zib has a 3 point SNOMED scale with a required binding. The scales match exactly.    
+This concept matches Condition.Severity (not Symptom.SymptomSeverity, as that would be the severity of the _manifestation_ of the reaction). The preferred binding is a 3 point HL7 scale. The zib has a 3 point SNOMED scale with a required binding. The scales match exactly.    
 
 
 
