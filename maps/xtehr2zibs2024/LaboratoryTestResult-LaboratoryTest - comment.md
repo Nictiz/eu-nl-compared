@@ -49,42 +49,112 @@ Header is not mapped other than for status.
 ## Discussions (datum:) LabResult
 # Notulen  
 
-•	Hoe om te gaan met hasMember in EHDS? Zit nu in LaboratoryTest. Er zijn twee manieren om met hasMember & Components
-o	Actie terugkoppeling Xt-EHR: Guidance geven op dit vlak - vraag aan EHDS. Met panels onder hasmember verwerken. Components vervalt dan. Definitie is onduidelijk
-•	Misschien ff checken bij Dave? Waarschijnlijk is dit al prima, omdat dit zo besloten is bij andere observations ook is. Als het goed is is dit ook binnen EU afgesproken - mogelijk volledig internationaal ook.
-•	Observation code is mogelijk via NPU. Niet voorstellen dat NPU eruit mag - is Feijkjes voorstel! 
-o	Actie voor ZC: hoe aangeven wat de ontvangende kant moet ontvangen
-o	Verschil hoe om te gaan met de ontvangen van de codes via andere codesystemen, mogelijk te beschrijven in de zibs -mogelijk beschrijven in de tekst Mogelijk Component volledig weg
-o	Hoe om te gaan met audits? Moet de gecodeerde uitwisseling altijd in het Engels? 
-•	Interpretation is een code data type in EU en bij ZC is het een string vel. Maar mogelijk is dit verschil ontstaan vanwege verkeerde mapping met Result Flagds
-o	ACTIE: mapping nalopen
-o	Actie Roxanne: nakijken welke element het is welke beter mapt
-o	Actie: beter navolgen hoe de interprtations geïnterpreteerd moeten worden
-•	Reference range heeft in EHDS LLM de datatype "base", dit is een vrij inhoudloze datatype. Het datatype moet gewijzigd worden naar hetzelfde data type als de normale reference arange in de normale observation
-•	accrediationStatus 
-o	ACTIE Diag: Definitie moet verduidelijkt worden wat het betekent als een lab geaccrediteerd is
-o	ACTIE ZC: Onderzoeken of er meerwaarde zit voor dit dataelement
-•	AnatomicLocation
-o	ACTIE ZC: Het komt naast Specimen ook voor in Labobservation. De meerwaarde is onduidelijk. Mogelijk vanwege de scope. Waarom is dit in PS dan gedefinieerd als Observation en niet LaboratoryObservation. Fijner is als deze twee volledig gescheiden worden, maar vanwege de scope van MTR begrijpelijk dat het zo gebeurd. Beschrijven in de scope in het excel bestand
-•	Calibrator
-o	ZC: Zib issue voor toeveogen dataelement maken
-•	dataAbsentReason
-o	Michal checkt in profilng guidelines wat er wordt gezegd over dataAbsentReason. De values zijn hetzeflde in nl core en FHIR
-o	ZC onderzoekt of het nodig is om hiervan een data element voor de zibs wordt, of dat dit opgelost in FRHI ien is het niet nodig om dit daarin te realiseren. Waarschijnlijk it een zib issue is. 
-•	DerivedFrom
-o	In EHDS zijn er verschillende soorten relaties met andere labresultaten. In Zib is er alleen GerelateerdeUitslag. Voor ZC om uit te zoeken analyse of het specificeren van deze relaties nodig zijn. Als er NL geen behoefte is, hoe zorgen we voor de dat deze relaties duidelijk worden? 
-•	Header.Status
-o	Bedoelde we de status van de observatie? Definitie van EHDS is dat het een status is van de resource. Resource is een technische status, niet inhoudelijk
-•	originalName
-o	Valt onder ObservationCode. Wat wordt hiermee bedoeld? In een Codeable Context kan dit al als string veld. Feedback geven dat dit veld weg moet - anders duidelijke definitie geven wat ddit inhoudt en wat de meerwaarde is en wat het verschil is met ObservationCode 
-•	PreviousResults
-o	Dit doen we niet in een Zib. Mogelijk wel in de IS, maar moet afgestemd worden met de EG
-o	Panel kan mogelijk wel via deze manier. 
-o	ACTIE EHDS: verduidelijken wat hiermee wordt bedoeld en in welke situatie. Gaat het om panels? Of voorgaande labresultaten van een bepaalde tijdsperiode?
-•	Uncertainty
-o	ACTIE ZC: Analyse opname in de zib
-•	TestKit
-o	ACTIE zc: Analyse opname in de zib
+### 1. hasMember & Components
+- **Vraagstuk**: Hoe om te gaan met `hasMember` in EHDS?  
+  - Zit nu in *LaboratoryTest*.  
+  - Twee mogelijkheden:
+    1. Panels onder `hasMember` verwerken (en `components` laten vervallen).  
+    2. Definitie verduidelijken (nu onduidelijk).  
+- **Actie Xt-EHR**: Guidance geven op dit vlak – vraag aan EHDS.
+
+> ✅ **Misschien checken bij Dave?** Waarschijnlijk is dit al afgesproken (ook internationaal, binnen EU en bij andere observations).
+
+---
+
+### 2. Observation Code (NPU)
+- **Opmerking**: Observation code mogelijk via *NPU*.  
+- **Belangrijk**: NPU mag er niet uit (voorstel Feijke).  
+- **Acties**:
+  - **ZC**: Hoe aangeven wat de ontvangende kant moet ontvangen?  
+  - Beschrijven hoe om te gaan met codes uit andere codesystemen (mogelijk in zibs-tekst).  
+  - Eventueel *components* volledig weglaten.  
+  - **Audits**: Moet gecodeerde uitwisseling altijd in het Engels?
+
+---
+
+### 3. Interpretation
+- **Huidig verschil**:  
+  - EU → *code data type*.  
+  - ZC → *string veld*.  
+  - Mogelijk verschil door verkeerde mapping met *ResultFlags*.  
+- **Acties**:  
+  - Mapping nalopen.  
+  - **Roxanne**: nagaan welk element beter mapt.  
+  - Beter navolgen hoe interpretations geïnterpreteerd moeten worden.
+
+---
+
+### 4. Reference Range
+- **Probleem**: In EHDS LLM datatype = *base* → inhoudsloos.  
+- **Actie**: Wijzigen naar hetzelfde datatype als de normale *reference range* in de standaard Observation.
+
+---
+
+### 5. AccreditationStatus
+- **Acties**:  
+  - **Diag**: Definitie verduidelijken – wat betekent geaccrediteerd lab precies?  
+  - **ZC**: Onderzoeken of dit dataelement meerwaarde heeft.
+
+---
+
+### 6. AnatomicLocation
+- **Opmerking**: Komt zowel bij *Specimen* als *LabObservation* voor.  
+- **Probleem**: Meerwaarde onduidelijk.  
+- **Actie ZC**: Beschrijven in scope (Excel) waarom dit in PS als *Observation* is gedefinieerd i.p.v. *LaboratoryObservation*.
+
+---
+
+### 7. Calibrator
+- **Actie ZC**: Zib-issue maken voor toevoegen van dit dataelement.
+
+---
+
+### 8. dataAbsentReason
+- **Huidig**:  
+  - Values zijn hetzelfde in NL Core en FHIR.  
+- **Acties**:  
+  - **Michal**: check profiling guidelines.  
+  - **ZC**: onderzoeken of dit een zib-issue is of opgelost kan worden in FHIR.
+
+---
+
+### 9. DerivedFrom
+- **Verschil**:  
+  - EHDS → meerdere soorten relaties met andere labresultaten.  
+  - Zib → alleen *GerelateerdeUitslag*.  
+- **Actie ZC**: Uitzoeken of specificatie van relaties nodig is.  
+  - Als NL geen behoefte heeft: hoe zorgen we toch voor duidelijke relaties?
+
+---
+
+### 10. Header.Status
+- **Vraag**: Bedoelen we de *status van de observatie*?  
+- **Opmerking**: EHDS → status van de resource (technisch), niet inhoudelijk.
+
+---
+
+### 11. originalName
+- **Huidig**: Valt onder *ObservationCode*.  
+- **Probleem**: Onduidelijk verschil met bestaande string veld in *Codeable Context*.  
+- **Actie**: Feedback → veld weghalen óf duidelijke definitie/meerwaarde geven.
+
+---
+
+### 12. PreviousResults
+- **Huidig**: Niet in zib.  
+- **Mogelijk**: Wel in IS → afstemmen met EG.  
+- **Vraagstuk**: Gaat dit om panels of voorgaande labresultaten in de tijd?  
+- **Actie EHDS**: verduidelijken betekenis en toepassing.
+
+---
+
+### 13. Uncertainty
+- **Actie ZC**: Analyseren of dit in de zib moet worden opgenomen.
+
+---
+
+### 14. TestKit
+- **Actie ZC**: Analyseren of dit in de zib moet worden opgenomen.
 
 
 ## Actiepuntenlijst
