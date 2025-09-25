@@ -17,7 +17,11 @@ Hypersensitity to radiation cannot be expressed using the Xt-EHR model.
 Issues on the Xt-EHR model:  
 + We need a clearer definition of EHDSAllergyIntolerance.onsetDate for a correct mapping to one of the zibs. Is the diagnosis date or the onset of the condition?
 + The name of the reaction seems to be missing.
-+ The reaction.date and reaction.severity have a cardinality seem to apply to the manifestation by definition, but are modelled as attributes of .reaction  
++ The reaction.date and reaction.severity seem to apply to the manifestation by definition, but are modelled as attributes of .reaction
+General remark:
++ During the qualification of e-Overdracht and BgZ it appeared that no vendor was able to register symptoms grouped by reaction. In general they register HypersensitivityIntolerance with a list of symptoms (or a mox of symptoms and reactions).
+
+  
 
 
 
