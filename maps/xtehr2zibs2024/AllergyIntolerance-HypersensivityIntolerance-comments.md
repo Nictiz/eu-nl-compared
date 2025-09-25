@@ -19,7 +19,7 @@ Issues on the Xt-EHR model:
 + The name of the reaction seems to be missing.
 + The reaction.date and reaction.severity seem to apply to the manifestation by definition, but are modelled as attributes of .reaction
 General remark:
-+ During the qualification of e-Overdracht and BgZ it appeared that no vendor was able to register symptoms grouped by reaction. In general they register HypersensitivityIntolerance with a list of symptoms (or a mox of symptoms and reactions).
++ During the qualification of e-Overdracht and BgZ it appeared that no vendor was able to register symptoms grouped by reaction. In general they register HypersensitivityIntolerance with a list of symptoms (or a mix of symptoms and reactions).
 
   
 
