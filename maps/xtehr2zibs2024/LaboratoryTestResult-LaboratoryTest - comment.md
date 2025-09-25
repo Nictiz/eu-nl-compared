@@ -113,7 +113,8 @@ Header is not mapped other than for status.
 - **Huidig**:  
   - Values zijn hetzelfde in NL Core en FHIR.  
 - **Acties**:  
-  - **Michal**: check profiling guidelines.  
+  - **Michal** (Afgerond): Uitzoeken profiling guidelines: 
+  DataAbsentReason extensie -> Nictiz profiling guidelines: the implementation guide should describe how the implementer should deal with it, probably using the data-absent-reason extension. Dat betekent dat er geen NL-specifieke data-absent-reason extensie in gebruik is.
   - **ZC**: onderzoeken of dit een zib-issue is of opgelost kan worden in FHIR.
 
 ---
