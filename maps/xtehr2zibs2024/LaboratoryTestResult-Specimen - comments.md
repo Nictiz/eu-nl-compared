@@ -25,7 +25,6 @@ Specimen is also used in imaging and servicerequest. The zib can currently only 
 
 - In **EHDS Lab result** kan een specimen meerdere specimens en containers bevatten.  
   In **ZIB** is dit één-op-één.  
-  in **nl core** LaboratoryTestResult.Specimen, container staat op 0...*, dus er zal geen problemen zijn met multiplicty (ten minste in FHIR)
   **Actie:** Lab checkt hoe dit in Nederland werkt en komt hierop terug.
   
 
@@ -45,7 +44,9 @@ Specimen is also used in imaging and servicerequest. The zib can currently only 
   Voor nu zo laten.  
 
 - **EHDS Specimen.container**  
-  **Actie:** Michal zoekt uit hoe in FHIR wordt omgegaan met specimen conatainer multiplicity.  
+  **Actie:** Michal zoekt uit hoe in FHIR wordt omgegaan met specimen conatainer multiplicity. 
+  in **nl core** LaboratoryTestResult.Specimen, container staat op 0...*, dus er zal geen problemen zijn met multiplicty (ten minste in FHIR)
+  **Actie**: Zib issue om te kijken of dit ook in NL zou moeten.
 
   **EHDS Specimen.container.device**   
   Verschil tussen EHDS (`706041008 | Device for body fluid and tissue collection/transfer/processing |`)  
