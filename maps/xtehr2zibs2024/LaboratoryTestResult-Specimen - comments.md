@@ -25,7 +25,9 @@ Specimen is also used in imaging and servicerequest. The zib can currently only 
 
 - In **EHDS Lab result** kan een specimen meerdere specimens en containers bevatten.  
   In **ZIB** is dit één-op-één.  
-  **Actie:** Lab checkt hoe dit in Nederland werkt en komt hierop terug.  
+  in **nl core** LaboratoryTestResult.Specimen, container staat op 0...*, dus er zal geen problemen zijn met multiplicty (ten minste in FHIR)
+  **Actie:** Lab checkt hoe dit in Nederland werkt en komt hierop terug.
+  
 
 - In de **Zib** moet specimen los zijn van *LaboratoryTestResult*.  
   **Actie:** ZIB issue maken Wouter.  
