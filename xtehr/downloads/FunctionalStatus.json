@@ -16,11 +16,11 @@
         }
     ],
     "url": "https://www.xt-ehr.eu/specifications/fhir/StructureDefinition/EHDSFunctionalStatus",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "name": "EHDSFunctionalStatus",
     "title": "Functional status",
     "status": "draft",
-    "date": "2025-09-22T14:21:51+00:00",
+    "date": "2025-09-24T12:10:10+00:00",
     "publisher": "Xt-EHR",
     "contact": [
         {
@@ -51,7 +51,7 @@
         "extension": [
             {
                 "url": "http://hl7.org/fhir/tools/StructureDefinition/snapshot-base-version",
-                "valueString": "0.1.0"
+                "valueString": "0.2.0"
             }
         ],
         "element": [
