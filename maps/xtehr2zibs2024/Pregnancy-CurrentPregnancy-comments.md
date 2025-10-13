@@ -2,7 +2,10 @@
 
 ## Overall discussion
 The zib has all (logical) concepts of the Xt-EHR model except for .currentPregnancyStatus, with which it is possible to express, for example, that the subject is not pregnant. The zib has Gravidity, Parity, and several concepts to express the data on which the EstimatedDateOfDelivery is based which the Xt-EHR model has not. 
-Note that the Xt-EHR model models an *observation* regarding pregnance at .dateOfStatus. In its current form, it is not clear whether the zib models an observation or a condition.
+Note that the Xt-EHR model models an *observation* regarding pregnance at .dateOfStatus. In its current form, it is not clear whether the zib models an observation or a condition.  
+  
+Commentaar Astrid:  
+Wel vreemd dat zowel in het Xt-EHR logical model als in de zib geen element is opgenomen, waarin wordt aangegeven of het om 1 of meerdere foetussen gaat.  
 
 
 | zib                                                            | xtehr                                            | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
@@ -142,7 +145,12 @@ Match but the zib definition is more specific.
 | type_zib | PQ |
 
 ### Comments
-Match. This concept is not present in the EHDS WP 6.1 stakeholder consultation branch. 
+Match. This concept is not present in the EHDS WP 6.1 stakeholder consultation branch.  
+Commentaar Astrid:  
+Dit zou de mapping m.i. moeten zijn, maar dat blijkt onvoldoende uit de definitie van het element in de zib en het voorbeeld. In het Xt-EHR logical model lijkt het dat de zwangerschapsduur betrekking heeft op de dateOfStatus. Zo niet, dan zegt gestationalAge weinig.  
+In de zib hebben we helemaal geen StatusDatum, alleen een datum waarop de à terme datum is bepaald. Daardoor is de zwangerschapsduur een vaag gegeven, want de datum waarop die is gevraagd is onbekend en hoe betrouwbaar is het om deze duur te 'vragen', zeker als de patiënt het antwoord moet geven. Je zou verwachten dat de zwangerschapsduur afgeleid kan worden op basis van 40 wk minus het aantal weken tussen ATermeDatum en Statusdatum. Het lijkt me betrouwbaarder om een StatusDatum te hebben en op basis van functionaliteit de zwangerschapsduur te bepalen dan een zwangeschapduur te 'vragen' zonder StatusDatum.  
+Het voorbeeld bij de zib is niet eenvoudig te intrpreteren: als de zwangerschapsduur 24 wk is, dan moet de StatusDatum dus liggen op ATermeDatum - (40 wk - 24 wk) = 18-09-2014.
+Neem in overweging om een StatusDatum op te nemen, waarbij Zwangerschapsduur dan een afgeleid gegeven is.  
 
 
 
@@ -172,6 +180,8 @@ Match. This concept is not present in the EHDS WP 6.1 stakeholder consultation b
 | type_zib | ST |
 
 ### Comments
+Commentaat Astrid:  
+Geen goede match: het element 'narrative' is een tekstuele weergave van de huidige zwangerschap als geheel. Het element 'comment' van de zib is bedoeld voor gegevens die niet te representeren zijn met de gestructureerde elementen van de zib.
 
 
 ## EHDSCurrentPregnancy.presentedForm
@@ -190,7 +200,9 @@ Match. This concept is not present in the EHDS WP 6.1 stakeholder consultation b
 | type_xtehr | EHDSAttachment |
 
 ### Comments
-This concept is absent in the zib as per design principles. This concept is not present in the EHDS WP6.1 stakeholder consultation branch.
+This concept is absent in the zib as per design principles. This concept is not present in the EHDS WP6.1 stakeholder consultation branch.  
+
+
 
 
 ## zib: Pregnancy.EstimatedDateOfDeliveryItems
@@ -253,7 +265,8 @@ This concept is absent in the zib as per design principles. This concept is not 
 | type_zib | TS |
 
 ### Comments
-
+Commentaar Astrid:  
+Zie mijn opmerking bij PregnancyDuration. Laten we overleggen of DateOfEstimation zou moeten gelden als StatusDatum en aan het rootconcept zou moeten hangen. In ieder geval moeten de ATermeDatum en de Zwangerschapsduur consistent zijn met elkaar.  
 
 
 ## zib: Pregnancy.EstimatedDateOfDeliveryItems.EstimatingMethod
