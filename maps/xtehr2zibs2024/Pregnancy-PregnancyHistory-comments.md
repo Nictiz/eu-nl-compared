@@ -1,7 +1,10 @@
 # PregnancyHistory  
 
 ## Overall discussion
-There are no matching concepts in the zib versus the Xt-EHR logical model.
+There are no matching concepts in the zib versus the Xt-EHR logical model.  
+Commentaar Astrid:  
+Blijkbaar gaat het hier om een instantiatie per zwangerschap in het verleden. Daarvoor kunnen we de zib niet gebruiken: er is geen 'outcome', omdat de zwangerschap nog gaande is.  
+Er is geen overeenkomst in dataelementen.  
 
 
 
