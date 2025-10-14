@@ -5,6 +5,7 @@
 
 + In zowel de zib als EHDSCurrentPregnancy ontbreekt het aantal foetussen. We maken er een zib issue en een consultatie-issue van.
 + In EHDSCurrentPregnancy ontbreken graviditeit en pariteit. Die kunnen in principe worden afgeleid uit de aanwezige instanties van EHDSPregnancyHistory, maar het afleiden van de pariteit is niet eenvoudig. We maken er geen consultatie-issue van en voor de zib moeten we overwegen om ze ergens anders onder te brengen: het zijn immers geen eigenschappen van de zwangerschap.
++ _@Astrid moeten we aan de zib een status toevoegen die mapt op currentPregnancyStatus?_
 
 ## Overall discussion
 The zib has all (logical) concepts of the Xt-EHR model except for .currentPregnancyStatus, with which it is possible to express, for example, that the subject is not pregnant. The zib has Gravidity, Parity, and several concepts to express the data on which the EstimatedDateOfDelivery is based which the Xt-EHR model has not. 
