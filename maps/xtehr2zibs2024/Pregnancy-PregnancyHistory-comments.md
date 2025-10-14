@@ -1,4 +1,9 @@
 # PregnancyHistory  
+## Bespreking 14-10
+Aanwezig: Lilian, Micha, Astrid, Jacob  
++ Er is geen zib voor pregnancy history, maar EHDSPregnancyHistory kan worden gevuld vanuit instantiaties van zib Zwangerschap die beëindigd zijn (_@Astrid hoe dan? Ontbreekt er niet een status aan de zib?_)
++ De waardenlijsten bij .outcome (https://art-decor.ehdsi.eu/decor/services/RetrieveValueSet?id=1.3.6.1.4.1.12559.11.10.1.3.1.42.62&effectiveDate=2022-04-28T16:50:00&prefix=epsos-&format=html&collapsable=true&language=en-US&ui=en-US en https://art-decor.ehdsi.eu/decor/services/RetrieveValueSet?id=1.3.6.1.4.1.12559.11.10.1.3.1.42.63&effectiveDate=2025-02-18T09:52:00&prefix=epsos-&format=html&collapsable=true&language=en-US&ui=en-US) passen niet bij het concept outcome: de meeste waarden zijn diagnoses. We maken een issue om het te concept te splitsen in een outcome en een verwijzing naar EHDSCondition. _@Astrid welke waarden uit de waardenlijst zijn geen diagnoses?_
++ _@Astrid hebben we in de zib een concept outcome nodig en/of een verwijzing naar Diagnose?_ 
 
 ## Overall discussion
 There are no matching concepts in the zib versus the Xt-EHR logical model.  
