@@ -1,4 +1,10 @@
 # CurrentPregnancy
+## Bespreking 14-10
++ EHDSCurrentPregnancy.gestationalAge en Zwangerschapsduur in de zib: dit concept hoort niet in het model. Gestational age kan worden afgeleid (40 wk minus het aantal weken tussen ATermeDatum en Statusdatum). Hier maken we een consultatie-issue van en een zib-issue. 
++ EHDSCurrentPregnancy.dateOfStatus: dit concept ontbreekt in de zib, maar is wel essentieel, omdat ook de zib het karakter van een _observatie_ heeft. StatusDatum moet aan het rootconcept worden toegevoegd. DatumBepaling (van de a-terme datum) lijkt niet nodig in de zib (is metadata). Hier maken we een zib-issue van.
+
++ In zowel de zib als EHDSCurrentPregnancy ontbreekt het aantal foetussen. We maken er een zib issue en een consultatie-issue van.
++ In EHDSCurrentPregnancy ontbreken graviditeit en pariteit. Die kunnen in principe worden afgeleid uit de aanwezige instanties van EHDSPregnancyHistory, maar het afleiden van de pariteit is niet eenvoudig. We maken er geen consultatie-issue van en voor de zib moeten we overwegen om ze ergens anders onder te brengen: het zijn immers geen eigenschappen van de zwangerschap.
 
 ## Overall discussion
 The zib has all (logical) concepts of the Xt-EHR model except for .currentPregnancyStatus, with which it is possible to express, for example, that the subject is not pregnant. The zib has Gravidity, Parity, and several concepts to express the data on which the EstimatedDateOfDelivery is based which the Xt-EHR model has not. 
@@ -100,7 +106,7 @@ Note: the presence of this concept indicates that the model is to be interpreted
 |---|---|
 | xtehr | EHDSCurrentPregnancy.expectedDateOfDelivery |
 | zib | Pregnancy.EstimatedDateOfDeliveryItems.EstimatedDateOfDelivery |
-| alias_zib | NL: ATermeDatum |
+| alias_zib | NL: ATerme |
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Date in which the woman is due to give birth. Year, day and month are required. |
@@ -148,7 +154,7 @@ Match but the zib definition is more specific.
 Match. This concept is not present in the EHDS WP 6.1 stakeholder consultation branch.  
 Commentaar Astrid:  
 Dit zou de mapping m.i. moeten zijn, maar dat blijkt onvoldoende uit de definitie van het element in de zib en het voorbeeld. In het Xt-EHR logical model lijkt het dat de zwangerschapsduur betrekking heeft op de dateOfStatus. Zo niet, dan zegt gestationalAge weinig.  
-In de zib hebben we helemaal geen StatusDatum, alleen een datum waarop de à terme datum is bepaald. Daardoor is de zwangerschapsduur een vaag gegeven, want de datum waarop die is gevraagd is onbekend en hoe betrouwbaar is het om deze duur te 'vragen', zeker als de patiënt het antwoord moet geven. Je zou verwachten dat de zwangerschapsduur afgeleid kan worden op basis van 40 wk minus het aantal weken tussen ATermeDatum en Statusdatum. Het lijkt me betrouwbaarder om een StatusDatum te hebben en op basis van functionaliteit de zwangerschapsduur te bepalen dan een zwangeschapduur te 'vragen' zonder StatusDatum.  
+In de zib hebben we helemaal geen Status, alleen een datum waarop de à terme datum is bepaald. Daardoor is de zwangerschapsduur een vaag gegeven, want de datum waarop die is gevraagd is onbekend en hoe betrouwbaar is het om deze duur te 'vragen', zeker als de patiënt het antwoord moet geven. Je zou verwachten dat de zwangerschapsduur afgeleid kan worden op basis van 40 wk minus het aantal weken tussen ATermeDatum en Statusdatum. Het lijkt me betrouwbaarder om een StatusDatum te hebben en op basis van functionaliteit de zwangerschapsduur te bepalen dan een zwangerschapduur te 'vragen' zonder StatusDatum.  
 Het voorbeeld bij de zib is niet eenvoudig te intrpreteren: als de zwangerschapsduur 24 wk is, dan moet de StatusDatum dus liggen op ATermeDatum - (40 wk - 24 wk) = 18-09-2014.
 Neem in overweging om een StatusDatum op te nemen, waarbij Zwangerschapsduur dan een afgeleid gegeven is.  
 
