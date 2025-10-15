@@ -1,11 +1,12 @@
 # CurrentPregnancy
 ## Bespreking 14-10
-+ EHDSCurrentPregnancy.gestationalAge en Zwangerschapsduur in de zib: dit concept hoort niet in het model. Gestational age kan worden afgeleid (40 wk minus het aantal weken tussen ATermeDatum en Statusdatum). Hier maken we een consultatie-issue van en een zib-issue. 
-+ EHDSCurrentPregnancy.dateOfStatus: dit concept ontbreekt in de zib, maar is wel essentieel, omdat ook de zib het karakter van een _observatie_ heeft. StatusDatum moet aan het rootconcept worden toegevoegd. DatumBepaling (van de a-terme datum) lijkt niet nodig in de zib (is metadata). Hier maken we een zib-issue van.
-
++ EHDSCurrentPregnancy.gestationalAge en Zwangerschapsduur in de zib: dit concept is redundant. Gestational age kan worden afgeleid (40 wk minus het aantal weken tussen ATermeDatum en Statusdatum). Hier maken we een consultatie-issue van en een zib-issue. 
++ EHDSCurrentPregnancy.dateOfStatus: dit concept ontbreekt in de zib, maar is wel essentieel, omdat ook de zib het karakter van een _observatie_ heeft. StatusDatum moet aan het rootconcept worden toegevoegd.
+  + De zib heeft DatumBepaling. Overleggen of deze nog nodig is. Blijkbaar wordt de bepaling van de à terme datum soms herzien. Het gebeurt dus niet zonder meer bij elke beoordeling van de status van de zwangerschap. Dit betekent dat de DatumBepaling nodig kan zijn om te beslissen of een hernieuwde bepaling nodig is. De à terme datum wordt nl. ook gebruikt voor het afleiden van de zwangerschapsduur. Een nauwkeurige bepaling van de à terme datum zal vooral spelen in de eerste 20-24 wk van de zwangerschap, omdat deze grens bepalend is voor pariteit en levensvatbaarheid.
 + In zowel de zib als EHDSCurrentPregnancy ontbreekt het aantal foetussen. We maken er een zib issue en een consultatie-issue van.
 + In EHDSCurrentPregnancy ontbreken graviditeit en pariteit. Die kunnen in principe worden afgeleid uit de aanwezige instanties van EHDSPregnancyHistory, maar het afleiden van de pariteit is niet eenvoudig. We maken er geen consultatie-issue van en voor de zib moeten we overwegen om ze ergens anders onder te brengen: het zijn immers geen eigenschappen van de zwangerschap.
-+ _@Astrid moeten we aan de zib een status toevoegen die mapt op currentPregnancyStatus?_
++ EHDSCurrentPregnancy.currentPregnancyStatus hoort niet in het model. Je kunt niet in de zwangerschap modelleren of de zwangerschap bestaat. Hoort in een vragenlijst. We maken er een consulatie-issue van.
++ Graviditeit en Pariteit zijn geen eigenschappen van de zwangerschap. We maken er een zib-issue van. 
 
 ## Overall discussion
 The zib has all (logical) concepts of the Xt-EHR model except for .currentPregnancyStatus, with which it is possible to express, for example, that the subject is not pregnant. The zib has Gravidity, Parity, and several concepts to express the data on which the EstimatedDateOfDelivery is based which the Xt-EHR model has not. 
