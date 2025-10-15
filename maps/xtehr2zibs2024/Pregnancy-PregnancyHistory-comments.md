@@ -1,9 +1,41 @@
 # PregnancyHistory  
 ## Bespreking 14-10
 Aanwezig: Lilian, Micha, Astrid, Jacob  
-+ Er is geen zib voor pregnancy history, maar EHDSPregnancyHistory kan worden gevuld vanuit instantiaties van zib Zwangerschap die beëindigd zijn (_@Astrid hoe dan? Ontbreekt er niet een status aan de zib?_)
-+ De waardenlijsten bij .outcome (https://art-decor.ehdsi.eu/decor/services/RetrieveValueSet?id=1.3.6.1.4.1.12559.11.10.1.3.1.42.62&effectiveDate=2022-04-28T16:50:00&prefix=epsos-&format=html&collapsable=true&language=en-US&ui=en-US en https://art-decor.ehdsi.eu/decor/services/RetrieveValueSet?id=1.3.6.1.4.1.12559.11.10.1.3.1.42.63&effectiveDate=2025-02-18T09:52:00&prefix=epsos-&format=html&collapsable=true&language=en-US&ui=en-US) passen niet bij het concept outcome: de meeste waarden zijn diagnoses. We maken een issue om het te concept te splitsen in een outcome en een verwijzing naar EHDSCondition. _@Astrid welke waarden uit de waardenlijst zijn geen diagnoses?_
-+ _@Astrid hebben we in de zib een concept outcome nodig en/of een verwijzing naar Diagnose?_ 
++ Er is geen zib voor pregnancy history, maar EHDSPregnancyHistory kan worden gevuld vanuit instantiaties van zib Zwangerschap die beëindigd zijn 
++ De items voor de codelijst van EHDS Outcome sluiten elkaar niet uit en de kardinaliteit is nu 0..1.
+Verzoek voor EHDS:
+  1. De lijst is niet mutually exclusive, omdat sommige items enerzijds een diagnose zijn waarbij de vrucht het lichaam nog niet heeft verlaten en anderzijds de manier aangeven waarop de zwangerschap eindigde. Als dat zo blijft, verhoog dan de kardinaliteit naar 0..*.
+  2. Als de kardinaliteit 0..1 moet blijven, zorg dan dat de items in de lijst elkaar uitsluiten. 
++ EHDS element outcomeDate: Dit is een moeilijk element, omdat er in de lijst voor 'outcome' een mengeling van waarden staat: enerzijds waarden die betrekking hebben op een diagnose, terwijl de vrucht nog in de moeder is (zwangeschap loopt nog) en anderzijds waarden (behalve newborn death) die echt een einde van de zwangerschap zijn.  
+In het eerste geval hebben we het over een diagnosedatum en in het andere geval over de einddatum van de zwangerschap.  
+Verzoek voor EHDS:  
+Wijzig 'outcomeDate' in 'EndDate', die dan betrekking heeft op het moment waarop de zwangerschap is beëindigd, d.w.z. de vrucht het lichaam verliet. Zo is er geen onduidelijkheid of de datum betrekking heeft op een diagnose, zoals 'fetal death', dan wel op het moment waarop de zwangerschap eindigde, nl. het moment van de 'stillbirth' of de 'termination of pregnancy'.
++ De zib mist een einddatum. Zib issue: EindDatum toevoegen aan rootconcept.
+  + Deze zal kunnen worden gemapped op outcomeDate, maar alleen als de outcome het einde van de zwangerschap is en niet een diagnose! Zie het verzoek hierboven m.b.t. het EHDS element 'outcomeDate'.
++ In de zib ontbreekt een equivalent voor de outcome van een zwangerschap.
+  + zib issue: voeg TypeZwangerschapseinde toe aan het rootconcept
+    + Codelijst voor TypeZwangerschapsEinde:
+      + Livebirth
+      + Miscarriage
+      + Stillbirth
+      + Termination of pregnancy (bedoelen ze hier abortus provocatus? Wat evt. nog meer?) 	
+  + zib issue: voeg verwijzing naar Diagnose toe aan rootconcept
+    + let op: Diagnose en Zwangerschapseinde zitten ws niet in dezelfde 'versie' (instantiatie) van dezelfde zwangerschap.
+    + Diagnose bij de moeder kan belangrijke context zijn voor de zwangerschap! Verwijzing naar diagnose bij moeder? Of gewoon in de toelichting?
+    + Codelijst voor Diagnose:
+      + Ectopic pregnancy
+      + Hydatidiform mole, benign
+      + Fetal death
+      + Foetale nood
+    + Uitgangspunt is dat er nog sprake is van zwangerschap zolang de vrucht het lichaam nog niet heeft verlaten.  
+Verwijzing naar diagnose lijkt niet nodig (voor EHDS).
++ Waardenlijst bij EHDSPregnancyHistory.outcome
+  + Newborn death: Dit betreft het kindje, dat binnen 28 dagen na de geboorte overlijdt. Het is dus geen einde van de zwangerschap, want het kindje kwam levend ter wereld. Men vindt het blijkbaar relevant om te weten of een zwangerschap al dan niet tot een geboorte van een kindje heeft geleid dat minstens 28 in leven is gebleven.
+    + Verzoek voor EHDS verwijderen uit de lijst om de volgende redenen:
+      + Het is geen einde van de zwangerschap: dat is nl. een live birth.
+      + Newborn death wordt pas ná de zwangerschap bekend.
+      + Het betreft een levend geboren kindje, dus een andere patiënt.
+
 
 ## Overall discussion
 There are no matching concepts in the zib versus the Xt-EHR logical model.  
