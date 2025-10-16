@@ -108,7 +108,7 @@
 | type_xtehr | Base |
 
 ### Comments
-
+Meerdere auteurs lijkte me problematisch. Wie is er verantwoordelijk voor een registratie als er > 1 auteur is?
 
 
 ## EHDSDataSet.header.authorship.author[x]
@@ -135,8 +135,11 @@ It concerns not only own observations, but also information received from third 
 | type_xtehr | EHDSHealthProfessional |
 
 ### Comments
+De zib Zorgverlener dekt geen Device.
 
-
+EHDSDataSet.header.authorship.author[x] .authorEHDSHealthProfessional					Zib Zorgverlener representeert HealthProfessional, maar de match tussen Zorgverlener en EHDSHealthProfessional valt onder een aparte verschillenanalyse.
+EHDSDataSet.header.authorship.author[x] .authorEHDSOrganisation					Zib Zorgverlener omvat verwijzing naar Zorgaanbieder, maar de match tussen ZorgAanbieder en EHDSOrganisation valt onder een andere verschillenanalyse.
+EHDSDataSet.header.authorship.author[x] .authorEHDSDevice
 
 ## EHDSDataSet.header.authorship.datetime
 
@@ -190,7 +193,7 @@ It concerns not only own observations, but also information received from third 
 | type_zib | II |
 
 ### Comments
-
+We moeten overleggen of het wenselijk is om meerdere identifiers te hebben, bijv. een identifier van een verzender als alias.
 
 
 ## EHDSDataSet.header.language
@@ -248,7 +251,8 @@ It concerns not only own observations, but also information received from third 
 | type_xtehr | CodeableConcept |
 
 ### Comments
-
+"Als het zib element DatTimeOfClosure (m.i. typefout in naam) gevuld is, impliceert dit een statuswaarde: nl. dat vanaf dat moment de instantiatie niet meer van toepassing is.
+We moeten ons afvragen of het wenselijk is  dat RegistratieGegevens een wat algemener element krijgt voor de status van de instantiatie."
 
 
 ## EHDSDataSet.header.statusReason[x]
@@ -267,7 +271,7 @@ It concerns not only own observations, but also information received from third 
 | type_xtehr | CodeableConcept |
 
 ### Comments
-
+Zeer beperkte match: betreft alleen de reden voor een instantiatie met een afgesloten status. Als we kiezen voor een algemenr element Status in de zib RegistratieGegevens dan moet de reden voor die status ook algemener zijn.
 
 
 ## EHDSDataSet.header.subject
@@ -286,7 +290,7 @@ It concerns not only own observations, but also information received from third 
 | type_xtehr | EHDSPatient |
 
 ### Comments
-
+De verwijzing naar Patient is impliciet in de zib.
 
 
 ## EHDSDataSet.header.version
@@ -305,7 +309,7 @@ It concerns not only own observations, but also information received from third 
 | type_xtehr | string |
 
 ### Comments
-
+Dit gegevenselement zie ik niet terug in het XT-EHR logical model.
 
 
 ## EHDSDataSet.presentedForm
@@ -324,7 +328,7 @@ It concerns not only own observations, but also information received from third 
 | type_xtehr | EHDSAttachment |
 
 ### Comments
-
+Dit gegevenselement zie ik niet terug in het XT-EHR logical model.
 
 
 ## zib: RegistrationData.AcquisitionDateTime
@@ -408,7 +412,7 @@ It concerns not only own observations, but also information received from third 
 | type_zib | TS |
 
 ### Comments
-
+Het lijkt me dat EHDS een StatusDateTime zou moeten hebben, zodat duidelijk is vanaf wanneer de statuswaarde van toepassing is.
 
 
 ## zib: RegistrationData.InformationSource
@@ -429,7 +433,7 @@ If the recorded information has not been assessed by the attending physician, th
 | stereotype_zib | container |
 
 ### Comments
-
+Ik kan me voorstellen dat het wenselijk is om de bron van een gegeven te weten. Bespreken of we dit willen inbrengen bij EHDS.
 
 
 ## zib: RegistrationData.InformationSource.ContactPerson
