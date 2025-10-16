@@ -4,6 +4,7 @@
 Er zijn slechts 3 equivalente concepten.
 De zib heeft meer procesinformatie (indiener van het verzoek, status van het verzoek). Wel opmerkelijk dat een belangrijk procesgegeven, namelijk "when service should occur" ontbreekt in de zib en wel aanwezig is in het LM.
 Het EHDS LM heeft meer gestructureerde informatie over datgene dat wordt verzocht, de reden van het verzoek, en de ondersteunende informatie. De zib heeft hier vrije tekst velden voor.
+Opmerkelijk dat de indiener en het tijdstip van indienen in het EHDS model ontbreken. De informatie in de header geldt, zou je zeggen, alleen voor de _registratie_ van het verzoek.
 
 
 
