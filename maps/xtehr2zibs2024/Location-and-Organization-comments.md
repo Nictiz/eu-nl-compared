@@ -18,9 +18,9 @@ Apart from this issue with the zib, the Xt-EHR model has a concept of hierarchy 
 |                                                           | EHDSLocation.managingOrganization |            | Reference       |             | 0..1          |
 |                                                           | EHDSLocation.name                 |            | string          |             | 0..1          |
 |                                                           | EHDSLocation.partOf               |            | Reference       |             | 0..1          |
-|                                                           | EHDSLocation.position             |            | Base            |             | 0..1          |
-|                                                           | EHDSLocation.position.latitude    |            | decimal         |             | 1..1          |
-|                                                           | EHDSLocation.position.longitude   |            | decimal         |             | 1..1          |
+|                                                           | EHDSLocation.position(*)          |            | Base            |             | 0..1          |
+|                                                           | EHDSLocation.position.latitude(*) |            | decimal         |             | 1..1          |
+|                                                           | EHDSLocation.position.longitude(*)|            | decimal         |             | 1..1          |
 |                                                           | EHDSLocation.type                 |            | CodeableConcept |             | 0..*          |
 |                                                           | EHDSOrganization                  |            |                 |             | 0..*          |
 |                                                           | EHDSOrganization.address          |            | EHDSAddress     |             | 0..*          |
@@ -33,7 +33,7 @@ Apart from this issue with the zib, the Xt-EHR model has a concept of hierarchy 
 | HealthcareProvider.DepartmentSpecialty                    |                                   | CD         |                 | 0..1        |               |
 |                                                           |                                   |            |                 | 0..1        |               |
 
-
+(*) 20-10-2025: not in main branch
 
 ## EHDSLocation
 
