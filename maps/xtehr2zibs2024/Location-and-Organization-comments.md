@@ -1,4 +1,8 @@
 # Location and Organization as of 2025-06-17
+## Comments added by Jacob 20-10
++ EHDSLocation lacks concept to describe specific location within a building
++ EHDSLocation.partOf is reference to EHDSOrganization. Should be EHDSLocation as per definition.
+
 ## Overall Discussion
 The Location and Organization Xt-EHR models cover the same information as zib HealthcareProvider does, but it is hard to match zib and Xt-EHR. This is largely due to the fact that the zib [suffers from the known issue](https://nictiz.atlassian.net/browse/ZIB-2471) that it is an amalgamation of both a location where care is delivered, and the managing organization of this location. In [ZIB-1539](https://nictiz.atlassian.net/browse/ZIB-1359) it is clarified that the zib in the first place represents a location, but from its use in other zibs and the description of the concepts it becomes clear that this is not the entire picture.
 
@@ -7,6 +11,7 @@ This makes comparison hard, as most zib concepts could potentially be equivalent
 For this analysis, the view was taken that the zib primarily represents a location, but the Discussion should be considered very weak.
 
 Apart from this issue with the zib, the Xt-EHR model has a concept of hierarchy (a location is part of an organization, and organizations can be hierarchically organized). The zib lacks this kind of hierarchical relationships.
+
 
 | zib                                                       | xtehr                             | type_zib   | type_xtehr      | card._zib   | card._xtehr   |
 |:----------------------------------------------------------|:----------------------------------|:-----------|:----------------|:------------|:--------------|
@@ -91,6 +96,7 @@ Apart from this issue with the zib, the Xt-EHR model has a concept of hierarchy 
 
 ### Comments
 The zib allows for multiple addresses, but the Xt-EHR models allows for just one address, defined as "the physical address". This make sense as the address here is meant to define "where somebody should be" (as opposed to the Organization, which can have multiple types of addresses). It's possible that the location/organization duality of the zib is the reason for this.
+Note: a concept describing a specific location within a building seems to be missing. 
 
 
 ## EHDSLocation.description
@@ -266,6 +272,7 @@ _If_ the zib represents a location, this information is part of the zib, kind of
 ### Comments
 
 This kind of hierarchical relationships are outside of the scope of the zib.
+Note: the reference is of type EHDSOrganization. That should probably be EHDSLocation, as per definition.
 
 ## EHDSLocation.position
 
