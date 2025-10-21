@@ -1,16 +1,16 @@
 # SubstanceUse
 
 ## General comments 
+Both the EHDS model and the zib seem to model an observation of single period (this may be a current period, without end date). In both models, metadata about the observation, such as when the observation was made, is absent.   
+"Alcohol" in the EHDS should be replaces by "Substance" throughout the model.
 
-Both the EHDS model and the zib seem to model an observation of single period (this may be a current period, without end date).
-The EHDS model has .period defined as "Time period for which this observation about substance use is applicable". It is unclear to me what this means.
-The zib has no metadata (like the date on which the observation was made) at all about the observation.
+In addition the zib has a DrugUseStatus indicating whether there was any drug use in the past or present (we must assume at the time of the observation).
+The EHDS model has only header.status of which the definition is "Status of the patient’s alcohol use." This is most probably an error, as the header should contain metadata of the _registration_ of the SubstanceUse instance.
 
-In addition the zib has a DrugUseStatus which can be information about the current and past drug uses. 
+There is an issue with EHDSSubstanceUse.frequencyAndQuantity.period. Its data type is _Period_, this should probably be _Quantity_.  
+There is a datatype mismatch in DrugUse.ObservationOfUse.Amount vs EHDSSubstanceUse.frequencyAndQuantity.quantity.
 
-The EHDS model has only header.status of which the definition is "Status of the patient’s alcohol use." This is most probably an error, as the header should contain metadata of the _registration_ of the SubstanceUse instance and the model is not limited to AlcoholUse.
-
-There may be an issue with units of the amount of substance consumed. The zib has "The number of units (pills, joints, shots etc.) per day, week, month, or year; or the frequency of use.", the EHDS model has "volume per time unit".  
+ 
 
 
 | zib                                | xtehr                                          | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
@@ -26,17 +26,15 @@ There may be an issue with units of the amount of substance consumed. The zib ha
 |                                    | EHDSSubstanceUse.header.status                 |            | CodeableConcept        |             | 1..1          |
 |                                    | EHDSSubstanceUse.header.statusReason[x]        |            | CodeableConcept        |             | 0..1          |
 |                                    | EHDSSubstanceUse.header.language               |            | CodeableConcept        |             | 0..1          |
-|                                    | EHDSSubstanceUse.period                        |            | Period                 |             | 0..1          |
+| DrugUse.ObservationOfUse.StartDate; DrugUse.ObservationOfUse.StopDate | EHDSSubstanceUse.period                        | TS         | Period                 | 0..1        | 0..1          |
 |                                    | EHDSSubstanceUse.frequencyAndQuantity          |            | Base                   |             | 0..1          |
 | DrugUse.ObservationOfUse.Amount    | EHDSSubstanceUse.frequencyAndQuantity.quantity | ST         | Quantity               | 0..1        | 1..1          |
-| DrugUse.ObservationOfUse.StartDate;DrugUse.ObservationOfUse.StopDate | EHDSSubstanceUse.frequencyAndQuantity.period   | TS         | Period                 | 0..1        | 0..1          |
+|                                    | EHDSSubstanceUse.frequencyAndQuantity.period   |            | Period                 |             | 0..1          |
 | DrugUse.DrugOrMedicationType       | EHDSSubstanceUse.substanceType                 | CD         | CodeableConcept        | 0..1        | 0..1          |
 | DrugUse.RouteOfAdministration      | EHDSSubstanceUse.routeOfAdministration         | CD         | CodeableConcept        | 0..*        | 0..*          |
 | DrugUse.Comment                    | EHDSSubstanceUse.note                          | ST         | string                 | 0..1        | 0..1          |
 | DrugUse.DrugUseStatus              |                                                | CD         |                        | 1           |               |
-| DrugUse.ObservationOfUse           |                                                |            |                        | 0..1        |               |
-| DrugUse.ObservationOfUse.StopDate  |                                                | TS         |                        | 0..1        |               |
-
+| DrugUse.ObservationOfUse           |                                                |            |                        | 0..1        |               
 
 
 ## EHDSSubstanceUse
@@ -214,7 +212,7 @@ There may be an issue with units of the amount of substance consumed. The zib ha
 | type_xtehr | CodeableConcept |
 
 ### Comments
-Clearly, wrong definition. Also, the header only contains metadata about the registration of the instance of SubstanceUse.
+Issue: header information is to be used for data about registration. Meaning of "Status of the patient’s alcohol use" is unclear.  
 
 
 
@@ -264,16 +262,23 @@ Clearly, wrong definition. Also, the header only contains metadata about the reg
 | attribute | value |
 |---|---|
 | xtehr | EHDSSubstanceUse.period |
-| zib |  |
+| zib | DrugUse.ObservationOfUse.StartDate; DrugUse.ObservationOfUse.StopDate  |
+| alias_zib | NL: StartDatum |
 | card._xtehr | 0..1 |
+| card._zib | 0..1 |
 | definition_xtehr | Time period for which this observation about substance use is applicable |
+| definition_zib | The date on which the patient started using. |
 | id_xtehr | EHDSSubstanceUse.period |
+| id_zib | NL-CM:7.4.6 |
+| name_zib | StartDate |
 | path_xtehr | EHDSSubstanceUse.period |
+| path_zib | DrugUse.ObservationOfUse.StartDate |
 | short_xtehr | Time period for which this observation about substance use is applicable |
+| stereotype_zib | data |
 | type_xtehr | Period |
+| type_zib | TS |
 
-### Comments
-Meaning unclear. 
+### Comments 
 
 
 
@@ -321,6 +326,8 @@ Meaning unclear.
 | type_zib | ST |
 
 ### Comments
+See issue on EHDSSubstanceUse.frequencyAndQuantity.period. 
+Data type mismatch: zib uses String. 
 
 
 
@@ -331,24 +338,17 @@ Meaning unclear.
 | attribute | value |
 |---|---|
 | xtehr | EHDSSubstanceUse.frequencyAndQuantity.period |
-| zib | DrugUse.ObservationOfUse.StartDate |
-| alias_zib | NL: StartDatum |
+| zib |  |
 | card._xtehr | 0..1 |
-| card._zib | 0..1 |
 | definition_xtehr | Time period of alcohol use. |
-| definition_zib | The date on which the patient started using. |
 | id_xtehr | EHDSSubstanceUse.frequencyAndQuantity.period |
-| id_zib | NL-CM:7.4.6 |
-| name_zib | StartDate |
 | path_xtehr | EHDSSubstanceUse.frequencyAndQuantity.period |
-| path_zib | DrugUse.ObservationOfUse.StartDate |
 | short_xtehr | Time period of alcohol use. |
-| stereotype_zib | data |
 | type_xtehr | Period |
-| type_zib | TS |
 
 ### Comments
-Maps to DrugUse.ObservationOfUse.StartDate and DrugUse.ObservationOfUse.StopDate
+There is an issue with the data type of this concept. Most probably, _Quantity_ is meant, so that the frequencyAndQuantity can be expressed in units per duration (5 units per 2 days) for example. In that case, there is a non-perfect match between EHDSSubstanceUse.frequencyAndQuantity and DrugUse.ObservationOfUse.Amount. Non-perfect because the zib uses datatype string. 
+
 
 
 ## EHDSSubstanceUse.substanceType
@@ -456,6 +456,7 @@ Maps to DrugUse.ObservationOfUse.StartDate and DrugUse.ObservationOfUse.StopDate
 | type_zib | CD |
 
 ### Comments
+Probably, "Status of the patient’s drug use" was intended to be included in the EHDS model, but is erroneously attributed to .header.status.  
 
 
 
@@ -497,5 +498,5 @@ Maps to DrugUse.ObservationOfUse.StartDate and DrugUse.ObservationOfUse.StopDate
 | type_zib | TS |
 
 ### Comments
-Maps to EHDSSubstanceUse.frequencyAndQuantity.period 
+Maps to 
 
