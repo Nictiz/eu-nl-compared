@@ -1,11 +1,14 @@
 # SubstanceUse
 
 ## General comments
-Both the EHDS model and the zib seem to model an observation of a period (this may be a current period, without end date), but metadata about the observation, like a date on which the observation was made, is missing in both models.  
-The zib has a AlcoholUseStatus which is a mix of the status at the time of the observation and the history.  
-The EHDS model has only header.status of which the definition is "Status of the patient’s alcohol use." This is probably an error, as the header should contain metadata of the _registration_ of the SubstanceUse instance.   
-There may be an issue with units of the amount of substance consumed. The zib has "unis per time unit", the EHDS model has "volume per time unit".  
-The zib lacks routeOfAdministration. 
+Both the EHDS model and the zib seem to model an observation of single period (this may be a current period, without end date). In both models, metadata about the observation, such as when the observation was made, is absent.   
+"Alcohol" in the EHDS should be replaces by "Substance" throughout the model.
+
+In addition the zib has a DrugUseStatus indicating whether there was any drug use in the past or present (we must assume at the time of the observation).
+The EHDS model has only header.status of which the definition is "Status of the patient’s alcohol use." This is most probably an error, as the header should contain metadata of the _registration_ of the SubstanceUse instance.
+
+There is an issue with EHDSSubstanceUse.frequencyAndQuantity.period. Its data type is _Period_, this should probably be _Quantity_.  
+
 
 
 
@@ -209,7 +212,7 @@ The zib lacks routeOfAdministration.
 | type_xtehr | CodeableConcept |
 
 ### Comments
-The definition of this concept is probably a error. The header contains metadata about the registration of the instance of SubstanceUse.
+Issue: header information is to be used for data about registration. Meaning of "Status of the patient’s alcohol use" is unclear.  
 
 
 
@@ -323,7 +326,8 @@ The definition of this concept is probably a error. The header contains metadata
 | type_zib | PQ |
 
 ### Comments
-The zib had units "units per timeperiod". The EHDS model has units "volume per time unit". 
+See issue on EHDSSubstanceUse.frequencyAndQuantity.period.
+
 
 
 
@@ -343,6 +347,7 @@ The zib had units "units per timeperiod". The EHDS model has units "volume per t
 | type_xtehr | Period |
 
 ### Comments
+There is an issue with the data type of this concept. Most probably, _Quantity_ is meant, so that the frequencyAndQuantity can be expressed in units per duration (5 units per 2 days) for example. In that case, there is a non-perfect match between EHDSSubstanceUse.frequencyAndQuantity and DrugUse.ObservationOfUse.Amount. Non-perfect because the zib uses datatype string. 
 
 
 
@@ -411,6 +416,7 @@ The zib had units "units per timeperiod". The EHDS model has units "volume per t
 | type_zib | ST |
 
 ### Comments
+Probably, "Status of the patient’s alcohol use" was intended to be included in the EHDS model, but is erroneously attributed to .header.status.  
 
 
 
@@ -474,4 +480,5 @@ The zib had units "units per timeperiod". The EHDS model has units "volume per t
 | type_zib | TS |
 
 ### Comments
+Maps to EHDSSubstanceUse.period
 
