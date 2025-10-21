@@ -1,4 +1,8 @@
 # MedicationStatement
+## discussie 21-10-2025 met Astrid, Jacob, Sander, Evelyn, Tim S.
++ zib TreatmentStatus en EHDS .UseIndicator zijn redundant met PeriodOfUse. Ieder afzonderlijk zijn ze goed te gebruiken. Issue EHDS: er is geen binding bij medicationTreatmentStatus. Waarschijnlijk meer dan alleen ja of nee, dan ook zib issue om dit aan te passen.
+
+_Wordt vervolgd_
 
 ## Algemeen
 Algemeen:
