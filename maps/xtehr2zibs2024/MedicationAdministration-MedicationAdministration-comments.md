@@ -4,7 +4,7 @@
 
 
 ## Bespreking 21-10-2025 met Astrid, Sander, Evelyn, Tim S., Jacob
-+ Toedierner ontbreekt in EHDS model maar gezien het gebruik van het model is dat logisch. We maken er geen issue van
++ Toediener ontbreekt in EHDS model maar gezien het gebruik van het model is dat logisch. We maken er geen issue van
 + EHDS model: onduidelijk of de toedieningssneldheid de oplossing of de werkzame stof bevat.
     + Astrid formuleert nog een zib issue en een EHDS issue
 + De reden van voorschrijven staat in de zibs in MedicatieAfspraak, maar de kardinaleit is te krap -> zib issue  
