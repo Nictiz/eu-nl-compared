@@ -4,7 +4,7 @@
 Both the EHDS model and the zib seem to model an observation of single period (this may be a current period, without end date). In both models, metadata about the observation, such as when the observation was made, is absent.   
 "Alcohol" in the EHDS should be replaces by "Substance" throughout the model.
 
-In addition the zib has a DrugUseStatus indicating whether there was any drug use in the past or present (we must assume at the time of the observation).
+In addition the zib has a DrugUseStatus indicating whether there was any drug use in the past or present (we must assume at the time of the observation). See also https://nictiz.atlassian.net/browse/ZIB-2212.  
 The EHDS model has only header.status of which the definition is "Status of the patient’s alcohol use." This is most probably an error, as the header should contain metadata of the _registration_ of the SubstanceUse instance.
 
 There is an issue with EHDSSubstanceUse.frequencyAndQuantity.period. Its data type is _Period_, this should probably be _Quantity_.  
