@@ -1,28 +1,28 @@
 # SubstanceUse
 
-| zib                                   | xtehr                                          | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
-|:--------------------------------------|:-----------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
-| AlcoholUse                            | EHDSSubstanceUse                               |            |                        |             | 0..*          |
-|                                       | EHDSSubstanceUse.header                        |            | Base                   |             | 1..1          |
-|                                       | EHDSSubstanceUse.header.subject                |            | EHDSPatient            |             | 1..1          |
-|                                       | EHDSSubstanceUse.header.identifier             |            | Identifier             |             | 0..*          |
-|                                       | EHDSSubstanceUse.header.authorship             |            | Base                   |             | 1..*          |
-|                                       | EHDSSubstanceUse.header.authorship.author[x]   |            | EHDSHealthProfessional |             | 1..1          |
-|                                       | EHDSSubstanceUse.header.authorship.datetime    |            | dateTime               |             | 1..1          |
-|                                       | EHDSSubstanceUse.header.lastUpdate             |            | dateTime               |             | 0..1          |
-|                                       | EHDSSubstanceUse.header.status                 |            | CodeableConcept        |             | 1..1          |
-|                                       | EHDSSubstanceUse.header.statusReason[x]        |            | CodeableConcept        |             | 0..1          |
-|                                       | EHDSSubstanceUse.header.language               |            | CodeableConcept        |             | 0..1          |
-|                                       | EHDSSubstanceUse.period                        |            | Period                 |             | 0..1          |
-|                                       | EHDSSubstanceUse.frequencyAndQuantity          |            | Base                   |             | 0..1          |
-| AlcoholUse.ObservationOfUse.Amount    | EHDSSubstanceUse.frequencyAndQuantity.quantity | PQ         | Quantity               | 0..1        | 1..1          |
-| AlcoholUse.ObservationOfUse.StartDate | EHDSSubstanceUse.frequencyAndQuantity.period   | TS         | Period                 | 0..1        | 0..1          |
-|                                       | EHDSSubstanceUse.substanceType                 |            | CodeableConcept        |             | 0..1          |
-|                                       | EHDSSubstanceUse.routeOfAdministration         |            | CodeableConcept        |             | 0..*          |
-| AlcoholUse.Comment                    | EHDSSubstanceUse.note                          | ST         | string                 | 0..1        | 0..1          |
-| AlcoholUse.AlcoholUseStatus           |                                                | CD         |                        | 1           |               |
-| AlcoholUse.ObservationOfUse           |                                                |            |                        | 0..1        |               |
-| AlcoholUse.ObservationOfUse.StopDate  |                                                | TS         |                        | 0..1        |               |
+| zib                                | xtehr                                          | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
+|:-----------------------------------|:-----------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
+| DrugUse                            | EHDSSubstanceUse                               |            |                        |             | 0..*          |
+|                                    | EHDSSubstanceUse.header                        |            | Base                   |             | 1..1          |
+|                                    | EHDSSubstanceUse.header.subject                |            | EHDSPatient            |             | 1..1          |
+|                                    | EHDSSubstanceUse.header.identifier             |            | Identifier             |             | 0..*          |
+|                                    | EHDSSubstanceUse.header.authorship             |            | Base                   |             | 1..*          |
+|                                    | EHDSSubstanceUse.header.authorship.author[x]   |            | EHDSHealthProfessional |             | 1..1          |
+|                                    | EHDSSubstanceUse.header.authorship.datetime    |            | dateTime               |             | 1..1          |
+|                                    | EHDSSubstanceUse.header.lastUpdate             |            | dateTime               |             | 0..1          |
+|                                    | EHDSSubstanceUse.header.status                 |            | CodeableConcept        |             | 1..1          |
+|                                    | EHDSSubstanceUse.header.statusReason[x]        |            | CodeableConcept        |             | 0..1          |
+|                                    | EHDSSubstanceUse.header.language               |            | CodeableConcept        |             | 0..1          |
+|                                    | EHDSSubstanceUse.period                        |            | Period                 |             | 0..1          |
+|                                    | EHDSSubstanceUse.frequencyAndQuantity          |            | Base                   |             | 0..1          |
+| DrugUse.ObservationOfUse.Amount    | EHDSSubstanceUse.frequencyAndQuantity.quantity | ST         | Quantity               | 0..1        | 1..1          |
+| DrugUse.ObservationOfUse.StartDate | EHDSSubstanceUse.frequencyAndQuantity.period   | TS         | Period                 | 0..1        | 0..1          |
+| DrugUse.DrugOrMedicationType       | EHDSSubstanceUse.substanceType                 | CD         | CodeableConcept        | 0..1        | 0..1          |
+| DrugUse.RouteOfAdministration      | EHDSSubstanceUse.routeOfAdministration         | CD         | CodeableConcept        | 0..*        | 0..*          |
+| DrugUse.Comment                    | EHDSSubstanceUse.note                          | ST         | string                 | 0..1        | 0..1          |
+| DrugUse.DrugUseStatus              |                                                | CD         |                        | 1           |               |
+| DrugUse.ObservationOfUse           |                                                |            |                        | 0..1        |               |
+| DrugUse.ObservationOfUse.StopDate  |                                                | TS         |                        | 0..1        |               |
 
 
 
@@ -33,16 +33,17 @@
 | attribute | value |
 |---|---|
 | xtehr | EHDSSubstanceUse |
-| zib | AlcoholUse |
-| alias_zib | NL: AlcoholGebruik |
+| zib | DrugUse |
+| alias_zib | NL: DrugsGebruik |
 | card._xtehr | 0..* |
 | definition_xtehr | Statement about using a substance (such as tobacco, alcohol, drugs, etc). |
-| definition_zib | Root concept of the AlcoholUse information model. This concept contains all data elements of the AlcoholUse information model. |
+| definition_zib | Root concept of the DrugUse information model. This concept contains all data elements of the DrugUse information model. |
+| definitioncode_zib | SNOMED CT: 228366006 Finding relating to drug misuse behavior |
 | id_xtehr | EHDSSubstanceUse |
-| id_zib | NL-CM:7.3.1 |
-| name_zib | AlcoholUse |
+| id_zib | NL-CM:7.4.1 |
+| name_zib | DrugUse |
 | path_xtehr | EHDSSubstanceUse |
-| path_zib | AlcoholUse |
+| path_zib | DrugUse |
 | short_xtehr | Substance use model |
 | stereotype_zib | rootconcept |
 
@@ -287,22 +288,22 @@
 | attribute | value |
 |---|---|
 | xtehr | EHDSSubstanceUse.frequencyAndQuantity.quantity |
-| zib | AlcoholUse.ObservationOfUse.Amount |
+| zib | DrugUse.ObservationOfUse.Amount |
 | alias_zib | NL: Hoeveelheid |
 | card._xtehr | 1..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Quantity (volume per time unit). |
-| definition_zib | The extent of the patient’s alcohol use in units of alcohol per time period. |
-| definitioncode_zib | SNOMED CT: 897148007 Alcoholic beverage intake |
+| definition_zib | The number of units (pills, joints, shots etc.) per day, week, month, or year; or the frequency of use. |
+| definitioncode_zib | SNOMED CT: 228390007 Frequency of drug misuse |
 | id_xtehr | EHDSSubstanceUse.frequencyAndQuantity.quantity |
-| id_zib | NL-CM:7.3.6 |
+| id_zib | NL-CM:7.4.8 |
 | name_zib | Amount |
 | path_xtehr | EHDSSubstanceUse.frequencyAndQuantity.quantity |
-| path_zib | AlcoholUse.ObservationOfUse.Amount |
+| path_zib | DrugUse.ObservationOfUse.Amount |
 | short_xtehr | Quantity (volume per time unit). |
 | stereotype_zib | data |
 | type_xtehr | Quantity |
-| type_zib | PQ |
+| type_zib | ST |
 
 ### Comments
 
@@ -315,17 +316,17 @@
 | attribute | value |
 |---|---|
 | xtehr | EHDSSubstanceUse.frequencyAndQuantity.period |
-| zib | AlcoholUse.ObservationOfUse.StartDate |
+| zib | DrugUse.ObservationOfUse.StartDate |
 | alias_zib | NL: StartDatum |
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Time period of alcohol use. |
-| definition_zib | The date on which the patient started using alcohol. |
+| definition_zib | The date on which the patient started using. |
 | id_xtehr | EHDSSubstanceUse.frequencyAndQuantity.period |
-| id_zib | NL-CM:7.3.4 |
+| id_zib | NL-CM:7.4.6 |
 | name_zib | StartDate |
 | path_xtehr | EHDSSubstanceUse.frequencyAndQuantity.period |
-| path_zib | AlcoholUse.ObservationOfUse.StartDate |
+| path_zib | DrugUse.ObservationOfUse.StartDate |
 | short_xtehr | Time period of alcohol use. |
 | stereotype_zib | data |
 | type_xtehr | Period |
@@ -342,14 +343,23 @@
 | attribute | value |
 |---|---|
 | xtehr | EHDSSubstanceUse.substanceType |
-| zib |  |
+| zib | DrugUse.DrugOrMedicationType |
+| alias_zib | NL: DrugsOfGeneesmiddelSoort |
 | binding_xtehr | {'strength': 'preferred', 'description': 'SNOMED CT'} |
 | card._xtehr | 0..1 |
+| card._zib | 0..1 |
 | definition_xtehr | Type of substance |
+| definition_zib | Type of drug used by the patient. |
+| definitioncode_zib | SNOMED CT: 410942007 Drug or medicament |
 | id_xtehr | EHDSSubstanceUse.substanceType |
+| id_zib | NL-CM:7.4.2 |
+| name_zib | DrugOrMedicationType |
 | path_xtehr | EHDSSubstanceUse.substanceType |
+| path_zib | DrugUse.DrugOrMedicationType |
 | short_xtehr | Type of substance |
+| stereotype_zib | data |
 | type_xtehr | CodeableConcept |
+| type_zib | CD |
 
 ### Comments
 
@@ -362,14 +372,23 @@
 | attribute | value |
 |---|---|
 | xtehr | EHDSSubstanceUse.routeOfAdministration |
-| zib |  |
+| zib | DrugUse.RouteOfAdministration |
+| alias_zib | NL: Toedieningsweg |
 | binding_xtehr | {'strength': 'preferred', 'description': 'EDQM'} |
 | card._xtehr | 0..* |
+| card._zib | 0..* |
 | definition_xtehr | Route(s) of administration |
+| definition_zib | The way the drugs are used. |
+| definitioncode_zib | SNOMED CT: 410675002 Route of administration |
 | id_xtehr | EHDSSubstanceUse.routeOfAdministration |
+| id_zib | NL-CM:7.4.4 |
+| name_zib | RouteOfAdministration |
 | path_xtehr | EHDSSubstanceUse.routeOfAdministration |
+| path_zib | DrugUse.RouteOfAdministration |
 | short_xtehr | Route(s) of administration |
+| stereotype_zib | data |
 | type_xtehr | CodeableConcept |
+| type_zib | CD |
 
 ### Comments
 
@@ -382,18 +401,18 @@
 | attribute | value |
 |---|---|
 | xtehr | EHDSSubstanceUse.note |
-| zib | AlcoholUse.Comment |
+| zib | DrugUse.Comment |
 | alias_zib | NL: Toelichting |
 | card._xtehr | 0..1 |
 | card._zib | 0..1 |
 | definition_xtehr | Textual comment. |
-| definition_zib | Relevant comments on the alcohol consumption. |
+| definition_zib | Relevant comments on the drug use. |
 | definitioncode_zib | LOINC: 48767-8 Annotation comment [Interpretation] Narrative |
 | id_xtehr | EHDSSubstanceUse.note |
-| id_zib | NL-CM:7.3.7 |
+| id_zib | NL-CM:7.4.9 |
 | name_zib | Comment |
 | path_xtehr | EHDSSubstanceUse.note |
-| path_zib | AlcoholUse.Comment |
+| path_zib | DrugUse.Comment |
 | short_xtehr | Textual comment. |
 | stereotype_zib | data |
 | type_xtehr | string |
@@ -403,21 +422,21 @@
 
 
 
-## zib: AlcoholUse.AlcoholUseStatus
+## zib: DrugUse.DrugUseStatus
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr |  |
-| zib | AlcoholUse.AlcoholUseStatus |
-| alias_zib | NL: AlcoholGebruikStatus |
+| zib | DrugUse.DrugUseStatus |
+| alias_zib | NL: DrugsGebruikStatus |
 | card._zib | 1 |
-| definition_zib | The status of the patient’s alcohol use. |
-| definitioncode_zib | SNOMED CT: 228273003 Finding relating to alcohol drinking behavior |
-| id_zib | NL-CM:7.3.2 |
-| name_zib | AlcoholUseStatus |
-| path_zib | AlcoholUse.AlcoholUseStatus |
+| definition_zib | Indication stating whether there was any drug use in the past or present. |
+| definitioncode_zib | SNOMED CT: 228366006 Finding relating to drug misuse behavior |
+| id_zib | NL-CM:7.4.3 |
+| name_zib | DrugUseStatus |
+| path_zib | DrugUse.DrugUseStatus |
 | stereotype_zib | data |
 | type_zib | CD |
 
@@ -425,40 +444,40 @@
 
 
 
-## zib: AlcoholUse.ObservationOfUse
+## zib: DrugUse.ObservationOfUse
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr |  |
-| zib | AlcoholUse.ObservationOfUse |
+| zib | DrugUse.ObservationOfUse |
 | alias_zib | NL: WaarnemingGebruik |
 | card._zib | 0..1 |
-| definition_zib | Container of the ObservationOfUse concept. This container contains all data elements of the observation of alcohol use. |
-| id_zib | NL-CM:7.3.3 |
+| definition_zib | Container for ObservationOfUse. This container contains all data elements of the ObservationOfUse container. |
+| id_zib | NL-CM:7.4.5 |
 | name_zib | ObservationOfUse |
-| path_zib | AlcoholUse.ObservationOfUse |
+| path_zib | DrugUse.ObservationOfUse |
 | stereotype_zib | container |
 
 ### Comments
 
 
 
-## zib: AlcoholUse.ObservationOfUse.StopDate
+## zib: DrugUse.ObservationOfUse.StopDate
 
 ### Table
 
 | attribute | value |
 |---|---|
 | xtehr |  |
-| zib | AlcoholUse.ObservationOfUse.StopDate |
+| zib | DrugUse.ObservationOfUse.StopDate |
 | alias_zib | NL: StopDatum |
 | card._zib | 0..1 |
-| definition_zib | The date on which the patient stopped consuming alcohol. |
-| id_zib | NL-CM:7.3.5 |
+| definition_zib | The date on which the patient quit using. |
+| id_zib | NL-CM:7.4.7 |
 | name_zib | StopDate |
-| path_zib | AlcoholUse.ObservationOfUse.StopDate |
+| path_zib | DrugUse.ObservationOfUse.StopDate |
 | stereotype_zib | data |
 | type_zib | TS |
 
