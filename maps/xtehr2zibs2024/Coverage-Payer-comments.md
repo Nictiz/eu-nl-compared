@@ -1,5 +1,19 @@
 # Coverage
 
+## Bespreking 28-10
+Aanwezig: Astrid en Yasmin
+
+## Bespreking 22-10
+Aanwezig: Astrid en Yasmin
+
+* Wat is een business identifier - instantiatie ID - overleggen met Pieter Edelman
+* Vastleggen van betaler verschilt erg per land door verschillen in opzet verzekeringen. Binnen Nederland zijn de Nederlandse waarden relevant, maar de buitenlandse waarschijnlijk niet.
+* Zib issue: Organization mapt niet goed op de zib zorgaanbieder omdat de zib 2 concepten omschrijft, zie ook bestaande zib issue https://nictiz.atlassian.net/browse/ZIB-2189?atlOrigin=eyJpIjoiMDFmYTI1YWFjNDAyNDdjYWE0NjdhYmEwYTFjNjU5NjIiLCJwIjoiaiJ9. Het zijn 2 concepten in 1 met cardinaliteit 0..1 (een zorgaanbieder kan maar 1 locatie hebben?) > veel redundantie. Het gevolg is dat zowel overkoepelende zorgaanbieders (organisaties) en vestigingen van een zorgaanbieder in dezelfde bouwsteen te staan komen. Een bouwsteen voor zorgaanbieder zou gekoppeld moeten kunnen worden aan meerdere locaties. Een bouwsteen voor vestiging zou 1 locatie moeten hebben (niet 0). Mappen naar de EHDS lukt niet, je wilt zowel naar de zorgaanbieder als de locatie kunnen verwijzen. Ook zijn daarbij de adresgegevens nodig. Na een splitsing van de zibs zou de mapping van zowel location als organisation opnieuw moeten gebeuren.
+* EHDS issue: niet netjes om aan te geven dat de betaler een patient. Het kan ook een andere persoon zijn en het is de vraag of deze gegevens nodig zijn (privacy). Dit mapt ook niet goed op de zib betaler, want daar kan een betaler ook een persoon zijn die niet de patient is. Database payer en patient zou gescheiden moeten worden - dus er wordt vastgelegd of je patient betaald, privacy - patient mapt niet goed op de zibs want payer kan ook niet de patient zijn, related person mapt niet goed op de zibs, want het kan ook een patient zijn. Betaler mappen op patient heeft geen zin want er zijn geen betaalgegevens bij de zib patient. Is het wenselijk om te weten dat het een patient is?
+* Zib issue: payer > payor
+
+
+
 | zib                                             | xtehr                             | type_zib   | type_xtehr       | card._zib   | card._xtehr   |
 |:------------------------------------------------|:----------------------------------|:-----------|:-----------------|:------------|:--------------|
 | Payer                                           | EHDSCoverage                      |            |                  |             | 0..*          |
@@ -97,7 +111,7 @@ Komt mogelijk overeen met zib element: RegistrationData.IdentificationNumber.
 | type_zib | CD |
 
 ### Comments
-Waarden van de value set overlappen weinig. Binding is preferred. Dit kan per land flink verschillen.
+Waarden van de value set overlappen weinig. Binding is preferred. Dit kan per land flink verschillen. Binnen Nederland zijn de Nederlandse waarden relevant, maar de buitenlandse ws niet, omdat een buitenlandse patiënt i.h.a. zelf moet betalen en bij de eigen verzekeraar moet declareren. Leveranciers kunnen dit gegeven als het uit het buitenland komt, ws óf negeren óf opslaan in een tekstveld.
 
 
 
@@ -168,6 +182,7 @@ Ws verkeerd gespeld in de zib, want EHDS noemt het 'payor'. 'Payor' heeft in het
 Volgens de specs van het LM (hier niet zichtbaar) kan dit een EHDSOrganisation of een EHDSPatient zijn. In de laatste vorm komt dit overeen met zib Patient. 
 !!Betaler als persoon hoeft niet de patiënt zelf te zijn: kan bijv. ouder zijn van minderjarige patiënt. Advies voor EHDS: Verwijs naar Persoon óf verwijs naar zowel Patient als RelatedPerson.
 
+Zib Betaler beperkt maakt een splitsing tussen zorgverzekeraars enerzijds en persoon anderzijds, waarbij persoon zowel een natuurlijk persoon kan zijn als een rechtspersoon (waaronder organisatie, gemeente, etc.). Dat maakt een twee-weg mapping op EHDSOrganisation moeilijk. We moeten overwegen om in de zib een splitsing te maken tussen natuurlijke personen en organisaties, waarbij een verzekeraar een specialisatie is van organisatie met specifieke gegevens.
 
 
 
