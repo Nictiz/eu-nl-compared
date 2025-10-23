@@ -1,4 +1,9 @@
 # MedicationStatement
+## Overleg 23-10
+Aanwezig: Astrid, Sander, Evelyn, Tim S. en Yasmin
+Medicationreason zou toegevoegd kunnen worden in de zib, maar vanwege de gevolgen voor de informatiestandaard is het ter overweging, anderzijds kan het beter zijn om alle veranderingen in 1 keer door te voeren (voor leveranciers) - issue aanmaken ter overweging
+_Wordt vervolgd_
+
 ## discussie 21-10-2025 met Astrid, Jacob, Sander, Evelyn, Tim S.
 + zib TreatmentStatus en EHDS .UseIndicator zijn redundant met PeriodOfUse. Ieder afzonderlijk zijn ze goed te gebruiken. Issue EHDS: er is geen binding bij medicationTreatmentStatus. Waarschijnlijk meer dan alleen ja of nee, dan ook zib issue om dit aan te passen.
 
