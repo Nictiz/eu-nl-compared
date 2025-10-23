@@ -3,7 +3,7 @@
 ## Bespreking 28-10
 Aanwezig: Astrid en Yasmin
 
-## Bespreking 22-10
+## Bespreking 22-10 
 Aanwezig: Astrid en Yasmin
 
 * Wat is een business identifier - instantiatie ID - overleggen met Pieter Edelman
