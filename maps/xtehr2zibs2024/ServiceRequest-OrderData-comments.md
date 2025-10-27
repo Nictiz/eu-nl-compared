@@ -6,11 +6,9 @@ Model: algemeen
 In een deel van de EHDS modellen is de auteur in de header gescheiden van een health professional met een specifieke rol: zo heeft Condition de auteur in de header, maar ook daarnaast expliciet de 'asserter' (diagnosesteller).
 Andere EHDS modellen hebben alleen het element auteur in de header met een verwijzing naar zorgverlener. Het lijkt niet wenselijk om een gegeven in de header een dubbelrol te geven, waarbij het twee betekenissen moet representeren. Het is wenselijk om naast het element in de header voor de administratieve verantwoordelijkheid als auteur (die voor elk model geldt) een apart element te hebben voor de zorgverlener die verantwoordelijk is voor een interpretatie, een besluit of het uitvoeren van een activiteit."
 
-*Request: Add a separate element outside the header for the responsible/executing healthcare professional, in addition to header.authorship.author[x].
-
+*Request: Add a separate element outside the header for the responsible/executing healthcare professional, in addition to header.authorship.author[x]. 
 In some EHDS models, the author in the header is distinguished from a healthcare professional with a specific role — for example, the Condition model has the author in the header but also explicitly defines the asserter (the clinician who made the diagnosis).
 Other EHDS models only have the author element in the header, referring to a healthcare professional.
-
 It seems undesirable for a single element in the header to serve a dual purpose, representing both administrative authorship and clinical responsibility. It would be preferable to have, alongside the header element that expresses administrative authorship (applicable to all models), a separate element for the healthcare professional responsible for interpretation, decision-making, or execution of an activity.*
 
 EHDS Issue 2
@@ -20,7 +18,6 @@ Het is wenselijk om naast het element in de header voor de administratieve veran
 In het kader van EHDSServiceRequest is er behoefte aan een apart element 'Aanvrager'."
 
 *In addition to the header element expressing administrative authorship (which applies to all models), it is desirable to include a separate element for the healthcare professional responsible for interpretation, decision-making, or the performance of an activity.
-
 In the context of the EHDSServiceRequest, there is a specific need for an element representing the requester.*
 
 EHDS Issue 3
@@ -41,16 +38,9 @@ De valueset EventStatus (FHIR) geeft weer aan wat voor status er behoefte is. "
 
 *Request: Add an element representing the status of the progress of the request.
 This information is important for determining the next step in processing the request.
-
 There is a status field in the header, but that element appears in every Xt-EHR logical model.
 Some models, however, include a separate concept-specific status in addition to header.status, such as the element diagnosisAssertionStatus in EHDSCondition.
-
-It is important that EHDS logical models distinguish between:
-
-an administrative status (in the header section), and
-
-a concept-specific status, which often uses its own specific value set.
-
+It is important that EHDS logical models distinguish between: an administrative status (in the header section), and a concept-specific status, which often uses its own specific value set.
 The FHIR EventStatus value set illustrates the type of status that would be needed here.*
 
 EHDS Issue 5
@@ -62,11 +52,8 @@ Het verzoek is om één van de volgende opties te overwegen:
 
 *Problem: Based on the “mouse-over” descriptions, there appears to be an overlap in meaning between the elements reasonCode and supportingInformation.
 When reading reason, one naturally thinks of the indication for the requested service — but that is already represented by the element reasonReference.
-
 Request: Consider one of the following options:
-
 Remove reasonCode if its meaning is already covered by the combination of reasonReference[x] and supportingInformation.
-
 If reasonCode remains justified, clearly distinguish between the meanings of reasonCode, reasonReference[x], and supportingInformation. In that case, it is also requested to rename reasonCode to avoid suggesting that it represents the indication for the requested service.*
 
 EHDS Issue 6
