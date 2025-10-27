@@ -1,8 +1,15 @@
 # DataSet
 
 ## Actions
-
-
+- Vraag EHDS: Verduidelijking van auteur. Is dat de informatiebron of de vastlegger?
+*Should author be interpreted as the original creator of the information content (the source of truth), or as the person/system who entered or issued the resource in a particular EHR? When data is transferred or reused across    systems, the distinction between the original author (the creator of the content) and the recorder (the one who entered or reissued the information) becomes important. Does author represent the original information source or the responsible recorder within the receiving system?*
+- Zib issue: Term auteur past wellicht niet goed bij de omschrijving (verantwoorelijke). Hoewel de term bij EHDS hetzelfde is, zou het wat anders kunnen betekenen.
+- Vraag EHDS: Verduidelijking datetime. Date and time of the issuing the document/resource by its author, is dat het moment van vastleggen (eenmalig) of registratie in een bepaald systeem? *Does datetime refer to the time of    original issuance or to the time of recording/import in the receiving system?*
+- Vraag EHDS: Wat voor business identifier is dit? *Should the business identifier be understood as identifying a specific instantiation of the resource, or the underlying business concept that the resource represents?*
+  *Should the business identifier be understood as identifying the business object itself (the conceptual entity) or a particular instantiation or occurrence of that object within the system?*
+- Zib issue: Language misschien toevoegen
+- Zib issue: Last update misschien toevoegen
+- Vraag EHDS: Verduidelijking status
 
 ## Discussion
 
@@ -89,7 +96,7 @@
 | type_xtehr | Base |
 
 ### Comments
-
+Is de header bedoeld voor de informatiebron of de registratie?
 
 
 ## EHDSDataSet.header.authorship
@@ -109,7 +116,12 @@
 
 ### Comments
 Meerdere auteurs lijkte me problematisch. Wie is er verantwoordelijk voor een registratie als er > 1 auteur is?
-
+Is de auteur degene die de gegevens vastgeled/geregistereerd heeft, of ben je (ook) auteur als je de gegevens overgenomen hebt?
+Verdere verduidelijking gewenst: Wanneer ben je een auteur en wanneer niet? Gaat het om de informatiebron of de vastlegger? Belangrijk om de verschillen met de zib te identificeren.
+In de zib gaat het alleen om registratiegegevens en niet om composities. In de zib zou verantwoordelijke wellicht beter passen i.p.v. auteur, o.b.v. huidig gebruik. Het gaat namelijk niet per se over wie het geschreven heeft.
+FHIR Provernance biedt meerdere opties.
+Hoe kan een organisatie een auteur zijn?
+Waarom is de auteur verplicht en waarom is het mogelijk om meerdere auteurs te hebben?
 
 ## EHDSDataSet.header.authorship.author[x]
 
@@ -135,7 +147,7 @@ It concerns not only own observations, but also information received from third 
 | type_xtehr | EHDSHealthProfessional |
 
 ### Comments
-De zib Zorgverlener dekt geen Device.
+De zib Zorgverlener dekt geen Device. (De zib registratiegegevens dekt geen device)
 
 EHDSDataSet.header.authorship.author[x] .authorEHDSHealthProfessional					Zib Zorgverlener representeert HealthProfessional, maar de match tussen Zorgverlener en EHDSHealthProfessional valt onder een aparte verschillenanalyse.
 EHDSDataSet.header.authorship.author[x] .authorEHDSOrganisation					Zib Zorgverlener omvat verwijzing naar Zorgaanbieder, maar de match tussen ZorgAanbieder en EHDSOrganisation valt onder een andere verschillenanalyse.
@@ -165,7 +177,8 @@ EHDSDataSet.header.authorship.author[x] .authorEHDSDevice
 | type_zib | TS |
 
 ### Comments
-
+Of dit overeenkomt met de zib is afhankelijk van de definitie van author. Is dit het moment dat het vastgelegd is in een systeem (nieuwe of overgenomen informatie)? Daar lijkt het op vanwege het woord issuing, en dan zou het overeenkomen met de zib.
+Uit de definitie van author lijkt het eerder het moment van schrijven, zodat deze datum en de auteur niet meer veranderen als de informatie in een ander systeem overgenomen wordt.
 
 
 ## EHDSDataSet.header.identifier
@@ -193,8 +206,8 @@ EHDSDataSet.header.authorship.author[x] .authorEHDSDevice
 | type_zib | II |
 
 ### Comments
-We moeten overleggen of het wenselijk is om meerdere identifiers te hebben, bijv. een identifier van een verzender als alias.
-
+We moeten overleggen of het wenselijk is om meerdere identifiers te hebben, bijv. een identifier van een verzender als alias. Hierover staat een issue open. Er lijkt een informatiebehoefte te zijn voor het vastleggen van meerdere identifiers. De vraag is eigenlijk: wat is erop tegen om er meerdere vast te leggen?
+Wat voor identifier is dit? Gaat het alleen om de instantiatie of over het onderliggende concept?
 
 ## EHDSDataSet.header.language
 
@@ -213,7 +226,7 @@ We moeten overleggen of het wenselijk is om meerdere identifiers te hebben, bijv
 | type_xtehr | CodeableConcept |
 
 ### Comments
-
+Zou toegevoegd kunnen worden in de zib, maar de relevantie zou beter uitgezocht moeten worden. Is registratiegegevens de goede plek daarvoor? Hoe gaat dat veranderen als met zibs 2.0 ook de uitwisseling gedekt moet zijn?
 
 
 ## EHDSDataSet.header.lastUpdate
@@ -232,7 +245,8 @@ We moeten overleggen of het wenselijk is om meerdere identifiers te hebben, bijv
 | type_xtehr | dateTime |
 
 ### Comments
-
+Als een gegeven veranderd, is het dan een nieuwe registratie of een aangepaste registratie? Veranderd daarmee ook de datumtijd of alleen dit veld?
+In de zib wordt er geen onderscheid gemaakt voor datumtijd (nieuw of aangepast), misschien zal de zib de oude datumtijd overschrijven bij een aanpassing. 
 
 
 ## EHDSDataSet.header.status
@@ -253,7 +267,7 @@ We moeten overleggen of het wenselijk is om meerdere identifiers te hebben, bijv
 ### Comments
 "Als het zib element DatTimeOfClosure (m.i. typefout in naam) gevuld is, impliceert dit een statuswaarde: nl. dat vanaf dat moment de instantiatie niet meer van toepassing is.
 We moeten ons afvragen of het wenselijk is  dat RegistratieGegevens een wat algemener element krijgt voor de status van de instantiatie."
-
+Verdere verduidelijking gewenst: Wat is status?
 
 ## EHDSDataSet.header.statusReason[x]
 
