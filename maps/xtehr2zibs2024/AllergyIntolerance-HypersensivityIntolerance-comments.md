@@ -21,7 +21,37 @@ Issues on the Xt-EHR model:
 General remark:
 + During the qualification of e-Overdracht and BgZ it appeared that no vendor was able to register symptoms grouped by reaction. In general they register HypersensitivityIntolerance with a list of symptoms (or a mix of symptoms and reactions).
 
-  
+Opmerkingen Astrid - consultatie-issues:
+1. Structuur is problematisch!
++ De relatie moet niet lopen van AllergyIntolerance naar reactie, maar andersom om de volgende redenen:
++ In slechts zeldzame gevallen (ca. 5%)wordt bij een reactie onderzoek gedaan naar de overgevoeligheid of
+intolerantie. Wat hier dus gebeurt, is dat men puur op basis van het optreden van een reactie een
+overgevoeligheid of intolerantie vastlegt op basis van de stof die de reactie uitlokte.
++ In de praktijk wil men vaak alleen reacties vastleggen.
++ Je wilt niet bij elke reactie een nieuwe instantiatie moeten maken van de overgevoeligheid of intolerantie.
+==> EHDS issue: In consultatie vraag splitsen modellen zodat ook alleen reactie vastgelegd kunnen worden.
+2. Geen mogelijkheid om stof weer te even die de reactie uitlokte
++ Stof waarvoor de patiënt overgevoelig is of een intolerantie heeft (d.w.z. de neiging om een reactie te
+ontwikkelen bij blootstelling aan een stof of groep van stoffen) kan anders zijn dan de feitelijke stof
+die de reactie uitlokte. Een patiënt kan bijv. overgevoelig zijn voor penicilline. Er zijn veel preparaten met
+penicilline als werkzame stof. De reactie kan uitgelokt zijn door bijv. Amoxicilline.
++ Er kunnen meerdere reacties zijn op basis van dezelfde overgevoeligheid of intolerantie, maar uitgelokt
+	door verschillende stoffen.
+3. Geen diagnosesteller en geen wijze van vaststellen
++ Zowel voor de overgevoeligheid of intolerantie als voor de reactie is er geen element om de diagnosetseller
+	te representeren.
++ Bij het CiO project is gebleken dat men de diagnosesteller en de manier van vaststellen heel belangrijk
+	vindt om de betrouwbaarheid van de diagnose in te schatten. Je wilt een patiënt niet onnodig een
+	geneesmiddel van eerste keus onthouden.	
+4. Stof: geen optie stofgroep behalve….
++ Ik neem aan dat hier ook een groep van stoffen mogelijk is.
+Jammer dat er geen stoffen kunnen worden aangegeven die uitzondering zijn van een groep.
++ Bij antibiotica komt het nogal eens voor dat bepaalde stoffen binnen een groep geen reactie oproepen.	
+5. Latentietijd van reactie ontbreekt
++ De latentietijd (tijdsduur tussen blootstelling en optreden van de reactie) is een belangrijk gegeven
+	om het reactiemechanisme en daarmee de aard van de reactie en het verwachte risico bij
+	hernieuwde blootstelling van de reactie vast te stellen.
+
 
 
 
@@ -120,6 +150,9 @@ General remark:
 Binding valuesets mismatch. The binding in the zib is required.
 Cardinality mismatch because in the zib, either Radiation or Substance must be chosen.
 
+Consultatie: Agence straling niet in xtEHR, vragen toe te voegen. 
+
+
 ## EHDSAllergyIntolerance.typeOfPropensity
 
 ### Table
@@ -137,8 +170,9 @@ Cardinality mismatch because in the zib, either Radiation or Substance must be c
 | type_xtehr | CodeableConcept |
 
 ### Comments
-No match in the zib. The type intolerance may be pre-coordinated in the .DiagnosisName.
-
+No match in the zib. The type intolerance may be pre-coordinated in the .DiagnosisName.  
+Geen element in de zib. Allergoloog in CiO-project achtte dit niet relevant omdat veel gebruikers dit niet weten. Is ook niet altijd eenvoudig vast te stellen.  
+ZIB Issue maken om te overwegen dit toe te voegen.
 
 
 ## EHDSAllergyIntolerance.description
@@ -168,6 +202,12 @@ No match in the zib. The type intolerance may be pre-coordinated in the .Diagnos
 ### Comments
 Not an exact match. The zib has a more restricted use of the concept by definition.
 
+Consultatie: Niet consequent toegepast - Voorstel maken.  
+Voorstel:
++ Narrative (geheel + extra)
++ Note/Comment (extra info op het geheel)
++ Description (extra toelichting specifiek veld (parent element) of setje)
+
 
 ## EHDSAllergyIntolerance.criticality
 
@@ -195,7 +235,9 @@ Not an exact match. The zib has a more restricted use of the concept by definiti
 | type_zib | CD |
 
 ### Comments
-Match. The valueset in the Xt-EHRT model has "unable to assess" which the zib has not as per design principles. 
+Match. Valueeset is mappable. The valueset in the Xt-EHRT model has "unable to assess" which the zib has not as per design principles.=> zib issue. 
+
+
 
 
 
@@ -225,7 +267,8 @@ Match. The valueset in the Xt-EHRT model has "unable to assess" which the zib ha
 
 ### Comments
 Cardinality mismatch, as the zib has conceptual cardinality.
-https://hl7.org/fhir/valueset-allergyintolerance-verification.html has a distinction between "unconfirmed" and its child "presumed" which the zib has not. It has a value "refuted" which is not in the zib value set because there is a separate zib "Exclusion". It has a value "entered in error" which is not in the zib value set as per design principles.  
+https://hl7.org/fhir/valueset-allergyintolerance-verification.html has a distinction between "unconfirmed" and its child "presumed" which the zib has not. It has a value "refuted" which is not in the zib value set because there is a separate zib "Exclusion". It has a value "entered in error" which is not in the zib value set as per design principles.    
+=> ZIB issue voor Unconfirmed en Presumed
 
 
 
@@ -248,7 +291,12 @@ https://hl7.org/fhir/valueset-allergyintolerance-verification.html has a distinc
 | type_xtehr | CodeableConcept |
 
 ### Comments
-This concept has a poor match to .Course in the zib Condition, to which the zib HypersensitivityIntolerance has a reference. In https://hl7.org/fhir/valueset-allergyintolerance-clinical.html we have "active", "inactive" and its child "resolved". Only "resolved" has an equivalent "No longer present" in the zib. The same incompatibility issues apply to the EHDSCondition.problemStatus element. 
+This concept has a poor match to .Course in the zib Condition, to which the zib HypersensitivityIntolerance has a reference. In https://hl7.org/fhir/valueset-allergyintolerance-clinical.html we have "active", "inactive" and its child "resolved". Only "resolved" has an equivalent "No longer present" in the zib. The same incompatibility issues apply to the EHDSCondition.problemStatus element.   
+Via de verwijzing vanuit OvergevoeligheidIntolerantie. Is in de praktijk niet of nauwelijks vast te stellen zolang er geen blootstelling is aan de stof.  
+De neiging om een reactie te ontwikkelen op een bepaalde stof heeft nl. geen symptomen.  
+Wel mapbaar (niet helemaal hetzelfde).  
+ZIB issue inperking codelijst nodig? Zie ook zibissue voor aandoening.     
+Consultatie opmerking zie ook clinicalStatus (Condition). Consultatie preffered binding is hier problematisch.
 
 
 
@@ -270,7 +318,13 @@ This concept has a poor match to .Course in the zib Condition, to which the zib 
 ### Comments
 There's a definition / name mismatch in the Xt-EHR model here.
 If the onset date is meant, this concept matches Condition.PeriodPresent.TimeInterval.StartEvent.
-If the date of the diagnosis is meant, this concept matches HypersensitityIntolerance.DianoisDate (typo in zib!).
+If the date of the diagnosis is meant, this concept matches HypersensitityIntolerance.DianoisDate (typo in zib!).  
+
+Astrid: match met AandoeningOfGesteldHeid.PeriodeAanwezig.BeginDatumTijd  
+
+Slechte naamgeving in EHDS model, want het betreft de begindatum van de eerste reactie.
+Consultatie issue: Voorstel wijzigen definitie naar t betreft de begindatum van de eerste reactie.   
+Consultatie Issue: Diagnosedatum / asserted date (en asserter)  
 
 
 ## EHDSAllergyIntolerance.endDate
@@ -289,7 +343,10 @@ If the date of the diagnosis is meant, this concept matches HypersensitityIntole
 | type_xtehr | dateTime |
 
 ### Comments
-This concept matches Condition.PeriodPresent.TimeInterval.EndEvent. 
+This concept matches Condition.PeriodPresent.TimeInterval.EndEvent.   
+Via de verwijzing vanuit OvergevoleigheidIntolerantie.  
+Is moeilijk vast te stellen, tenzij er bij blootstelling aan de stof geen (noemenswaardige) reactie meer optreedt).
+
 
 
 
@@ -331,7 +388,15 @@ This concept matches the root concept of the zib Reaction.
 
 ### Comments
 As the cardinality of this concept is 0..*, this concept can only be mapped to Symptom.SymptomName. The binding in the zib to SNOMED findings is required.
-However,the examples given in the definition are more applicable to the name of the reaction itself, which would map to Reaction.DiagnosisNameData.DiagnosisName. It appears that the name of the reaction itself (cardinality 0..1) is missing. 
+However,the examples given in the definition are more applicable to the name of the reaction itself, which would map to Reaction.DiagnosisNameData.DiagnosisName. It appears that the name of the reaction itself (cardinality 0..1) is missing.  
+
+Men lijkt hier een mix van symptomen en diagnoses te willen representeren. Anafylactische shock en angio-oedeem zijn diagnoses. Jeukende ogen zijn bijv. een symptoom. In de DHD diagnosethesaurus wordt het inhoudelijk ws voldoende gedekt.
+
+Consultatie: Dit moet minimaal card 1 ..* zijn.  Pleit voor 1..1. Add aditional symptoms 0..*.     
+ZIB-issue. Als zibs meerdere symptomen hebben moet het via symptoom. ZIB issue Mainfestation en relatie tussen condition en symptomen bekijken.
+
+Consultatie geen onderscheid tussen Conditie en Symptoom.
+
 
 
 ## EHDSAllergyIntolerance.reaction.date
@@ -350,8 +415,8 @@ However,the examples given in the definition are more applicable to the name of 
 | type_xtehr | dateTime |
 
 ### Comments
-This concept matches Symptom.SymptomPeriod::TimeInterval.StartEvent.
-
+This concept matches Symptom.SymptomPeriod::TimeInterval.StartEvent.  
+Astrid: match met PeriodeAanwezig.BeginDatumTijd via de verwijzing vanuit Reactie.
 
 
 ## EHDSAllergyIntolerance.reaction.severity
@@ -371,7 +436,7 @@ This concept matches Symptom.SymptomPeriod::TimeInterval.StartEvent.
 | type_xtehr | CodeableConcept |
 
 ### Comments
-This concept matches Condition.Severity (not Symptom.SymptomSeverity, as that would be the severity of the _manifestation_ of the reaction). The preferred binding is a 3 point HL7 scale. The zib has a 3 point SNOMED scale with a required binding. The scales match exactly.    
+This concept matches Condition.Severity via reference from Reaction. (not Symptom.SymptomSeverity, as that would be the severity of the _manifestation_ of the reaction). The preferred binding is a 3 point HL7 scale. The zib has a 3 point SNOMED scale with a required binding. The scales match exactly.    
 
 
 
@@ -391,7 +456,9 @@ This concept matches Condition.Severity (not Symptom.SymptomSeverity, as that wo
 | type_xtehr | dateTime |
 
 ### Comments
-This concept matches Condition.PeriodPresent::TimeInterval.StartEvent.StartDateTime.
+This concept matches Condition.PeriodPresent::TimeInterval.StartEvent.StartDateTime.  
+Astrid: Dit element komt het dichtst bij de DiagnoseDatum: de datum waarop de reactie is vastgesteld.  
+!!! Zeer slechte naam voor het element: 'date' blijkt in feite de onsetdate te zijn en 'onsetdate' is de obervatiedatum. Dat is precies andersom!
 
 
 
