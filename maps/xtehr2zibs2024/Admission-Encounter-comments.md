@@ -1,5 +1,36 @@
 # Encounter
 
+## Discussie 30 oktober 2025  
+Aanwezig:
++ Astrid
++ Yasmin
++ Wouter
++ Marty
++ Sander
++ Jacob
+.priority: FHIRr6: niet meer bij admission - Astrid:deze hoort gezien de huidige waardenlijst niet in dit model maar in een procesmodel zoals Aanvraaggegevens. Achteraf noteren van prioriteit kan een kwaliteit/performance doel dienen. Daarvoor volstaat een meer beperkte waardenlijst bv spoed/regulier.    
+In de zib aanvraaggegevens moet priority ==> zib issue
+===> zib-issue: deelopnames
+===> zib-issue: admission type nodig (deelopname en volledige opname)
+
+hoe zijn de location parts bedoeld?
+zib: opname is op vestigingsniveau?
+alleen volledige opname binnen vestiging bedoeld?
+
+.note: naar EHDS opmerken: dit is een narrative (tekstuele samenvattiing) en hoort niet in het model
+zie voorstel Astrid over narrative, note, comment in AllergyIntolerance). We communiceren dit naar EHDS, maar niet als een issue op EHDSEncounter.  
+
+.baseOn: Er is nu geen relatie in de zibs tussen opname en encounter naar zorgepisode => zib issue
+
+.partOf
+wat is de definitie van .partOf?  wordt het bepaald door de locatie? kan je binnen een part meerdere locations hebben?
+Een definitie van encounter zou kunnen zijn:
++ aaneengesloten
++ in 1 vestiging
+Astrid pleit voor : location 1-op-1 met part maken, dan moet location kardinaliteit 1 krijgen ==> EHDS issue 
+
+  
+
 ## Overall discussion
 The Xt-EHR Encounter model apparently has a broader scope, including the scope of both Admission and Contact zibs. 
 The Xt-EHR model and the zib can both be used for both past admissions and planned admissions. However, only the Xt-EHR models actual and planned start and end dates separately.
