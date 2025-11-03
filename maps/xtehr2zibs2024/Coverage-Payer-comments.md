@@ -3,6 +3,13 @@
 ## Bespreking 28-10
 Aanwezig: Astrid en Yasmin
 
+EHDS: Betaler is een persoon (patient) of organisatie (verzekeraar, rechtspersoon)
+Zib: Betaler is een persoon (persoon of rechtspersoon) of organisatie (verzekeraar)
+
+Veranderingen zibs: organisatie kan een zorgaanbiedern of verzekeraar zijn
+Verzekerdenummer aan verzekering en niet verzekeraar
+
+
 ## Bespreking 22-10 
 Aanwezig: Astrid en Yasmin
 
