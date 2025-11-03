@@ -1,4 +1,26 @@
 # Procedure as of 2025-07-08
+## Discussion 3-11-2025
+Aanwezig:
++ Wouter Zanen
++ Micha Drielinger
++ Jacob Engel
++ Pieter Edelman  
+
+EHDS issues for EHDSProcedure:
++ Purpose and scope of the model: indicate that the model is not be used for planned procedures
++ Add EHDSPatient and EHDSRelatedPerson to possible data types of .performer
++ Add reference to a model describing the goal of the procedure
++ Change cardinality of .code tot 1..1 
+  
+EHDS issues for EHDSServiceRequest:
++ add data type Timing to .occurrence
+
+Zib issues:
++ Restrict purpose NursingInterventrion model to current and past interventions
++ Add body site
++ Change cardinality of .performer to 0..*
+
+
 ## Reason for comparing NursingIntervention (in addition to zib Procedure)
 
 Certain elements of EHDSProcedure are not included in or relevant to zib Procedure, but are covered in zib NursingIntervention, which is used within the eOverdracht use case "Overdracht Sturen". This use case partially overlaps with the EHDS use case "Discharge Report".  
