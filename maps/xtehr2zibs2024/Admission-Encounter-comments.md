@@ -10,7 +10,7 @@ Aanwezig:
 + Jacob
 
 .priority: FHIRr6: niet meer bij admission - Astrid:deze hoort gezien de huidige waardenlijst niet in dit model maar in een procesmodel zoals Aanvraaggegevens. Achteraf noteren van prioriteit kan een kwaliteit/performance doel dienen. Daarvoor volstaat een meer beperkte waardenlijst bv spoed/regulier.    
-In de zib aanvraaggegevens moet priority ==> zib issue    
+==>  zib issue: in zib aanvraaggegevens moet priority 
 ===> zib-issue: deelopnames  
 ===> zib-issue: admission type nodig (deelopname en volledige opname)  
 
