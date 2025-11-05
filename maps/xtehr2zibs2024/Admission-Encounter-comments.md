@@ -1,5 +1,10 @@
 # Encounter
 ## Discussie 5 november 2025
+Aanwezig:  
++ Astrid
++ Jacob
++ Yasmin
+
 Organisatorisch scheiden van fysieke plek  
 Vestigingen Productieplekken  
 Rechtspersonen   
