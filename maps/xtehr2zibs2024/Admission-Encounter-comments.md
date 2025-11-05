@@ -7,18 +7,18 @@ Aanwezig:
 + Wouter
 + Marty
 + Sander
-+ Jacob
++ Jacob  
 .priority: FHIRr6: niet meer bij admission - Astrid:deze hoort gezien de huidige waardenlijst niet in dit model maar in een procesmodel zoals Aanvraaggegevens. Achteraf noteren van prioriteit kan een kwaliteit/performance doel dienen. Daarvoor volstaat een meer beperkte waardenlijst bv spoed/regulier.    
-In de zib aanvraaggegevens moet priority ==> zib issue
+In de zib aanvraaggegevens moet priority ==> zib issue  
 ===> zib-issue: deelopnames
 ===> zib-issue: admission type nodig (deelopname en volledige opname)
 
-hoe zijn de location parts bedoeld?
+hoe zijn de location parts bedoeld?  
 zib: opname is op vestigingsniveau?
-alleen volledige opname binnen vestiging bedoeld?
+alleen volledige opname binnen vestiging bedoeld?  
 
-.note: naar EHDS opmerken: dit is een narrative (tekstuele samenvattiing) en hoort niet in het model
-zie voorstel Astrid over narrative, note, comment in AllergyIntolerance). We communiceren dit naar EHDS, maar niet als een issue op EHDSEncounter.  
+.note: naar EHDS opmerken: dit is een narrative (tekstuele samenvattiing) en hoort niet in het model  
+(zie voorstel Astrid over narrative, note, comment in AllergyIntolerance). We communiceren dit naar EHDS, maar niet als een issue op EHDSEncounter.    
 
 .baseOn: Er is nu geen relatie in de zibs tussen opname en encounter naar zorgepisode => zib issue
 
