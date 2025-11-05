@@ -14,13 +14,14 @@ Waar is patient behandeld:
 	• Fysieke plek
 	• Organisatieonderdeel
 
-EHDS issue voor EHDSLocation: foutje EHDSLocation.partOf moet part of Location zijn    
-EHDS issue voor EHDSEncounter: in location sluiten Organisation en Location elkaar uit. Dat klopt niet.   
++ EHDS issue voor EHDSLocation: foutje EHDSLocation.partOf moet part of Location zijn    
++ EHDS issue voor EHDSEncounter: in location sluiten Organisation en Location elkaar uit. Dat klopt niet. Het is ook vreemd dat een organisationPart[x] een EHDSLocation kan zijn.
++ EHDS issue: relatie .serviceProvider met .OrganisationPart onder .location?
 
 EHDSEncounter actual period, plannedStartDate, plannedEndDate: hoe is de relatie met de location periods verderop in het model?   
 Bij deelopnames hoort ook een verantwoordelijk behandelaar.   
 De hoofdopname heeft een admitter.    
-De deelopname heeft een varantwoordelijk behandelaar.     
+De deelopname heeft een verantwoordelijk behandelaar.     
 
 ## Discussie 30 oktober 2025  
 Aanwezig:
