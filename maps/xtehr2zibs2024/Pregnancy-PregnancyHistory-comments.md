@@ -1,4 +1,24 @@
 # PregnancyHistory  
+## Bespreking 5-11
+Aanwezig: Astrid, Jacob  
+De waardenlijst EHDSOutcomeOfPregnancy bevat waarden voor drie concepten: 
++ Reason for termination of pregnancy
+  + Ectopic pregnancy
+  + Hydatidiform mole, benign
+  + Fetal death
+  + Foetale nood
++ Result of pregnancy
+  + Livebirth
+  + Miscarriage
+  + Stillbirth
++ Termination of pregnancy
+  + cesarian section
+  + abortus provocatus
+  + through medication
+  + non-sectio surgical procedure  
+
+EHDS issue: splits outcome in deze drie concepten.   
+Als concept niet geplitst kan worden dan moet de kardinaliteit naar 0..*.
 ## Bespreking 14-10
 Aanwezig: Lilian, Micha, Astrid, Jacob  
 + Er is geen zib voor pregnancy history, maar EHDSPregnancyHistory kan worden gevuld vanuit instantiaties van zib Zwangerschap die beëindigd zijn 
