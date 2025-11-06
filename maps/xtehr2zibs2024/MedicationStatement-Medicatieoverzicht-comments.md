@@ -22,7 +22,7 @@ Het ene element met een reference naar EHDSMedicationDispense voor de doseerinst
 
 Op deze manier is de betekenis van de elementen eenduidig en heeft de gebruiker altijd inzicht in het feitelijk gebruik met een mogelijkheid om dit te vergelijken met het bedoelde (voorgeschreven) gebruik."
 
-EHDS Issue 3
+EHDS Issue 3 https://github.com/Xt-EHR/xt-ehr-common/issues/362
 Model: EHDSMedicationStatement
 Verzoek: naam en definitie wijzigen van 'dosageInstructions' naar 'actualDosage' met definitie 'Details of how medication is/was used.'
 
