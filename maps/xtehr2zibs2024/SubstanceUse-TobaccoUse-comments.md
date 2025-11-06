@@ -20,8 +20,10 @@ Both the EHDS model and the zib seem to model an observation of single period (t
 
 In addition the zib has a 
 + TobaccoUseStatus indicating whether there was any drug use in the past or present (we must assume at the time of the observation). 
-+ PackYears which is a summation of TobaccoUse in the past.
-See also https://nictiz.atlassian.net/browse/ZIB-2212. 
++ PackYears which is a summation of TobaccoUse in the past.  
+
+See also https://nictiz.atlassian.net/browse/ZIB-2212.  
+
 The EHDS model has only header.status of which the definition is "Status of the patient’s alcohol use." This is most probably an error, as the header should contain metadata of the _registration_ of the SubstanceUse instance.
 
 
