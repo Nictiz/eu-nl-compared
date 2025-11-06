@@ -1,11 +1,16 @@
 # MedicationStatement
 ## issues (mail Astrid 31-10-2025)
 EHDS Issue 1  
-Model: EHDSMedicationStatement  
+Model: Local
+
+eu-nl-compared/maps/xtehr2zibs2024/EpisodeOfCare-EpisodeOfCare-comments.md at main · Nictiz/eu-nl-compared
+https://github.com/Nictiz/eu-nl-compared/blob/main/maps/xtehr2zibs2024/EpisodeOfCare-EpisodeOfCare-comments.md
+
+EHDSMedicationStatement  
 "Verzoek: de waarden van medicationTreatmentStatus in lijn brengen met de definitie.
 Het element medicationTreatmentStatus heeft als definitie 'The current status of the taking of medicine' en als type CodeableConcept. Als het om de current use gaat, dan kan de waarde alleen 'ja' of 'nee' zijn. Het verzoek is om de toegestane waarden van medicationTreatmentStatus daarmee in lijn te brengen."
 
-EHDS Issue 2  
+EHDS Issue 2  https://github.com/Xt-EHR/xt-ehr-common/issues/361  
 Model: EHDSMedicationStatement  
 Verzoek: Toevoegen van twee elementen aan EHDSMedicationStatement met resp. een reference naar EHDSMedicationDispense en EHDSMedicationPrescription.  
 In EHDSServiceRequest is het niet eenvoudig om het element dosageInstructions goed te interpreteren. Zoals het nu is gedefinieerd betreft dit feitelijk gebruik (is/was taken) of voorgeschreven gebruik (should be taken). Feitelijk gebruik kan afwijken van voorgeschreven gebruik. De patiënt kan minder gebruiken, meer gebruiken, eerder stoppen of het helemaal niet gebruiken. Hetzelfde geldt voor het element periodOfUse. Ook hier kan de periode van feitelijk gebruik afwijken van de voorgeschreven periode van gebruik.  
