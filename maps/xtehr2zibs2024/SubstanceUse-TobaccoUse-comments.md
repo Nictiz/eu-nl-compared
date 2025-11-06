@@ -1,4 +1,19 @@
 # SubstanceUse
+## Discussion 6 november 2025
+Participants: Astrid, Jacob, Sander  
+EHDSissues:
++ Change "Alcohol" into "Substance" all over
++ Replace definition of .status in the header by its definition in EHDSDataset
++ Add .status element, definition: Status of the patient’s substance use, type: codeable concept
++ Add .statusDate, definition: Date on which the status was observed, type: dateTime
++ Change cardinality of frequencyAndQuantity to 0..*, as within the period of observation, multiple periods of substance use may have occurred
++ Add .packYears, definition: Cumulated quantity of tobacco used up to .statusDate
+
+Zib issues:
++ DrugUse: Align data type of ObservationOfUse.Amount with EHDS model
++ AlcoholUse, DrugUse, Tobacco, use: add element to match EHDSSubstanceUse.period = Time period for which this observation about substance use is applicabl
+
+
 ## General comments
 Both the EHDS model and the zib seem to model an observation of single period (this may be a current period, without end date). In the zib model, metadata about the observation, such as when the observation was made, is absent. In the EHDS model, there is .period, which is defined as "Time period for which this observation about substance use is applicable". It is not clear what this means. 
 "Alcohol" in the EHDS model should be replaced by "Substance" throughout the model.
