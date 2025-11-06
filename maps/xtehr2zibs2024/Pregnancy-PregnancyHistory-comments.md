@@ -17,7 +17,7 @@ De waardenlijst EHDSOutcomeOfPregnancy bevat waarden voor drie concepten:
   + through medication
   + non-sectio surgical procedure  
 
-EHDS issue: splits outcome in deze drie concepten.   
+EHDS issue https://github.com/Xt-EHR/xt-ehr-common/issues/357 splits outcome in deze drie concepten.  
 Als concept niet geplitst kan worden dan moet de kardinaliteit naar 0..*.
 ## Bespreking 14-10
 Aanwezig: Lilian, Micha, Astrid, Jacob  
@@ -51,7 +51,7 @@ Wijzig 'outcomeDate' in 'EndDate', die dan betrekking heeft op het moment waarop
 Verwijzing naar diagnose lijkt niet nodig (voor EHDS).
 + Waardenlijst bij EHDSPregnancyHistory.outcome
   + Newborn death: Dit betreft het kindje, dat binnen 28 dagen na de geboorte overlijdt. Het is dus geen einde van de zwangerschap, want het kindje kwam levend ter wereld. Men vindt het blijkbaar relevant om te weten of een zwangerschap al dan niet tot een geboorte van een kindje heeft geleid dat minstens 28 in leven is gebleven.
-    + Verzoek voor EHDS verwijderen uit de lijst om de volgende redenen:
+    + Verzoek voor EHDS https://github.com/Xt-EHR/xt-ehr-common/issues/358 verwijderen uit de lijst om de volgende redenen:
       + Het is geen einde van de zwangerschap: dat is nl. een live birth.
       + Newborn death wordt pas ná de zwangerschap bekend.
       + Het betreft een levend geboren kindje, dus een andere patiënt.
