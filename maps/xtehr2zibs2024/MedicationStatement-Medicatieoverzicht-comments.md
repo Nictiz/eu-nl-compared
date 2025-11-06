@@ -1,4 +1,66 @@
 # MedicationStatement
+## issues
+EHDS Issue 1  
+Model: EHDSMedicationStatement  
+"Verzoek: de waarden van medicationTreatmentStatus in lijn brengen met de definitie.
+Het element medicationTreatmentStatus heeft als definitie 'The current status of the taking of medicine' en als type CodeableConcept. Als het om de current use gaat, dan kan de waarde alleen 'ja' of 'nee' zijn. Het verzoek is om de toegestane waarden van medicationTreatmentStatus daarmee in lijn te brengen."
+
+EHDS Issue 2  
+Model: EHDSMedicationStatement  
+Verzoek: Toevoegen van twee elementen aan EHDSMedicationStatement met resp. een reference naar EHDSMedicationDispense en EHDSMedicationPrescription.  
+In EHDSServiceRequest is het niet eenvoudig om het element dosageInstructions goed te interpreteren. Zoals het nu is gedefinieerd betreft dit feitelijk gebruik (is/was taken) of voorgeschreven gebruik (should be taken). Feitelijk gebruik kan afwijken van voorgeschreven gebruik. De patiënt kan minder gebruiken, meer gebruiken, eerder stoppen of het helemaal niet gebruiken. Hetzelfde geldt voor het element periodOfUse. Ook hier kan de periode van feitelijk gebruik afwijken van de voorgeschreven periode van gebruik.  
+Er is behoefte aan duidelijkheid m.b.t. het voorgeschreven gebruik en het feitelijk gebruik.  
+Die duidelijkheid kan worden verkregen door het volgende:
+  1. Voor het voorgeschreven gebruik twee extra elementen opnemen:
+Het ene element met een reference naar EHDSMedicationDispense voor de doseerinstructies zoals afgegeven door de apotheek en het andere element met een reference naar EHDSMedicationPrescription voor het oorspronkelijke voorschrift. In dit voorschrift zitten de doseerinstructies en de bedoelde periode van gebruik, zoals gespecificeerd door de voorschrijver.
+  2. De elementen dosageInstructions en periodOfUse reserveren voor feitelijk gebruik in verleden of heden (separaat issue)
+
+Op deze manier is de betekenis van de elementen eenduidig en heeft de gebruiker altijd inzicht in het feitelijk gebruik met een mogelijkheid om dit te vergelijken met het bedoelde (voorgeschreven) gebruik."
+
+EHDS Issue 3
+Model: EHDSMedicationStatement
+Verzoek: naam en definitie wijzigen van 'dosageInstructions' naar 'actualDosage' met definitie 'Details of how medication is/was used.'
+
+Het element 'dosageInstructions' is nu niet goed interpreteerbaar, omdat niet duidelijk is of het feitelijk gebruik betreft (is/was taken) of gebruik zoals voorgeschreven (should be taken). Het is wenselijk om dit element alleen te gebruiken voor feitelijk gebruik.
+Het bedoelde gebruik van het geneesmiddel is beschikbaar als het verzoek wordt ingewilligd om twee elementen toe te voegen (separaat issue):
+Het ene element met een reference naar EHDSMedicationDispense voor de doseerinstructies zoals afgegeven door de apotheek en het andere element met een reference naar EHDSMedicationPrescription voor de doseerinstructies van het oorspronkelijke voorschrift.
+Zo kun je aangeven dat een patiënt een voorgeschreven middel anders gebruikt dan voorgeschreven of zelfs helemaal niet gebruikt. In het laatste geval is er een verwijzing naar het voorgeschreven geneesmiddel via EHDSMedicationPrescription, heeft medicationTreatmentStatus de waarde 'nee' en blijft het element dosageInstructions leeg."
+
+EHDS Issue 4  
+Model: EHDSMedicationStatement  
+Verzoek: naam en definitie wijzigen van 'periodOfUse' naar 'actualPeriodOfUse' met definitie 'Period when patient took/is taking the medication.
+Het element 'periodOfUse' is nu niet goed interpreteerbaar, omdat niet duidelijk is of het de feitelijke periode betreft (took, is taking) of de periode zoals voorgeschreven (is excpected to take). Het is wenselijk om dit element alleen te gebruiken voor de feitelijke periode van gebruik.  
+De bedoelde periode van gebruik is beschikbaar als het verzoek wordt ingewilligd om een element met een reference naar EHDSMedicationPrescription toe te voegen (separaat issue) waarin de bedoelde periodOfUse is gespecificeerd.  
+Zo is duidelijk of een patiënt een voorgeschreven middel in de voorgeschreven periode gebruikt of daarvan afwijkt (later of eerder is begonnen met gebruik).  
+Als de patiënt het voorgeschreven geneesmiddel (nog) niet gebruikt, is er een verwijzing naar het voorgeschreven geneesmiddel via EHDSMedicationPrescription, heeft medicationTreatmentStatus de waarde 'nee' en blijft het element periodOfUse leeg."
+
+EHDS Issue 5  
+Model: EHDSMedicationStatement  
+Verzoek: element 'intendeUseType' laten vervallen.  
+Dit element is in feite een gegeven bij het medicatievoorschrift. Het element 'intendedUseType' is niet meer nodig als het verzoek wordt ingewilligd om een element in het model op te nemen (separaat issue) met een reference naar EHDSMedicationPrescription waarin intendedUseType wordt gespecificeerd."
+
+EHDS Issue 6  
+Model: EHDSMedicationStatement  
+Verzoek: element 'medicationReason' laten vervallen.  
+Dit element is in feite een gegeven bij het medicatievoorschrift. Het element 'medicationReason' is niet meer nodig als het verzoek (separaat issue) wordt ingewilligd om een element in het model op te nemen met een reference naar EHDSMedicationPrescription waarin de indicatie voor het voorgeschreven geneesmiddel wordt gespecificeerd."
+
+Zib Issue 1  
+Zib: MedicatieAfspraak  
+Beschrijving:  
+Het model EHDSMedicationStatement heeft een element intendedUseType, waarin kan worden aangegeven wat de intentie is voor het toepassen van het geneesmiddel, zoals profylactisch, curatief, palliatief, diagnostisch, etc.
+Wellicht moeten wij on overleg met het veld nagaan of een dergelijk element ook wenselijk is in de zib MedicatieAfspraak."
+
+Zib Issue 2
+Zib: MedicatieGebruik
+Beschrijving:  
+De zib MedicatieGebruik is net als bij EHDSMedicationStatement bedoeld voor verleden, heden en toekomst. Het element GebruikIndicator is een boolean en kan geen onderscheid maken tussen verleden en toekomst. Om dit onderscheid wel te kunnen maken is een waardenlijst nodig.
+De vraag is wat de betekenis is van MedicatieGebruik in de toekomst? Hoe verhoudt zich dit tot een ToedieningsAfspraak en/of een MedicatieAfspraak.
+
+
+
+
+
+
 ## Overleg 23-10
 Aanwezig: Astrid, Sander, Evelyn, Tim S. en Yasmin
 Medicationreason zou toegevoegd kunnen worden in de zib, maar vanwege de gevolgen voor de informatiestandaard is het ter overweging, anderzijds kan het beter zijn om alle veranderingen in 1 keer door te voeren (voor leveranciers) - issue aanmaken ter overweging
@@ -12,7 +74,18 @@ _Wordt vervolgd_
 ## Algemeen
 Algemeen:
 In deze mapping worden elementen uit > 1 zib gecombineerd. Bedenk dat je niet zonder meer de relatie tussen instantiaties van verschillende zibs kunt leggen op basis van het farmaceutisch product, want een patiënt kan meerdere keren in zijn leven, evt. met lange tussenpozen, hetzelfde farmaceutisch product gebruiken. Daarom is een expliciete relatie tussen instantiaties van verschillende zibs belangrijk!
-De gewenste relaties zijn ook aan bod gekomen bij het architectuurteamoverleg.
+De gewenste relaties zijn ook aan bod gekomen bij het architectuurteamoverleg.  
+
+hHt is niet eenvoudig om het elementen dosageInstructions en periodOfUse goed te interpreteren. Zoals het nu is gedefinieerd betreft dit feitelijk gebruik (is/was taken) of voorgeschreven gebruik (should be taken). Feitelijk gebruik kan afwijken van voorgeschreven gebruik. De patiënt kan minder gebruiken, meer gebruiken, eerder stoppen of het helemaal niet gebruiken. Hetzelfde geldt voor het element periodOfUse. Ook hier kan de periode van feitelijk gebruik afwijken van de voorgeschreven periode van gebruik.
+Er is behoefte aan duidelijkheid m.b.t. wat de patiënt volgens instructies zou moeten gebruiken en wat hij feitelijk gebruikt.
+Die duidelijkheid kan worden verkregen door het volgende:  
+  1. De elementen dosageInstructions en periodOfUse te reserveren voor feitelijk gebruik in verleden of heden.
+  2. Voor het voorgeschreven gebruik twee extra elementen op te nemen: Het ene element met een reference naar EHDSMedicationDispense voor de doseerinstructies zoals afgegeven door de apotheek en het andere element met een reference naar EHDSMedicationPrescription voor het oorspronkelijke voorschrift. In dit voorschrift zitten de doseerinstructies en de bedoelde periode van gebruik, maar ook de indicatie (reden van voorschrijven)en het gebruiksdoel (intendedUseType), zoals gespecificeerd door de voorschrijver.
+
+Op deze manier is de betekenis van de elementen eenduidig en heeft de gebruiker altijd inzicht in het feitelijk gebruik met een mogelijkheid om dit te vergelijken met het bedoelde (voorgeschreven) gebruik.
+De elementen intendedUseType en medicationReason zijn dan niet meer nodig, omdat die inEHDSMedicationPrescription zitten.
+Het element MedicationReasonText kan worden gebruikt om de reden van zelfmedicatie te representeren.
+
 
 
 | zib                                                    | xtehr                                               | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
@@ -95,10 +168,8 @@ De gewenste relaties zijn ook aan bod gekomen bij het architectuurteamoverleg.
 | type_zib | BL |
 
 ### Comments
-Het zib element is een boolean. Men kan alleen aangeven of het medicament wordt gebruitk of niet. Het is niet duidelijk welke waarden gelden voor het EHDS element medicationTreatmentStatus. Er zal wel overlap zijn van betekenis, maar ws niet volledig. Als je kijkt naar de definitie van PeriodOfUse in de zib MedicationUse dan is deze zib voor verleden, heden en toekomst bedoeld. In geval van verleden en toekomst kan een boolean geen onderscheid maken: de waarde is dan 0. Ik kan me voorstellen dat het EHDS model dit onderscheid wel maakt.
-Afgezien van de waarden in het EHDS model is dit onderscheid wenselijk, want in het geval van 'verleden' en 'heden' moeten de InstructionForUse weegeven wat het feitelijk gebruik was/is en in het geval van 'toekomst' (planned) moeten de InstructionsForUse gebaseerd zijn op de MedicationAgreement/AdministrationAgreement.
-
-
+Het zib element is een boolean. Men kan alleen aangeven of het medicament wordt gebruikt of niet. Het is niet duidelijk welke waarden gelden voor het EHDS element medicationTreatmentStatus. De definitie van medicationTreatmentStatus is 'The current status of the taking of medicine'. Dan kan de waarde alleen maar 'ja' of nee' zijn.   
+Het verzoek aan EHDS is om de toegestane waarden van medicationTreatmentStatus daarmee in lijn te brengen.
 
 ## EHDSMedicationStatement.medication
 
@@ -148,11 +219,9 @@ Mapt op:
 + MedicationAgreement.PrescriptionReason.Reaction
 + MedicationAgreement.PrescriptionReason.Symptom  
 
-Naast de genoemde Diagnosis, Hypersensitivity, Reaction en Symptom, kan ook een (voorgenomen) Procedure reden zijn voor medicatiegebruik.  
-De hier opgegeven verwijzingen naar zibs komen voor in de zib MedicatieAfspraak. Dat is een andere zib dan MedicatieGebruik. Het is belangrijk dat duidelijk is dat de instantiaties van deze twee zibs expliciet aan elkaar zijn gerelateerd!  
-Zie ook de algemene opmerking bovenaan.
-
-
+Naast de genoemde Dagnosis, Hypersensitivity, Reaction en Symptom, kan ook een (voorgenomen) Procedure reden zijn voor medicatiegebruik.
+De hier opgegeven verwijzingen naar zibs komen voor in de zib MedicatieAfspraak. Dat is een andere zib dan MedicatieGebruik. Het is belangrijk dat duidelijk is dat de instantiaties van deze twee zibs expliciet aan elkaar zijn gerelateerd! Zie ook de algemene opmerking bovenaan.  
+Wat betreft EHDS kan dit element vervallen als het verzoek wordt ingewilligd om een element op te nemen met een reference naar EHDSMedicationPrescrition. Dit model bevat nl. de indicatie voor het voorgeschreven geneesmiddel.
 
 ## EHDSMedicationStatement.medicationReasonText
 
@@ -179,6 +248,7 @@ Zie ook de algemene opmerking bovenaan.
 | type_zib | ST |
 
 ### Comments
+Dit kun je gebruiken als de patiënt op eigen initiatief medicatie gebruikt.
 
 
 
@@ -198,7 +268,8 @@ Zie ook de algemene opmerking bovenaan.
 | type_xtehr | CodeableConcept |
 
 ### Comments
-Dit heb ik niet kunnen terugvinden in de zib(s).
+Dit heb ik niet kunnen terugvinden in de zib(s). Dit moet mogelijk een plaats krijgen in de zib MedicatieAfspraak. Er is dan ook een relatie nodig tussen de zibs MedicatieGebruik em MedicatieAfspraak.
+Dit element kan uit het EHDS model worden verwijderd  als het verzoek wordt ingewilligd om een element met een reference naar EHDSMedicationPrescription toe te voegen (separaat issue) waarin intendedUseType wordt gespecificeerd.
 
 
 
@@ -231,12 +302,11 @@ Mapt op:
 + AdministrationAgreement.InstructionsForUse
 + MedicationAgreement.InstructionsForUse
 
-Alle drie de zibs (MedicatieAfspraak, ToedieningsAfspraak en MedicatieGebruik) hebben een verwijzing naar GebruiksInstructie. Als er een MedicatieAfspraak/ToedieningsAfspraak is, zou de patiënt zich daaraan moeten houden, maar de patiënt kan ook zelf het initiatief nemen tot medicatiegebruik.  
-Het lijkt hier in het EHDS logical model te gaan om het feitelijk medicatiegebruik, tenzij het in de toekomst ligt.  
-Als de medicatie in gebruik is, lijkt het element MedicationUse.InstructionsForUse de beste match.  
-Als het geneesmiddel in de toekomst moet worden gebruikt, dan lijken de instructies op basis van een MedicatieAfspraak/ToedieninsgAfspraak van toepassing.  Het is dan wenselijk dat deze relatie expliciet is, zodat je uit instantiaties van verschillende zibs de juiste combineert om de gegevens voor dit EHDS model aan te leveren.
-Zie ook de algemene opmerking bovenaan.
-
+Het element 'dosageInstructions' is nu niet goed interpreteerbaar, omdat niet duidelijk is of het feitelijk gebruik betreft (is/was taken) of gebruik zoals voorgeschreven (should be taken). Het is wenselijk om dit element alleen te gebruiken voor feitelijk gebruik.
+Het bedoelde gebruik is beschikbaar als het verzoek wordt ingewilligd om twee elementen toe te voegen (separaat issue):
+Het ene element met een reference naar EHDSMedicationDispense voor de doseerinstructies zoals afgegeven door de apotheek en het andere element met een reference naar EHDSMedicationPrescription voor de doseerinstructies van het oorspronkelijke voorschrift.  
+Zo kun je ook aangeven dat een patiënt een voorgeschreven middel anders gebruikt als voorgeschreven of zelfs helemaal niet gebruikt. In het laatste geval is er wel een verwijzing naar het voorgeschreven geneesmiddel via EHDSMedicationPrescription, heeft medicationTreatmentStatus de waarde 'nee' en blijft het element dosageInstructions leeg.  
+Verzoek aan EHDS is om de naam te wijzigen in 'actualDosage' met definitie 'Details of how medication is/was used.'
 
 
 
@@ -263,7 +333,11 @@ Zie ook de algemene opmerking bovenaan.
 | type_xtehr | Period |
 
 ### Comments
-In de zib wordt in de definitie van dit element gesproken over de 'intended duration of use', maar in het EHDS model lijkt het (ook) te gaan over de feitelijke periode van gebruik. Mogelijk moet dit in de definitie in de zib worden aangepast.
+'periodOfUse' is nu niet goed interpreteerbaar, omdat niet duidelijk is of het de feitelijke periode betreft (took, is taking) of de periode zoals voorgeschreven (is excpected to take). Het is wenselijk om dit element alleen te gebruiken voor de feitelijke periode van gebruik.
+De bedoelde periode van gebruik is beschikbaar als het verzoek wordt ingewilligd om een element met een reference naar EHDSMedicationPrescription toe te voegen (separaat issue) waarin de bedoelde periodOfUse is gespecificeerd.
+Zo is ook duidelijk of een patiënt een voorgeschreven middel in de voorgeschreven periode gebruikt of daarvan afwijkt (later of eerder is begonnen met gebruik).
+Als de patiënt het voorgeschreven geneesmiddel (nog) niet gebruikt, is er een verwijzing naar het voorgeschreven geneesmiddel via EHDSMedicationPrescription, heeft medicationTreatmentStatus de waarde 'nee' en blijft het element periodOfUse leeg.
+Verzoek aan EHDS is om de naam te wijzigen in 'actualPeriodOfUse' met definitie 'Period when patient took/is taking the medication.'
 
 
 ## zib: MedicationUse.Prescriber::HealthProfessional
