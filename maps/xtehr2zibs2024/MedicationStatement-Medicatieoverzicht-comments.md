@@ -1,5 +1,5 @@
 # MedicationStatement
-## issues
+## issues (mail Astrid 31-10-2025)
 EHDS Issue 1  
 Model: EHDSMedicationStatement  
 "Verzoek: de waarden van medicationTreatmentStatus in lijn brengen met de definitie.
