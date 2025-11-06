@@ -11,7 +11,7 @@ EHDSissues:
 
 Zib issues:
 + DrugUse: Align data type of ObservationOfUse.Amount with EHDS model
-+ AlcoholUse, DrugUse, Tobacco, use: add element to match EHDSSubstanceUse.period = Time period for which this observation about substance use is applicabl
++ AlcoholUse, DrugUse, TobaccoUse: add element to match EHDSSubstanceUse.period = Time period for which this observation about substance use is applicabl
 
 
 ## General comments
