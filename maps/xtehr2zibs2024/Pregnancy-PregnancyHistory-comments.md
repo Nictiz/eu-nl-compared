@@ -26,9 +26,9 @@ Aanwezig: Lilian, Micha, Astrid, Jacob
 Verzoek voor EHDS:
   1. De lijst is niet mutually exclusive, omdat sommige items enerzijds een diagnose zijn waarbij de vrucht het lichaam nog niet heeft verlaten en anderzijds de manier aangeven waarop de zwangerschap eindigde. Als dat zo blijft, verhoog dan de kardinaliteit naar 0..*.
   2. Als de kardinaliteit 0..1 moet blijven, zorg dan dat de items in de lijst elkaar uitsluiten. 
-+ EHDS element outcomeDate: Dit is een moeilijk element, omdat er in de lijst voor 'outcome' een mengeling van waarden staat: enerzijds waarden die betrekking hebben op een diagnose, terwijl de vrucht nog in de moeder is (zwangeschap loopt nog) en anderzijds waarden (behalve newborn death) die echt een einde van de zwangerschap zijn.  
++ EHDS element outcomeDate: Dit is een moeilijk element, omdat er in de lijst voor 'outcome' een mengeling van waarden staat: enerzijds waarden die betrekking hebben op een diagnose, terwijl de vrucht nog in de moeder is (zwangerschap loopt nog) en anderzijds waarden (behalve newborn death) die echt een einde van de zwangerschap zijn.  
 In het eerste geval hebben we het over een diagnosedatum en in het andere geval over de einddatum van de zwangerschap.  
-Verzoek voor EHDS:  
+Verzoek voor EHDS https://github.com/Xt-EHR/xt-ehr-common/issues/359:  
 Wijzig 'outcomeDate' in 'EndDate', die dan betrekking heeft op het moment waarop de zwangerschap is beëindigd, d.w.z. de vrucht het lichaam verliet. Zo is er geen onduidelijkheid of de datum betrekking heeft op een diagnose, zoals 'fetal death', dan wel op het moment waarop de zwangerschap eindigde, nl. het moment van de 'stillbirth' of de 'termination of pregnancy'.
 + De zib mist een einddatum. Zib issue: EindDatum toevoegen aan rootconcept.
   + Deze zal kunnen worden gemapped op outcomeDate, maar alleen als de outcome het einde van de zwangerschap is en niet een diagnose! Zie het verzoek hierboven m.b.t. het EHDS element 'outcomeDate'.
