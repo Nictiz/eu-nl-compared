@@ -1,4 +1,6 @@
 # SubstanceUse
+## Discussion 6 november: see SubstanceUse-TobaccoUse-comments.md
+## General discussion
 Both the EHDS model and the zib seem to model an observation of single period (this may be a current period, without end date). In the zib model, metadata about the observation, such as when the observation was made, is absent. In the EHDS model, there is .period, which is defined as "Time period for which this observation about substance use is applicable". It is not clear what this means. 
 "Alcohol" in the EHDS model should be replaced by "Substance" throughout the model.
 
