@@ -2,16 +2,16 @@
 ## Bespreking 10 november
 Aanwezig: Chevy, Shenaida, Jacob, Marty  
 
-+ EHDS issue: er lijkt overlap te zitten in .reason (kan verwijzing naar condition zijn) en .diagnosis.condition. Dat is onduidelelijk
++ EHDS issue: er lijkt overlap te zitten in .reason (kan verwijzing naar condition zijn) en .diagnosis.condition. Dat is onduidelijk
   + opmerking Jacob na de meeting: .reason gaat over een geplande episode, .diagnosis is voor de verslaglegging van een voorbije episode. Maar dan hebben we de volgende issues:
-    + EHDSissue: blijkbaar kan EpisodeOfCare gebruikt worden voor zowel een geplande episode als een voorbij episode, maar dan ontbreken elementen voor een status en een statusdatum, voeg deze toe
-    + EHDSissue: als EpisodeOfCare gebruikt kan worden voor een geplande episode dan overlapt .reason met EHDSCareplan.addresses en .EHDSCareplan.activity. Vervang .reason door verwijzing naar EHDSCareplan.activity.  
+    + EHDS issue: blijkbaar kan EpisodeOfCare gebruikt worden voor zowel een geplande episode als een voorbije episode, maar dan ontbreken elementen voor een status en een statusdatum, voeg deze toe
+    + EHDS issue: waarom kan een EHDSProcedure een reden zijn voor een EpisodeOfCare? We denken dat hier niet de geplande procedures moeten zijn, daarvoor is immers het CarePlan.  
 + EHDS issue: begin- en einddatum ontbreken (als dit model voor zowel planning als verslaglegging kan worden gebruikt, dan zijn zowel geplande als actuele begin en einddatum nodig)
 + EHDS issue: tekstvelden voor naam en toelichting van de episode ontbreken
 + EHDS issue: van .type ontbreekt binding informatie
-+ zib issue: kardinaliteit van .FocusEpisodeOfCare::Condition moet 0..* zijn
++ zib issue: kardinaliteit van .FocusEpisodeOfCare::Condition moet 0..* zijn ipv 0..1
 + zib issue: we hebben een equivalent voor EHDSEpisodeOfCare.type nodig
-+ zib issue: we hebben een equivalent voor EHDSEpisodeOfCare.reason nodig. Dit kan een verwijzing naar EHDSCarePlan zijn, afhankelijk van uitkomst van issue over de overlap met EHDSCarePlan.
++ zib issue: we hebben een equivalent voor EHDSEpisodeOfCare.reason nodig. 
 
 
 ## Overall discussion
