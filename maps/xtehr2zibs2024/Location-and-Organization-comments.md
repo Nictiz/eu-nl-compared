@@ -1,4 +1,24 @@
-# Location and Organization as of 2025-06-17
+# Location and Organization 
+
+## Bespreking 5 november 2025
+Aanwezig: Astrid, Wouter, Jacob, Yasmin   
+
++ correctie op mapping tabel: zib locationName mapt op EHDSLocation.name
++ Zib: als location niet gevuld is dan is er maar 1 vestiging. Dus als location niet gevuld is kan je de zib mappen op de EHDS modellen.
++ ContactInformation op .telecom mits er maar 1 vestiging is
++ OrganizationType: is er een intl codestelsel? 
++ .departmentspecialty in zib: schrappen
++ Hoe weet je dat EHDSLocation een vestiging is (geen EHDS issue)
+  + Locatie: je communiceert het laagste niveau dat relevant is. 
++ Belangrijk: locatie geeft de fysieke hierarchie
++ Organisatie geeft de organisatorische hierarchie
++ Voorstel naar EHDS: serviceLocation in EHDSEncounter
++ Locatie: je communiceert het laagste niveau dat relevant is.
++ EHDSissue: type binding preferred vervang door example. Dat geldt voor EHDSOrganisation en EHDSLocation
+
+ 
+
+
 ## Comments added by Jacob 20-10
 + EHDSLocation lacks concept to describe specific location within a building
 + EHDSLocation.partOf is reference to EHDSOrganization. Should be EHDSLocation as per definition.
