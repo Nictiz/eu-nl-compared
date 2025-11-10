@@ -4,9 +4,8 @@ Aanwezig: Chevy, Shenaida, Jacob, Marty
 
 + EHDS issue: er lijkt overlap te zitten in .reason (kan verwijzing naar condition zijn) en .diagnosis.condition. Dat is onduidelijk
   + opmerking Jacob na de meeting: .reason gaat over een geplande episode, .diagnosis is voor de verslaglegging van een voorbije episode. Maar dan hebben we de volgende issues:
-    + EHDS issue: blijkbaar kan EpisodeOfCare gebruikt worden voor zowel een geplande episode als een voorbije episode, maar dan ontbreken elementen voor een status en een statusdatum, voeg deze toe
+    + EHDS issue: blijkbaar kan EpisodeOfCare gebruikt worden voor zowel een geplande episode als een voorbije episode, maar de geplande en de gerealiseerde begin- en einddata ontbreken
     + EHDS issue: waarom kan een EHDSProcedure een reden zijn voor een EpisodeOfCare? We denken dat hier niet de geplande procedures moeten zijn, daarvoor is immers het CarePlan.  
-+ EHDS issue: begin- en einddatum ontbreken (als dit model voor zowel planning als verslaglegging kan worden gebruikt, dan zijn zowel geplande als actuele begin en einddatum nodig)
 + EHDS issue: tekstvelden voor naam en toelichting van de episode ontbreken
 + EHDS issue: van .type ontbreekt binding informatie
 + zib issue: kardinaliteit van .FocusEpisodeOfCare::Condition moet 0..* zijn ipv 0..1
