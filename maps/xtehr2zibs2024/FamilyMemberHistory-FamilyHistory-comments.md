@@ -23,14 +23,7 @@
 | FamilyHistory.FamilyMember.Disorder                                |                                                     |            |                        | 1..*        |               |
 | FamilyHistory.FamilyMember.Disorder.IsCauseOfDeath                 |                                                     | BL         |                        | 0..1        |               |
 | FamilyHistory.FamilyMember.DeathIndicator                          |                                                     | BL         |                        | 0..1        |               |
-| FamilyHistory.FamilyMember.Disorder.DisorderFamilyMember           |                                                     |            |                        | 1           |               |
 | FamilyHistory.FamilyMember.Disorder.DisorderFamilyMember           |                                                     |            |                        | (0..1)      |               |
-| FamilyHistory.FamilyMember.Disorder.DisorderFamilyMember           |                                                     |            |                        | (0..1)      |               |
-| FamilyHistory.FamilyMember.Disorder.DisorderFamilyMember           |                                                     |            |                        | 1           |               |
-| FamilyHistory.FamilyMember.Disorder.DisorderFamilyMember           |                                                     |            |                        | (0..1)      |               |
-| FamilyHistory.FamilyMember.Disorder.DisorderFamilyMember           |                                                     |            |                        | (0..1)      |               |
-| FamilyHistory.FamilyMember.AgeAtDeath                              |                                                     | INT        |                        | 0..1        |               |
-| FamilyHistory.FamilyMember.DeathIndicator                          |                                                     | BL         |                        | 0..1        |               |
 
 
 
