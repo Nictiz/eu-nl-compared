@@ -367,6 +367,7 @@ Modellering in EHDS is niet echt mooi, want laat ruimte voor redundantie. De zie
 
 ### Comments
 In de zib is dit de combinatie van AandoeningFamilielid én IsDoodsoorzaak = 1.
+Als het familielid door iets anders dan een ziekte is overleden (is dus niet relevant voor familieanamnese), zal je dat met de zib niet registreren. In het EHDS model kan het wel.
 
 
 
