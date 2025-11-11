@@ -1,15 +1,18 @@
 # FamilyMemberHistory
 
-## Bespreking 10 november 2025
-Aanwezig: Jacob Shenaida Chevy
-+ EHDS issue: kardinaliteit van FamilyMemberHistory binnen Discharge Report is 0..ster. Dat klopt niet met de naam van het model en heeft als effect dat iedere familielid-entry een header krijgt. Dat lijkt niet handig. Voorstel: breng de elementen in het model onder in FamilyMember container met kardinaliteit 1..ster. (als dit verzoek niet wordt ingewilligd moet de zib het EHDS model volgen; de registratiegegevens kunnen immers per familielid anders zijn).
-+ EHDS issue: de datum waarop de anamnese is afgenomen ontbreekt. Wij gaan er van uit dat de datum in de header (Date and time of authoring/issuing) een andere betekenis heeft.
+## Toegevoegd door Jacob na de bespreking op 10 november
 + geen EHDS issue: de constructie in de zib waarbij één van de AandoeningFamilielid met een indicator als doodsoorzaak wordt aangewezen voorkomt redundantie. Maar het EHDS model is altijd te mappen op de zib en andersom => geen issue.
-+ EHDS issue: het EHDS model verwijst naar hl7:v3-RoleCode.  In deze lijst komen ook items voor die geen bloedverwantsschap betreffen en de zib beperkt zich tot bloedverwanten. In het kader van de familieanamnese is dat ook terecht. Het EHDS model zou zich ook tot bloedverwanten moeten beperken.  (FHIR (R5) perkt deze lijst in naar concept is-a FAMMEMB)
 + zib issue(?): de zib heeft een overlijdensindicator, het EHDS model niet. Een familielid met alleen een overlijdensindicator kan niet worden gemapt op het EHDS model zonder informatieverlies. Mogelijk nuttig als de overlijdensdatum/leeftijd bij overlijden niet bekend is? Maar wat is dan de toegevoegde waarde van de kennis dat het familielid overleden is? Voorstel: overlijdensindicator uit zib verwijderen.
 + EHDS issue: Het EHDS model heeft een geboortedatum, de zib niet. Een familielid met alleen een geboortedatum kan niet worden gemapt op de zib zonder informatieverlies. Maar het lijkt er op dat de geboortedatum alleen is toegevoegd om het mogelijk te maken om de overlijdensdatum in plaats van de leetfijd bij overlijden. Dit maakt het EHDS model nodeloos complex. Voorstel: EHDS model vereenvoudigen door ageOrDateOfDeathDate te verwijderen: dan is dateOfBirth niet nodig. Als EHDS dit verzoek niet inwilligt dan moet de zib het EHDS model volgen.
-+ EHDS issue: de datum waarop de anamnese is afgenomen ontbreekt
++ zib issue: de zib bevat een verwijzing naar Diagnose en OvergevoelighedIntolerantie, het EHDS heeft alleen een codeable concept. In dit geval lijkt een codeable concept voldoende en zou de optie om alleen een codeable concept te gebruiken moeten worden toegevoegd aan de zib.
++ zib issue: in de zib kunnen alleen diagnoses en overgevoeligheidintoleranties als doodsoorzaken worden geregistreerd. Dat komt neer op SNOMED codes uit de bevindingen-tak. Een verkeersongeluk en zelfmoord (gebeurtenis) passen hier niet in (zou dan letsel door verkeersongeluk resp zelfmoord moeten worden). In het EHDS model speelt dit probleem niet. Is op te lossen door ook codeable conept toe te staan.
+
+## Bespreking 10 november 2025
+Aanwezig: Jacob Shenaida Chevy
 + EHDS issue: toelichting (comment) op familielid ontbreekt
++ EHDS issue: het EHDS model verwijst naar hl7:v3-RoleCode.  In deze lijst komen ook items voor die geen bloedverwantsschap betreffen en de zib beperkt zich tot bloedverwanten. In het kader van de familieanamnese is dat ook terecht. Het EHDS model zou zich ook tot bloedverwanten moeten beperken.  (FHIR (R5) perkt deze lijst in naar concept is-a FAMMEMB)
++ EHDS issue: kardinaliteit van FamilyMemberHistory binnen Discharge Report is 0..ster. Dat klopt niet met de naam van het model en heeft als effect dat iedere familielid-entry een header krijgt. Dat lijkt niet handig. Voorstel: breng de elementen in het model onder in FamilyMember container met kardinaliteit 1..ster. (als dit verzoek niet wordt ingewilligd moet de zib het EHDS model volgen; de registratiegegevens kunnen immers per familielid anders zijn).
++ EHDS issue: de datum waarop de anamnese is afgenomen ontbreekt. Wij gaan er van uit dat de datum in de header (Date and time of authoring/issuing) een andere betekenis heeft.
 
 
 | zib                                                                | xtehr                                               | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
