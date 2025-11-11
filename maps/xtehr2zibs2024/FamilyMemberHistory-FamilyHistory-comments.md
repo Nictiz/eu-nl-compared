@@ -2,7 +2,7 @@
 
 ## Bespreking 10 november 2025
 Aanwezig: Jacob Shenaida Chevy
-+ EHDS issue: kardinaliteit van FamilyMemberHistory binnen Discharge Report is 0..*(*). Dat klopt niet met de naam van het model en heeft als effect dat iedere familielid-entry een header krijgt. Dat lijkt niet handig. Voorstel: breng de elementen in het model onder in FamilyMember container met kardinaliteit 1..*(*). (als dit verzoek niet wordt ingewilligd moet de zib het EHDS model volgen; de regsitratiegegevens kunnen immers per familielid anders zijn).
++ EHDS issue: kardinaliteit van FamilyMemberHistory binnen Discharge Report is 0..ster. Dat klopt niet met de naam van het model en heeft als effect dat iedere familielid-entry een header krijgt. Dat lijkt niet handig. Voorstel: breng de elementen in het model onder in FamilyMember container met kardinaliteit 1..ster. (als dit verzoek niet wordt ingewilligd moet de zib het EHDS model volgen; de registratiegegevens kunnen immers per familielid anders zijn).
 + EHDS issue: de datum waarop de anamnese is afgenomen ontbreekt. Wij gaan er van uit dat de datum in de header (Date and time of authoring/issuing) een andere betekenis heeft.
 + geen EHDS issue: de constructie in de zib waarbij één van de AandoeningFamilielid met een indicator als doodsoorzaak wordt aangewezen voorkomt redundantie. Maar het EHDS model is altijd te mappen op de zib en andersom => geen issue.
 + EHDS issue: het EHDS model verwijst naar hl7:v3-RoleCode.  In deze lijst komen ook items voor die geen bloedverwantsschap betreffen en de zib beperkt zich tot bloedverwanten. In het kader van de familieanamnese is dat ook terecht. Het EHDS model zou zich ook tot bloedverwanten moeten beperken.  (FHIR (R5) perkt deze lijst in naar concept is-a FAMMEMB)
