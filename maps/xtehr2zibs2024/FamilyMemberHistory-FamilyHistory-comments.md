@@ -10,7 +10,7 @@ Aanwezig: Jacob Shenaida Chevy
 + EHDS issue: Het EHDS model heeft een geboortedatum, de zib niet. Een familielid met alleen een geboortedatum kan niet worden gemapt op de zib zonder informatieverlies. Maar het lijkt er op dat de geboortedatum alleen is toegevoegd om het mogelijk te maken om de overlijdensdatum in plaats van de leetfijd bij overlijden. Dit maakt het EHDS model nodeloos complex. Voorstel: EHDS model vereenvoudigen door ageOrDateOfDeathDate te verwijderen: dan is dateOfBirth niet nodig. Als EHDS dit verzoek niet inwilligt dan moet de zib het EHDS model volgen.
 + EHDS issue: de datum waarop de anamnese is afgenomen ontbreekt
 + EHDS issue: toelichting (comment) op familielid ontbreekt
-+ 
+
 
 | zib                                                                | xtehr                                               | type_zib   | type_xtehr             | card._zib   | card._xtehr   |
 |:-------------------------------------------------------------------|:----------------------------------------------------|:-----------|:-----------------------|:------------|:--------------|
