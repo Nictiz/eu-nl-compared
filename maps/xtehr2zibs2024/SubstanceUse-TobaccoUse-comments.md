@@ -2,12 +2,12 @@
 ## Discussion 6 november 2025
 Participants: Astrid, Jacob, Sander  
 EHDSissues:
-+ Change "Alcohol" into "Substance" all over
-+ Replace definition of .status in the header by its definition in EHDSDataset
-+ Add .status element, definition: Status of the patient’s substance use, type: codeable concept
-+ Add .statusDate, definition: Date on which the status was observed, type: dateTime
-+ Change cardinality of frequencyAndQuantity to 0..*, as within the period of observation, multiple periods of substance use may have occurred
-+ Add .packYears, definition: Cumulated quantity of tobacco used up to .statusDate
++ Change "Alcohol" into "Substance" all over https://github.com/Xt-EHR/xt-ehr-common/issues/369
++ Replace definition of .status in the header by its definition in EHDSDataset https://github.com/Xt-EHR/xt-ehr-common/issues/370
++ Add .status element, definition: Status of the patient’s substance use, type: codeable concept https://github.com/Xt-EHR/xt-ehr-common/issues/370
++ Add .statusDate, definition: Date on which the status was observed, type: dateTime https://github.com/Xt-EHR/xt-ehr-common/issues/371
++ Change cardinality of frequencyAndQuantity to 0..*, as within the period of observation, multiple periods of substance use may have occurred https://github.com/Xt-EHR/xt-ehr-common/issues/372
++ Add .cumulativeUse, definition: Cumulated quantity of substance used up to .statusDate, type: Quantity (is dit wel een issue?)
 
 Zib issues:
 + DrugUse: Align data type of ObservationOfUse.Amount with EHDS model
