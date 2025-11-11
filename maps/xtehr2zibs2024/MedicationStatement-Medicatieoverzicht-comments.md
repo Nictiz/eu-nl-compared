@@ -1,12 +1,7 @@
 # MedicationStatement
 ## issues (mail Astrid 31-10-2025)
-EHDS Issue 1  
-Model: Local
-
-eu-nl-compared/maps/xtehr2zibs2024/EpisodeOfCare-EpisodeOfCare-comments.md at main · Nictiz/eu-nl-compared
-https://github.com/Nictiz/eu-nl-compared/blob/main/maps/xtehr2zibs2024/EpisodeOfCare-EpisodeOfCare-comments.md
-
-EHDSMedicationStatement  
+EHDS Issue 1  https://github.com/Xt-EHR/xt-ehr-common/issues/360
+Model: EHDSMedicationStatement  
 "Verzoek: de waarden van medicationTreatmentStatus in lijn brengen met de definitie.
 Het element medicationTreatmentStatus heeft als definitie 'The current status of the taking of medicine' en als type CodeableConcept. Als het om de current use gaat, dan kan de waarde alleen 'ja' of 'nee' zijn. Het verzoek is om de toegestane waarden van medicationTreatmentStatus daarmee in lijn te brengen."
 
@@ -31,7 +26,7 @@ Het bedoelde gebruik van het geneesmiddel is beschikbaar als het verzoek wordt i
 Het ene element met een reference naar EHDSMedicationDispense voor de doseerinstructies zoals afgegeven door de apotheek en het andere element met een reference naar EHDSMedicationPrescription voor de doseerinstructies van het oorspronkelijke voorschrift.
 Zo kun je aangeven dat een patiënt een voorgeschreven middel anders gebruikt dan voorgeschreven of zelfs helemaal niet gebruikt. In het laatste geval is er een verwijzing naar het voorgeschreven geneesmiddel via EHDSMedicationPrescription, heeft medicationTreatmentStatus de waarde 'nee' en blijft het element dosageInstructions leeg."
 
-EHDS Issue 4  
+EHDS Issue 4 https://github.com/Xt-EHR/xt-ehr-common/issues/366
 Model: EHDSMedicationStatement  
 Verzoek: naam en definitie wijzigen van 'periodOfUse' naar 'actualPeriodOfUse' met definitie 'Period when patient took/is taking the medication.
 Het element 'periodOfUse' is nu niet goed interpreteerbaar, omdat niet duidelijk is of het de feitelijke periode betreft (took, is taking) of de periode zoals voorgeschreven (is excpected to take). Het is wenselijk om dit element alleen te gebruiken voor de feitelijke periode van gebruik.  
@@ -39,12 +34,12 @@ De bedoelde periode van gebruik is beschikbaar als het verzoek wordt ingewilligd
 Zo is duidelijk of een patiënt een voorgeschreven middel in de voorgeschreven periode gebruikt of daarvan afwijkt (later of eerder is begonnen met gebruik).  
 Als de patiënt het voorgeschreven geneesmiddel (nog) niet gebruikt, is er een verwijzing naar het voorgeschreven geneesmiddel via EHDSMedicationPrescription, heeft medicationTreatmentStatus de waarde 'nee' en blijft het element periodOfUse leeg."
 
-EHDS Issue 5  
+EHDS Issue 5  https://github.com/Xt-EHR/xt-ehr-common/issues/367
 Model: EHDSMedicationStatement  
 Verzoek: element 'intendeUseType' laten vervallen.  
 Dit element is in feite een gegeven bij het medicatievoorschrift. Het element 'intendedUseType' is niet meer nodig als het verzoek wordt ingewilligd om een element in het model op te nemen (separaat issue) met een reference naar EHDSMedicationPrescription waarin intendedUseType wordt gespecificeerd."
 
-EHDS Issue 6  
+EHDS Issue 6 https://github.com/Xt-EHR/xt-ehr-common/issues/368 
 Model: EHDSMedicationStatement  
 Verzoek: element 'medicationReason' laten vervallen.  
 Dit element is in feite een gegeven bij het medicatievoorschrift. Het element 'medicationReason' is niet meer nodig als het verzoek (separaat issue) wordt ingewilligd om een element in het model op te nemen met een reference naar EHDSMedicationPrescription waarin de indicatie voor het voorgeschreven geneesmiddel wordt gespecificeerd."
