@@ -7,7 +7,7 @@ EHDSissues:
 + Add .status element, definition: Status of the patient’s substance use, type: codeable concept https://github.com/Xt-EHR/xt-ehr-common/issues/370
 + Add .statusDate, definition: Date on which the status was observed, type: dateTime https://github.com/Xt-EHR/xt-ehr-common/issues/371
 + Change cardinality of frequencyAndQuantity to 0..*, as within the period of observation, multiple periods of substance use may have occurred https://github.com/Xt-EHR/xt-ehr-common/issues/372
-+ Add .cumulativeUse, definition: Cumulated quantity of substance used up to .statusDate, type: Quantity (is dit wel een issue?)
++ Add .cumulativeUse, definition: Cumulated quantity of substance used up to .statusDate, type: Quantity https://github.com/Xt-EHR/xt-ehr-common/issues/373
 
 Zib issues:
 + DrugUse: Align data type of ObservationOfUse.Amount with EHDS model
