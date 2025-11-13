@@ -7,8 +7,9 @@ case: oma is door maar we weten niet wanneer
 + EHDS issue: restrict binding description of .patientRelationship to blood relationhips. Justification: the current binding description (hl7:v3-RoleCode) is not restricted to blood relationships
 + zib issue: geboortedatum toevoegen: er zijn use cases waarin alleen de geboortedatum bekend is
 + EHDS issue: remove element .ageOrDateOfDeathDate, justification: if .dateOfBirth is not populated, .ageOrDateOfDeathDate is not relevant
-+ EHDS issue: rename EHDSFamilyMemberHistory to EHDSFamilyHistory and create a container EHDSFamilyMember (cardinality 1..*) within EHDSFamilyHistory, containing family member specific elements. Justification: family history is in practice taken at once, so that one instance of the header information  
-EHDS issue: datum anamnese ontbreekt
++ EHDS issue: rename EHDSFamilyMemberHistory to EHDSFamilyHistory and create a container EHDSFamilyMember (cardinality 1..*) within EHDSFamilyHistory, containing family member specific elements. Justification: family history is in practice taken at once, so that meta (header) information is applicable to all of the family history. In the current model, a header is created for each family member instance, which is undesirable.  
++ EHDS issue: add .date, type: dateTime, definition: the date and time on which the family was taken. The meaning of this date is different from .header.authorship.datetime, which is the date on which the instance was registered in the patient's health record. The date should be added on family history level (dependent on resoluton of issue #rename)
++ EHDS issue: add text element to the model on family member level, type: string, definition: comment on the family member which might be relevant to the family history
 
 
 ## Toegevoegd door Jacob na de bespreking op 10 november
