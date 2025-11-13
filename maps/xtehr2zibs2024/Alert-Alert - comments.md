@@ -1,9 +1,14 @@
 # Alert
+## Duiding door Jacob en Astrid 13 november 2025
++ EHDSIssue: add .alertSetter, definition: the health professional who is responsible for setting the alert, type: EHDSHealthProfessional. This is not the same rol as .header.author: the .author is the person responsible for registration in the health record, while the setter of the alert can be a professional in another organisation.
++ EHDSIssue: remove .status. It seems to overlap with .header.status and it is redundant because EHDSAlert.period indicates when the alert is active.
++ zib issue: add equivalent of EHDSAlert.priority
+
 ## General discussion
 Missing in the EHDS model: 
 + Alert.DecisionMaker = asserter of the Alert (we assume that EHDSAlert.header.author is another role)
 + Alert.HypersensitivityIntolerance and Alert.Diagnosis (references) - only their names can be mapped to EHDSAlert.code
-+ Alert.AlertType (valueset: Condition, Potential contraindication for medication, Alert). The zib has binding MedicationContraIndicationNameCodelist (for contra indications), and AlertNameCodelist (gereral codelist, mostly useful for hospital admissions). It is not clear in which EHDS model contraindiactions are represented.
++ Alert.AlertType (valueset: Condition, Potential contraindication for medication, Alert). The zib has binding MedicationContraIndicationNameCodelist (for contra indications), and AlertNameCodelist (gereral codelist, mostly useful for hospital admissions). It is not clear in which EHDS model contraindications are represented.
 
 Missing in the zib:
 + priority (value set: no alarm, low, medium, high)
@@ -278,6 +283,7 @@ Missing in the zib:
 | type_zib | ST |
 
 ### Comments
+Astrid 13-11: Beperkte mapping, want in de zib vult text de gestructureerde gegevens aan, terwijl EHDSAlert.text zelfstandig interpreteerbaar moet zijn.
 
 
 
@@ -298,7 +304,8 @@ Missing in the zib:
 | type_xtehr | CodeableConcept |
 
 ### Comments
-
+Astrid 13-11: Alert van het type 'Waarschuwing' zou je kunnen mappen op 'High priority', aangenomen dat deze valueset wordt gebruikt: https://build.fhir.org/ig/HL7/fhir-extensions/CodeSystem-flag-priority-code.html
+Het lijkt mij dat dit wel voor EHDS compatibiliteit nodig is en dus een zib-issue moet zijn. De gebruiker moet de priority ws zelf aangeven.
 
 
 ## EHDSAlert.status
@@ -415,6 +422,7 @@ Missing in the zib:
 | type_zib | CD |
 
 ### Comments
+Astrid 13-11: De vraag is of het 'erg' is als je geen AlertType kunt uitwisselen buiten Nederland. Het is vooral van belang voor MedicatieBewakingsoftware, die in Nederland G-standaard codes gebruikt.
 
 
 
@@ -476,4 +484,5 @@ Missing in the zib:
 | stereotype_zib | context,reference |
 
 ### Comments
+Astrid 13-11: EHDS issue: dit element aanvragen. Als je twijfelt aan de (prioriteit van) een Alert dan is het nuttig om te weten wie het Alert heeft ingesteld. Je kunt dan beoordelen of je het wilt overnemen of zelf wilt evalueren/aanpassen.
 
