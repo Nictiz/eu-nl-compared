@@ -2,14 +2,12 @@
 ## Te openen issues (beproken door Jacob en Astrid 13 november 2025)
 
 case: oma is door maar we weten niet wanneer
-EHDS issue: overlijdensindicator toevoegen
-zib issue: verwijzing naar Aandoening of gesteldheid vervangen door codeable concept
-zelfmoord niet meenemen in SNOMED tak
-inoerking waardenlijst
-zib issue: geboortedatum toevoegen
-geen death date opnemen in de zib
-EHDS issue: overweeg om de death date eruit te laten, want zonder geboortedatum heb je er niks aan
-EHDS issue: kardinaliteit familieanamnese wegens header
++ EHDS issue: add element .deathIndicator, type: boolean, definition: indication whether the family member has died, justification: in some cases the death age or date is not known, but the fact that the family member had died is relevant
++ zib issue: verwijzingen naar Diagnose en OvergevoeligheidIntolerantie vervangen door codeable concept, want het betreft diagnoses van een andere patient
++ EHDS issue: restrict binding description of .patientRelationship to blood relationhips. Justification: the current binding description (hl7:v3-RoleCode) is not restricted to blood relationships
++ zib issue: geboortedatum toevoegen: er zijn use cases waarin alleen de geboortedatum bekend is
++ EHDS issue: remove element .ageOrDateOfDeathDate, justification: if .dateOfBirth is not populated, .ageOrDateOfDeathDate is not relevant
++ EHDS issue: rename EHDSFamilyMemberHistory to EHDSFamilyHistory and create a container EHDSFamilyMember (cardinality 1..*) within EHDSFamilyHistory, containing family member specific elements. Justification: family history is in practice taken at once, so that one instance of the header information  
 EHDS issue: datum anamnese ontbreekt
 
 
