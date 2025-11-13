@@ -1,4 +1,17 @@
 # FamilyMemberHistory
+## Te openen issues (beproken door Jacob en Astrid 13 november 2025)
+
+case: oma is door maar we weten niet wanneer
+EHDS issue: overlijdensindicator toevoegen
+zib issue: verwijzing naar Aandoening of gesteldheid vervangen door codeable concept
+zelfmoord niet meenemen in SNOMED tak
+inoerking waardenlijst
+zib issue: geboortedatum toevoegen
+geen death date opnemen in de zib
+EHDS issue: overweeg om de death date eruit te laten, want zonder geboortedatum heb je er niks aan
+EHDS issue: kardinaliteit familieanamnese wegens header
+EHDS issue: datum anamnese ontbreekt
+
 
 ## Toegevoegd door Jacob na de bespreking op 10 november
 + geen EHDS issue: de constructie in de zib waarbij één van de AandoeningFamilielid met een indicator als doodsoorzaak wordt aangewezen voorkomt redundantie. Maar het EHDS model is altijd te mappen op de zib en andersom => geen issue.
