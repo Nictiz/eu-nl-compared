@@ -1,7 +1,7 @@
 # FamilyMemberHistory
 ## Te openen issues (beproken door Jacob en Astrid 13 november 2025)
 
-case: oma is door maar we weten niet wanneer
+case: oma is dood maar we weten niet wanneer
 + EHDS issue: add element .deathIndicator, type: boolean, definition: indication whether the family member has died, justification: in some cases the death age or date is not known, but the fact that the family member had died is relevant
 + zib issue: verwijzingen naar Diagnose en OvergevoeligheidIntolerantie vervangen door codeable concept, want het betreft diagnoses van een andere patient. Let op de use case dat doodsoorzaak = onbekend wordt ingevuld (kan dit volgend het EHDS model? Zegt EHDS iets over DAR?)
 + EHDS issue: restrict binding description of .patientRelationship to blood relationhips. Justification: the current binding description (hl7:v3-RoleCode) is not restricted to blood relationships
