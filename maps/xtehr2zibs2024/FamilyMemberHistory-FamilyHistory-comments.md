@@ -1,15 +1,16 @@
 # FamilyMemberHistory
 ## Te openen issues (beproken door Jacob en Astrid 13 november 2025)
 
-case: oma is dood maar we weten niet wanneer
-+ EHDS issue: add element .deathIndicator, type: boolean, definition: indication whether the family member has died, justification: in some cases the death age or date is not known, but the fact that the family member had died is relevant
++ EHDS issue: add element .deathIndicator, type: boolean, definition: indication whether the family member has died, justification: in some cases the death age or date is not known, but the fact that the family member had died is relevant #380 
 + zib issue: verwijzingen naar Diagnose en OvergevoeligheidIntolerantie vervangen door codeable concept, want het betreft diagnoses van een andere patient. Let op de use case dat doodsoorzaak = onbekend wordt ingevuld (kan dit volgend het EHDS model? Zegt EHDS iets over DAR?)
-+ EHDS issue: restrict binding description of .patientRelationship to blood relationhips. Justification: the current binding description (hl7:v3-RoleCode) is not restricted to blood relationships
++ EHDS issue: restrict binding description of .patientRelationship to blood relationhips. Justification: the current binding description (hl7:v3-RoleCode) is not restricted to blood relationships #381
 + zib issue: geboortedatum toevoegen: er zijn use cases waarin alleen de geboortedatum bekend is
-+ EHDS issue: remove element .ageOrDateOfDeathDate, justification: if .dateOfBirth is not populated, .ageOrDateOfDeathDate is not relevant
-+ EHDS issue: rename EHDSFamilyMemberHistory to EHDSFamilyHistory (cardinality 0..1 on top level) and create a container EHDSFamilyMember (cardinality 1..*) within EHDSFamilyHistory, containing family member specific elements. Justification: family history is in practice taken at once, so that meta (header) information is applicable to all of the family history. In the current model, a header is created for each family member instance, which is undesirable.  
-+ EHDS issue: add .date, type: dateTime, definition: the date and time on which the family was taken. The meaning of this date is different from .header.authorship.datetime, which is the date on which the instance was registered in this patient's health record. The date should be added on family history level (dependent on resoluton of issue #bovenstaand issue)
-+ EHDS issue: add text element to the model on family member level, type: string, definition: comment on the family member which might be relevant to the family history
++ EHDS issue: remove element .ageOrDateOfDeathDate, justification: if .dateOfBirth is not populated, .ageOrDateOfDeathDate is not relevant #382
++ EHDS issue: rename EHDSFamilyMemberHistory to EHDSFamilyHistory (cardinality 0..1 on top level) and create a container EHDSFamilyMember (cardinality 1..*) within EHDSFamilyHistory, containing family member specific elements. Justification: family history is in practice taken at once, so that meta (header) information is applicable to all of the family history. In the current model, a header is created for each family member instance, which is undesirable. #383 
++ EHDS issue: add .date, type: dateTime, definition: the date and time on which the family was taken. The meaning of this date is different from .header.authorship.datetime, which is the date on which the instance was registered in this patient's health record. The date should be added on family history level (dependent on resoluton of issue #383) #384
++ EHDS issue: add text element to the model on family member level, type: string, definition: comment on the family member which might be relevant to the family history #385
+
+De EHDS issue nummers verwijzen naar https://github.com/Xt-EHR/xt-ehr-common/issues.
 
 
 ## Toegevoegd door Jacob na de bespreking op 10 november
