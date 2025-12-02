@@ -24,14 +24,13 @@ EHDS presents the nextVaccinationDate which is not present in the zib.
 - EHDS vaccine is missing in the zib, this could be represented in the Pharmaceutical product code. Multiple codes are allowed. 
 
 ## Discussions (16-09-2025:)# Vaccination
-Consultatie: Sharper definition needed is this about vaccination or immunisation (Does it include passive and active immunisation)
-Consultatie: Dossaging add as a non mandatory item (there is some discussion in NL). 
-Consultatie: NextVaccinationDate under specified (should this be a different model, vaccinationScheme?). Possible model in fhir "ImmunizationRecommenation / Request". 
-ZIBissue: Mogelijk 1..* maken van pathogen (en kijken naar hoe dit past binnen rijksvaccinatie programma). 
-Consultatie: Please add examples and a better description for what vaccine is. And what is the value of this field?
-Consultatie: Add a comment field to the model, for instance to describe deviating regimes.
-Zib issue: Motive opnieuw beoordelen en/of bij scheiding vaccinatie / toediening.  
-
++ Consultatie: Sharper definition needed is this about vaccination or immunisation (Does it include passive and active immunisation) https://github.com/Xt-EHR/xt-ehr-common/issues/403
++ Consultatie: Dossaging add as a non mandatory item (there is some discussion in NL) https://github.com/Xt-EHR/xt-ehr-common/issues/404
++ Consultatie: NextVaccinationDate under specified (should this be a different model, vaccinationScheme?). Possible model in fhir "ImmunizationRecommenation / Request". https://github.com/Xt-EHR/xt-ehr-common/issues/405
++ ZIBissue: Mogelijk 1..* maken van pathogen (en kijken naar hoe dit past binnen rijksvaccinatie programma). 
++ Consultatie: Please add examples and a better description for what vaccine is. And what is the value of this field? https://github.com/Xt-EHR/xt-ehr-common/issues/406
++ Consultatie: Add a comment field to the model, for instance to describe deviating regimes https://github.com/Xt-EHR/xt-ehr-common/issues/407
++ Zib issue: Motive opnieuw beoordelen en/of bij scheiding vaccinatie / toediening.    
 
 A workgroup EUvac is starting up (Nictiz is not participating yet), may impact future versions. 
 
