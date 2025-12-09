@@ -5,7 +5,7 @@
   + De zib heeft DatumBepaling. Overleggen of deze nog nodig is. Blijkbaar wordt de bepaling van de à terme datum soms herzien. Het gebeurt dus niet zonder meer bij elke beoordeling van de status van de zwangerschap. Dit betekent dat de DatumBepaling nodig kan zijn om te beslissen of een hernieuwde bepaling nodig is. De à terme datum wordt nl. ook gebruikt voor het afleiden van de zwangerschapsduur. Een nauwkeurige bepaling van de à terme datum zal vooral spelen in de eerste 20-24 wk van de zwangerschap, omdat deze grens bepalend is voor pariteit en levensvatbaarheid (https://nictiz.atlassian.net/browse/ZIB-2902).
 + In zowel de zib als EHDSCurrentPregnancy ontbreekt het aantal foetussen. We maken er een zib issue (https://nictiz.atlassian.net/browse/ZIB-2903) en een consultatie-issue van.
 + In EHDSCurrentPregnancy ontbreken graviditeit en pariteit. Die kunnen in principe worden afgeleid uit de aanwezige instanties van EHDSPregnancyHistory, maar het afleiden van de pariteit is niet eenvoudig. We maken er geen consultatie-issue van en voor de zib moeten we overwegen om ze ergens anders onder te brengen: het zijn immers geen eigenschappen van de zwangerschap.
-+ EHDSCurrentPregnancy.currentPregnancyStatus hoort niet in het model. Je kunt niet in de zwangerschap modelleren of de zwangerschap bestaat. Hoort in een vragenlijst. We maken er een consulatie-issue van.
++ EHDSCurrentPregnancy.currentPregnancyStatus hoort niet in het model. Je kunt niet in de zwangerschap modelleren of de zwangerschap bestaat. Hoort in een vragenlijst. We maken er een consultatie-issue van.
 + Graviditeit en Pariteit zijn geen eigenschappen van de zwangerschap. We maken er een zib-issue van (https://nictiz.atlassian.net/browse/ZIB-2904).
 
 ## Overall discussion
