@@ -30,7 +30,7 @@ Verzoek voor EHDS:
 In het eerste geval hebben we het over een diagnosedatum en in het andere geval over de einddatum van de zwangerschap.  
 Verzoek voor EHDS https://github.com/Xt-EHR/xt-ehr-common/issues/359:  
 Wijzig 'outcomeDate' in 'EndDate', die dan betrekking heeft op het moment waarop de zwangerschap is beëindigd, d.w.z. de vrucht het lichaam verliet. Zo is er geen onduidelijkheid of de datum betrekking heeft op een diagnose, zoals 'fetal death', dan wel op het moment waarop de zwangerschap eindigde, nl. het moment van de 'stillbirth' of de 'termination of pregnancy'.
-+ De zib mist een einddatum. Zib issue: EindDatum toevoegen aan rootconcept.
++ De zib mist een einddatum. Zib issue: EindDatum toevoegen aan rootconcept https://nictiz.atlassian.net/browse/ZIB-2893.
   + Deze zal kunnen worden gemapped op outcomeDate, maar alleen als de outcome het einde van de zwangerschap is en niet een diagnose! Zie het verzoek hierboven m.b.t. het EHDS element 'outcomeDate'.
 + In de zib ontbreekt een equivalent voor de outcome van een zwangerschap.
   + zib issue: voeg TypeZwangerschapseinde toe aan het rootconcept
@@ -38,7 +38,8 @@ Wijzig 'outcomeDate' in 'EndDate', die dan betrekking heeft op het moment waarop
       + Livebirth
       + Miscarriage
       + Stillbirth
-      + Termination of pregnancy (bedoelen ze hier abortus provocatus? Wat evt. nog meer?) 	
+      + Termination of pregnancy (bedoelen ze hier abortus provocatus? Wat evt. nog meer?)
+      + https://nictiz.atlassian.net/browse/ZIB-2894	
   + zib issue: voeg verwijzing naar Diagnose toe aan rootconcept
     + let op: Diagnose en Zwangerschapseinde zitten ws niet in dezelfde 'versie' (instantiatie) van dezelfde zwangerschap.
     + Diagnose bij de moeder kan belangrijke context zijn voor de zwangerschap! Verwijzing naar diagnose bij moeder? Of gewoon in de toelichting?
@@ -47,8 +48,9 @@ Wijzig 'outcomeDate' in 'EndDate', die dan betrekking heeft op het moment waarop
       + Hydatidiform mole, benign
       + Fetal death
       + Foetale nood
-    + Uitgangspunt is dat er nog sprake is van zwangerschap zolang de vrucht het lichaam nog niet heeft verlaten.  
-Verwijzing naar diagnose lijkt niet nodig (voor EHDS).
+    + Uitgangspunt is dat er nog sprake is van zwangerschap zolang de vrucht het lichaam nog niet heeft verlaten. 
+    + https://nictiz.atlassian.net/browse/ZIB-2895
+    + Verwijzing naar diagnose (EHDSCondition) lijkt niet nodig (voor EHDS).
 + Waardenlijst bij EHDSPregnancyHistory.outcome
   + Newborn death: Dit betreft het kindje, dat binnen 28 dagen na de geboorte overlijdt. Het is dus geen einde van de zwangerschap, want het kindje kwam levend ter wereld. Men vindt het blijkbaar relevant om te weten of een zwangerschap al dan niet tot een geboorte van een kindje heeft geleid dat minstens 28 in leven is gebleven.
     + Verzoek voor EHDS https://github.com/Xt-EHR/xt-ehr-common/issues/358 verwijderen uit de lijst om de volgende redenen:
