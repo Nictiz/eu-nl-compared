@@ -10,8 +10,8 @@ EHDSissues:
 + Add .cumulativeUse, definition: Cumulated quantity of substance used up to .statusDate, type: Quantity https://github.com/Xt-EHR/xt-ehr-common/issues/373
 
 Zib issues:
-+ DrugUse: Align data type of ObservationOfUse.Amount with EHDS model
-+ AlcoholUse, DrugUse, TobaccoUse: add element to match EHDSSubstanceUse.period = Time period for which this observation about substance use is applicabl
++ DrugUse: Align data type of ObservationOfUse.Amount with EHDS model https://nictiz.atlassian.net/browse/ZIB-2912
++ AlcoholUse, DrugUse, TobaccoUse: add element to match EHDSSubstanceUse.period = Time period for which this observation about substance use is applicable https://nictiz.atlassian.net/browse/ZIB-2913
 
 
 ## General comments
