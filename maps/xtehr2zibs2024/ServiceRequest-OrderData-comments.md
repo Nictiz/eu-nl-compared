@@ -48,23 +48,23 @@ EHDS Issue 7
 Model: EHDSServiceRequest  
 Verzoek: Toevoegen van elementen GewensteUitvoerder en GewensteZorgaanbieder (dit is op het niveau van vestiging). Het is belangrijk om bij een aanvraag aan te kunnen geven door wie en waar de gevraagde activiteit bij voorkeur moet worden uitgevoerd.
 
-Zib Issue 1  
+Zib Issue 1 https://nictiz.atlassian.net/browse/ZIB-2896
 Zib: AanvraagGegevens  
 Beschrijving:  
 Het is vreemd dat de zib Aanvrager geen gegevens heeft m.b.t. het tijdinterval waarin de aangevraagde activiteit moet worden uitgevoerd. Dit is een essentieel onderdeel van een aanvraag om te zorgen voor een goede planning.  
 
-Zib Issue 2  
+Zib Issue 2 https://nictiz.atlassian.net/browse/ZIB-2897 
 Zib: AanvraagGegevens  
 Beschrijving:  
 Supporting information betreft medisch inhoudelijke informatie die belangrijk is voor het uitvoeren van een verrichting en/of het interpreteren van de resulteten daarvan (nuchter zijn, houdingsbeperkingen, Malampati score, diabetes, etc.). Deze informatie wordt in de praktijk inderdaad bij een aanvraag meegegeven. Vanuit het perspectief van de use-case 'Aanvraag' zijn deze gegevens relevant, maar horen deze gegevens dan conceptueel bij de aanvraag (het proces) of bij de verrichting?  
 Het is niet duidelijk of RedenAanvraag deze informatie dekt. Als dat zo is, is de naam van het element niet echt intuïtief, want je denkt al gauw aan de indicatie voor de aangevraagde activiteit.
 
-Zib Issue 3  
+Zib Issue 3 https://nictiz.atlassian.net/browse/ZIB-2898
 Zib: AanvraagGegevens of Verrichting  
 Beschrijving:  
 De zib AanvraagGegevens heeft geen elementen voor de gewenste uitvoerder of zorgaanbieder. De zib verrichting heeft wel verwijzingen naar Uitvoerder::Zorgverlner en Locatie::Zorgaanbieder. Als het een verrichting in de toekomst betreft, gelden deze elementen dan als de gevraagde of de geplande uitvoerder c.q. locatie? Je zou dit wellicht kunnen afleiden uit de status van de Aanvraag. Dit is belangrijk om te bepalen of bij AanvraagGegevens al dan niet elementen nodig zijn voor de gewenste uitvoerder, c.q. locatie.
 
-Zib Issue 4  
+Zib Issue 4 https://nictiz.atlassian.net/browse/ZIB-2899
 Zib: AanvraagGegevens  
 Beschrijving:  
 Het model EHDSServiceRequest heeft een element priority. De zib AanvraaGegevens heeft geen vergelijkbaa element. Verzoek om in overweging te nemen om een element 'Prioriteit' of 'Urgentie' toe te voegen aan de zib.
