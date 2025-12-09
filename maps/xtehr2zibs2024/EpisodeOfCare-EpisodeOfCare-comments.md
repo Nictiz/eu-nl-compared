@@ -8,9 +8,9 @@ Aanwezig: Chevy, Shenaida, Jacob, Marty
     + EHDS issue: waarom kan een EHDSProcedure een reden zijn voor een EpisodeOfCare? We denken dat hier niet de geplande procedures moeten zijn, daarvoor is immers het CarePlan.  
 + EHDS issue: tekstvelden voor naam en toelichting van de episode ontbreken
 + EHDS issue: van .type ontbreekt binding informatie
-+ zib issue: kardinaliteit van .FocusEpisodeOfCare::Condition moet 0..* zijn ipv 0..1
-+ zib issue: we hebben een equivalent voor EHDSEpisodeOfCare.type nodig
-+ zib issue: we hebben een equivalent voor EHDSEpisodeOfCare.reason nodig. 
++ zib issue: kardinaliteit van .FocusEpisodeOfCare::Condition moet 0..* zijn ipv 0..1 (https://nictiz.atlassian.net/browse/ZIB-2905)
++ zib issue: we hebben een equivalent voor EHDSEpisodeOfCare.type nodig (https://nictiz.atlassian.net/browse/ZIB-2906)
++ zib issue: we hebben een equivalent voor EHDSEpisodeOfCare.reason nodig (https://nictiz.atlassian.net/browse/ZIB-2907)
 
 
 ## Overall discussion
