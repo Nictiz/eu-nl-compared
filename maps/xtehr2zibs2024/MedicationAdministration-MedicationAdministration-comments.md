@@ -58,24 +58,6 @@ Als er echter via EHDSMedicationAdministration gegevens binnenkomen via element 
 Wellicht moeten we overwegen om aan de voorgenomen keuzebox voor RedenVanToediening een element toe te voegen (naam ToedieningsReden?) dat alleen gevuld mag zijn als er geen verwijzing naar ToedieningsAfspraak of MedicatieAfspraak mogelijk is.  
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-20-10-2025 verschillenanalyse Astrid verwerkt
-
-
 ## Bespreking 21-10-2025 met Astrid, Sander, Evelyn, Tim S., Jacob
 + Toediener ontbreekt in EHDS model maar gezien het gebruik van het model is dat logisch. We maken er geen issue van
 + EHDS model: onduidelijk of de toedieningssneldheid de oplossing of de werkzame stof bevat.
