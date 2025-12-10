@@ -1,4 +1,83 @@
 # MedicationAdministration
+## Overzicht issues
+EHDS Issue 1
+Model: EHDSMedicationAdministration
+"Vraag:
+Bij een infuus kan de toedieningssnelheid worden gewijzigd. Klopt het dat een instantantiatie van het Xt-EHR logical model EHDSMedicationAdministration een toedieningsperiode representeert waarbinnen de toedieningssnelheid, i.e. EHDSdosage.rate gelijk blijft?"
+
+EHDS Issue 2
+Model: EHDSMedicationAdministration
+"Vraag:
+Wat is precies de betekenis van het element 'rateRatio' in de context van EHDSMedicationAdministration.EHDSDosage? Is het A of B of iets anders?
+A: de hoeveelheid infuusvloeistof die inloopt per tijdseenheid
+B: de hoeveelheid werkzame stof die inloopt per tijdseenheid"
+
+EHDS Issue 3
+Model: EHDSMedicationAdministration
+"Vraag/verzoek:
+Gegevens voor het element EHDSMedicationAdministration.Reason[x] omvatten nu reasonEHDSCondition, reasonEHDSObservation en reasonCodableConcept. We willen ook graag een verrichting (Procedure) als reden voor de medicatietoediening kunnen opgeven. Zijn jullie bereid om een verwijzing naar Procedure op te nemen of moeten we dan gebruik maken van reasonCodableConcept?"
+
+Zib Issue 1
+Samenvatting: Hoe definiëren we Toedieningssnelheid?
+Betreft zib: MedicatieToediening2
+"Beschrijving:
+De zib MedicatieToediening omvat ook infusen. De zib bevat het element Toedieningssnelheid . Dit betekent dat de zib in feite een infuusfase representeert waarin de toedieningssnelheid van het infuus niet verandert. Dit betekent dat elke wijziging van de loopsnelheid een nieuwe instantiatie vergt.
+
+De vraag is wat de precieze betekenis is van het element Toedieningssnelheid. Er zijn twee mogelijkheden:
+1. De hoeveelheid vloeistof die per tijdseenheid inloopt.
+2. De hoeveelheid werkzame stof die per tijdseenheid inloopt.
+
+De meest wenselijke betekenis is 2: de hoeveelheid werkzame stof die per tijdseenheid inloopt. Dan kun je nl. in combinatie met de ToegediendeHoeveelheid de duur afleiden dat deze loopsnelheid van toepassing was zonder informatie over de concentratie van de werkzame stof in de toedienvloeistof.
+Als de Toedieningssnelheid de hoeveelheid vloeistof per tijdseenheid representeert, heb je de concentratie werkzame stof in de infuusvloeistof nodig om de periode van inloop af te leiden óf je moet een apart element toevoegen om de inloopperiode weer te geven."
+"Het EHDS model heeft een verwijzing naar EHDSDosage met element 'rate' dat weer bestaat uit de elementen 'rateRatio' en 'rateQuantity'. Het element 'rateRatio' lijkt overeen te komen met het element 'Toedieningssnelheid' in de zib. Op basis hiervan lijkt het Xt_EHR logical model ook uit te gaan van een toedieningsperiode, waarbinnen de toedieningssnelheid gelijk blijft.
+Ook hier geldt dat we precies de betekenis moeten weten van het element rateRatio in de context van EHDSMedicationAdministration.EHDSDosage: gaat het hier om de hoeveelheid vloeistof per tijdseenheid of de hoeveelheid werkzame stof per tijdseenheid? Als we dit weten, moeten we overleggen wat te doen in de zib: de betekenis van Toedieningssnelheid in lijn brengen met EHDS of een andere aanpassing die het aanleveren van de juiste waarde voor het element rateRatio mogelijk maakt."
+
+Zib Issue 2
+Samenvatting: Hoe omgaan met toedieningsperiode in EHDSMedicationAdministration in MedicatieToediening2?
+Betreft zib: MedicatieToediening2
+"Beschrijving:
+Als na duidelijkheid over de betekenis van 'rateRatio' in de context van EHDSMedicationAdministration.EHDSDosage het element Toedieningssnelheid de hoeveelheid werkzame stof per tijdseenheid representeert, verdient het aanbeveling om voor aanlevering de periode af te leiden op basis van de combinatie met het element ToegediendeHoeveelheid.
+Andersom kunnen we bij ontvangst van de periode en de hoeveelheid werkzame stof per tijdseenheid de ToegediendeHoeveelheid afleiden.
+Het toevoegen van een element ToedieningsPeriode met een afleidbare waarde brengt het risico mee van inconsistentie met de waarden van Toedieningssnelheid en ToegediendeHoeveelheid.
+
+Als Toedieningssnelheid de hoeveelheid vloeistof per tijdseenheid weergeeft, dan hebben we wel een element ToedieningsPeriode met een verwijzing naar TijdsInterval nodig om een waarde voor het element EHDSMedicationAdministration.occurrence[x].occurrencePeriod te kunnen aanleveren."
+
+Zib Issue 3
+Samenvatting: Kardinaliteit van RedenVanVoorschrijven van 0..1 naar 0..*?
+Betreft zib: MedicatieAfspraak
+"Beschrijving:
+Het model EHDSMedicationAdministration heeft een element reason [x] met kardinaliteit 0..*.
+RedenVanVoorschrijven in MedicatieAfspraak heeft kardinaliteit 0..1.  Dat is geen probleem bij aanleveren van gegevens, maar bij nadere overweging, lijkt het terecht om de kardinaliteit van RedenVanVoorschrijven te wijzigen naar 0..*. Er kan nl. meer dan één reden zijn om iets voor te schrijven."
+
+Zib Issue 4
+Samenvatting: RedenVanVoorschrijven uitbreiden met een verwijzing naar Verrichting?
+Betreft zib: MedicatieAfspraak
+"Beschrijving:
+Een verrichting kan een reden van voorschrijven zijn: het gaat dan om medicatie voorafgaand aan of tijdens een verrichting, zoals bijv. antibioticaprofylaxe of pijnstilling. Daarom graag overwegen om de RedenVanVoorschrijven uit te breiden met een verwijzing naar Verrichting."
+
+Zib Issue 5
+Samenvatting: waar past reason[x] van EHDSMedicationAdministration in de zibs?
+Betreft zib: MedicatieToediening2
+"Beschrijving:
+Voor het aanleveren van gegevens voor reason[x] in model EHDSMedicationAdministration lijkt er geen probleem. We zouden daarvoor RedenVanVoorschrijven van MedicatieAfspraak kunnen gebruiken onder de aanname dat MedicatieToediening2 een RedenVanToediening met keuzebox krijgt met de mogelijkheid om te verwijzen naar ToedieningsAfspraak óf MedicatieAfspraak (is ook besproken in het architectuurteamoverleg).
+Als er echter via EHDSMedicationAdministration gegevens binnenkomen via element reason[x] hoe passen die dan in de zibs? We hebben dan geen medicatieAfspraak waarin we deze gegevens kunnen opnemen en er is geen element voor in MedicatieToediening2. Als we er in MedicatieToediening2 wel een element voor zouden opnemen dan mag er geen conflict zijn met de RedenVanVoorschrijven in een MedicatieAfspraak.
+Wellicht moeten we overwegen om aan de voorgenomen keuzebox voor RedenVanToediening een element toe te voegen (naam ToedieningsReden?) dat alleen gevuld mag zijn als er geen verwijzing naar ToedieningsAfspraak of MedicatieAfspraak mogelijk is.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 20-10-2025 verschillenanalyse Astrid verwerkt
 
