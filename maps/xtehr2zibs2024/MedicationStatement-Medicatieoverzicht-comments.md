@@ -44,13 +44,13 @@ Model: EHDSMedicationStatement
 Verzoek: element 'medicationReason' laten vervallen.  
 Dit element is in feite een gegeven bij het medicatievoorschrift. Het element 'medicationReason' is niet meer nodig als het verzoek (separaat issue) wordt ingewilligd om een element in het model op te nemen met een reference naar EHDSMedicationPrescription waarin de indicatie voor het voorgeschreven geneesmiddel wordt gespecificeerd."
 
-Zib Issue 1  
+Zib Issue 1 - zib-2920
 Zib: MedicatieAfspraak  
 Beschrijving:  
 Het model EHDSMedicationStatement heeft een element intendedUseType, waarin kan worden aangegeven wat de intentie is voor het toepassen van het geneesmiddel, zoals profylactisch, curatief, palliatief, diagnostisch, etc.
 Wellicht moeten wij on overleg met het veld nagaan of een dergelijk element ook wenselijk is in de zib MedicatieAfspraak."
 
-Zib Issue 2
+Zib Issue 2 - zib-2921
 Zib: MedicatieGebruik
 Beschrijving:  
 De zib MedicatieGebruik is net als bij EHDSMedicationStatement bedoeld voor verleden, heden en toekomst. Het element GebruikIndicator is een boolean en kan geen onderscheid maken tussen verleden en toekomst. Om dit onderscheid wel te kunnen maken is een waardenlijst nodig.
