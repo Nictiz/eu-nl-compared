@@ -1,18 +1,18 @@
 # MedicationAdministration
 ## Overzicht issues
-EHDS Issue 1
+EHDS Issue 1 https://github.com/Xt-EHR/xt-ehr-common/issues/414
 Model: EHDSMedicationAdministration
 "Vraag:
 Bij een infuus kan de toedieningssnelheid worden gewijzigd. Klopt het dat een instantantiatie van het Xt-EHR logical model EHDSMedicationAdministration een toedieningsperiode representeert waarbinnen de toedieningssnelheid, i.e. EHDSdosage.rate gelijk blijft?"
 
-EHDS Issue 2
+EHDS Issue 2 ingediend in Imaging consultatie
 Model: EHDSMedicationAdministration
 "Vraag:
 Wat is precies de betekenis van het element 'rateRatio' in de context van EHDSMedicationAdministration.EHDSDosage? Is het A of B of iets anders?
 A: de hoeveelheid infuusvloeistof die inloopt per tijdseenheid
 B: de hoeveelheid werkzame stof die inloopt per tijdseenheid"
 
-EHDS Issue 3
+EHDS Issue 3 ingedioend in Imaging consultatie
 Model: EHDSMedicationAdministration
 "Vraag/verzoek:
 Gegevens voor het element EHDSMedicationAdministration.Reason[x] omvatten nu reasonEHDSCondition, reasonEHDSObservation en reasonCodableConcept. We willen ook graag een verrichting (Procedure) als reden voor de medicatietoediening kunnen opgeven. Zijn jullie bereid om een verwijzing naar Procedure op te nemen of moeten we dan gebruik maken van reasonCodableConcept?"
