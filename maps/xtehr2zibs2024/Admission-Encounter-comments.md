@@ -77,7 +77,7 @@ The Xt-EHR model is layered: an encounter can be part of an encounter.
 | Admission.EndDateTime                                             | EHDSEncounter.plannedEndDate                   | TS         | dateTime               | 0..1        | 0..1          |
 |                                                                   | EHDSEncounter.admission                        |            | Base                   |             | 0..1          |
 |                                                                   | EHDSEncounter.admission.admitter               |            | EHDSHealthProfessional |             | 0..1          |
-|                                                                   | EHDSEncounter.admission.admitSource            |            | CodeableConcept        |             | 0..1          |
+| Admission.Origin                                                  | EHDSEncounter.admission.admitSource            | CD         | CodeableConcept        | 1           | 0..1          |
 |                                                                   | EHDSEncounter.admission.referringProfessional  |            | EHDSHealthProfessional |             | 0..1          |
 | Admission.ReasonAdmission.Problem                                 | EHDSEncounter.admission.reason[x]              |            | CodeableConcept        | 1           | 0..*          |
 | Admission.ReasonAdmission.TiggerForAdmission                      | EHDSEncounter.admission.reason[x]              | CD         | CodeableConcept        | 1           | 0..*          |
@@ -93,7 +93,6 @@ The Xt-EHR model is layered: an encounter can be part of an encounter.
 |                                                                   | EHDSEncounter.location.period                  |            | Period                 |             | 0..1          |
 | Admission.CareFacility::HealthcareProvider                        | EHDSEncounter.location.organisationPart[x]     |            | EHDSOrganisation       | 1           | 1..1          |
 | Admission.CareType                                                |                                                | CD         |                        | 1           |               |
-| Admission.Origin                                                  |                                                | CD         |                        | 1           |               |
 | Admission.AdmissionScope                                          |                                                | CD         |                        | 1           |               |
 | Admission.ReasonAdmission                                         |                                                |            |                        | 1           |               |
 | Admission.ResponsibleHealthProfessional::HealthProfessional       |                                                |            |                        | 1           |               |
@@ -395,6 +394,7 @@ The zib does not include actual and planned dates separately.
 | xtehr | EHDSEncounter.admission.admitter |
 | zib |  |
 | card._xtehr | 0..1 |
+| card._zib | 1 |
 | definition_xtehr | Admitting healthcare professional |
 | id_xtehr | EHDSEncounter.admission.admitter |
 | path_xtehr | EHDSEncounter.admission.admitter |
@@ -412,17 +412,24 @@ The zib does not include actual and planned dates separately.
 | attribute | value |
 |---|---|
 | xtehr | EHDSEncounter.admission.admitSource |
-| zib |  |
+| zib | Admission.Origin |
+| alias_zib | NL: Herkomst |
 | binding_xtehr | {'strength': 'preferred', 'description': 'hl7:admit-source'} |
 | card._xtehr | 0..1 |
+| card._zib | 1 |
 | definition_xtehr | From where the patient was admitted (e.g. physician referral, transfer). |
+| definition_zib | Location where the patient comes from prior to the (partial) admission. This will mainly be used at the start of hospitalisation. |
 | id_xtehr | EHDSEncounter.admission.admitSource |
+| id_zib | NL-CM:15.4.9 |
+| name_zib | Origin |
 | path_xtehr | EHDSEncounter.admission.admitSource |
+| path_zib | Admission.Origin |
 | short_xtehr | From where the patient was admitted (e.g. physician referral, transfer). |
+| stereotype_zib | data |
 | type_xtehr | CodeableConcept |
+| type_zib | CD |
 
 ### Comments
-
 
 
 ## EHDSEncounter.admission.referringProfessional
@@ -773,26 +780,6 @@ Cardinality mismatch. In the Xt-EHR model, container .location has cardinality 0
 
 ### Comments
 
-
-
-## zib: Admission.Origin
-
-### Table
-
-| attribute | value |
-|---|---|
-| xtehr |  |
-| zib | Admission.Origin |
-| alias_zib | NL: Herkomst |
-| card._zib | 1 |
-| definition_zib | Location where the patient comes from prior to the (partial) admission. This will mainly be used at the start of hospitalisation. |
-| id_zib | NL-CM:15.4.9 |
-| name_zib | Origin |
-| path_zib | Admission.Origin |
-| stereotype_zib | data |
-| type_zib | CD |
-
-### Comments
 
 
 
